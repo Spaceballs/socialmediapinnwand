@@ -15,7 +15,9 @@ public class Hauptfenster extends JFrame {
     public Hauptfenster(){
         
         final JFrame frame = new JFrame("Social Media Pinnwand"); //Frame erzeugen
-        
+
+        DialogAnmelden anmeldeDialog = new DialogAnmelden(frame);
+
         JMenuBar menueLeiste = new JMenuBar(); //Menueleiste erzeugen
 
         JMenu menue = new JMenu("Menü"); //Menue erzeugen
@@ -46,9 +48,6 @@ public class Hauptfenster extends JFrame {
         accountdaten.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                new DialogNutzer(frame);
-               
-               //String username = JOptionPane.showInputDialog("Bitte geben Sie den neuen Usernamen ein:");
-               //String name = JOptionPane.showInputDialog("Bitte geben Sie den neuen Nachnamen ein:");
            }
         });
 
