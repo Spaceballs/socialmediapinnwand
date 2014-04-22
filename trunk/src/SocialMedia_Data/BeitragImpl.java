@@ -2,7 +2,8 @@ package SocialMedia_Data;
 
 //import SocialMedia_DatabaseManager.Vector<Kommentar>;
 //import SocialMedia_DatabaseManager.Vector<Like>;
-        import java.util.Vector;
+import java.util.Date;
+import java.util.Vector;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -64,7 +65,7 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.57E61C7E-1682-26A8-796D-BF4927349BF6]
     // </editor-fold> 
-    public void setCreationDate (String val) {
+    public void setCreationDate (Date val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -83,7 +84,7 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.DA572805-9588-8C69-7CF1-90C898B1A046]
     // </editor-fold> 
-    public String getCreationDate () {
+    public Date getCreationDate () {
         return null;
     }
 

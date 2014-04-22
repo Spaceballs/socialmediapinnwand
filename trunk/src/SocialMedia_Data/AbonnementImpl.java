@@ -1,5 +1,7 @@
 package SocialMedia_Data;
 
+import java.util.Date;
+
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.D34739A1-3E6D-6B19-CAA4-1E4A754FEA92]
@@ -66,14 +68,14 @@ public class AbonnementImpl extends DataReference implements Abonnement {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.FFDBA0C0-7013-1319-C885-A0C20F7E50BC]
     // </editor-fold> 
-    public String getCreationDate () {
+    public Date getCreationDate () {
         return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.15452194-E393-8805-950E-73A7A3F863A4]
     // </editor-fold> 
-    public void setCreationDate (String val) {
+    public void setCreationDate (Date val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

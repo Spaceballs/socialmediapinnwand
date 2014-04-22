@@ -1,6 +1,9 @@
 package SocialMedia_Data;
 
 
+import java.util.Date;
+
+
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.10E903FF-6500-1EBC-DEF5-09B7199BA578]
 // </editor-fold> 
@@ -43,14 +46,14 @@ public class LikeImpl extends DataReference implements Like {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.FB04B5AC-0813-1DB5-1357-1629B89D664D]
     // </editor-fold> 
-    public String getCreationDate () {
+    public Date getCreationDate () {
         return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.AAB82147-0B8D-A25E-5FE6-5CD95C5B7D85]
     // </editor-fold> 
-    public void setCreationDate (String val) {
+    public void setCreationDate (Date val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
