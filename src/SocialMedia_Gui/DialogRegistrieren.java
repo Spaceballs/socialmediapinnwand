@@ -75,7 +75,7 @@ public class DialogRegistrieren {
         registrieren.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                dialog.dispose();
-               new Hauptfenster();
+               new DialogAnmelden();
            }
         });
 
