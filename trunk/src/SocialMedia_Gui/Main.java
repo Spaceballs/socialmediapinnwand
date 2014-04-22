@@ -20,7 +20,7 @@ public class Main {
 }
 
     public static void createAndShowGUI() {
-        new DialogRegistrieren();
+        new Hauptfenster();
     }
 
 }
