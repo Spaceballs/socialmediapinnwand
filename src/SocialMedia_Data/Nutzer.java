@@ -1,5 +1,7 @@
 package SocialMedia_Data;
 
+import java.util.Date;
+
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.917FBD41-4ADB-8612-BEDC-6048D96A8ED8]
@@ -59,12 +61,12 @@ public interface Nutzer {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F9094BD0-FFA3-1A4A-800E-4AD664ADA06C]
     // </editor-fold> 
-    public String getCreationDate ();
+    public Date getCreationDate ();
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.4DB1BE4D-10E5-4539-5A7A-248A7CF6F7C3]
     // </editor-fold> 
-    public void setCreationDate (String val);
+    public void setCreationDate (Date val);
 
 }
 

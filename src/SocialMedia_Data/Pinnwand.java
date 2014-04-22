@@ -1,5 +1,7 @@
 package SocialMedia_Data;
 
+import java.util.Date;
+
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.A573FCE8-0C7C-85E2-81F5-BD4F7AE55AF6]
@@ -29,12 +31,12 @@ public interface Pinnwand {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D0572A2F-A50C-FB2C-0114-3B9FE8613AF4]
     // </editor-fold> 
-    public String getCreationDate ();
+    public Date getCreationDate ();
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C432522A-7D52-DB1F-6623-1F594C6C5B03]
     // </editor-fold> 
-    public void setCreationDate (String val);
+    public void setCreationDate (Date val);
 
 }
 

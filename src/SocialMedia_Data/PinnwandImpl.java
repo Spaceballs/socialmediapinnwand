@@ -2,6 +2,7 @@ package SocialMedia_Data;
 
 //import SocialMedia_DatabaseManager.Vector<Beitrag>;
     import java.util.Vector;
+    import java.util.Date;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -50,14 +51,14 @@ public class PinnwandImpl extends DataReference implements Pinnwand {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.8E214C75-16B9-1093-9E83-06CAE123C577]
     // </editor-fold> 
-    public String getCreationDate () {
+    public Date getCreationDate () {
         return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.B250D00D-7652-10AF-33A3-C9FDA1EA3CA3]
     // </editor-fold> 
-    public void setCreationDate (String val) {
+    public void setCreationDate (Date val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

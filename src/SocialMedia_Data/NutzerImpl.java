@@ -1,6 +1,7 @@
 package SocialMedia_Data;
 
 //import SocialMedia_DatabaseManager.Vector<Abonnement>;
+import java.util.Date;
         import java.util.Vector;
 
 
@@ -108,14 +109,14 @@ public class NutzerImpl extends DataReference implements Nutzer {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.533A23D6-473F-672C-342E-35A42BB259DB]
     // </editor-fold> 
-    public String getCreationDate () {
+    public Date getCreationDate () {
         return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C83F59FD-2047-7AB3-C249-FFFCC8DEE9F7]
     // </editor-fold> 
-    public void setCreationDate (String val) {
+    public void setCreationDate (Date val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
