@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -16,14 +18,21 @@ import java.awt.event.ActionListener;
  */
 public class DialogAnmelden {
 
-    public DialogAnmelden(JFrame frame) {
+    public DialogAnmelden() {
 
-        JPanel p = new JPanel(new BorderLayout(5,5));
+        JDialog anmelden = new JDialog();
+
+        anmelden.setTitle("Anmelden");
+        anmelden.setLayout(new BorderLayout(5,5));
+        anmelden.setSize(200,200);
+        anmelden.setModal(true);
+        
+//        anmelden.add(new JLabel("Beispiel JLabel"));
 
         JPanel labels = new JPanel(new GridLayout(0,1,2,2));
         labels.add(new JLabel("Username", SwingConstants.RIGHT));
         labels.add(new JLabel("Passwort", SwingConstants.RIGHT));
-        p.add(labels, BorderLayout.WEST);
+        anmelden.add(labels, BorderLayout.WEST);
 
         JPanel controls = new JPanel(new GridLayout(0,1,2,2));
         JTextField username = new JTextField();
@@ -31,10 +40,29 @@ public class DialogAnmelden {
         JPasswordField password = new JPasswordField();
 //        password.addAncestorListener(new RequestFocusListener(false));
         controls.add(password);
-        p.add(controls, BorderLayout.CENTER);
+        anmelden.add(controls, BorderLayout.CENTER);
 
-        Object[] options = {"Anmelden", "Registrieren"};
-        JOptionPane.showOptionDialog(frame, p, "Anmelden", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        anmelden.setVisible(true);
+        anmelden.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+
+
+//        JPanel p = new JPanel(new BorderLayout(5,5));
+//
+//        JPanel labels = new JPanel(new GridLayout(0,1,2,2));
+//        labels.add(new JLabel("Username", SwingConstants.RIGHT));
+//        labels.add(new JLabel("Passwort", SwingConstants.RIGHT));
+//        p.add(labels, BorderLayout.WEST);
+//
+//        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
+//        JTextField username = new JTextField();
+//        controls.add(username);
+//        JPasswordField password = new JPasswordField();
+////        password.addAncestorListener(new RequestFocusListener(false));
+//        controls.add(password);
+//        p.add(controls, BorderLayout.CENTER);
+//
+//        Object[] options = {"Anmelden", "Registrieren"};
+//        JOptionPane.showOptionDialog(frame, p, "Anmelden", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 
 //        alte Variante
