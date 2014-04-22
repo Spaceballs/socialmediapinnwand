@@ -16,7 +16,7 @@ public class Hauptfenster extends JFrame {
         
         final JFrame frame = new JFrame("Social Media Pinnwand"); //Frame erzeugen
 
-        DialogAnmelden anmeldeDialog = new DialogAnmelden(frame);
+        DialogAnmelden anmeldeDialog = new DialogAnmelden();
 
         JMenuBar menueLeiste = new JMenuBar(); //Menueleiste erzeugen
 
