@@ -7,17 +7,17 @@ package SocialMedia_Gui;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.border.EmptyBorder;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author Max
  */
-public class DialogNutzer {
+public class DialogRegistrieren {
 
-    public DialogNutzer(){
-        JFrame dialog = new JFrame("Accoundaten ändern");
+    public DialogRegistrieren() {
+        final JFrame dialog = new JFrame("Registrieren");
 
         // GridBagLayout mit Abstand zwischen den Elementen.
         dialog.setLayout(new GridBagLayout());
@@ -66,10 +66,18 @@ public class DialogNutzer {
         dialog.add(password, c);
 
 
-        JButton speichern = new JButton("Speichern");
+        JButton registrieren = new JButton("Registrieren");
         c.gridx = 1;
         c.gridy = 4;
-        dialog.add(speichern, c);
+        dialog.add(registrieren, c);
+
+        //ActionListener Button
+        registrieren.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+               dialog.dispose();
+               new Hauptfenster();
+           }
+        });
 
         dialog.pack(); //Komplettes Frame auf optimale Größe packen
         //dialog.setSize(400,400);
@@ -77,7 +85,6 @@ public class DialogNutzer {
         dialog.setVisible(true); //Anzeigen des Frames
 
         dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
     }
 
 }
