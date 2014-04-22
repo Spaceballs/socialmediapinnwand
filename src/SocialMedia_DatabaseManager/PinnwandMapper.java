@@ -19,6 +19,12 @@ public class PinnwandMapper {
     public PinnwandMapper () {
     }
 
+
+    public static PinnwandMapper pinnwandMapper(){
+        return null;
+    }
+
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.91B9B9C7-88E3-E831-1662-6E60F7095367]
     // </editor-fold> 

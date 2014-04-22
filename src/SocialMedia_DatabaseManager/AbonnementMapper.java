@@ -19,6 +19,11 @@ public class AbonnementMapper {
     public AbonnementMapper () {
     }
 
+    public static AbonnementMapper abonnementMapper(){
+        return null;
+    }
+
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.07672B8C-2DA5-0B58-2173-FAF4118927BD]
     // </editor-fold> 

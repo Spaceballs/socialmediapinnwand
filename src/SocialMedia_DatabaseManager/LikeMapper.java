@@ -19,6 +19,10 @@ public class LikeMapper {
     public LikeMapper () {
     }
 
+    public static LikeMapper likeMapper(){
+        return null;
+    }
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D470D38B-A8D0-F180-05C3-212EC2769706]
     // </editor-fold> 

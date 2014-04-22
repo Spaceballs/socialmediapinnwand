@@ -19,6 +19,12 @@ public class BeitragMapper {
     public BeitragMapper () {
     }
 
+
+    public static BeitragMapper beitragMapper(){
+        return null;
+    }
+
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.83B8D728-1072-5297-E306-A9EA071580E9]
     // </editor-fold> 
