@@ -19,6 +19,12 @@ public class KommentarMapper {
     public KommentarMapper () {
     }
 
+
+    public static KommentarMapper kommentarMapper(){
+        return null;
+    }
+
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.7866B8A7-10AA-8192-AC55-B9F8AF1AE130]
     // </editor-fold> 

@@ -20,6 +20,12 @@ public class NutzerMapper {
     public NutzerMapper () {
     }
 
+
+    public static NutzerMapper nutzerMapper(){
+        return null;
+    }
+    
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C1ED3A6E-09B8-4760-D3C6-A75103DC7528]
     // </editor-fold> 

@@ -1,6 +1,8 @@
 package SocialMedia_Data;
 
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.util.Date;
+import java.util.Vector;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -82,6 +84,13 @@ public class AbonnementImpl extends DataReference implements Abonnement {
     // #[regen=yes,id=DCE.3F4ABB83-B7D5-73F1-C799-438A3E6484D4]
     // </editor-fold> 
     public Pinnwand getAbonnementPinnwand () {
+        Vector<Pinnwand> pinnwaende = new Vector<Pinnwand>();
+        pinnwaende = SocialMediaLogicImpl.getAllPinnwand();
+
+
+
+
+
         return null;
     }
 
