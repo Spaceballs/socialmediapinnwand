@@ -42,7 +42,7 @@ public class DialogNutzer {
         p.add(controls, BorderLayout.CENTER);
 
         JOptionPane.showMessageDialog(
-            frame, p, "Log In", JOptionPane.QUESTION_MESSAGE);
+            frame, p, "Accountdaten ändern", JOptionPane.PLAIN_MESSAGE);
          
 //        alte Variante
 //        final JFrame dialog = new JFrame("Accoundaten ändern");
