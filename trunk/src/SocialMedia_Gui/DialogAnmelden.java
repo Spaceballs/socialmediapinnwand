@@ -34,8 +34,7 @@ public class DialogAnmelden {
         p.add(controls, BorderLayout.CENTER);
 
         Object[] options = {"Anmelden", "Registrieren"};
-        JOptionPane.showOptionDialog(frame, p, "Anmelden",
-                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        JOptionPane.showOptionDialog(frame, p, "Anmelden", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 
 //        alte Variante
