@@ -16,8 +16,6 @@ public class Hauptfenster extends JFrame {
         
         final JFrame frame = new JFrame("Social Media Pinnwand"); //Frame erzeugen
 
-        DialogAnmelden anmeldeDialog = new DialogAnmelden();
-
         JMenuBar menueLeiste = new JMenuBar(); //Menueleiste erzeugen
 
         JMenu menue = new JMenu("Menü"); //Menue erzeugen
@@ -43,6 +41,13 @@ public class Hauptfenster extends JFrame {
         JMenuItem abmelden = new JMenuItem("Abmelden");
         meinAccount.add(abmelden);
 
+
+        //ActionListener Nutzer suchen
+        suchen.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+               new DialogSuchen(frame);
+           }
+        });
 
         //ActionListener Accountdaten ändern
         accountdaten.addActionListener(new ActionListener() {

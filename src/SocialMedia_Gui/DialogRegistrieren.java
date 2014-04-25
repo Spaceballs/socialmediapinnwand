@@ -18,31 +18,6 @@ public class DialogRegistrieren {
 
     public DialogRegistrieren() {
 
-//        JPanel p = new JPanel(new BorderLayout(5,5));
-//
-//        JPanel labels = new JPanel(new GridLayout(0,1,2,2));
-//        labels.add(new JLabel("Username", SwingConstants.RIGHT));
-//        labels.add(new JLabel("Nachname", SwingConstants.RIGHT));
-//        labels.add(new JLabel("Vorname", SwingConstants.RIGHT));
-//        labels.add(new JLabel("Passwort", SwingConstants.RIGHT));
-//        p.add(labels, BorderLayout.WEST);
-//
-//        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
-//        JTextField username = new JTextField();
-//        controls.add(username);
-//        JTextField name = new JTextField();
-//        controls.add(name);
-//        JTextField surname = new JTextField();
-//        controls.add(surname);
-//        JPasswordField password = new JPasswordField();
-////        password.addAncestorListener(new RequestFocusListener(false));
-//        controls.add(password);
-//        p.add(controls, BorderLayout.CENTER);
-//
-//        JOptionPane.showMessageDialog(
-//            frame, p, "Accountdaten ändern", JOptionPane.PLAIN_MESSAGE);
-
-//        alte Variante
         final JFrame dialog = new JFrame("Registrieren");
 
         // GridBagLayout mit Abstand zwischen den Elementen.
@@ -86,7 +61,7 @@ public class DialogRegistrieren {
         c.gridy = 3;
         dialog.add(new JLabel("Passwort:", JLabel.RIGHT), c);
 
-        JTextField password = new JTextField();
+        JPasswordField password = new JPasswordField();
         c.gridx = 1;
         c.gridy = 3;
         dialog.add(password, c);

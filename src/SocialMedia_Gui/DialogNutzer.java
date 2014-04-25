@@ -41,8 +41,17 @@ public class DialogNutzer {
         controls.add(password);
         p.add(controls, BorderLayout.CENTER);
 
-        JOptionPane.showMessageDialog(
-            frame, p, "Accountdaten ändern", JOptionPane.PLAIN_MESSAGE);
+        String[] buttons = {"Speichern", "Account löschen"};
+
+        if (JOptionPane.showOptionDialog(
+            frame, p, "Accountdaten ändern", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, buttons, buttons[0])
+            == 1) {
+                if (JOptionPane.showConfirmDialog(frame,
+                        "Den Account wirklich löschen?", "Account löschen",
+                        JOptionPane.YES_NO_OPTION) == 0) {
+                    System.out.println("Gelöscht");
+                }
+            }
          
 //        alte Variante
 //        final JFrame dialog = new JFrame("Accoundaten ändern");
