@@ -1,5 +1,7 @@
 package SocialMedia_Data;
 
+import SocialMedia_Logic.SocialMediaLogic;
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.util.Date;
 
 
@@ -47,6 +49,8 @@ public interface Abonnement {
     // #[regen=yes,id=DCE.8E66B614-65DD-29A9-D87A-4716E0DB4AEB]
     // </editor-fold> 
     public void setCreationDate (Date val);
+
+    public Pinnwand getAbonnementPinnwand (SocialMediaLogicImpl verwaltung);
 
 }
 
