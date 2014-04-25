@@ -12,7 +12,7 @@ public class NutzerMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.665FBD45-137D-BD65-2498-CA0B84C4F9F3]
     // </editor-fold> 
-    private NutzerMapper nutzerMapper = null;
+    private static NutzerMapper nutzerMapper = null;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.47C0FA3B-D373-5813-EC7D-DA212FB0136B]
@@ -22,7 +22,10 @@ public class NutzerMapper {
 
 
     public static NutzerMapper nutzerMapper(){
-        return null;
+        if (nutzerMapper == null) {
+            nutzerMapper = new NutzerMapper();
+        }
+        return nutzerMapper;
     }
     
 

@@ -11,7 +11,7 @@ public class BeitragMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.4D65ED05-AD0B-FC57-0EC4-0AFACBC0DD01]
     // </editor-fold> 
-    private BeitragMapper beitragMapper = null;
+    private static BeitragMapper beitragMapper = null;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3F9CA0CE-A15F-4755-D8B8-4637AD032631]
@@ -21,7 +21,10 @@ public class BeitragMapper {
 
 
     public static BeitragMapper beitragMapper(){
-        return null;
+        if(beitragMapper == null){
+            beitragMapper = new BeitragMapper();
+        }
+        return beitragMapper;
     }
 
 
