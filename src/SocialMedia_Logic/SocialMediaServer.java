@@ -46,8 +46,12 @@ public class SocialMediaServer {
                                                 SocialMedia_DatabaseManager.NutzerMapper.nutzerMapper(),
                                                 SocialMedia_DatabaseManager.PinnwandMapper.pinnwandMapper());
                 
-                        
+                Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);
+                System.out.println("RMI Gestartet...");
+                
+                Registry rmiRegistry = LocateRegistry.createRegistry(serverPort);
                 System.out.println("RMI Registry am Port " + serverPort + " erstellt...");
+                
                 String rmiRegistryServer = System.getProperty("java.rmi.registry.hostname","localhost");
                 System.out.println("Server: "+ rmiRegistryServer);
                 
@@ -69,10 +73,9 @@ public class SocialMediaServer {
     // #[regen=yes,id=DCE.5C715AB0-272A-0F62-41FE-99F75849F41F]
     // </editor-fold> 
     public static void main (String args[]) {
-        Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);
-        System.out.println("RMI Gestartet...");
 
-        Registry rmiRegistry = LocateRegistry.createRegistry(serverPort);
+
+        
         
         SocialMediaServer logic = new SocialMediaServer();
         System.out.println("Server gestartet...");
