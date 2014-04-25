@@ -23,7 +23,7 @@ public class SocialMediaServer {
     // </editor-fold> 
     private SocialMediaLogic socialMediaLogic = null;
 
-    private int serverPort = 1099;
+    private final int serverPort = 1099;
     
     
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
