@@ -30,13 +30,14 @@ public class AbonnementImpl extends DataReference implements Abonnement {
     // #[regen=yes,id=DCE.0342C465-F245-6BA6-2C42-0097A84203E5]
     // </editor-fold> 
     public int getID () {
-        return 0;
+        return super.getID();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.470EDC27-EFF8-7E0C-8C42-93954CFB72E6]
     // </editor-fold> 
     public void setID (int val) {
+        super.setID(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -71,13 +72,14 @@ public class AbonnementImpl extends DataReference implements Abonnement {
     // #[regen=yes,id=DCE.FFDBA0C0-7013-1319-C885-A0C20F7E50BC]
     // </editor-fold> 
     public Date getCreationDate () {
-        return null;
+        return super.getCreationDate();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.15452194-E393-8805-950E-73A7A3F863A4]
     // </editor-fold> 
     public void setCreationDate (Date val) {
+        super.setCreationDate(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -86,8 +88,6 @@ public class AbonnementImpl extends DataReference implements Abonnement {
     public Pinnwand getAbonnementPinnwand () {
         Vector<Pinnwand> pinnwaende = new Vector<Pinnwand>();
         pinnwaende = SocialMediaLogicImpl.getAllPinnwand();
-
-
 
 
 

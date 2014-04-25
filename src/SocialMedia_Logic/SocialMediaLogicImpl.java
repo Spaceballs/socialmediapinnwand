@@ -24,12 +24,14 @@ import SocialMedia_DatabaseManager.PinnwandMapper;
 //import SocialMedia_DatabaseManager.Vector<Like>;
 //import SocialMedia_DatabaseManager.Vector<Nutzer>;
 import SocialMedia_ReportGenerator.ReportGenerator; 
+import SocialMedia_ReportGenerator.ReportGeneratorImpl;
+import java.rmi.RemoteException;
 import java.util.Vector;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.FB484D00-E9A8-8868-8F1F-2944573C596E]
 // </editor-fold> 
-public class SocialMediaLogicImpl implements SocialMediaLogic {
+public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject implements SocialMediaLogic {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.EB4714A1-545D-2CD4-C61F-CAB30CBEAB2D]
@@ -60,6 +62,9 @@ public class SocialMediaLogicImpl implements SocialMediaLogic {
     // #[regen=yes,id=DCE.AD32097B-46E4-1D92-AB48-48CDBC6877B5]
     // </editor-fold> 
     private PinnwandMapper pinnwandMapper;
+
+    private ReportGenerator reportGenerator;
+
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9993C351-D864-16C8-841C-49E622E0F1E3]
@@ -129,7 +134,14 @@ public class SocialMediaLogicImpl implements SocialMediaLogic {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A40EA4B1-D3AE-FBD5-8C74-CE69064D5075]
     // </editor-fold> 
-    public SocialMediaLogicImpl (LikeMapper likeMapper, KommentarMapper kommentarMapper, BeitragMapper beitragMapper, AbonnementMapper abonnementMapper, NutzerMapper nutzerMapper, PinnwandMapper pinnwandMapper) {
+    public SocialMediaLogicImpl (LikeMapper likeMapper, KommentarMapper kommentarMapper, BeitragMapper beitragMapper, AbonnementMapper abonnementMapper, NutzerMapper nutzerMapper, PinnwandMapper pinnwandMapper) throws RemoteException {
+        this.likeMapper = likeMapper;
+        this.kommentarMapper = kommentarMapper;
+        this.beitragMapper = beitragMapper;
+        this.abonnementMapper = abonnementMapper;
+        this.nutzerMapper = nutzerMapper;
+        this.pinnwandMapper = pinnwandMapper;
+        this.reportGenerator = new ReportGeneratorImpl(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -368,7 +380,7 @@ public class SocialMediaLogicImpl implements SocialMediaLogic {
     // #[regen=yes,id=DCE.0C6ACEA3-8FF0-DA46-FB02-E756225055F9]
     // </editor-fold> 
     public Vector<Pinnwand> getAllPinnwand () {
-        return null;
+        return this.pinnwandMapper.getAll();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -396,7 +408,7 @@ public class SocialMediaLogicImpl implements SocialMediaLogic {
     // #[regen=yes,id=DCE.0A2A6431-0899-945E-33F2-3D1BC5D84ABE]
     // </editor-fold> 
     public Vector<Abonnement> getAllAbonnement () {
-        return null;
+        return this.abonnementMapper.getAll();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
