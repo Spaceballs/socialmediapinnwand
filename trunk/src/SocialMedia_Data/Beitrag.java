@@ -1,6 +1,8 @@
 package SocialMedia_Data;
 
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.util.Date;
+import java.util.Vector;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -47,6 +49,12 @@ public interface Beitrag {
     // #[regen=yes,id=DCE.CF6F29FE-DF8E-EBD8-03CD-58BB92E7DBBD]
     // </editor-fold> 
     public void setID (int val);
+
+    public Vector<Kommentar> getAllBeitragKommentar (SocialMediaLogicImpl verwaltung);
+
+    public Vector<Like> getAllBeitragLikes (SocialMediaLogicImpl verwaltung);
+
+    public Nutzer getCreatorOfBeitrag (SocialMediaLogicImpl verwaltung);
 
 }
 

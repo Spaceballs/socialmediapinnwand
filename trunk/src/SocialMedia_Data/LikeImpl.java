@@ -34,26 +34,28 @@ public class LikeImpl extends DataReference implements Like {
     // #[regen=yes,id=DCE.916B3284-A731-62BC-96ED-30C92654A130]
     // </editor-fold> 
     public int getID () {
-        return 0;
+        return super.getID();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.0628100C-56D2-5AA4-55EA-AD07AB380980]
     // </editor-fold> 
     public void setID (int val) {
+        super.setID(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.FB04B5AC-0813-1DB5-1357-1629B89D664D]
     // </editor-fold> 
     public Date getCreationDate () {
-        return null;
+        return super.getCreationDate();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.AAB82147-0B8D-A25E-5FE6-5CD95C5B7D85]
     // </editor-fold> 
     public void setCreationDate (Date val) {
+        super.setCreationDate(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

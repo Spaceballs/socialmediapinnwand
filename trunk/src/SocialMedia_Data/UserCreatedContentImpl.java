@@ -57,26 +57,28 @@ public class UserCreatedContentImpl extends DataReference {
     // #[regen=yes,id=DCE.CB563634-1841-4105-4579-E5B5A00B379F]
     // </editor-fold> 
     public int getID () {
-        return 0;
+        return super.getID();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.835D5887-E4CA-D7BE-1D7E-883FD1B8AF11]
     // </editor-fold> 
     public void setID (int val) {
+        super.setID(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3FFF7CC0-A385-C9AB-FC0F-D5E595FE08FD]
     // </editor-fold> 
     public Date getCreationDate () {
-        return null;
+        return super.getCreationDate();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.61ADF81F-39BD-E018-FAC8-8F23B5B49FD4]
     // </editor-fold> 
     public void setCreationDate (Date val) {
+        super.setCreationDate(val);
     }
 
 }

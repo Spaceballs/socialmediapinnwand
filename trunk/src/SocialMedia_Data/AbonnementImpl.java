@@ -1,5 +1,6 @@
 package SocialMedia_Data;
 
+import SocialMedia_Logic.SocialMediaLogic;
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.util.Date;
 import java.util.Vector;
@@ -85,12 +86,14 @@ public class AbonnementImpl extends DataReference implements Abonnement {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3F4ABB83-B7D5-73F1-C799-438A3E6484D4]
     // </editor-fold> 
-    public Pinnwand getAbonnementPinnwand () {
-        Vector<Pinnwand> pinnwaende = new Vector<Pinnwand>();
-        pinnwaende = SocialMediaLogicImpl.getAllPinnwand();
-
-
-
+    public Pinnwand getAbonnementPinnwand (SocialMediaLogicImpl verwaltung) {
+        Vector<Pinnwand> pinnwaende = verwaltung.getAllPinnwand();
+        
+        for (int i = 0; i < pinnwaende.size(); i++) {
+            Pinnwand pinnwand = pinnwaende.elementAt(i);
+            if(pinnwand.getID() == pinnwandID)
+                return pinnwand;
+        }
         return null;
     }
 

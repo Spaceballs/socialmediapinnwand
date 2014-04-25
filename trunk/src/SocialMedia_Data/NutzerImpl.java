@@ -1,6 +1,7 @@
 package SocialMedia_Data;
 
 //import SocialMedia_DatabaseManager.Vector<Abonnement>;
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.util.Date;
         import java.util.Vector;
 
@@ -96,48 +97,69 @@ public class NutzerImpl extends DataReference implements Nutzer {
     // #[regen=yes,id=DCE.DB086FF5-415F-77FF-4654-276E885DBAAB]
     // </editor-fold> 
     public int getID () {
-        return 0;
+        return super.getID();
     }
-/**
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.2D5533DE-3888-DE18-7A6E-70C1F4DB8220]
     // </editor-fold> 
     public void setID (int val) {
+        super.setID(val);
     }
- */
+ 
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.533A23D6-473F-672C-342E-35A42BB259DB]
     // </editor-fold> 
     public Date getCreationDate () {
-        return null;
+        return super.getCreationDate();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C83F59FD-2047-7AB3-C249-FFFCC8DEE9F7]
     // </editor-fold> 
     public void setCreationDate (Date val) {
+        super.setCreationDate(val);
     }
 
+    /**
+     *
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.73B6C5E7-4078-D778-0BF9-9745651A4CBE]
     // </editor-fold> 
     public void setID (int val) {
+        super.setID(val);
     }
+     *
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.EA9F8A85-2059-4E68-72FA-B23705639051]
     // </editor-fold> 
-    public Pinnwand getNutzerPinnwand () {
+    public Pinnwand getNutzerPinnwand (SocialMediaLogicImpl verwaltung) {
+        Vector<Pinnwand> pinnwaende = verwaltung.getAllPinnwand();
+
+        for (int i = 0; i < pinnwaende.size(); i++) {
+            Pinnwand pinnwand = pinnwaende.elementAt(i);
+            if(pinnwand.getNutzerID() == this.getID())
+                return pinnwand;
+        }
         return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.E49402FD-5DC6-2D8C-7CB5-633CA9E8C37B]
     // </editor-fold> 
-    public Vector<Abonnement> getAllNutzerAbonnement () {
-        return null;
-    }
+    public Vector<Abonnement> getAllNutzerAbonnement (SocialMediaLogicImpl verwaltung) {
+        Vector<Abonnement> abonnements = verwaltung.getAllAbonnement();
+        Vector<Abonnement> nutzerAbonnements = null;
 
+        for (int i = 0; i < abonnements.size(); i++) {
+            Abonnement abonnement = abonnements.elementAt(i);
+            if(abonnement.getNutzerID() == this.getID())
+                nutzerAbonnements.addElement(abonnement);
+        }
+        return nutzerAbonnements;
+    }
 }
 

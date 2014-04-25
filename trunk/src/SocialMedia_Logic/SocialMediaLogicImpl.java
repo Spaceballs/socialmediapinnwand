@@ -65,7 +65,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
 
     private ReportGenerator reportGenerator;
 
-
+    /**
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9993C351-D864-16C8-841C-49E622E0F1E3]
     // </editor-fold> 
@@ -130,6 +130,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.6747B83B-E0F7-D214-A7C1-84F36AD01DC1]
     // </editor-fold> 
     private ReportGenerator mReportGenerator;
+*/
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A40EA4B1-D3AE-FBD5-8C74-CE69064D5075]
@@ -143,6 +144,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         this.pinnwandMapper = pinnwandMapper;
         this.reportGenerator = new ReportGeneratorImpl(this);
     }
+
+    /**
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.E929B82C-9AA5-5632-24CF-A07C993A9752]
@@ -227,12 +230,14 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     public void setPinnwandMapper (PinnwandMapper val) {
         this.mPinnwandMapper = val;
     }
+     *
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F512BA95-062D-B7B4-5874-8D2D04E7A001]
     // </editor-fold> 
     public Vector<Like> getAllLikeOfBeitrag (Beitrag val) {
-        return null;
+        return val.getAllBeitragLikes(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -260,8 +265,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.EEA69D64-E839-E156-7131-877DEDAFDDA6]
     // </editor-fold> 
     public Pinnwand getPinnwandOfAbonnement (Abonnement val) {
-        return null;
+        return val.getAbonnementPinnwand(this);
     }
+
+    /**
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.6858C105-4B91-7C1F-99C9-FCBC92679077]
@@ -276,6 +283,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     public void setReportGenerator (ReportGenerator val) {
         this.mReportGenerator = val;
     }
+     *
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.332BE2CD-E2F2-7B46-7CF6-53FA4A82274E]
@@ -373,7 +382,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.2B7961BD-5993-B6B1-74E5-DCAE142378D2]
     // </editor-fold> 
     public Pinnwand getPinnwandOfNutzer (Nutzer val) {
-        return null;
+        return val.getNutzerPinnwand(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

@@ -23,39 +23,42 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
     // #[regen=yes,id=DCE.82D86FD2-D644-32D0-FFB9-98412EDCE68C]
     // </editor-fold> 
     public String getText () {
-        return null;
+        return super.getText();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F8404719-458E-776D-9A48-5892CA6FF163]
     // </editor-fold> 
     public void setText (String val) {
+        super.setText(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F3CED0C9-2AF8-CA5E-712B-A05F135629D0]
     // </editor-fold> 
     public int getID () {
-        return 0;
+        return super.getID();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.B502763E-0101-C2E2-06A0-080470A42D08]
     // </editor-fold> 
     public void setID (int val) {
+        super.setID(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A57C8256-3A70-719B-E1A7-C109CBAF569B]
     // </editor-fold> 
     public Date getCreationDate () {
-        return null;
+        return super.getCreationDate();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A6DE489F-102A-64AC-3A02-B800ED40E10E]
     // </editor-fold> 
     public void setCreationDate (Date val) {
+        super.setCreationDate(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -76,13 +79,14 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
     // #[regen=yes,id=DCE.96D1950D-AE51-F332-FAF4-5B7B26F6A0F9]
     // </editor-fold> 
     public int getNutzerID () {
-        return 0;
+        return super.getNutzerID();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3A574E2B-4755-7A15-297B-828B2A4505AB]
     // </editor-fold> 
     public void setNutzerID (int val) {
+        super.setNutzerID(val);
     }
 
 }

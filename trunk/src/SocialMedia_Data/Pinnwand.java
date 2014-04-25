@@ -1,6 +1,8 @@
 package SocialMedia_Data;
 
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.util.Date;
+import java.util.Vector;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -37,6 +39,10 @@ public interface Pinnwand {
     // #[regen=yes,id=DCE.C432522A-7D52-DB1F-6623-1F594C6C5B03]
     // </editor-fold> 
     public void setCreationDate (Date val);
+
+    public Vector<Beitrag> getAllPinnwandBeitraege (SocialMediaLogicImpl verwaltung);
+
+    public Nutzer getOwner (SocialMediaLogicImpl verwaltung);
 
 }
 
