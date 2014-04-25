@@ -1,9 +1,15 @@
 package SocialMedia_Logic;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
  
 
@@ -17,35 +23,59 @@ public class SocialMediaServer {
     // </editor-fold> 
     private SocialMediaLogic socialMediaLogic = null;
 
+    private int serverPort = 1099;
+    
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.34EC638F-091D-E446-8B60-6A9101569827]
-    // </editor-fold> 
-    public SocialMediaServer () {
-		try {
+    // </editor-fold>
 
-			socialMediaLogic =
-				new SocialMediaLogicImpl(SocialMedia_DatabaseManager.LikeMapper.likeMapper(),
-                                                        SocialMedia_DatabaseManager.KommentarMapper.kommentarMapper(),
-                                                        SocialMedia_DatabaseManager.BeitragMapper.beitragMapper(),
-                                                        SocialMedia_DatabaseManager.AbonnementMapper.abonnementMapper(),
-                                                        SocialMedia_DatabaseManager.NutzerMapper.nutzerMapper(),
-                                                        SocialMedia_DatabaseManager.PinnwandMapper.pinnwandMapper());
+    /**
+     *
+     */
+    public SocialMediaServer () {
+        
+        
+        try {
+
+                socialMediaLogic =
+                        new SocialMediaLogicImpl(SocialMedia_DatabaseManager.LikeMapper.likeMapper(),
+                                                SocialMedia_DatabaseManager.KommentarMapper.kommentarMapper(),
+                                                SocialMedia_DatabaseManager.BeitragMapper.beitragMapper(),
+                                                SocialMedia_DatabaseManager.AbonnementMapper.abonnementMapper(),
+                                                SocialMedia_DatabaseManager.NutzerMapper.nutzerMapper(),
+                                                SocialMedia_DatabaseManager.PinnwandMapper.pinnwandMapper());
+                
                         
-			Naming.rebind("rmi://thiesnb:1099/BankVerwaltung1",(Remote) socialMediaLogic);
-		}
-		catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+                System.out.println("RMI Registry am Port " + serverPort + " erstellt...");
+                String rmiRegistryServer = System.getProperty("java.rmi.registry.hostname","localhost");
+                System.out.println("Server: "+ rmiRegistryServer);
+                
+                Naming.lookup("rmi://" + rmiRegistryServer + ":1099/"+ socialMediaLogic);
+                System.out.println("RMI Verbindung hergestellt...");
+                
+        } catch (RemoteException ex) {
+            Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex){
+            Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotBoundException ex) {
+            Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.5C715AB0-272A-0F62-41FE-99F75849F41F]
     // </editor-fold> 
     public static void main (String args[]) {
+        Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);
+        System.out.println("RMI Gestartet...");
+
+        Registry rmiRegistry = LocateRegistry.createRegistry(serverPort);
+        
         SocialMediaServer logic = new SocialMediaServer();
+        System.out.println("Server gestartet...");
     }
 }
 
