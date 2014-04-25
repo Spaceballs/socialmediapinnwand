@@ -244,21 +244,21 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.99C8403B-5BBC-E69A-9FC6-F0E8428FA93D]
     // </editor-fold> 
     public Vector<Kommentar> getAllKommentarOfBeitrag (Beitrag val) {
-        return null;
+        return val.getAllBeitragKommentar(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.EE7AEF7E-9E77-F835-A78D-1EEAC56AAD77]
     // </editor-fold> 
     public Vector<Beitrag> getAllBeitrag () {
-        return null;
+        return beitragMapper.getAll();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9B4DF46F-B156-4748-2520-2D5835471895]
     // </editor-fold> 
     public Vector<Abonnement> getAllAbonnementOfNutzer (Nutzer val) {
-        return null;
+        return val.getAllNutzerAbonnement(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -290,7 +290,26 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.332BE2CD-E2F2-7B46-7CF6-53FA4A82274E]
     // </editor-fold> 
     public Nutzer createNutzer (String username, String name, String surname, String password) {
-        return null;
+        Boolean isCreatable = true;
+        Nutzer neuerNutzer = new NutzerImpl();
+        neuerNutzer.setName(name);
+        neuerNutzer.setSurname(surname);
+        neuerNutzer.setUsername(username);
+        neuerNutzer.setPassword(password);
+
+        Vector<Nutzer> alleNutzer = this.getAllNutzer();
+
+        for (int i = 0; i < alleNutzer.size(); i++) {
+            Nutzer nutzer = alleNutzer.elementAt(i);
+            if(nutzer.getUsername().equals(neuerNutzer.getUsername()))
+                isCreatable = false;
+        }
+        if (isCreatable) {
+            return nutzerMapper.insert(neuerNutzer);
+        } else {
+            return null;
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

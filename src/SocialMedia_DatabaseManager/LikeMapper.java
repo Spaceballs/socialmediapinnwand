@@ -26,13 +26,15 @@ public class LikeMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D470D38B-A8D0-F180-05C3-212EC2769706]
     // </editor-fold> 
-    public void insert (Like val) {
+    public Like insert (Like val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D580C23C-7D18-88FB-DC26-1E1EFD8FE605]
     // </editor-fold> 
-    public void update (Like val) {
+    public Like update (Like val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
