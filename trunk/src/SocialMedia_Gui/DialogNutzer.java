@@ -16,10 +16,13 @@ import java.awt.event.ActionListener;
  *
  * @author Max
  */
-public class DialogNutzer {
+public class DialogNutzer extends JFrame {
 
-    public DialogNutzer(JFrame frame){
+    public DialogNutzer(){
+        initialize();
+    }
 
+    private void initialize() {
         JPanel p = new JPanel(new BorderLayout(5,5));
 
         JPanel labels = new JPanel(new GridLayout(0,1,2,2));
@@ -44,9 +47,9 @@ public class DialogNutzer {
         String[] buttons = {"Speichern", "Account löschen"};
 
         if (JOptionPane.showOptionDialog(
-            frame, p, "Accountdaten ändern", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, buttons, buttons[0])
+            this, p, "Accountdaten ändern", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, buttons, buttons[0])
             == 1) {
-                if (JOptionPane.showConfirmDialog(frame,
+                if (JOptionPane.showConfirmDialog(this,
                         "Den Account wirklich löschen?", "Account löschen",
                         JOptionPane.YES_NO_OPTION) == 0) {
                     System.out.println("Gelöscht");

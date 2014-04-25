@@ -13,9 +13,10 @@ import java.awt.event.ActionListener;
 public class Hauptfenster extends JFrame {
 
     public Hauptfenster(){
-        
-        final JFrame frame = new JFrame("Social Media Pinnwand"); //Frame erzeugen
+        initialize();
+    }
 
+    private void initialize() {
         JMenuBar menueLeiste = new JMenuBar(); //Menueleiste erzeugen
 
         JMenu menue = new JMenu("Menü"); //Menue erzeugen
@@ -45,14 +46,16 @@ public class Hauptfenster extends JFrame {
         //ActionListener Nutzer suchen
         suchen.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               new DialogSuchen(frame);
+               new DialogSuchen();
            }
         });
+
+
 
         //ActionListener Accountdaten ändern
         accountdaten.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               new DialogNutzer(frame);
+               new DialogNutzer();
            }
         });
 
@@ -66,26 +69,27 @@ public class Hauptfenster extends JFrame {
                 }
             }
         });
-        
-        frame.setJMenuBar(menueLeiste); //Menueleiste zu Frame hinzufuegen
+
+        this.setJMenuBar(menueLeiste); //Menueleiste zu Frame hinzufuegen
 
         JPanel panelLinks = new JPanel();
         JPanel panelRechts = new JPanel();
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, panelRechts);
-        splitPane.setResizeWeight(0.7); //Position des Dividers relativ zu Framegroesse       
+        splitPane.setResizeWeight(0.7); //Position des Dividers relativ zu Framegroesse
         splitPane.setEnabled(false); //Divider fixieren
 
-        frame.getContentPane().add(splitPane);
+        this.getContentPane().add(splitPane);
 
-        frame.pack(); //Komplettes Frame auf optimale Größe packen
+        this.setTitle("Social Media Pinnwand");
+        this.pack(); //Komplettes Frame auf optimale Größe packen
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize(); //Frame an Bildschirmgroesse anpassen
         //frame.setSize(d);
-        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        frame.setLocationRelativeTo(null); //Position des Fensters
-        frame.setVisible(true); //Anzeigen des Frames
+        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null); //Position des Fensters
+        this.setVisible(true); //Anzeigen des Frames
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 

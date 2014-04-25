@@ -8,14 +8,18 @@ package SocialMedia_Gui;
 import javax.swing.*;
 import java.awt.*;
 
+
 /**
  *
  * @author Max
  */
-public class DialogSuchen {
+public class DialogSuchen extends JFrame {
 
-    public DialogSuchen(JFrame frame){
-
+    public DialogSuchen(){
+        initialize();
+    }
+        
+    private void initialize() {
         JPanel p = new JPanel(new BorderLayout(5,5));
 
         JPanel labels = new JPanel(new GridLayout(0,1,2,2));
@@ -28,7 +32,7 @@ public class DialogSuchen {
         p.add(controls, BorderLayout.CENTER);
 
         JOptionPane.showMessageDialog(
-            frame, p, "Nutzer suchen", JOptionPane.PLAIN_MESSAGE);
+            this, p, "Nutzer suchen", JOptionPane.PLAIN_MESSAGE);
     }
 
 }
