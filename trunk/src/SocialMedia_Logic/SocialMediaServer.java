@@ -11,7 +11,10 @@ import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
- 
+/**
+ * 
+ * @author Sebastian
+ */
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.A24B76E7-9F46-56FA-1EC7-D50C1E13D908]
@@ -72,6 +75,10 @@ public class SocialMediaServer {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.5C715AB0-272A-0F62-41FE-99F75849F41F]
     // </editor-fold> 
+    /**
+     * 
+     * @param args 
+     */
     public static void main (String args[]) {
 
 

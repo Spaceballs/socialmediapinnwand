@@ -32,6 +32,10 @@ import java.util.Vector;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.FB484D00-E9A8-8868-8F1F-2944573C596E]
 // </editor-fold> 
+/**
+ * 
+ * @author Sebastian
+ */
 public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject implements SocialMediaLogic {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -246,7 +250,12 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F512BA95-062D-B7B4-5874-8D2D04E7A001]
-    // </editor-fold> 
+    // </editor-fold>
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Vector<Like> getAllLikeOfBeitrag (Beitrag val) {
         return val.getAllBeitragLikes(this);
     }
@@ -254,13 +263,22 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.99C8403B-5BBC-E69A-9FC6-F0E8428FA93D]
     // </editor-fold> 
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Vector<Kommentar> getAllKommentarOfBeitrag (Beitrag val) {
         return val.getAllBeitragKommentar(this);
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.EE7AEF7E-9E77-F835-A78D-1EEAC56AAD77]
     // </editor-fold> 
+    /**
+     * 
+     * @return 
+     */
     public Vector<Beitrag> getAllBeitrag () {
         return beitragMapper.getAll();
     }
@@ -268,6 +286,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9B4DF46F-B156-4748-2520-2D5835471895]
     // </editor-fold> 
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Vector<Abonnement> getAllAbonnementOfNutzer (Nutzer val) {
         return val.getAllNutzerAbonnement(this);
     }
@@ -275,6 +298,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.EEA69D64-E839-E156-7131-877DEDAFDDA6]
     // </editor-fold> 
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Pinnwand getPinnwandOfAbonnement (Abonnement val) {
         return val.getAbonnementPinnwand(this);
     }
@@ -300,6 +328,14 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.332BE2CD-E2F2-7B46-7CF6-53FA4A82274E]
     // </editor-fold> 
+    /**
+     * 
+     * @param username
+     * @param name
+     * @param surname
+     * @param password
+     * @return 
+     */
     public Nutzer createNutzer (String username, String name, String surname, String password) {
         Boolean isCreatable = true;
         Nutzer neuerNutzer = new NutzerImpl();
@@ -328,6 +364,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.FC04FC00-E24A-98F2-3349-B9FD920145AE]
     // </editor-fold> 
+    /**
+     * 
+     * @param n
+     * @return 
+     */
     public Pinnwand createPinnwand (Nutzer n) {
         Pinnwand pinnwand = new PinnwandImpl();
         pinnwand.setCreationDate(new Date());
@@ -338,6 +379,13 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.88BE6958-5E18-14BA-A610-1D88707C5B09]
     // </editor-fold> 
+    /**
+     * 
+     * @param p
+     * @param n
+     * @param text
+     * @return 
+     */
     public Beitrag createBeitrag (Pinnwand p, Nutzer n, String text) {
         Beitrag beitrag = new BeitragImpl();
         beitrag.setCreationDate(new Date());
@@ -350,6 +398,13 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A02DB77D-0CF1-4106-4F71-8156B34213A9]
     // </editor-fold> 
+    /**
+     * 
+     * @param b
+     * @param n
+     * @param text
+     * @return 
+     */
     public Kommentar createKommentar (Beitrag b, Nutzer n, String text) {
         Kommentar kommentar = new KommentarImpl();
         kommentar.setBeitragID(b.getID());
@@ -362,6 +417,12 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9F06F9DF-CAE9-CF4B-A623-71CD19435718]
     // </editor-fold> 
+    /**
+     * 
+     * @param b
+     * @param n
+     * @return 
+     */
     public Like createLike (Beitrag b, Nutzer n) {
         Like like = new LikeImpl();
         like.setBeitragID(b.getID());
@@ -374,6 +435,12 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9C219BC2-CE4B-0A3F-F90A-6D9158230771]
     // </editor-fold> 
+    /**
+     * 
+     * @param p
+     * @param n
+     * @return 
+     */
     public Abonnement createAbonnement (Pinnwand p, Nutzer n) {
         Abonnement abonnement = new AbonnementImpl();
         abonnement.setCreationDate(new Date());
@@ -385,6 +452,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F096A7B4-B512-4224-39C4-0A1923FB1E76]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void deleteBeitrag (Beitrag val) {
         Vector<Kommentar> kommentareToDelete = val.getAllBeitragKommentar(this);
         for (int i = 0; i < kommentareToDelete.size(); i++) {
@@ -402,6 +473,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.54EA257F-BDC9-E395-06E2-C38930EA1C47]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void deleteKommentar (Kommentar val) {
         kommentarMapper.delete(val);
     }
@@ -409,6 +484,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F04E9C7D-DF39-D4C1-CA6F-F0C7E594FF23]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void deleteLike (Like val) {
         likeMapper.delete(val);
     }
@@ -416,6 +495,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D70A0C1C-C792-90AD-0451-23BE6ED0F91C]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void deleteAbonnement (Abonnement val) {
         abonnementMapper.delete(val);
     }
@@ -423,6 +506,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.44DCB352-14CA-B344-5BC9-140373F0D2B6]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void deactivateNutzer (Nutzer val) {
         val.setUsername("Deaktivierter Nutzer");
         val.setPassword(new Date().toString());
@@ -431,12 +518,22 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.5737DE0C-5D9D-A07C-31A1-2A9182689801]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void deletePinnwand (Pinnwand val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F430EEA6-50C6-02C3-918D-04DD28681A58]
     // </editor-fold> 
+    /**
+     * 
+     * @param username
+     * @param password
+     * @return 
+     */
     public Nutzer authenticateNutzer (String username, String password) {
         Vector<Nutzer> nutzers = nutzerMapper.getAll();
         Nutzer nutzer = null;
@@ -456,6 +553,14 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F21F8D86-3A7A-9698-C19B-B697E5029F30]
     // </editor-fold> 
+    /**
+     * 
+     * @param username
+     * @param name
+     * @param surname
+     * @param password
+     * @return 
+     */
     public Nutzer registrateNutzer (String username, String name, String surname, String password) {
         return createNutzer(username, name, surname, password);
     }
@@ -463,6 +568,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.2B7961BD-5993-B6B1-74E5-DCAE142378D2]
     // </editor-fold> 
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Pinnwand getPinnwandOfNutzer (Nutzer val) {
         return val.getNutzerPinnwand(this);
     }
@@ -470,6 +580,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.0C6ACEA3-8FF0-DA46-FB02-E756225055F9]
     // </editor-fold> 
+    /**
+     * 
+     * @return 
+     */
     public Vector<Pinnwand> getAllPinnwand () {
         return this.pinnwandMapper.getAll();
     }
@@ -477,6 +591,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A778174E-5769-F86A-5D7A-3B24981B8141]
     // </editor-fold> 
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Vector<Beitrag> getAllBeitragOfPinnwand (Pinnwand val) {
         return val.getAllPinnwandBeitraege(this);
     }
@@ -484,6 +603,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.57B75893-889C-FDFD-4B14-C8C32D7C6BF8]
     // </editor-fold> 
+    /**
+     * 
+     * @return 
+     */
     public Vector<Like> getAllLike () {
         return likeMapper.getAll();
     }
@@ -491,6 +614,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9B8BB13C-9084-D93A-081F-3E5FCE5AD63F]
     // </editor-fold> 
+    /**
+     * 
+     * @return 
+     */
     public Vector<Kommentar> getAllKommentar () {
         return kommentarMapper.getAll();
     }
@@ -498,6 +625,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.0A2A6431-0899-945E-33F2-3D1BC5D84ABE]
     // </editor-fold> 
+    /**
+     * 
+     * @return 
+     */
     public Vector<Abonnement> getAllAbonnement () {
         return this.abonnementMapper.getAll();
     }
@@ -505,6 +636,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D1944576-2CD0-9400-47FB-2EFE48B33DE5]
     // </editor-fold> 
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Nutzer getOwnerOfPinnwandOfAbonnement (Abonnement val) {
         Pinnwand p = null;
         p = val.getAbonnementPinnwand(this);
@@ -514,6 +650,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F73B11C8-1E12-4694-46DB-4CC2CADB0F4E]
     // </editor-fold> 
+    /**
+     * 
+     * @return 
+     */
     public Vector<Nutzer> getAllNutzer () {
         return nutzerMapper.getAll();
     }
@@ -521,6 +661,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.86E91838-6671-CE8D-5E33-D0DD3F055D7F]
     // </editor-fold> 
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Vector<Nutzer> searchNutzer (String val) {
         Vector<Nutzer> nutzers = nutzerMapper.getAll();
         Vector<Nutzer> filteredNutzers = null;
@@ -539,6 +684,15 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3AF91737-2A47-B29A-5E79-2E90649BA926]
     // </editor-fold> 
+    /**
+     * 
+     * @param username
+     * @param name
+     * @param surname
+     * @param password
+     * @param n
+     * @return 
+     */
     public Nutzer editNutzer (String username, String name, String surname, String password, Nutzer n) {
         return null;
     }
@@ -546,6 +700,12 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.73F924D2-DAB9-D6BA-1382-98A56D7A2F08]
     // </editor-fold> 
+    /**
+     * 
+     * @param text
+     * @param b
+     * @return 
+     */
     public Beitrag editBeitrag (String text, Beitrag b) {
         return null;
     }
@@ -553,6 +713,12 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.5D166AAA-C58E-F614-CBC5-BDC40AD2AF64]
     // </editor-fold> 
+    /**
+     * 
+     * @param text
+     * @param k
+     * @return 
+     */
     public Kommentar editKommentar (String text, Kommentar k) {
         return null;
     }
@@ -560,24 +726,41 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.7E869C88-9B52-64C0-3A27-F54B650336BB]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void saveNutzer (Nutzer val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.96DF2B87-8D8D-F34E-C01E-85EDD102CA5A]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void saveBeitrag (Beitrag val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.4C2FEF26-D39B-EA32-2139-40C512071758]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void saveKommentar (Kommentar val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.291FFDFE-4910-E21F-D077-7345E9D295EA]
     // </editor-fold> 
+    /**
+     * 
+     * @param p
+     * @return 
+     */
     public Nutzer getOwnerOfPinnwand (Pinnwand p) {
         return p.getOwner(this);
     }
