@@ -30,7 +30,7 @@ public class SocialMediaServer {
                                                         SocialMedia_DatabaseManager.AbonnementMapper.abonnementMapper(),
                                                         SocialMedia_DatabaseManager.NutzerMapper.nutzerMapper(),
                                                         SocialMedia_DatabaseManager.PinnwandMapper.pinnwandMapper());
-
+                        
 			Naming.rebind("rmi://thiesnb:1099/BankVerwaltung1",(Remote) socialMediaLogic);
 		}
 		catch (RemoteException e) {
