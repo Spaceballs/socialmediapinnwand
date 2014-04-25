@@ -11,7 +11,7 @@ public class PinnwandMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.4E26FF35-0885-BDAD-492B-10424F0BBB35]
     // </editor-fold> 
-    private PinnwandMapper pinnwandMapper = null;
+    private static PinnwandMapper pinnwandMapper = null;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.0AB0C381-AC32-1B92-6B6A-A2C563F7DC21]
@@ -21,7 +21,10 @@ public class PinnwandMapper {
 
 
     public static PinnwandMapper pinnwandMapper(){
-        return null;
+        if (pinnwandMapper == null) {
+            pinnwandMapper = new PinnwandMapper();
+        }
+        return pinnwandMapper;
     }
 
 

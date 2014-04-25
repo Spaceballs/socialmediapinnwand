@@ -11,7 +11,7 @@ public class LikeMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A75B29F6-98A7-14CF-DC50-4096791E2E76]
     // </editor-fold> 
-    private LikeMapper likeMapper = null;
+    private static LikeMapper likeMapper = null;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F420CC2E-47C1-AA2F-9057-59785D74E036]
@@ -20,7 +20,10 @@ public class LikeMapper {
     }
 
     public static LikeMapper likeMapper(){
-        return null;
+        if (likeMapper == null) {
+            likeMapper = new LikeMapper();
+        }
+        return likeMapper;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

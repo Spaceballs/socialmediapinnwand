@@ -50,6 +50,10 @@ public interface Beitrag {
     // </editor-fold> 
     public void setID (int val);
 
+    public int getNutzerID ();
+
+    public void setNutzerID (int val);
+
     public Vector<Kommentar> getAllBeitragKommentar (SocialMediaLogicImpl verwaltung);
 
     public Vector<Like> getAllBeitragLikes (SocialMediaLogicImpl verwaltung);

@@ -48,5 +48,8 @@ public interface Kommentar {
     // </editor-fold> 
     public void setCreationDate (Date val);
 
+    public int getNutzerID ();
+
+    public void setNutzerID (int val);
 }
 

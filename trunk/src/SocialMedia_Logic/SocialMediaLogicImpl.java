@@ -26,6 +26,7 @@ import SocialMedia_DatabaseManager.PinnwandMapper;
 import SocialMedia_ReportGenerator.ReportGenerator; 
 import SocialMedia_ReportGenerator.ReportGeneratorImpl;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.Vector;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -305,7 +306,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
                 isCreatable = false;
         }
         if (isCreatable) {
-            return nutzerMapper.insert(neuerNutzer);
+            neuerNutzer = nutzerMapper.insert(neuerNutzer);
+            createPinnwand(neuerNutzer);
+            return neuerNutzer;
         } else {
             return null;
         }
@@ -316,65 +319,103 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.FC04FC00-E24A-98F2-3349-B9FD920145AE]
     // </editor-fold> 
     public Pinnwand createPinnwand (Nutzer n) {
-        return null;
+        Pinnwand pinnwand = new PinnwandImpl();
+        pinnwand.setCreationDate(new Date());
+        pinnwand.setNutzerID(n.getID());
+        return pinnwandMapper.insert(pinnwand);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.88BE6958-5E18-14BA-A610-1D88707C5B09]
     // </editor-fold> 
     public Beitrag createBeitrag (Pinnwand p, Nutzer n, String text) {
-        return null;
+        Beitrag beitrag = new BeitragImpl();
+        beitrag.setCreationDate(new Date());
+        beitrag.setPinnwandID(p.getID());
+        beitrag.setText(text);
+        beitrag.setNutzerID(n.getID());
+        return beitragMapper.insert(beitrag);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A02DB77D-0CF1-4106-4F71-8156B34213A9]
     // </editor-fold> 
     public Kommentar createKommentar (Beitrag b, Nutzer n, String text) {
-        return null;
+        Kommentar kommentar = new KommentarImpl();
+        kommentar.setBeitragID(b.getID());
+        kommentar.setCreationDate(new Date());
+        kommentar.setText(text);
+        kommentar.setNutzerID(n.getID());
+        return kommentarMapper.insert(kommentar);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9F06F9DF-CAE9-CF4B-A623-71CD19435718]
     // </editor-fold> 
     public Like createLike (Beitrag b, Nutzer n) {
-        return null;
+        Like like = new LikeImpl();
+        like.setBeitragID(b.getID());
+        like.setCreationDate(new Date());
+        like.setLike(true);
+        like.setNutzerID(n.getID());
+        return likeMapper.insert(like);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9C219BC2-CE4B-0A3F-F90A-6D9158230771]
     // </editor-fold> 
     public Abonnement createAbonnement (Pinnwand p, Nutzer n) {
-        return null;
+        Abonnement abonnement = new AbonnementImpl();
+        abonnement.setCreationDate(new Date());
+        abonnement.setNutzerID(n.getID());
+        abonnement.setPinnwandID(p.getID());
+        return abonnementMapper.insert(abonnement);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F096A7B4-B512-4224-39C4-0A1923FB1E76]
     // </editor-fold> 
     public void deleteBeitrag (Beitrag val) {
+        Vector<Kommentar> kommentareToDelete = val.getAllBeitragKommentar(this);
+        for (int i = 0; i < kommentareToDelete.size(); i++) {
+            Kommentar kommentar = kommentareToDelete.elementAt(i);
+            deleteKommentar(kommentar);
+        }
+        Vector<Like> likesToDelete = val.getAllBeitragLikes(this);
+        for (int i = 0; i < likesToDelete.size(); i++) {
+            Like like = likesToDelete.elementAt(i);
+            deleteLike(like);
+        }
+        beitragMapper.delete(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.54EA257F-BDC9-E395-06E2-C38930EA1C47]
     // </editor-fold> 
     public void deleteKommentar (Kommentar val) {
+        kommentarMapper.delete(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F04E9C7D-DF39-D4C1-CA6F-F0C7E594FF23]
     // </editor-fold> 
     public void deleteLike (Like val) {
+        likeMapper.delete(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D70A0C1C-C792-90AD-0451-23BE6ED0F91C]
     // </editor-fold> 
     public void deleteAbonnement (Abonnement val) {
+        abonnementMapper.delete(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.44DCB352-14CA-B344-5BC9-140373F0D2B6]
     // </editor-fold> 
     public void deactivateNutzer (Nutzer val) {
+        val.setUsername("Deaktivierter Nutzer");
+        val.setPassword(new Date().toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -387,14 +428,26 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.F430EEA6-50C6-02C3-918D-04DD28681A58]
     // </editor-fold> 
     public Nutzer authenticateNutzer (String username, String password) {
-        return null;
+        Vector<Nutzer> nutzers = nutzerMapper.getAll();
+        Nutzer nutzer = null;
+        do {
+            int i=0;
+            nutzer = nutzers.elementAt(i);
+            i++;
+        } while (!username.equals(nutzer.getUsername()));
+
+        if (password.equals(nutzer.getPassword())) {
+            return nutzer;
+        } else {
+            return null;
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F21F8D86-3A7A-9698-C19B-B697E5029F30]
     // </editor-fold> 
     public Nutzer registrateNutzer (String username, String name, String surname, String password) {
-        return null;
+        return createNutzer(username, name, surname, password);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -415,21 +468,21 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.A778174E-5769-F86A-5D7A-3B24981B8141]
     // </editor-fold> 
     public Vector<Beitrag> getAllBeitragOfPinnwand (Pinnwand val) {
-        return null;
+        return val.getAllPinnwandBeitraege(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.57B75893-889C-FDFD-4B14-C8C32D7C6BF8]
     // </editor-fold> 
     public Vector<Like> getAllLike () {
-        return null;
+        return likeMapper.getAll();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9B8BB13C-9084-D93A-081F-3E5FCE5AD63F]
     // </editor-fold> 
     public Vector<Kommentar> getAllKommentar () {
-        return null;
+        return kommentarMapper.getAll();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -443,21 +496,34 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.D1944576-2CD0-9400-47FB-2EFE48B33DE5]
     // </editor-fold> 
     public Nutzer getOwnerOfPinnwandOfAbonnement (Abonnement val) {
-        return null;
+        Pinnwand p = null;
+        p = val.getAbonnementPinnwand(this);
+        return p.getOwner(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F73B11C8-1E12-4694-46DB-4CC2CADB0F4E]
     // </editor-fold> 
     public Vector<Nutzer> getAllNutzer () {
-        return null;
+        return nutzerMapper.getAll();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.86E91838-6671-CE8D-5E33-D0DD3F055D7F]
     // </editor-fold> 
     public Vector<Nutzer> searchNutzer (String val) {
-        return null;
+        Vector<Nutzer> nutzers = nutzerMapper.getAll();
+        Vector<Nutzer> filteredNutzers = null;
+        for (int i = 0; i < nutzers.size(); i++) {
+            Nutzer nutzer = nutzers.elementAt(i);
+            if (
+                    nutzer.getSurname().toLowerCase().contains(val.toLowerCase())
+                    || nutzer.getName().toLowerCase().contains(val.toLowerCase())
+                    || nutzer.getUsername().toLowerCase().contains(val.toLowerCase())
+                    )
+                filteredNutzers.addElement(nutzer);
+        }
+        return filteredNutzers;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -503,7 +569,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.291FFDFE-4910-E21F-D077-7345E9D295EA]
     // </editor-fold> 
     public Nutzer getOwnerOfPinnwand (Pinnwand p) {
-        return null;
+        return p.getOwner(this);
     }
 
 }
