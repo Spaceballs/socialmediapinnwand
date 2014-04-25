@@ -16,14 +16,15 @@ import java.awt.event.WindowEvent;
  *
  * @author Max
  */
-public class DialogAnmelden {
+public class DialogAnmelden extends JFrame implements ActionListener{
 
     public DialogAnmelden() {
+        initialize();
+    }
 
-        final JFrame dialog = new JFrame("Anmelden");
-
+    private void initialize() {
         // GridBagLayout mit Abstand zwischen den Elementen.
-        dialog.setLayout(new GridBagLayout());
+        this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.anchor = GridBagConstraints.LINE_START;
@@ -34,37 +35,37 @@ public class DialogAnmelden {
 
         c.gridx = 0;
         c.gridy = 0;
-        dialog.add(new JLabel("Username:", JLabel.RIGHT), c);
+        this.add(new JLabel("Username:", JLabel.RIGHT), c);
 
         JTextField username = new JTextField();
         c.gridx = 1;
         c.gridy = 0;
-        dialog.add(username, c);
+        this.add(username, c);
 
         c.gridx = 0;
         c.gridy = 1;
-        dialog.add(new JLabel("Passwort:", JLabel.RIGHT), c);
+        this.add(new JLabel("Passwort:", JLabel.RIGHT), c);
 
         JPasswordField password = new JPasswordField();
         c.gridx = 1;
         c.gridy = 1;
-        dialog.add(password, c);
+        this.add(password, c);
 
 
         JButton anmelden = new JButton("Anmelden");
         c.gridx = 0;
         c.gridy = 2;
-        dialog.add(anmelden, c);
+        this.add(anmelden, c);
 
         JButton registrieren = new JButton("Registrieren");
         c.gridx = 1;
         c.gridy = 2;
-        dialog.add(registrieren, c);
+        this.add(registrieren, c);
 
         //ActionListener Button Anmelden
         anmelden.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               dialog.dispose();
+               dispose();
                new Hauptfenster();
            }
         });
@@ -72,17 +73,17 @@ public class DialogAnmelden {
         //ActionListener Button Registrieren
         registrieren.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               dialog.dispose();
+               dispose();
                new DialogRegistrieren();
            }
         });
 
-        dialog.pack(); //Komplettes Frame auf optimale Größe packen
+        this.pack(); //Komplettes Frame auf optimale Größe packen
         //dialog.setSize(400,400);
-        dialog.setLocationRelativeTo(null); //Position des Fensters
-        dialog.setVisible(true); //Anzeigen des Frames
+        this.setLocationRelativeTo(null); //Position des Fensters
+        this.setVisible(true); //Anzeigen des Frames
 
-        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 
 //    andere Varianten
@@ -136,6 +137,10 @@ public class DialogAnmelden {
 //
 //        Object[] options = {"Anmelden", "Registrieren"};
 //        JOptionPane.showOptionDialog(frame, p, "Anmelden", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
