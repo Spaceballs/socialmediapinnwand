@@ -135,7 +135,17 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A40EA4B1-D3AE-FBD5-8C74-CE69064D5075]
-    // </editor-fold> 
+    // </editor-fold>
+
+    /**
+     *
+     * @param likeMapper
+     * @param kommentarMapper
+     * @param beitragMapper
+     * @param abonnementMapper
+     * @param nutzerMapper
+     * @param pinnwandMapper
+     */
     public SocialMediaLogicImpl (LikeMapper likeMapper, KommentarMapper kommentarMapper, BeitragMapper beitragMapper, AbonnementMapper abonnementMapper, NutzerMapper nutzerMapper, PinnwandMapper pinnwandMapper) throws RemoteException {
         this.likeMapper = likeMapper;
         this.kommentarMapper = kommentarMapper;
