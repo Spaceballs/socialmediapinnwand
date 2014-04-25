@@ -28,13 +28,15 @@ public class PinnwandMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.91B9B9C7-88E3-E831-1662-6E60F7095367]
     // </editor-fold> 
-    public void insert (Pinnwand val) {
+    public Pinnwand insert (Pinnwand val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.98581B02-63DA-4E99-816E-9EF2B4A8E4F6]
     // </editor-fold> 
-    public void update (Pinnwand val) {
+    public Pinnwand update (Pinnwand val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

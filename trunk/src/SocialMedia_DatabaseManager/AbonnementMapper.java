@@ -35,15 +35,17 @@ public class AbonnementMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.07672B8C-2DA5-0B58-2173-FAF4118927BD]
     // </editor-fold> 
-    public void insert (Abonnement val) {
+    public Abonnement insert (Abonnement val) {
         Connection con = DBConnection.connection();
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.720694C4-3F40-2FAE-694D-624DF8707ACE]
     // </editor-fold> 
-    public void update (Abonnement val) {
+    public Abonnement update (Abonnement val) {
         Connection con = DBConnection.connection();
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

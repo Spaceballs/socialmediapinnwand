@@ -29,13 +29,15 @@ public class NutzerMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C1ED3A6E-09B8-4760-D3C6-A75103DC7528]
     // </editor-fold> 
-    public void insert (Nutzer val) {
+    public Nutzer insert (Nutzer val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.25652AD8-6667-DE25-7002-EB0BC3239B9E]
     // </editor-fold> 
-    public void update (Nutzer val) {
+    public Nutzer update (Nutzer val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

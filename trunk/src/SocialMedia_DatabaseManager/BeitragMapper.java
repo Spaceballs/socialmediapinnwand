@@ -28,13 +28,15 @@ public class BeitragMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.83B8D728-1072-5297-E306-A9EA071580E9]
     // </editor-fold> 
-    public void insert (Beitrag val) {
+    public Beitrag insert (Beitrag val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.4ACBD08C-1948-DCEB-5211-AC0A39939014]
     // </editor-fold> 
-    public void update (Beitrag val) {
+    public Beitrag update (Beitrag val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

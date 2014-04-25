@@ -28,13 +28,15 @@ public class KommentarMapper {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.7866B8A7-10AA-8192-AC55-B9F8AF1AE130]
     // </editor-fold> 
-    public void insert (Kommentar val) {
+    public Kommentar insert (Kommentar val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D59859BD-8C69-DEF0-2252-03A01A7EB350]
     // </editor-fold> 
-    public void update (Kommentar val) {
+    public Kommentar update (Kommentar val) {
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
