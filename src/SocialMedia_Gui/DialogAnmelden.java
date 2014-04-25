@@ -78,6 +78,7 @@ public class DialogAnmelden extends JFrame implements ActionListener{
            }
         });
 
+        this.setTitle("Anmelden");
         this.pack(); //Komplettes Frame auf optimale Größe packen
         //dialog.setSize(400,400);
         this.setLocationRelativeTo(null); //Position des Fensters
