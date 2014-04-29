@@ -1,19 +1,21 @@
 package SocialMedia_DatabaseManager;
 
 import SocialMedia_Data.Beitrag; 
+import java.awt.image.RescaleOp;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.Vector;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.C7EFE1A2-DFDC-BDB2-0C05-445EE6027E44]
 // </editor-fold> 
-public class BeitragMapper {
+public class BeitragMapper extends DBStatementFactory {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.4D65ED05-AD0B-FC57-0EC4-0AFACBC0DD01]
     // </editor-fold> 
     private static BeitragMapper beitragMapper = null;
-
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3F9CA0CE-A15F-4755-D8B8-4637AD032631]
     // </editor-fold> 
@@ -57,6 +59,11 @@ public class BeitragMapper {
     // </editor-fold> 
     public Vector<Beitrag> getAll () {
         Connection con = DBConnection.connection();
+        Vector<Beitrag> beitraege = new Vector<Beitrag>();
+        try {
+            ResultSet resultSet = con.createStatement().executeQuery(null)
+        } catch (Exception e) {
+        }
         return null;
     }
 
