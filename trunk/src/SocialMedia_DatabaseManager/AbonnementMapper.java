@@ -11,13 +11,13 @@ import java.util.Vector;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.86058FE3-4703-84A6-19E0-7413B2A65EE8]
 // </editor-fold> 
-public class AbonnementMapper {
+public class AbonnementMapper extends DBStatementFactory {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.4F343793-5692-58DE-EA80-D99B835998E9]
     // </editor-fold> 
     private static AbonnementMapper abonnementMapper = null;
-
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.5767551A-2A74-DDFE-D2F0-8B38B96D1742]
     // </editor-fold> 
@@ -60,16 +60,17 @@ public class AbonnementMapper {
     // </editor-fold> 
     public Vector<Abonnement> getAll () {
         Connection con = DBConnection.connection();
-        // Ergebnisvektor vorbereiten
         Vector<Abonnement> abonnements = new Vector<Abonnement>();
         try {
-                ResultSet resultSet = con.createStatement().executeQuery("SELECT id, " +
-                        "creationDate, " +
-                        "nutzerID, " +
-                        "pinnwandID " +
-                        "FROM " +
-                        "abonnement" +
-                        "Order BY id");
+            ResultSet resultSet = con.createStatement().executeQuery(super.statementFactory(new AbonnementImpl()));
+            /**
+                ResultSet resultSet = con.createStatement().executeQuery(
+                        SELECT + 
+                        COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + ", " + COLUMN_PINNWAND_ID +
+                        FROM + 
+                        TABLE_NAME_ABONNEMENT + 
+                        ORDER_BY_ID_STATEMENT_OPTION);
+            */
                 while (resultSet.next()) {
                     try {
                         Abonnement abonnement = new AbonnementImpl();
@@ -77,8 +78,6 @@ public class AbonnementMapper {
                         abonnement.setCreationDate(resultSet.getDate("creationDate"));
                         abonnement.setNutzerID( resultSet.getInt("nutzerID") );
                         abonnement.setPinnwandID(resultSet.getInt("pinnwandID"));
-
-                        // Hinzufügen des neuen Objekts zum Ergebnisvektor
                         abonnements.addElement(abonnement);
                     }
                     catch(SQLException e) {
