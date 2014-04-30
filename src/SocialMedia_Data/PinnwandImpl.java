@@ -9,7 +9,7 @@ import SocialMedia_Logic.SocialMediaLogicImpl;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.47B4081F-641D-CF5F-7507-4246F9B5F87B]
 // </editor-fold> 
-public class PinnwandImpl extends DataReference implements Pinnwand {
+public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F8ED24B1-434A-1BB8-CA16-4BFE06D95567]

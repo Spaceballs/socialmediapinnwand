@@ -8,7 +8,7 @@ import java.util.Vector;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.2A8A201C-25A8-2BD1-CC04-C6B0EFE3BF00]
 // </editor-fold> 
-public interface Beitrag {
+public interface Beitrag extends UserCreatedContent {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.1904621F-2CD0-69B0-FCF7-13F7B5E2F83A]

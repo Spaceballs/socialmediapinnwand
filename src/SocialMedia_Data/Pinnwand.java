@@ -8,7 +8,7 @@ import java.util.Vector;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.A573FCE8-0C7C-85E2-81F5-BD4F7AE55AF6]
 // </editor-fold> 
-public interface Pinnwand {
+public interface Pinnwand extends DataReference{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9A113161-9549-A226-EBD6-6C10C1599BB1]

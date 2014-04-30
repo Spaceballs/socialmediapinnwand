@@ -8,7 +8,7 @@ import java.util.Vector;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.917FBD41-4ADB-8612-BEDC-6048D96A8ED8]
 // </editor-fold> 
-public interface Nutzer {
+public interface Nutzer extends DataReference{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.E43AA795-3C56-21D4-4433-70637434F45E]

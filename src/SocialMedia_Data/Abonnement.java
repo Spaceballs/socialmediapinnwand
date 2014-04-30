@@ -1,6 +1,5 @@
 package SocialMedia_Data;
 
-import SocialMedia_Logic.SocialMediaLogic;
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.util.Date;
 
@@ -8,7 +7,7 @@ import java.util.Date;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.C6C8C8C1-C1A1-6C43-5A79-24AB722E73B1]
 // </editor-fold> 
-public interface Abonnement {
+public interface Abonnement extends DataReference {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.CA1B5D3A-569F-7542-04E9-B473D20FF13A]
