@@ -1,13 +1,16 @@
 package SocialMedia_DatabaseManager;
 
 import SocialMedia_Data.Kommentar; 
+import SocialMedia_Data.KommentarImpl;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.86508071-818C-8C40-6662-8E8A4D4DE5AB]
 // </editor-fold> 
-public class KommentarMapper {
+public class KommentarMapper extends DBStatementFactory{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9E5DE831-C9E8-68A8-D649-9ECFB3E846AC]
@@ -57,7 +60,34 @@ public class KommentarMapper {
     // </editor-fold> 
     public Vector<Kommentar> getAll () {
         Connection con = DBConnection.connection();
-        return null;
+        Vector<Kommentar> kommentare = new Vector<Kommentar>();
+        try {
+            ResultSet resultSet = con.createStatement().executeQuery(
+                SELECT + " " +
+                COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + ", " + COLUMN_BEITRAG_ID + ", " + COLUMN_TEXT + " " +
+                FROM + " " +
+                TABLE_NAME_KOMMENTAR + " " +
+                ORDER_BY_ID_STATEMENT_OPTION);
+
+            while (resultSet.next()) {
+                try {
+                    Kommentar kommentar = new KommentarImpl();
+                    kommentar.setID(resultSet.getInt(COLUMN_ID));
+                    kommentar.setCreationDate(resultSet.getDate(COLUMN_CREATION_DATE));
+                    kommentar.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                    kommentar.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
+                    kommentar.setText(resultSet.getString(COLUMN_TEXT));
+                    kommentare.addElement(kommentar);
+                }
+                catch(SQLException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return kommentare;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

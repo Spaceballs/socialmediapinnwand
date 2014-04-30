@@ -1,7 +1,10 @@
 package SocialMedia_DatabaseManager;
 
 import SocialMedia_Data.Pinnwand; 
+import SocialMedia_Data.PinnwandImpl;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -11,7 +14,7 @@ import java.util.Vector;
  * 
  * @author Sebastian
  */
-public class PinnwandMapper {
+public class PinnwandMapper extends DBStatementFactory{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.4E26FF35-0885-BDAD-492B-10424F0BBB35]
@@ -85,7 +88,30 @@ public class PinnwandMapper {
      */
     public Vector<Pinnwand> getAll () {
         Connection con = DBConnection.connection();
-        return null;
+        Vector<Pinnwand> pinnwaende = new Vector<Pinnwand>();
+        try {
+            ResultSet resultSet = con.createStatement().executeQuery(
+                    SELECT + " " +
+                    COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + " " +
+                    FROM + " " +
+                    TABLE_NAME_PINNWAND + " " +
+                    ORDER_BY_ID_STATEMENT_OPTION);
+            while (resultSet.next()) {
+                try {
+                    Pinnwand pinnwand = new PinnwandImpl();
+                    pinnwand.setID(resultSet.getInt(COLUMN_ID));
+                    pinnwand.setCreationDate(resultSet.getDate(COLUMN_CREATION_DATE));
+                    pinnwand.setNutzerID(resultSet.getInt(COLUMN_NUTZER_ID));
+                    pinnwaende.addElement(pinnwand);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pinnwaende;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

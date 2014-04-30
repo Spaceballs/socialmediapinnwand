@@ -1,9 +1,11 @@
 package SocialMedia_DatabaseManager;
 
 import SocialMedia_Data.Beitrag; 
+import SocialMedia_Data.BeitragImpl;
 import java.awt.image.RescaleOp;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -22,7 +24,10 @@ public class BeitragMapper extends DBStatementFactory {
     public BeitragMapper () {
     }
 
-
+    /**
+     * 
+     * @return 
+     */
     public static BeitragMapper beitragMapper(){
         if(beitragMapper == null){
             beitragMapper = new BeitragMapper();
@@ -53,7 +58,11 @@ public class BeitragMapper extends DBStatementFactory {
     public void delete (Beitrag val) {
         Connection con = DBConnection.connection();
     }
-
+    
+    /**
+     * 
+     * @return 
+     */
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.0B0DADF1-20A3-4875-9AA5-6F90023A7F32]
     // </editor-fold> 
@@ -61,10 +70,31 @@ public class BeitragMapper extends DBStatementFactory {
         Connection con = DBConnection.connection();
         Vector<Beitrag> beitraege = new Vector<Beitrag>();
         try {
-            ResultSet resultSet = con.createStatement().executeQuery(null)
-        } catch (Exception e) {
+            ResultSet resultSet = con.createStatement().executeQuery(
+                SELECT + " " +
+                COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + ", " + COLUMN_PINNWAND_ID + ", " + COLUMN_TEXT + " " +
+                FROM + " " +
+                TABLE_NAME_BEITRAG + " " +
+                ORDER_BY_ID_STATEMENT_OPTION);
+            while (resultSet.next()) {
+                try {
+                    Beitrag beitrag = new BeitragImpl();
+                    beitrag.setID(resultSet.getInt(COLUMN_ID));
+                    beitrag.setCreationDate(resultSet.getDate(COLUMN_CREATION_DATE));
+                    beitrag.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                    beitrag.setPinnwandID(resultSet.getInt(COLUMN_PINNWAND_ID));
+                    beitrag.setText(resultSet.getString(COLUMN_TEXT));
+                    beitraege.addElement(beitrag);
+                }
+                catch(SQLException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+        return beitraege;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

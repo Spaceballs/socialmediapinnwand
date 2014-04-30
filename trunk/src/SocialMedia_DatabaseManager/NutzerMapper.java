@@ -1,7 +1,10 @@
 package SocialMedia_DatabaseManager;
 
 import SocialMedia_Data.Nutzer;
+import SocialMedia_Data.NutzerImpl;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -11,7 +14,7 @@ import java.util.Vector;
  * 
  * @author Sebastian
  */
-public class NutzerMapper {
+public class NutzerMapper extends DBStatementFactory{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.665FBD45-137D-BD65-2498-CA0B84C4F9F3]
@@ -87,7 +90,35 @@ public class NutzerMapper {
      */
     public Vector<Nutzer> getAll() {
         Connection con = DBConnection.connection();
-        return null;
+        Vector<Nutzer> nutzers = new Vector<Nutzer>();
+        try {
+            ResultSet resultSet = con.createStatement().executeQuery(
+                SELECT + " " +
+                COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NICKNAME + ", " + COLUMN_NACHNAME + ", " + COLUMN_VORNAME + ", " + COLUMN_PASSWORD + " " +
+                FROM + " " +
+                TABLE_NAME_NUTZER + " " +
+                ORDER_BY_ID_STATEMENT_OPTION);
+
+            while (resultSet.next()) {
+                try {
+                    Nutzer nutzer = new NutzerImpl();
+                    nutzer.setID(resultSet.getInt(COLUMN_ID));
+                    nutzer.setCreationDate(resultSet.getDate(COLUMN_CREATION_DATE));
+                    nutzer.setUsername(resultSet.getString(COLUMN_NICKNAME) );
+                    nutzer.setName(resultSet.getString(COLUMN_NACHNAME));
+                    nutzer.setSurname(resultSet.getString(COLUMN_VORNAME));
+                    nutzer.setPassword(resultSet.getString(COLUMN_PASSWORD));
+                    nutzers.addElement(nutzer);
+                }
+                catch(SQLException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nutzers;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
