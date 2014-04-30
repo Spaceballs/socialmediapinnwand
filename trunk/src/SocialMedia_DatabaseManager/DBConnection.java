@@ -18,7 +18,7 @@ public class DBConnection {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.152435AE-BD70-7A93-09A2-29A72C2F852F]
     // </editor-fold> 
-    private static String url = "jdbc:mysql://localhost/bankproject?user=demo&password=demo";
+    private static String url = "jdbc:mysql://mars.iuk.hdm-stuttgart.de/u-mk173?user=mk173&password=oof7eiM2ua";
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.82C17374-FFED-AA2D-BAAE-8FC453E9BEF6]

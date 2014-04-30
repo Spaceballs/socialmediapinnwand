@@ -57,16 +57,20 @@ public class LikeMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.0C4B0EE1-B2C6-56F6-18D3-A695BA7EDA76]
     // </editor-fold> 
     public Vector<Like> getAll () {
+        System.err.println(SELECT + " " +
+                COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + ", " + COLUMN_BEITRAG_ID + ", " + COLUMN_LIKE + " " +
+                FROM + " " +
+                TABLE_NAME_LIKE + " " +
+                ORDER_BY_ID_STATEMENT_OPTION);
         Connection con = DBConnection.connection();
         Vector<Like> likes = new Vector<Like>();
         try {
             ResultSet resultSet = con.createStatement().executeQuery(
                 SELECT + " " +
-                COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + ", " + COLUMN_BEITRAG_ID + " " +
+                COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + ", " + COLUMN_BEITRAG_ID + ", " + COLUMN_LIKE + " " +
                 FROM + " " +
                 TABLE_NAME_LIKE + " " +
                 ORDER_BY_ID_STATEMENT_OPTION);
-
             while (resultSet.next()) {
                 try {
                     Like like = new LikeImpl();
@@ -74,6 +78,7 @@ public class LikeMapper extends DBStatementFactory{
                     like.setCreationDate(resultSet.getDate(COLUMN_CREATION_DATE));
                     like.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
                     like.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
+                    like.setLike(resultSet.getBoolean(COLUMN_LIKE));
                     likes.addElement(like);
                 }
                 catch(SQLException e) {

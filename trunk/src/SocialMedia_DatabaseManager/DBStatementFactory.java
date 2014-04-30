@@ -14,10 +14,10 @@ import java.sql.Statement;
  */
 public abstract class DBStatementFactory {
     
-    final String SELECT = "SELECT ";
-    final String INSERT = "INSERT ";
-    final String UPDATE = "UPDATE ";
-    final String FROM = "FROM ";
+    final String SELECT = "SELECT";
+    final String INSERT = "INSERT";
+    final String UPDATE = "UPDATE";
+    final String FROM = "FROM";
     
     final String COLUMN_ID = "id";
     final String COLUMN_CREATION_DATE = "creationDate";
@@ -31,13 +31,14 @@ public abstract class DBStatementFactory {
     final String COLUMN_VORNAME = "vorname";
     final String COLUMN_PASSWORD = "password";
     final String COLUMN_TEXT = "text";
+    final String COLUMN_LIKE = "likes";
     
-    final String TABLE_NAME_ABONNEMENT = "socialMediaApplication_abonnement";
-    final String TABLE_NAME_NUTZER = "socialMediaApplication_nutzer";
-    final String TABLE_NAME_PINNWAND = "socialMediaApplication_pinnwand";
-    final String TABLE_NAME_LIKE = "socialMediaApplication_like";
-    final String TABLE_NAME_BEITRAG = "socialMediaApplication_beitrag";
-    final String TABLE_NAME_KOMMENTAR = "socialMediaApplication_kommentar";
+    final String TABLE_NAME_ABONNEMENT = "`abonnement`";
+    final String TABLE_NAME_NUTZER = "`nutzer`";
+    final String TABLE_NAME_PINNWAND = "`pinnwand`";
+    final String TABLE_NAME_LIKE = "`like`";
+    final String TABLE_NAME_BEITRAG = "`beitrag`";
+    final String TABLE_NAME_KOMMENTAR = "`kommentar`";
 
     final String ORDER_BY_ID_STATEMENT_OPTION = "Order BY id";
 }

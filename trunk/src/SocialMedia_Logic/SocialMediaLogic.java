@@ -138,6 +138,19 @@ public interface SocialMediaLogic {
     // #[regen=yes,id=DCE.E37CB35B-8EC6-1D18-9244-0DE4417EABFC]
     // </editor-fold> 
     public Nutzer getOwnerOfPinnwand (Pinnwand p);
+    
+    public Vector<Beitrag> getAllBeitrag ();
+    
+    public Vector<Pinnwand> getAllPinnwand ();
+    
+    public Vector<Like> getAllLike ();
+    
+    public Vector<Kommentar> getAllKommentar ();
+    
+    public Vector<Abonnement> getAllAbonnement ();
+    
+    public Vector<Nutzer> getAllNutzer ();
+    
 
 }
 
