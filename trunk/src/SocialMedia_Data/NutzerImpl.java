@@ -9,7 +9,7 @@ import java.util.Date;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.3553D03C-6305-B201-4A1B-DB2554E72E8D]
 // </editor-fold> 
-public class NutzerImpl extends DataReference implements Nutzer {
+public class NutzerImpl extends DataReferenceImpl implements Nutzer {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.0D00499F-FD8A-E51C-CC84-E75EC702091C]

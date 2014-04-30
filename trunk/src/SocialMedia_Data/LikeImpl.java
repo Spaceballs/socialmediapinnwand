@@ -7,7 +7,7 @@ import java.util.Date;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.10E903FF-6500-1EBC-DEF5-09B7199BA578]
 // </editor-fold> 
-public class LikeImpl extends DataReference implements Like {
+public class LikeImpl extends DataReferenceImpl implements Like {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.8858E767-5D5C-E807-0C1F-2E6D5F55A01E]

@@ -1,6 +1,5 @@
 package SocialMedia_Data;
 
-import SocialMedia_Logic.SocialMediaLogic;
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.util.Date;
 import java.util.Vector;
@@ -13,7 +12,7 @@ import java.util.Vector;
  * 
  * @author Sebastian
  */
-public class AbonnementImpl extends DataReference implements Abonnement {
+public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.332F54F4-F850-3FBE-B548-28DCCA1F4A8E]
@@ -33,7 +32,8 @@ public class AbonnementImpl extends DataReference implements Abonnement {
      */
     public AbonnementImpl () {
     }
-
+    
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.0342C465-F245-6BA6-2C42-0097A84203E5]
     // </editor-fold> 
@@ -41,10 +41,12 @@ public class AbonnementImpl extends DataReference implements Abonnement {
      * 
      * @return 
      */
+    /**
     public int getID () {
         return super.getID();
     }
-
+    */
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.470EDC27-EFF8-7E0C-8C42-93954CFB72E6]
     // </editor-fold> 
@@ -52,10 +54,13 @@ public class AbonnementImpl extends DataReference implements Abonnement {
      * 
      * @param val 
      */
+    /**
     public void setID (int val) {
         super.setID(val);
     }
-
+    */
+    
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.34CD4721-4808-AC12-AB06-15C640C1C70A]
     // </editor-fold> 
