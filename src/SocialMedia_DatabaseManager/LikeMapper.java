@@ -1,13 +1,16 @@
 package SocialMedia_DatabaseManager;
 
 import SocialMedia_Data.Like; 
+import SocialMedia_Data.LikeImpl;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.11E2FD15-AC88-BA60-9549-E52BE333AD91]
 // </editor-fold> 
-public class LikeMapper {
+public class LikeMapper extends DBStatementFactory{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A75B29F6-98A7-14CF-DC50-4096791E2E76]
@@ -55,7 +58,33 @@ public class LikeMapper {
     // </editor-fold> 
     public Vector<Like> getAll () {
         Connection con = DBConnection.connection();
-        return null;
+        Vector<Like> likes = new Vector<Like>();
+        try {
+            ResultSet resultSet = con.createStatement().executeQuery(
+                SELECT + " " +
+                COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + ", " + COLUMN_BEITRAG_ID + " " +
+                FROM + " " +
+                TABLE_NAME_LIKE + " " +
+                ORDER_BY_ID_STATEMENT_OPTION);
+
+            while (resultSet.next()) {
+                try {
+                    Like like = new LikeImpl();
+                    like.setID(resultSet.getInt(COLUMN_ID));
+                    like.setCreationDate(resultSet.getDate(COLUMN_CREATION_DATE));
+                    like.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                    like.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
+                    likes.addElement(like);
+                }
+                catch(SQLException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return likes;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

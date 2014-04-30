@@ -40,9 +40,4 @@ public abstract class DBStatementFactory {
     final String TABLE_NAME_KOMMENTAR = "socialMediaApplication_kommentar";
 
     final String ORDER_BY_ID_STATEMENT_OPTION = "Order BY id";
-    
-    public String statementFactory(Object o){
-        o.g
-        return "";
-    }
 }

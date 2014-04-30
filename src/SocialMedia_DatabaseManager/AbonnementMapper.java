@@ -62,30 +62,30 @@ public class AbonnementMapper extends DBStatementFactory {
         Connection con = DBConnection.connection();
         Vector<Abonnement> abonnements = new Vector<Abonnement>();
         try {
-            ResultSet resultSet = con.createStatement().executeQuery(super.statementFactory(new AbonnementImpl()));
-            /**
-                ResultSet resultSet = con.createStatement().executeQuery(
-                        SELECT + 
-                        COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + ", " + COLUMN_PINNWAND_ID +
-                        FROM + 
-                        TABLE_NAME_ABONNEMENT + 
-                        ORDER_BY_ID_STATEMENT_OPTION);
-            */
-                while (resultSet.next()) {
-                    try {
-                        Abonnement abonnement = new AbonnementImpl();
-                        abonnement.setID(resultSet.getInt("id"));
-                        abonnement.setCreationDate(resultSet.getDate("creationDate"));
-                        abonnement.setNutzerID( resultSet.getInt("nutzerID") );
-                        abonnement.setPinnwandID(resultSet.getInt("pinnwandID"));
-                        abonnements.addElement(abonnement);
-                    }
-                    catch(SQLException e) {
-                        e.printStackTrace();
-                        break;
-                    }
+            ResultSet resultSet = con.createStatement().executeQuery(
+                SELECT + " " +
+                COLUMN_ID + ", " + COLUMN_CREATION_DATE + ", " + COLUMN_NUTZER_ID + ", " + COLUMN_PINNWAND_ID + " " +
+                FROM + " " +
+                TABLE_NAME_ABONNEMENT + " " +
+                ORDER_BY_ID_STATEMENT_OPTION);
+
+            while (resultSet.next()) {
+                try {
+                    Abonnement abonnement = new AbonnementImpl();
+                    abonnement.setID(resultSet.getInt(COLUMN_ID));
+                    abonnement.setCreationDate(resultSet.getDate(COLUMN_CREATION_DATE));
+                    abonnement.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                    abonnement.setPinnwandID(resultSet.getInt(COLUMN_PINNWAND_ID));
+                    abonnements.addElement(abonnement);
                 }
-        } catch (SQLException e) {e.printStackTrace();}
+                catch(SQLException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return abonnements;
     }
 
