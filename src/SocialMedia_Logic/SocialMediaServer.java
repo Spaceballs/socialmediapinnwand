@@ -48,6 +48,7 @@ public class SocialMediaServer {
                                                 SocialMedia_DatabaseManager.AbonnementMapper.abonnementMapper(),
                                                 SocialMedia_DatabaseManager.NutzerMapper.nutzerMapper(),
                                                 SocialMedia_DatabaseManager.PinnwandMapper.pinnwandMapper());
+                System.err.println(socialMediaLogic.getAllLike().toString());
                 
                 Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);
                 System.out.println("RMI Gestartet...");
