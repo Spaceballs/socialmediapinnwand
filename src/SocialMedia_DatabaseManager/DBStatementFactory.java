@@ -14,6 +14,8 @@ import java.sql.Statement;
  */
 public abstract class DBStatementFactory {
     
+    final String WHERE = "WHERE";
+    final String DELETE = "DELETE";
     final String SELECT = "SELECT";
     final String INSERT = "INSERT";
     final String UPDATE = "UPDATE";
