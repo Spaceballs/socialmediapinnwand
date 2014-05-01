@@ -95,12 +95,12 @@ public class AbonnementMapper extends DBStatementFactory {
                     abonnements.addElement(abonnement);
                 }
                 catch(SQLException e) {
-                    e.printStackTrace();
+                    Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, e);
                     break;
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, e);
         }
         return abonnements;
     }

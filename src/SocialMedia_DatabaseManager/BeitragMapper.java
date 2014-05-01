@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.C7EFE1A2-DFDC-BDB2-0C05-445EE6027E44]
@@ -87,12 +89,12 @@ public class BeitragMapper extends DBStatementFactory {
                     beitraege.addElement(beitrag);
                 }
                 catch(SQLException e) {
-                    e.printStackTrace();
+                    Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, e);
                     break;
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, e);
         }
         return beitraege;
     }
