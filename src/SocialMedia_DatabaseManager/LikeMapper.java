@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.11E2FD15-AC88-BA60-9549-E52BE333AD91]
@@ -51,6 +53,21 @@ public class LikeMapper extends DBStatementFactory{
     // </editor-fold> 
     public void delete (Like val) {
         Connection con = DBConnection.connection();
+        try {
+            con.createStatement().executeQuery(
+                    DELETE + " " +
+                    FROM + " " +
+                    TABLE_NAME_KOMMENTAR + " " +
+                    WHERE + " " +
+                    COLUMN_ID + "=" + "`" + val.getID() + "`" + " " +
+                    COLUMN_CREATION_DATE + "=" + "`" + val.getCreationDate() + "`" + " " +
+                    COLUMN_NUTZER_ID + "=" + "`" + val.getNutzerID() + "`" + " " +
+                    COLUMN_BEITRAG_ID + "=" + "`" + val.getBeitragID() + "`" +  " " +
+                    COLUMN_LIKE + "=" + "`" + val.getLike() + "`" + " " +
+                    ORDER_BY_ID_STATEMENT_OPTION);
+        } catch (SQLException ex) {
+            Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

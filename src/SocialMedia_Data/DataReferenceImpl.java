@@ -38,7 +38,6 @@ public class DataReferenceImpl implements DataReference {
      * 
      * @return 
      */
-    @Override
     public int getID () {
         return ID;
     }
@@ -50,7 +49,6 @@ public class DataReferenceImpl implements DataReference {
      * 
      * @param val 
      */
-    @Override
     public void setID (int val) {
         this.ID = val;
     }
@@ -62,7 +60,6 @@ public class DataReferenceImpl implements DataReference {
      * 
      * @return 
      */
-    @Override
     public Date getCreationDate () {
         return creationDate;
     }
@@ -74,7 +71,6 @@ public class DataReferenceImpl implements DataReference {
      * 
      * @param val 
      */
-    @Override
     public void setCreationDate (Date val) {
         this.creationDate = val;
     }

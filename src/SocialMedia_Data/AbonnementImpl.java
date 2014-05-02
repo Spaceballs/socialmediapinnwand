@@ -1,7 +1,6 @@
 package SocialMedia_Data;
 
 import SocialMedia_Logic.SocialMediaLogicImpl;
-import java.util.Date;
 import java.util.Vector;
 
 
@@ -32,34 +31,6 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
      */
     public AbonnementImpl () {
     }
-    
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.0342C465-F245-6BA6-2C42-0097A84203E5]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
-    /**
-    public int getID () {
-        return super.getID();
-    }
-    */
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.470EDC27-EFF8-7E0C-8C42-93954CFB72E6]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    /**
-    public void setID (int val) {
-        super.setID(val);
-    }
-    */
-    
     
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.34CD4721-4808-AC12-AB06-15C640C1C70A]
@@ -103,28 +74,6 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
      */
     public void setPinnwandID (int val) {
         this.pinnwandID = val;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.FFDBA0C0-7013-1319-C885-A0C20F7E50BC]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
-    public Date getCreationDate () {
-        return super.getCreationDate();
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.15452194-E393-8805-950E-73A7A3F863A4]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    public void setCreationDate (Date val) {
-        super.setCreationDate(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

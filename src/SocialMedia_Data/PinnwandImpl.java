@@ -3,7 +3,6 @@ package SocialMedia_Data;
 //import SocialMedia_DatabaseManager.Vector<Beitrag>;
 import SocialMedia_Logic.SocialMediaLogicImpl;
     import java.util.Vector;
-    import java.util.Date;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -23,20 +22,6 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.336B64D4-7A85-04C0-6E35-345CAFB99DEF]
-    // </editor-fold> 
-    public int getID () {
-        return super.getID();
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.89A92A9A-D870-875A-FB5B-2E3A39DE06D9]
-    // </editor-fold> 
-    public void setID (int val) {
-        super.setID(val);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.9C4291DD-740E-D30A-3764-2DC928A81FA5]
     // </editor-fold> 
     public int getNutzerID () {
@@ -48,20 +33,6 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     // </editor-fold> 
     public void setNutzerID (int val) {
         this.nutzerID = val;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.8E214C75-16B9-1093-9E83-06CAE123C577]
-    // </editor-fold> 
-    public Date getCreationDate () {
-        return super.getCreationDate();
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.B250D00D-7652-10AF-33A3-C9FDA1EA3CA3]
-    // </editor-fold> 
-    public void setCreationDate (Date val) {
-        super.setCreationDate(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

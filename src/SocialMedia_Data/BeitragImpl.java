@@ -3,7 +3,6 @@ package SocialMedia_Data;
 //import SocialMedia_DatabaseManager.Vector<Kommentar>;
 //import SocialMedia_DatabaseManager.Vector<Like>;
 import SocialMedia_Logic.SocialMediaLogicImpl;
-import java.util.Date;
 import java.util.Vector;
 
 
@@ -30,49 +29,6 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     public BeitragImpl () {
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.C945911F-F454-1D88-5310-C9A5C00922CB]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
-    public String getText () {
-        return super.getText();
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.2C7CB7A6-B16F-682E-E585-FD398806DF85]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    public void setText (String val) {
-        super.setText(val);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.4A30B1A8-6AC6-7D86-7848-B2917DD642B5]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
-    public int getID () {
-        return super.getID();
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.F71FDCA7-B9C9-FA59-2C86-92BF6FA9CF31]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    public void setID (int val) {
-        super.setID(val);
-    }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.793C9FA5-83AA-F5C8-A0D7-5DF4C6DFEBD0]
@@ -94,50 +50,6 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
      */
     public void setPinnwandID (int val) {
         this.pinnwandID = val;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.57E61C7E-1682-26A8-796D-BF4927349BF6]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    public void setCreationDate (Date val) {
-        super.setCreationDate(val);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.42B80735-49DD-DC44-32A0-27F8A0A1EE65]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
-    public int getNutzerID () {
-        return super.getNutzerID();
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.ECF4D252-5F36-EC4D-1454-1F816D76890B]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    public void setNutzerID (int val) {
-        super.setNutzerID(val);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.DA572805-9588-8C69-7CF1-90C898B1A046]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
-    public Date getCreationDate () {
-        return super.getCreationDate();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
