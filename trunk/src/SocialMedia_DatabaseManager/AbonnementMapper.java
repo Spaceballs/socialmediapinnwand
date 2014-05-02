@@ -2,10 +2,12 @@ package SocialMedia_DatabaseManager;
 
 import SocialMedia_Data.Abonnement; 
 import SocialMedia_Data.AbonnementImpl;
-import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +15,10 @@ import java.util.logging.Logger;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.86058FE3-4703-84A6-19E0-7413B2A65EE8]
 // </editor-fold> 
+/**
+ * 
+ * @author Sebastian
+ */
 public class AbonnementMapper extends DBStatementFactory {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -23,9 +29,16 @@ public class AbonnementMapper extends DBStatementFactory {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.5767551A-2A74-DDFE-D2F0-8B38B96D1742]
     // </editor-fold> 
+    /**
+     * 
+     */
     protected AbonnementMapper () {
     }
 
+    /**
+     * 
+     * @return 
+     */
     public static AbonnementMapper abonnementMapper(){
         if(abonnementMapper == null){
             abonnementMapper = new AbonnementMapper();
@@ -37,34 +50,80 @@ public class AbonnementMapper extends DBStatementFactory {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.07672B8C-2DA5-0B58-2173-FAF4118927BD]
     // </editor-fold> 
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Abonnement insert (Abonnement val) {
         Connection con = DBConnection.connection();
-        return null;
+        try {
+            Timestamp t = new Timestamp(val.getCreationDate().getTime());
+            con.createStatement().executeUpdate(
+                    INSERT_INTO + " " +
+                    TABLE_NAME_ABONNEMENT + " ( " +
+                    COLUMN_CREATION_DATE + ", " + COLUMN_PINNWAND_ID + ", " + COLUMN_NUTZER_ID + " ) " +
+                    VALUES + " ( " + "\"" +
+                    t + "\"" + " , " + "\"" + val.getPinnwandID() + "\"" + " , " + "\"" + val.getNutzerID() + "\"" + " )");
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery(
+                    SELECT + " " + 
+                    COLUMN_ID + " " + 
+                    FROM  + " " + 
+                    TABLE_NAME_ABONNEMENT  + " " + 
+                    ORDER_BY_ID_DESC_STATEMENT_OPTION + " " + 
+                    LIMIT_STATEMENT_OPTION + " " + "1");
+            if (resultSet.next())
+                val.setID((resultSet.getInt(COLUMN_ID)));
+        } catch (SQLException ex) {
+            Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.720694C4-3F40-2FAE-694D-624DF8707ACE]
     // </editor-fold> 
+    /**
+     * 
+     * @param val
+     * @return 
+     */
     public Abonnement update (Abonnement val) {
         Connection con = DBConnection.connection();
-        return null;
+        try {
+            Timestamp t = new Timestamp(val.getCreationDate().getTime());
+            con.createStatement().executeUpdate(
+                    UPDATE + " " +
+                    TABLE_NAME_ABONNEMENT + " " +
+                    SET + " " +
+                    COLUMN_CREATION_DATE + " =\"" + t + "\"" + ", " +
+                    COLUMN_NUTZER_ID + " =\"" + val.getNutzerID() + "\""  + ", " +
+                    COLUMN_PINNWAND_ID + " =\"" + val.getPinnwandID() + "\""  + " " +
+                    WHERE + " " +
+                    COLUMN_ID + " = " + val.getID());
+        } catch (SQLException ex) {
+            Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3BF353D9-FF07-B451-4B89-20F8318BE4F0]
     // </editor-fold> 
+    /**
+     * Deletes the given Abonnement from the sql database by val.getID().
+     * @param val Abonnement to be deleted.
+     */
     public void delete (Abonnement val) {
         Connection con = DBConnection.connection();
         try {
-            con.createStatement().executeQuery(
+            con.createStatement().executeUpdate(
                     DELETE + " " +
                     FROM + " " +
                     TABLE_NAME_ABONNEMENT + " " +
                     WHERE + " " +
-                    COLUMN_ID + "=" + "`" + val.getID() + "`" + " " +
-                    COLUMN_CREATION_DATE + "=" + "`" + val.getCreationDate() + "`" + " " +
-                    COLUMN_NUTZER_ID + "=" + "`" + val.getNutzerID() + "`" + " " +
-                    COLUMN_PINNWAND_ID + "=" + "`" + val.getPinnwandID() + "`");
+                    COLUMN_ID + " =\"" + val.getID() + "\"");
         } catch (SQLException ex) {
             Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,6 +132,10 @@ public class AbonnementMapper extends DBStatementFactory {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.FF6B8927-E3C3-0DF3-8FD2-6F803361FCCF]
     // </editor-fold> 
+    /**
+     * Returns all the Abonnements in the sql database
+     * @return Vector of Abonnements
+     */
     public Vector<Abonnement> getAll () {
         Connection con = DBConnection.connection();
         Vector<Abonnement> abonnements = new Vector<Abonnement>();
@@ -88,8 +151,8 @@ public class AbonnementMapper extends DBStatementFactory {
                 try {
                     Abonnement abonnement = new AbonnementImpl();
                     abonnement.setID(resultSet.getInt(COLUMN_ID));
-                    abonnement.setCreationDate(resultSet.getDate(COLUMN_CREATION_DATE));
-                    abonnement.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                    abonnement.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                    abonnement.setNutzerID(resultSet.getInt(COLUMN_NUTZER_ID) );
                     abonnement.setPinnwandID(resultSet.getInt(COLUMN_PINNWAND_ID));
                     abonnements.addElement(abonnement);
                 }
@@ -107,10 +170,11 @@ public class AbonnementMapper extends DBStatementFactory {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.8FEA238D-153E-6EFA-188A-255C783AA53D]
     // </editor-fold> 
+    /**
     public Abonnement findByID (int val) {
         Connection con = DBConnection.connection();
         return null;
     }
-
+    */
 }
 

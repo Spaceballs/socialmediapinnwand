@@ -358,7 +358,6 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         } else {
             return null;
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
