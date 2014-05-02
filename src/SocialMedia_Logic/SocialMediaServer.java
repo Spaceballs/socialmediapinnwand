@@ -1,5 +1,10 @@
 package SocialMedia_Logic;
 
+import SocialMedia_Data.Abonnement;
+import SocialMedia_Data.Nutzer;
+import SocialMedia_Data.NutzerImpl;
+import SocialMedia_Data.Pinnwand;
+import SocialMedia_Data.PinnwandImpl;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -44,7 +49,14 @@ public class SocialMediaServer {
                                             SocialMedia_DatabaseManager.AbonnementMapper.abonnementMapper(),
                                             SocialMedia_DatabaseManager.NutzerMapper.nutzerMapper(),
                                             SocialMedia_DatabaseManager.PinnwandMapper.pinnwandMapper());
-
+            
+            
+            sometests();
+            
+            
+            
+            
+            
             Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);
             System.out.println("RMI Gestartet...");
 
@@ -78,6 +90,37 @@ public class SocialMediaServer {
     public static void main (String args[]) {
         SocialMediaServer logic = new SocialMediaServer();
         System.out.println("Server gestartet...");
+    }
+
+    private void sometests() {
+        Nutzer n = new NutzerImpl();
+        Pinnwand p = new PinnwandImpl();
+        n.setID(1);
+        p.setID(1);
+        Abonnement a = socialMediaLogic.createAbonnement(p, n);
+        java.util.Vector<Abonnement> aa = socialMediaLogic.getAllAbonnement();
+        
+        System.out.println("Abonnement Data:");
+        System.out.println("Abonnement ID: " + a.getID());
+        System.out.println("Abonnement Creation Date: " + a.getCreationDate());
+        System.out.println("Abonnement Nutzer ID: " + a.getNutzerID());
+        System.out.println("Abonnement Pinnwand ID: " + a.getPinnwandID());
+        //socialMediaLogic.deleteAbonnement(a);
+
+
+        while (!aa.isEmpty()) {
+            a = aa.elementAt(0);
+            aa.remove(0);
+            a.setNutzerID(4);
+            a.setPinnwandID(4);
+            SocialMedia_DatabaseManager.AbonnementMapper aM = SocialMedia_DatabaseManager.AbonnementMapper.abonnementMapper();
+            aM.update(a);
+            System.out.print("Abonnement ID: " + a.getID() + " ");
+            System.out.print("Abonnement Creation Date: " + a.getCreationDate() + " ");
+            System.out.print("Abonnement Nutzer ID: " + a.getNutzerID() + " ");
+            System.out.print("Abonnement Pinnwand ID: " + a.getPinnwandID() + " ");
+            System.out.println();
+        }
     }
 }
 

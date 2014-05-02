@@ -20,6 +20,9 @@ public abstract class DBStatementFactory {
     final String INSERT = "INSERT";
     final String UPDATE = "UPDATE";
     final String FROM = "FROM";
+    final String INSERT_INTO = "INSERT INTO";
+    final String VALUES = "VALUES";
+    final String SET = "SET";
     
     final String COLUMN_ID = "id";
     final String COLUMN_CREATION_DATE = "creationDate";
@@ -43,4 +46,8 @@ public abstract class DBStatementFactory {
     final String TABLE_NAME_KOMMENTAR = "`kommentar`";
 
     final String ORDER_BY_ID_STATEMENT_OPTION = "Order BY id";
+    final String ORDER_BY_ID_DESC_STATEMENT_OPTION = "Order BY id DESC";
+    final String MAX_ID_STATEMENT_OPTION = "MAX(id)";
+    final String LIMIT_STATEMENT_OPTION = "LIMIT";
+    
 }
