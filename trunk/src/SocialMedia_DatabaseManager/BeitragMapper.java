@@ -59,6 +59,21 @@ public class BeitragMapper extends DBStatementFactory {
     // </editor-fold> 
     public void delete (Beitrag val) {
         Connection con = DBConnection.connection();
+        try {
+            con.createStatement().executeQuery(
+                    DELETE + " " +
+                    FROM + " " +
+                    TABLE_NAME_BEITRAG + " " +
+                    WHERE + " " +
+                    COLUMN_ID + "=" + "`" + val.getID() + "`" + " " +
+                    COLUMN_CREATION_DATE + "=" + "`" + val.getCreationDate() + "`" + " " +
+                    COLUMN_NUTZER_ID + "=" + "`" + val.getNutzerID() + "`" + " " +
+                    COLUMN_PINNWAND_ID + "=" + "`" + val.getPinnwandID() + "`" +  " " +
+                    COLUMN_TEXT + "=" + "`" + val.getText() + "`" + " " +
+                    ORDER_BY_ID_STATEMENT_OPTION);
+        } catch (SQLException ex) {
+            Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**

@@ -61,11 +61,10 @@ public class AbonnementMapper extends DBStatementFactory {
                     FROM + " " +
                     TABLE_NAME_ABONNEMENT + " " +
                     WHERE + " " +
-                    COLUMN_ID + "=" + "`" + val.getID() + "`" +
-                    COLUMN_CREATION_DATE + "=" + "`" + val.getCreationDate() + "`" +
-                    COLUMN_NUTZER_ID + "=" + "`" + val.getNutzerID() + "`" +
-                    COLUMN_PINNWAND_ID + "=" + "`" + val.getPinnwandID() + "`"
-            );
+                    COLUMN_ID + "=" + "`" + val.getID() + "`" + " " +
+                    COLUMN_CREATION_DATE + "=" + "`" + val.getCreationDate() + "`" + " " +
+                    COLUMN_NUTZER_ID + "=" + "`" + val.getNutzerID() + "`" + " " +
+                    COLUMN_PINNWAND_ID + "=" + "`" + val.getPinnwandID() + "`");
         } catch (SQLException ex) {
             Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
