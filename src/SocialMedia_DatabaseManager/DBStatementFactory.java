@@ -31,12 +31,11 @@ public abstract class DBStatementFactory {
     final String COLUMN_KOMMENTAR_ID = "kommentarID";
     final String COLUMN_BEITRAG_ID = "beitragID";
     final String COLUMN_LIKE_ID = "likeID";
-    final String COLUMN_NICKNAME = "nickname";
-    final String COLUMN_NACHNAME = "nachname";
-    final String COLUMN_VORNAME = "vorname";
+    final String COLUMN_NICKNAME = "username";
+    final String COLUMN_NACHNAME = "name";
+    final String COLUMN_VORNAME = "surname";
     final String COLUMN_PASSWORD = "password";
     final String COLUMN_TEXT = "text";
-    final String COLUMN_LIKE = "likes";
     
     final String TABLE_NAME_ABONNEMENT = "`abonnement`";
     final String TABLE_NAME_NUTZER = "`nutzer`";

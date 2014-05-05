@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,13 +68,11 @@ public class LikeMapper extends DBStatementFactory{
                     TABLE_NAME_LIKE + " ( " +
                             COLUMN_CREATION_DATE + ", " + 
                             COLUMN_BEITRAG_ID + ", " + 
-                            COLUMN_NUTZER_ID +  ", " + 
-                            COLUMN_LIKE + " ) " +
+                            COLUMN_NUTZER_ID +" ) " +
                     VALUES + " ( " + 
                             "\"" + t + "\"" + " , " + 
                             "\"" + val.getBeitragID() + "\"" + ", " + 
-                            "\"" + val.getNutzerID() + "\"" +  ", " + 
-                            "\"" + val.getLike() + "\"" + " )");
+                            "\"" + val.getNutzerID() + "\"" +" )");
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(
                     SELECT + " " + 
@@ -110,8 +109,7 @@ public class LikeMapper extends DBStatementFactory{
                     SET + " " +
                             COLUMN_CREATION_DATE + " =\"" + t + "\"" + ", " +
                             COLUMN_NUTZER_ID + " =\"" + val.getNutzerID() + "\""  + ", " +
-                            COLUMN_BEITRAG_ID + " =\"" + val.getBeitragID() + "\""  + ", " +
-                            COLUMN_LIKE + " =\"" + val.getLike() + "\""  + " " +
+                            COLUMN_BEITRAG_ID + " =\"" + val.getBeitragID() + "\""  + " " +
                     WHERE + " " +
                             COLUMN_ID + " = " + val.getID());
         } catch (SQLException ex) {
@@ -161,8 +159,7 @@ public class LikeMapper extends DBStatementFactory{
                         COLUMN_ID + ", " + 
                         COLUMN_CREATION_DATE + ", " + 
                         COLUMN_NUTZER_ID + ", " + 
-                        COLUMN_BEITRAG_ID + ", " + 
-                        COLUMN_LIKE + " " +
+                        COLUMN_BEITRAG_ID + " " +
                 FROM + " " +
                         TABLE_NAME_LIKE + " " +
                 ORDER_BY_ID_STATEMENT_OPTION);
@@ -173,7 +170,6 @@ public class LikeMapper extends DBStatementFactory{
                     like.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
                     like.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
                     like.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
-                    like.setLike(resultSet.getBoolean(COLUMN_LIKE));
                     likes.addElement(like);
                 }
                 catch(SQLException e) {

@@ -9,11 +9,6 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     private int beitragID;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.B023F896-D23E-21AD-8FAF-4DA3EA0207D3]
-    // </editor-fold> 
-    private boolean like;
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9F346565-9596-51FA-AD5A-A635411942F3]
     // </editor-fold> 
     private int nutzerID;
@@ -47,28 +42,6 @@ public class LikeImpl extends DataReferenceImpl implements Like {
      */
     public void setBeitragID (int val) {
         this.beitragID = val;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.840EB099-4650-E28D-4FBC-1362311648DE]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
-    public boolean getLike () {
-        return like;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.1735E31C-F812-B729-A9EC-741E874D6456]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    public void setLike (boolean val) {
-        this.like = val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
