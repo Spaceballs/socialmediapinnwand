@@ -23,7 +23,8 @@ import java.util.logging.Logger;
  * @author Sebastian
  */
 public class SocialMediaClient {
-    private final String serverPort = "1098";
+    private final String serverPort = "1099";
+    private final String clientPort = "1098";
     private final String serverAdress = "localhost";
     private SocialMediaLogic socialMediaLogic = null;
     
@@ -32,7 +33,7 @@ public class SocialMediaClient {
      * 
      */
     private SocialMediaClient (){
-        DialogServerData serverData = new DialogServerData(this, serverAdress, serverPort);
+        DialogServerData serverData = new DialogServerData(this, serverAdress, serverPort, clientPort);
 
     }
     
@@ -48,11 +49,11 @@ public class SocialMediaClient {
      * @param adresse
      * @param serverPort 
      */
-    public void executeClient(String adresse, String serverPort) {
+    public void executeClient(String adresse, String serverPort, String clientPort) {
          try {
-             Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);
+             Process exec = Runtime.getRuntime().exec("rmiregistry "+ clientPort);
              System.out.println("RMI Gestartet...");
-             socialMediaLogic = (SocialMediaLogic) Naming.lookup("rmi://" + serverAdress + ":" + serverPort + "/socialMediaLogic");
+             socialMediaLogic = (SocialMediaLogic) Naming.lookup("rmi://" + adresse + ":" + serverPort + "/socialMediaLogic");
              System.out.println("Verbindung hergestellt...");
         } catch (NotBoundException ex) {
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
