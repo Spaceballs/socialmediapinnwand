@@ -151,6 +151,15 @@ public interface SocialMediaLogic {
     
     public Vector<Nutzer> getAllNutzer ();
     
-
+    public Pinnwand createPinnwand (Nutzer n);
+    
+    public void deletePinnwand (Pinnwand val);
+    
+    public Nutzer saveNutzer (Nutzer val);
+    
+    public Beitrag saveBeitrag (Beitrag val);
+    
+    public Kommentar saveKommentar (Kommentar val);
+    
 }
 

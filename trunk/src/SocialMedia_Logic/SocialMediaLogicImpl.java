@@ -70,72 +70,96 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
 
     private ReportGenerator reportGenerator;
 
-    /**
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9993C351-D864-16C8-841C-49E622E0F1E3]
     // </editor-fold> 
+    /**
     private BeitragImpl mBeitragImpl;
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.10923064-344E-34CA-DAD0-7B0B43557281]
     // </editor-fold> 
+    /**
     private KommentarImpl mKommentarImpl;
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D1C038DB-E8BE-8F11-611C-6B1F72640E28]
     // </editor-fold> 
+    /**
     private LikeImpl mLikeImpl;
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.38AB6D65-1C53-A8E5-A633-DE72ADAD95EF]
     // </editor-fold> 
+    /**
     private PinnwandImpl mPinnwandImpl;
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.581077A3-7577-A33B-BC13-E596C94996F4]
     // </editor-fold> 
+    /**
     private AbonnementImpl mAbonnementImpl;
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F684580B-48EE-C623-EB5C-F884CF202FB7]
     // </editor-fold> 
+    /**
     private NutzerImpl mNutzerImpl;
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.B733DD4E-D212-7D7B-28BC-F5F7BDFF3C47]
     // </editor-fold> 
+    /**
     private PinnwandMapper mPinnwandMapper;
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.BFA99BFB-745E-DFDA-B8E6-E9694F495CB7]
     // </editor-fold> 
+    /**
     private NutzerMapper mNutzerMapper;
+    */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.8EF53F9B-C617-BF06-AEE5-5640D92FED41]
     // </editor-fold> 
+    /**
     private AbonnementMapper mAbonnementMapper;
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.ECEFB40D-C12D-3573-7AC1-3EEA3D4A31CD]
     // </editor-fold> 
+    /**
     private BeitragMapper mBeitragMapper;
-
+     */
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.93B57EBB-8476-BE9F-69F0-A6280A40A2E6]
     // </editor-fold> 
+    /**
     private KommentarMapper mKommentarMapper;
-
+     */
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.98EF5AEC-BB27-1083-8D93-7D39E5E21BF3]
-    // </editor-fold> 
+    // </editor-fold>
+    /**
     private LikeMapper mLikeMapper;
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.6747B83B-E0F7-D214-A7C1-84F36AD01DC1]
     // </editor-fold> 
+    /**
     private ReportGenerator mReportGenerator;
-*/
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A40EA4B1-D3AE-FBD5-8C74-CE69064D5075]
@@ -160,92 +184,114 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         this.reportGenerator = new ReportGeneratorImpl(this);
     }
 
-    /**
+
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.E929B82C-9AA5-5632-24CF-A07C993A9752]
     // </editor-fold> 
+    /**
     public AbonnementMapper getAbonnementMapper () {
         return mAbonnementMapper;
     }
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.D9B509AB-618D-69F3-0295-7B1E8654B4B5]
     // </editor-fold> 
+    /**
     public void setAbonnementMapper (AbonnementMapper val) {
         this.mAbonnementMapper = val;
     }
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.E6B3A845-6C39-7A23-DD49-880CA04D7998]
     // </editor-fold> 
+    /**
     public BeitragMapper getBeitragMapper () {
         return mBeitragMapper;
     }
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.4C9782F2-F29B-7DB0-E1C6-219156F494B4]
     // </editor-fold> 
+    /**
     public void setBeitragMapper (BeitragMapper val) {
         this.mBeitragMapper = val;
     }
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.BA018761-DFEF-073F-9CD8-B114A2CA97A9]
     // </editor-fold> 
+    /**
     public KommentarMapper getKommentarMapper () {
         return mKommentarMapper;
     }
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.3A6D889E-4C70-6F2A-5F46-C92FC2796232]
     // </editor-fold> 
+    /**
     public void setKommentarMapper (KommentarMapper val) {
         this.mKommentarMapper = val;
     }
+     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.1CE5B23F-7E35-3547-1EFB-5EE1D9C5F09F]
     // </editor-fold> 
+    /**
     public LikeMapper getLikeMapper () {
         return mLikeMapper;
     }
-
+     */
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.5F9ECE85-3252-A252-C034-E75D0F86EF2D]
     // </editor-fold> 
+    /**
     public void setLikeMapper (LikeMapper val) {
         this.mLikeMapper = val;
     }
-
+     */
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.16CC8171-F482-CAF0-53A0-879A93395401]
     // </editor-fold> 
+    /**
     public NutzerMapper getNutzerMapper () {
         return mNutzerMapper;
     }
-
+     */
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.51C55431-348E-B322-92B0-CFBE123E2D83]
     // </editor-fold> 
+    /**
     public void setNutzerMapper (NutzerMapper val) {
         this.mNutzerMapper = val;
     }
-
+     */
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.17C5896F-3C7C-A5B5-66EC-62F8FCF8FA18]
     // </editor-fold> 
+    /**
     public PinnwandMapper getPinnwandMapper () {
         return mPinnwandMapper;
     }
-
+     */
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.1ECF5936-CE36-5434-0577-566E6CB6A36B]
     // </editor-fold> 
+    /**
     public void setPinnwandMapper (PinnwandMapper val) {
         this.mPinnwandMapper = val;
     }
-     *
      */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -307,22 +353,22 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         return val.getAbonnementPinnwand(this);
     }
 
-    /**
-
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.6858C105-4B91-7C1F-99C9-FCBC92679077]
     // </editor-fold> 
+    /**
     public ReportGenerator getReportGenerator () {
         return mReportGenerator;
     }
-
+     */
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.342B0088-2895-7E8A-A3F3-A8EDCB71F3D2]
     // </editor-fold> 
+    /**
     public void setReportGenerator (ReportGenerator val) {
         this.mReportGenerator = val;
     }
-     *
      */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -693,7 +739,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @return 
      */
     public Nutzer editNutzer (String username, String name, String surname, String password, Nutzer n) {
-        return null;
+        n.setUsername(username);
+        n.setName(name);
+        n.setSurname(surname);
+        n.setPassword(password);
+        return saveNutzer(n);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -706,7 +756,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @return 
      */
     public Beitrag editBeitrag (String text, Beitrag b) {
-        return null;
+        b.setText(text);
+        return saveBeitrag(b);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -719,7 +770,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @return 
      */
     public Kommentar editKommentar (String text, Kommentar k) {
-        return null;
+        k.setText(text);
+        return saveKommentar(k);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -729,7 +781,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val 
      */
-    public void saveNutzer (Nutzer val) {
+    public Nutzer saveNutzer (Nutzer val) {
+        return nutzerMapper.update(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -739,7 +792,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val 
      */
-    public void saveBeitrag (Beitrag val) {
+    public Beitrag saveBeitrag (Beitrag val) {
+        return beitragMapper.update(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -749,7 +803,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val 
      */
-    public void saveKommentar (Kommentar val) {
+    public Kommentar saveKommentar (Kommentar val) {
+        return kommentarMapper.update(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
