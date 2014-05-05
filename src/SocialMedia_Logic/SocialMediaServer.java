@@ -20,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Social Media Server creates the server logic and the mappers.
+ * After that the RMI server is created the server logic is registrated with the RMI.
  * 
  * @author Sebastian
  */
@@ -41,7 +43,7 @@ public class SocialMediaServer {
     // </editor-fold>
 
     /**
-     *
+     * Constructor of the Server class
      */
     public SocialMediaServer () {
         try {
@@ -72,7 +74,11 @@ public class SocialMediaServer {
             Naming.rebind("rmi://" + rmiRegistryServer + ":" + serverPort + "/socialMediaLogic",(Remote) socialMediaLogic);
             Naming.lookup("rmi://" + rmiRegistryServer + ":" + serverPort + "/socialMediaLogic");
             System.out.println("RMI Verbindung hergestellt...");
+            
+            
             System.exit(0);
+            
+            
         } catch (RemoteException ex) {
             Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -88,14 +94,18 @@ public class SocialMediaServer {
     // #[regen=yes,id=DCE.5C715AB0-272A-0F62-41FE-99F75849F41F]
     // </editor-fold> 
     /**
-     * 
-     * @param args 
+     * Main class of the server and crates the server itself.
+     * @param args - deprecated
      */
     public static void main (String args[]) {
         SocialMediaServer logic = new SocialMediaServer();
         System.out.println("Server gestartet...");
     }
 
+    /**
+     * Class for db and logic tests.
+     * Mostly uses the socialMediaLogic to manipulate db entries.
+     */
     private void sometests() {
     }
 }
