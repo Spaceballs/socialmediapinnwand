@@ -71,97 +71,6 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     private ReportGenerator reportGenerator;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.9993C351-D864-16C8-841C-49E622E0F1E3]
-    // </editor-fold> 
-    /**
-    private BeitragImpl mBeitragImpl;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.10923064-344E-34CA-DAD0-7B0B43557281]
-    // </editor-fold> 
-    /**
-    private KommentarImpl mKommentarImpl;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.D1C038DB-E8BE-8F11-611C-6B1F72640E28]
-    // </editor-fold> 
-    /**
-    private LikeImpl mLikeImpl;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.38AB6D65-1C53-A8E5-A633-DE72ADAD95EF]
-    // </editor-fold> 
-    /**
-    private PinnwandImpl mPinnwandImpl;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.581077A3-7577-A33B-BC13-E596C94996F4]
-    // </editor-fold> 
-    /**
-    private AbonnementImpl mAbonnementImpl;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.F684580B-48EE-C623-EB5C-F884CF202FB7]
-    // </editor-fold> 
-    /**
-    private NutzerImpl mNutzerImpl;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.B733DD4E-D212-7D7B-28BC-F5F7BDFF3C47]
-    // </editor-fold> 
-    /**
-    private PinnwandMapper mPinnwandMapper;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.BFA99BFB-745E-DFDA-B8E6-E9694F495CB7]
-    // </editor-fold> 
-    /**
-    private NutzerMapper mNutzerMapper;
-    */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.8EF53F9B-C617-BF06-AEE5-5640D92FED41]
-    // </editor-fold> 
-    /**
-    private AbonnementMapper mAbonnementMapper;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.ECEFB40D-C12D-3573-7AC1-3EEA3D4A31CD]
-    // </editor-fold> 
-    /**
-    private BeitragMapper mBeitragMapper;
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.93B57EBB-8476-BE9F-69F0-A6280A40A2E6]
-    // </editor-fold> 
-    /**
-    private KommentarMapper mKommentarMapper;
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.98EF5AEC-BB27-1083-8D93-7D39E5E21BF3]
-    // </editor-fold>
-    /**
-    private LikeMapper mLikeMapper;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.6747B83B-E0F7-D214-A7C1-84F36AD01DC1]
-    // </editor-fold> 
-    /**
-    private ReportGenerator mReportGenerator;
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A40EA4B1-D3AE-FBD5-8C74-CE69064D5075]
     // </editor-fold>
 
@@ -173,9 +82,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param abonnementMapper
      * @param nutzerMapper
      * @param pinnwandMapper
+     * @throws java.rmi.RemoteException
      */
     public SocialMediaLogicImpl (LikeMapper likeMapper, KommentarMapper kommentarMapper, BeitragMapper beitragMapper, AbonnementMapper abonnementMapper, NutzerMapper nutzerMapper, PinnwandMapper pinnwandMapper) throws RemoteException {
-        
         this.likeMapper = likeMapper;
         this.kommentarMapper = kommentarMapper;
         this.beitragMapper = beitragMapper;
@@ -184,116 +93,6 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         this.pinnwandMapper = pinnwandMapper;
         this.reportGenerator = new ReportGeneratorImpl(this);
     }
-
-
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.E929B82C-9AA5-5632-24CF-A07C993A9752]
-    // </editor-fold> 
-    /**
-    public AbonnementMapper getAbonnementMapper () {
-        return mAbonnementMapper;
-    }
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.D9B509AB-618D-69F3-0295-7B1E8654B4B5]
-    // </editor-fold> 
-    /**
-    public void setAbonnementMapper (AbonnementMapper val) {
-        this.mAbonnementMapper = val;
-    }
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.E6B3A845-6C39-7A23-DD49-880CA04D7998]
-    // </editor-fold> 
-    /**
-    public BeitragMapper getBeitragMapper () {
-        return mBeitragMapper;
-    }
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.4C9782F2-F29B-7DB0-E1C6-219156F494B4]
-    // </editor-fold> 
-    /**
-    public void setBeitragMapper (BeitragMapper val) {
-        this.mBeitragMapper = val;
-    }
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.BA018761-DFEF-073F-9CD8-B114A2CA97A9]
-    // </editor-fold> 
-    /**
-    public KommentarMapper getKommentarMapper () {
-        return mKommentarMapper;
-    }
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.3A6D889E-4C70-6F2A-5F46-C92FC2796232]
-    // </editor-fold> 
-    /**
-    public void setKommentarMapper (KommentarMapper val) {
-        this.mKommentarMapper = val;
-    }
-     */
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.1CE5B23F-7E35-3547-1EFB-5EE1D9C5F09F]
-    // </editor-fold> 
-    /**
-    public LikeMapper getLikeMapper () {
-        return mLikeMapper;
-    }
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.5F9ECE85-3252-A252-C034-E75D0F86EF2D]
-    // </editor-fold> 
-    /**
-    public void setLikeMapper (LikeMapper val) {
-        this.mLikeMapper = val;
-    }
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.16CC8171-F482-CAF0-53A0-879A93395401]
-    // </editor-fold> 
-    /**
-    public NutzerMapper getNutzerMapper () {
-        return mNutzerMapper;
-    }
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.51C55431-348E-B322-92B0-CFBE123E2D83]
-    // </editor-fold> 
-    /**
-    public void setNutzerMapper (NutzerMapper val) {
-        this.mNutzerMapper = val;
-    }
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.17C5896F-3C7C-A5B5-66EC-62F8FCF8FA18]
-    // </editor-fold> 
-    /**
-    public PinnwandMapper getPinnwandMapper () {
-        return mPinnwandMapper;
-    }
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.1ECF5936-CE36-5434-0577-566E6CB6A36B]
-    // </editor-fold> 
-    /**
-    public void setPinnwandMapper (PinnwandMapper val) {
-        this.mPinnwandMapper = val;
-    }
-     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F512BA95-062D-B7B4-5874-8D2D04E7A001]
@@ -315,6 +114,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Kommentar> getAllKommentarOfBeitrag (Beitrag val) throws RemoteException{
         return val.getAllBeitragKommentar(this);
@@ -326,6 +126,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Beitrag> getAllBeitrag () throws RemoteException{
         return beitragMapper.getAll();
@@ -338,6 +139,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Abonnement> getAllAbonnementOfNutzer (Nutzer val) throws RemoteException{
         return val.getAllNutzerAbonnement(this);
@@ -350,28 +152,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Pinnwand getPinnwandOfAbonnement (Abonnement val) throws RemoteException{
         return val.getAbonnementPinnwand(this);
     }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.6858C105-4B91-7C1F-99C9-FCBC92679077]
-    // </editor-fold> 
-    /**
-    public ReportGenerator getReportGenerator () {
-        return mReportGenerator;
-    }
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.342B0088-2895-7E8A-A3F3-A8EDCB71F3D2]
-    // </editor-fold> 
-    /**
-    public void setReportGenerator (ReportGenerator val) {
-        this.mReportGenerator = val;
-    }
-     */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.332BE2CD-E2F2-7B46-7CF6-53FA4A82274E]
@@ -383,6 +168,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param surname
      * @param password
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Nutzer createNutzer (String username, String name, String surname, String password) throws RemoteException{
         Boolean isCreatable = true;
@@ -416,6 +202,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param n
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Pinnwand createPinnwand (Nutzer n) throws RemoteException{
         Pinnwand pinnwand = new PinnwandImpl();
@@ -433,6 +220,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param n
      * @param text
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Beitrag createBeitrag (Pinnwand p, Nutzer n, String text) throws RemoteException{
         Beitrag beitrag = new BeitragImpl();
@@ -452,6 +240,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param n
      * @param text
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Kommentar createKommentar (Beitrag b, Nutzer n, String text) throws RemoteException{
         Kommentar kommentar = new KommentarImpl();
@@ -470,6 +259,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param b
      * @param n
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Like createLike (Beitrag b, Nutzer n) throws RemoteException{
         Like like = new LikeImpl();
@@ -487,6 +277,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param p
      * @param n
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Abonnement createAbonnement (Pinnwand p, Nutzer n) throws RemoteException{
         Abonnement abonnement = new AbonnementImpl();
@@ -502,6 +293,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
     public void deleteBeitrag (Beitrag val) throws RemoteException{
         Vector<Kommentar> kommentareToDelete = val.getAllBeitragKommentar(this);
@@ -523,6 +315,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
     public void deleteKommentar (Kommentar val) throws RemoteException{
         kommentarMapper.delete(val);
@@ -534,6 +327,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
     public void deleteLike (Like val) throws RemoteException{
         likeMapper.delete(val);
@@ -545,6 +339,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
     public void deleteAbonnement (Abonnement val) throws RemoteException{
         abonnementMapper.delete(val);
@@ -556,6 +351,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
     public void deactivateNutzer (Nutzer val) throws RemoteException{
         val.setUsername("Deaktivierter Nutzer");
@@ -568,6 +364,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
     public void deletePinnwand (Pinnwand val) throws RemoteException{
     }
@@ -580,6 +377,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param username
      * @param password
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Nutzer authenticateNutzer (String username, String password) throws RemoteException{
         Vector<Nutzer> nutzers = nutzerMapper.getAll();
@@ -609,6 +407,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param surname
      * @param password
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Nutzer registrateNutzer (String username, String name, String surname, String password) throws RemoteException{
         return createNutzer(username, name, surname, password);
@@ -621,6 +420,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Pinnwand getPinnwandOfNutzer (Nutzer val) throws RemoteException{
         return val.getNutzerPinnwand(this);
@@ -632,6 +432,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Pinnwand> getAllPinnwand () throws RemoteException{
         return this.pinnwandMapper.getAll();
@@ -644,6 +445,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Beitrag> getAllBeitragOfPinnwand (Pinnwand val) throws RemoteException{
         return val.getAllPinnwandBeitraege(this);
@@ -655,6 +457,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Like> getAllLike () throws RemoteException{
         return likeMapper.getAll();
@@ -666,6 +469,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Kommentar> getAllKommentar () throws RemoteException{
         return kommentarMapper.getAll();
@@ -677,6 +481,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Abonnement> getAllAbonnement () throws RemoteException{
         return this.abonnementMapper.getAll();
@@ -689,9 +494,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Nutzer getOwnerOfPinnwandOfAbonnement (Abonnement val) throws RemoteException{
-        Pinnwand p = null;
+        Pinnwand p;
         p = val.getAbonnementPinnwand(this);
         return p.getOwner(this);
     }
@@ -702,6 +508,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Nutzer> getAllNutzer () throws RemoteException{
         return nutzerMapper.getAll();
@@ -714,6 +521,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param val
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Vector<Nutzer> searchNutzer (String val) throws RemoteException{
         Vector<Nutzer> nutzers = nutzerMapper.getAll();
@@ -723,8 +531,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
             if (
                     nutzer.getSurname().toLowerCase().contains(val.toLowerCase())
                     || nutzer.getName().toLowerCase().contains(val.toLowerCase())
-                    || nutzer.getUsername().toLowerCase().contains(val.toLowerCase())
-                    )
+                    || nutzer.getUsername().toLowerCase().contains(val.toLowerCase()))
                 filteredNutzers.addElement(nutzer);
         }
         return filteredNutzers;
@@ -741,13 +548,37 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param password
      * @param n
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public Nutzer editNutzer (String username, String name, String surname, String password, Nutzer n) throws RemoteException{
-        n.setUsername(username);
-        n.setName(name);
-        n.setSurname(surname);
-        n.setPassword(password);
-        return saveNutzer(n);
+    public Nutzer editNutzer (String username, String name, String surname, String password, Nutzer val) throws RemoteException{
+        Boolean isEditable = true;
+        Boolean isSame = false;
+        Vector<Nutzer> alleNutzer = this.getAllNutzer();
+        for (int i = 0; i < alleNutzer.size(); i++) {
+            Nutzer nutzer = alleNutzer.elementAt(i);
+            if(nutzer.getUsername().equals(username) ){
+                isEditable = false;
+                if (nutzer.getID() == val.getID())
+                    isSame = true;
+            }       
+        }
+        if (isEditable) {
+            val.setUsername(username);
+            val.setName(name);
+            val.setSurname(surname);
+            val.setPassword(password);
+            return saveNutzer(val);
+        } else {
+            if (isSame){
+                val.setUsername(username);
+                val.setName(name);
+                val.setSurname(surname);
+                val.setPassword(password);
+                return saveNutzer(val);
+            } else {
+                return null;
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -758,6 +589,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param text
      * @param b
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Beitrag editBeitrag (String text, Beitrag b) throws RemoteException{
         b.setText(text);
@@ -772,6 +604,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param text
      * @param k
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Kommentar editKommentar (String text, Kommentar k) throws RemoteException{
         k.setText(text);
@@ -784,6 +617,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param val 
+     * @return  
+     * @throws java.rmi.RemoteException 
      */
     public Nutzer saveNutzer (Nutzer val) throws RemoteException{
         return nutzerMapper.update(val);
@@ -795,6 +630,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param val 
+     * @return  
+     * @throws java.rmi.RemoteException 
      */
     public Beitrag saveBeitrag (Beitrag val) throws RemoteException{
         return beitragMapper.update(val);
@@ -806,6 +643,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param val 
+     * @return  
+     * @throws java.rmi.RemoteException 
      */
     public Kommentar saveKommentar (Kommentar val) throws RemoteException{
         return kommentarMapper.update(val);
@@ -818,6 +657,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * 
      * @param p
      * @return 
+     * @throws java.rmi.RemoteException 
      */
     public Nutzer getOwnerOfPinnwand (Pinnwand p) throws RemoteException{
         return p.getOwner(this);

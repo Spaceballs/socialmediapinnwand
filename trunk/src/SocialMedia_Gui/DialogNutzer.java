@@ -5,13 +5,13 @@
 
 package SocialMedia_Gui;
 
-import SocialMedia_Client.SocialMediaClient;
+import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import javax.swing.*;
 import java.awt.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -21,30 +21,53 @@ import java.awt.event.ActionListener;
 public class DialogNutzer extends JFrame {
     
     private SocialMediaLogic server;
-
-    public DialogNutzer(SocialMediaLogic server){
+    private JTextField username = new JTextField();
+    private JTextField name = new JTextField();
+    private JTextField surname = new JTextField();
+    private JPasswordField password = new JPasswordField();
+    private JPanel controls = new JPanel(new GridLayout(0,1,2,2));
+    private JPanel p = new JPanel(new BorderLayout(5,5));
+    private Nutzer clientNutzer = null;
+    public JPanel labels;
+    
+    /**
+     * 
+     * @param server
+     * @param clientNutzer 
+     */
+    public DialogNutzer(SocialMediaLogic server, Nutzer clientNutzer){
         this.server = server;
+        this.clientNutzer = clientNutzer;
+        try {
+            this.username.setText(clientNutzer.getUsername());
+            this.name.setText(clientNutzer.getName());
+            this.surname.setText(clientNutzer.getSurname());
+            this.password.setText(clientNutzer.getPassword());
+        } catch (RemoteException ex) {
+            Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initialize();
     }
 
+    /**
+     * 
+     */
     private void initialize() {
-        JPanel p = new JPanel(new BorderLayout(5,5));
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        JPanel labels = new JPanel(new GridLayout(0,1,2,2));
+
+        labels = new JPanel(new GridLayout(0,1,2,2));
         labels.add(new JLabel("Username", SwingConstants.RIGHT));
         labels.add(new JLabel("Nachname", SwingConstants.RIGHT));
         labels.add(new JLabel("Vorname", SwingConstants.RIGHT));
         labels.add(new JLabel("Passwort", SwingConstants.RIGHT));
         p.add(labels, BorderLayout.WEST);
 
-        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
-        JTextField username = new JTextField();
+        
         controls.add(username);
-        JTextField name = new JTextField();
         controls.add(name);
-        JTextField surname = new JTextField();
         controls.add(surname);
-        JPasswordField password = new JPasswordField();
+        
 //        password.addAncestorListener(new RequestFocusListener(false));
         controls.add(password);
         p.add(controls, BorderLayout.CENTER);
@@ -52,15 +75,32 @@ public class DialogNutzer extends JFrame {
         String[] buttons = {"Speichern", "Account löschen"};
 
         if (JOptionPane.showOptionDialog(
-            this, p, "Accountdaten ändern", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, buttons, buttons[0])
+                this, p, "Accountdaten ändern", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, buttons, buttons[0])
             == 1) {
                 if (JOptionPane.showConfirmDialog(this,
                         "Den Account wirklich löschen?", "Account löschen",
                         JOptionPane.YES_NO_OPTION) == 0) {
+                    try {
+                        server.deactivateNutzer(clientNutzer);
+                        dispose();
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     System.out.println("Gelöscht");
                 }
+            } else {
+                try {
+                    Nutzer clientNutzerBarbeitet;
+                    clientNutzerBarbeitet = server.editNutzer(username.getText(), name.getText(), surname.getText(), new String(password.getPassword()), clientNutzer);
+                    if (clientNutzerBarbeitet == null){
+                        // TO-DO: Error Behaviour
+                    } else {
+                        dispose();
+                    }   
+                } catch (RemoteException ex) {
+                    Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-         
 //        alte Variante
 //        final JFrame dialog = new JFrame("Accoundaten ändern");
 //
@@ -129,7 +169,5 @@ public class DialogNutzer extends JFrame {
 //        dialog.setVisible(true); //Anzeigen des Frames
 //
 //        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
     }
-
 }
