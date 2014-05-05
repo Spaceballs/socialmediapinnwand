@@ -7,9 +7,9 @@
 package SocialMedia_Client;
 
 import SocialMedia_Gui.DialogAnmelden;
+import SocialMedia_Gui.DialogServerData;
 import static SocialMedia_Gui.Main.createAndShowGUI;
 import SocialMedia_Logic.SocialMediaLogic;
-import com.sun.org.apache.xml.internal.serializer.NamespaceMappings;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -23,22 +23,37 @@ import java.util.logging.Logger;
  * @author Sebastian
  */
 public class SocialMediaClient {
-    
-    private final int serverPort = 1099;
+    private final String serverPort = "1098";
     private final String serverAdress = "localhost";
-    SocialMediaLogic socialMediaLogic = null;
-    
+    private SocialMediaLogic socialMediaLogic = null;
     
     
     /**
      * 
      */
     private SocialMediaClient (){
-        try {
-            Process exec = Runtime.getRuntime().exec("rmiregistry "+ (serverPort+1));
-            System.out.println("RMI Gestartet...");
-            socialMediaLogic = (SocialMediaLogic) Naming.lookup("rmi://" + serverAdress + ":" + serverPort + "/socialMediaLogic");
-            System.out.println("Verbindung hergestellt...");
+        DialogServerData serverData = new DialogServerData(this, serverAdress, serverPort);
+
+    }
+    
+    /**
+     * 
+     */
+    public void createAndShowGUI() {
+        DialogAnmelden  anmelden = new DialogAnmelden(socialMediaLogic);
+    }
+
+    /**
+     * 
+     * @param adresse
+     * @param serverPort 
+     */
+    public void executeClient(String adresse, String serverPort) {
+         try {
+             Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);
+             System.out.println("RMI Gestartet...");
+             socialMediaLogic = (SocialMediaLogic) Naming.lookup("rmi://" + serverAdress + ":" + serverPort + "/socialMediaLogic");
+             System.out.println("Verbindung hergestellt...");
         } catch (NotBoundException ex) {
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -48,24 +63,10 @@ public class SocialMediaClient {
         } catch (IOException ex) {
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
         javax.swing.SwingUtilities.invokeLater(
-                new Runnable() {
-                    public void run() {
-                        createAndShowGUI();
-                    }
-                }
-        );
+                new Runnable() { public void run() { createAndShowGUI();}});
     }
-    
-    /**
-     * 
-     */
-    public void createAndShowGUI() {
-        DialogAnmelden  anmelden = new DialogAnmelden(socialMediaLogic);
-    }
-    
+       
     /**
      * 
      * @param args 
@@ -74,5 +75,4 @@ public class SocialMediaClient {
         SocialMediaClient c = new SocialMediaClient();
         System.out.println("Client gestartet...");
     }
-    
 }
