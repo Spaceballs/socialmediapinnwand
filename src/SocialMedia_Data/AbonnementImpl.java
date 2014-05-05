@@ -1,6 +1,7 @@
 package SocialMedia_Data;
 
 import SocialMedia_Logic.SocialMediaLogicImpl;
+import java.rmi.RemoteException;
 import java.util.Vector;
 
 
@@ -29,7 +30,8 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     /**
      * Konstruktor von Abonnement.
      */
-    public AbonnementImpl () {
+    public AbonnementImpl () 
+            throws RemoteException{
     }
     
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -39,7 +41,8 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
      * 
      * @return 
      */
-    public int getNutzerID () {
+    public int getNutzerID () 
+            throws RemoteException{
         return nutzerID;
     }
 
@@ -50,7 +53,8 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
      * 
      * @param val 
      */
-    public void setNutzerID (int val) {
+    public void setNutzerID (int val) 
+            throws RemoteException{
         this.nutzerID = val;
     }
 
@@ -61,7 +65,8 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
      * 
      * @return 
      */
-    public int getPinnwandID () {
+    public int getPinnwandID () 
+            throws RemoteException{
         return pinnwandID;
     }
 
@@ -72,7 +77,8 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
      * 
      * @param val 
      */
-    public void setPinnwandID (int val) {
+    public void setPinnwandID (int val) 
+            throws RemoteException{
         this.pinnwandID = val;
     }
 
@@ -84,7 +90,8 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
      * @param verwaltung
      * @return 
      */
-    public Pinnwand getAbonnementPinnwand (SocialMediaLogicImpl verwaltung) {
+    public Pinnwand getAbonnementPinnwand (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
         Vector<Pinnwand> pinnwaende = verwaltung.getAllPinnwand();
         
         for (int i = 0; i < pinnwaende.size(); i++) {

@@ -1,6 +1,9 @@
 package SocialMedia_Data;
 // #[regen=yes,id=DCE.10E903FF-6500-1EBC-DEF5-09B7199BA578]
 // </editor-fold> 
+
+import java.rmi.RemoteException;
+
 public class LikeImpl extends DataReferenceImpl implements Like {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -18,8 +21,10 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     // </editor-fold> 
     /**
      * 
+     * @throws java.rmi.RemoteException
      */
-    public LikeImpl () {
+    public LikeImpl () 
+            throws RemoteException{
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -28,8 +33,10 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public int getBeitragID () {
+    public int getBeitragID () 
+            throws RemoteException{
         return beitragID;
     }
 
@@ -39,8 +46,10 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
-    public void setBeitragID (int val) {
+    public void setBeitragID (int val) 
+            throws RemoteException{
         this.beitragID = val;
     }
 
@@ -50,8 +59,10 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public int getNutzerID () {
+    public int getNutzerID () 
+            throws RemoteException{
         return nutzerID;
     }
 
@@ -61,8 +72,10 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
-    public void setNutzerID (int val) {
+    public void setNutzerID (int val) 
+            throws RemoteException{
         this.nutzerID = val;
     }
 

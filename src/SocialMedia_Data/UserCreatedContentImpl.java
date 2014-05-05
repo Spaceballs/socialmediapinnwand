@@ -1,6 +1,9 @@
 package SocialMedia_Data;
 
 // #[regen=yes,id=DCE.8AE5A633-3062-4D82-1BEC-55C100571D26]
+
+import java.rmi.RemoteException;
+
 // </editor-fold> 
 
 /**
@@ -24,8 +27,10 @@ public class UserCreatedContentImpl extends DataReferenceImpl implements UserCre
     // </editor-fold> 
     /**
      * 
+     * @throws java.rmi.RemoteException
      */
-    public UserCreatedContentImpl () {
+    public UserCreatedContentImpl () 
+            throws RemoteException{
     }
 
     
@@ -36,7 +41,8 @@ public class UserCreatedContentImpl extends DataReferenceImpl implements UserCre
      * 
      * @return 
      */
-    public int getNutzerID () {
+    public int getNutzerID () 
+            throws RemoteException{
         return nutzerID;
     }
 
@@ -47,7 +53,8 @@ public class UserCreatedContentImpl extends DataReferenceImpl implements UserCre
      * 
      * @param val 
      */
-    public void setNutzerID (int val) {
+    public void setNutzerID (int val) 
+            throws RemoteException{
         this.nutzerID = val;
     }
 
@@ -58,7 +65,8 @@ public class UserCreatedContentImpl extends DataReferenceImpl implements UserCre
      * 
      * @return 
      */
-    public String getText () {
+    public String getText () 
+            throws RemoteException{
         return text;
     }
 
@@ -69,7 +77,8 @@ public class UserCreatedContentImpl extends DataReferenceImpl implements UserCre
      * 
      * @param val 
      */
-    public void setText (String val) {
+    public void setText (String val) 
+            throws RemoteException{
         this.text = val;
     }
 }

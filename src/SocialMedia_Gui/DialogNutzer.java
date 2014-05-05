@@ -5,6 +5,8 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Client.SocialMediaClient;
+import SocialMedia_Logic.SocialMediaLogic;
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,8 +19,11 @@ import java.awt.event.ActionListener;
  * @author Max
  */
 public class DialogNutzer extends JFrame {
+    
+    private SocialMediaLogic server;
 
-    public DialogNutzer(){
+    public DialogNutzer(SocialMediaLogic server){
+        this.server = server;
         initialize();
     }
 

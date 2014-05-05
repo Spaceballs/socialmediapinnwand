@@ -2,6 +2,7 @@ package SocialMedia_Data;
 
 //import SocialMedia_DatabaseManager.Vector<Beitrag>;
 import SocialMedia_Logic.SocialMediaLogicImpl;
+import java.rmi.RemoteException;
     import java.util.Vector;
 
 
@@ -18,27 +19,31 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.72DCC317-149D-B9E4-6A3B-717A3374A9CA]
     // </editor-fold> 
-    public PinnwandImpl () {
+    public PinnwandImpl () 
+            throws RemoteException{
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.9C4291DD-740E-D30A-3764-2DC928A81FA5]
     // </editor-fold> 
-    public int getNutzerID () {
+    public int getNutzerID () 
+            throws RemoteException{
         return nutzerID;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.44707E22-5B0D-70BB-F963-9CA705705444]
     // </editor-fold> 
-    public void setNutzerID (int val) {
+    public void setNutzerID (int val) 
+            throws RemoteException{
         this.nutzerID = val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.1C5670FC-1942-4082-13A2-408A385BBDAB]
     // </editor-fold> 
-    public Vector<Beitrag> getAllPinnwandBeitraege (SocialMediaLogicImpl verwaltung) {
+    public Vector<Beitrag> getAllPinnwandBeitraege (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
         Vector<Beitrag> beitraege = verwaltung.getAllBeitrag();
         Vector<Beitrag> pinnwandBeitraege = null;
 
@@ -53,7 +58,8 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A095AC40-10D1-77A9-0A67-2D41CC05B201]
     // </editor-fold> 
-    public Nutzer getOwner (SocialMediaLogicImpl verwaltung) {
+    public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
         Vector<Nutzer> nutzers = verwaltung.getAllNutzer();
 
         for (int i = 0; i < nutzers.size(); i++) {

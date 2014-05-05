@@ -1,6 +1,9 @@
 package SocialMedia_Data;
 // #[regen=yes,id=DCE.67A3AF12-C93F-4EF2-3E3E-0535912403EA]
 // </editor-fold> 
+
+import java.rmi.RemoteException;
+
 /**
  * 
  * @author Sebastian
@@ -17,8 +20,10 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
     // </editor-fold> 
     /**
      * 
+     * @throws java.rmi.RemoteException
      */
-    public KommentarImpl () {
+    public KommentarImpl () 
+            throws RemoteException{
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -27,8 +32,10 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public int getBeitragID () {
+    public int getBeitragID () 
+            throws RemoteException{
         return beitragID;
     }
 
@@ -38,8 +45,10 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
-    public void setBeitragID (int val) {
+    public void setBeitragID (int val) 
+            throws RemoteException{
         this.beitragID = val;
     }
 }

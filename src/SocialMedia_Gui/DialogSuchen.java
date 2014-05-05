@@ -5,6 +5,8 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Client.SocialMediaClient;
+import SocialMedia_Logic.SocialMediaLogic;
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,8 +16,11 @@ import java.awt.*;
  * @author Max
  */
 public class DialogSuchen extends JFrame {
+    
+    private SocialMediaLogic server;
 
-    public DialogSuchen(){
+    DialogSuchen(SocialMediaLogic server) {
+        this.server = server;
         initialize();
     }
         
