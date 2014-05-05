@@ -389,6 +389,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         neuerNutzer.setSurname(surname);
         neuerNutzer.setUsername(username);
         neuerNutzer.setPassword(password);
+        neuerNutzer.setCreationDate(new Date());
 
         Vector<Nutzer> alleNutzer = this.getAllNutzer();
 
@@ -472,7 +473,6 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         Like like = new LikeImpl();
         like.setBeitragID(b.getID());
         like.setCreationDate(new Date());
-        like.setLike(true);
         like.setNutzerID(n.getID());
         return likeMapper.insert(like);
     }

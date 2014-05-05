@@ -26,24 +26,6 @@ public interface Like extends DataReference {
     public void setBeitragID (int val);
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.1F50ED9E-A202-54ED-2AD4-192A3452D9DF]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
-    public boolean getLike ();
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.E6919080-9E04-B847-9F2F-83C19F0DEED6]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    public void setLike (boolean val);
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.66E08099-C5B7-4506-F5DA-E8F82BABB84C]
     // </editor-fold> 
     /**
