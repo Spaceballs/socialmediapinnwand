@@ -27,7 +27,7 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,id=DCE.9A023376-AEF4-0492-69FC-D772039EAC98]
     // </editor-fold> 
     /**
-     * 
+     * Konstruktor von Abonnement.
      */
     public AbonnementImpl () {
     }
