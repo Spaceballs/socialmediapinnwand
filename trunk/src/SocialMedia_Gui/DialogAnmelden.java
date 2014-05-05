@@ -83,7 +83,7 @@ public class DialogAnmelden extends JFrame implements ActionListener{
            public void actionPerformed(ActionEvent e) {
                Nutzer clientNutzer = null;
                try {
-                   clientNutzer = server.authenticateNutzer(username.getText(), password.getPassword().toString());
+                   clientNutzer = server.authenticateNutzer(username.getText(), new String(password.getPassword()));
                } catch (RemoteException ex) {
                    Logger.getLogger(DialogAnmelden.class.getName()).log(Level.SEVERE, null, ex);
                }
@@ -92,7 +92,7 @@ public class DialogAnmelden extends JFrame implements ActionListener{
                    Hauptfenster hauptfenster = new Hauptfenster(server, clientNutzer);
                } else {
                    dispose();
-                   DialogAnmelden  anmelden = new DialogAnmelden(server, username.getText(), password.getPassword().toString());
+                   DialogAnmelden  anmelden = new DialogAnmelden(server, username.getText(), new String(password.getPassword()));
                }
            }
         });
@@ -101,7 +101,7 @@ public class DialogAnmelden extends JFrame implements ActionListener{
         registrieren.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                dispose();
-               DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, username.getText(), password.getPassword().toString());
+               DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, username.getText(), new String(password.getPassword()));
            }
         });
 
