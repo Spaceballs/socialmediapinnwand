@@ -104,16 +104,13 @@ public class DialogAnmelden extends JFrame implements ActionListener{
                DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, username.getText(), new String(password.getPassword()));
            }
         });
-
         this.setTitle("Anmelden");
         this.pack(); //Komplettes Frame auf optimale Größe packen
         //dialog.setSize(400,400);
         this.setLocationRelativeTo(null); //Position des Fensters
         this.setVisible(true); //Anzeigen des Frames
-
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-
+    }
 //    andere Varianten
 //        JDialog anmelden = new JDialog();
 //
@@ -165,10 +162,8 @@ public class DialogAnmelden extends JFrame implements ActionListener{
 //
 //        Object[] options = {"Anmelden", "Registrieren"};
 //        JOptionPane.showOptionDialog(frame, p, "Anmelden", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-    }
-
+    
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
 }
