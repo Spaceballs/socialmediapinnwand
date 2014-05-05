@@ -32,12 +32,14 @@ public class DialogServerData extends JFrame implements ActionListener{
     private SocialMediaClient client;
     
     JTextField adresse = new JTextField();;
-    JTextField port = new JTextField();
+    JTextField serverPort = new JTextField();
+    JTextField clientPort = new JTextField();
 
-    public DialogServerData(SocialMediaClient client, String adresse, String port) {
+    public DialogServerData(SocialMediaClient client, String adresse, String serverPort, String clientPort) {
         this.client = client;
         this.adresse.setText(adresse);
-        this.port.setText(port);
+        this.serverPort.setText(serverPort);
+        this.clientPort.setText(clientPort);
         initialize();
     }
 
@@ -54,24 +56,38 @@ public class DialogServerData extends JFrame implements ActionListener{
         c.gridx = 0;
         c.gridy = 0;
         this.add(new JLabel("Server Adresse:", JLabel.RIGHT), c);
+        
         c.gridx = 1;
         c.gridy = 0;
         this.add(adresse, c);
+        
         c.gridx = 0;
         c.gridy = 1;
         this.add(new JLabel("Server Port:", JLabel.RIGHT), c);
+        
         c.gridx = 1;
         c.gridy = 1;
-        this.add(port, c);
-        JButton anmelden = new JButton("Übernehmen");
+        this.add(serverPort, c);
+        
         c.gridx = 0;
         c.gridy = 2;
+        this.add(new JLabel("Client Port:", JLabel.RIGHT), c);
+        
+        c.gridx = 1;
+        c.gridy = 2;
+        this.add(clientPort, c);      
+        
+        
+        
+        JButton anmelden = new JButton("Übernehmen");
+        c.gridx = 0;
+        c.gridy = 3;
         this.add(anmelden, c);
 
         //ActionListener Button Anmelden
         anmelden.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               client.executeClient(adresse.getText(), port.getText());
+               client.executeClient(adresse.getText(), serverPort.getText(), clientPort.getText());
                dispose();
            }
         });
@@ -101,9 +117,9 @@ public class DialogServerData extends JFrame implements ActionListener{
 //        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
 //        JTextField adresse = new JTextField();
 //        controls.add(adresse);
-//        JPasswordField port = new JPasswordField();
-////        port.addAncestorListener(new RequestFocusListener(false));
-//        controls.add(port);
+//        JPasswordField serverPort = new JPasswordField();
+////        serverPort.addAncestorListener(new RequestFocusListener(false));
+//        controls.add(serverPort);
 //        anmelden.add(controls, BorderLayout.CENTER);
 //
 //        JButton login = new JButton("Anmelden");
@@ -127,9 +143,9 @@ public class DialogServerData extends JFrame implements ActionListener{
 //        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
 //        JTextField adresse = new JTextField();
 //        controls.add(adresse);
-//        JPasswordField port = new JPasswordField();
-////        port.addAncestorListener(new RequestFocusListener(false));
-//        controls.add(port);
+//        JPasswordField serverPort = new JPasswordField();
+////        serverPort.addAncestorListener(new RequestFocusListener(false));
+//        controls.add(serverPort);
 //        p.add(controls, BorderLayout.CENTER);
 //
 //        Object[] options = {"Anmelden", "Registrieren"};
