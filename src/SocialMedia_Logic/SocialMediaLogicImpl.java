@@ -584,14 +584,16 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     public Nutzer authenticateNutzer (String username, String password) throws RemoteException{
         Vector<Nutzer> nutzers = nutzerMapper.getAll();
         Nutzer nutzer = null;
-        do {
-            int i=0;
-            nutzer = nutzers.elementAt(i);
-            i++;
-        } while (!username.equals(nutzer.getUsername()));
-
-        if (password.equals(nutzer.getPassword())) {
-            return nutzer;
+        for (int i = 0; i < nutzers.size(); i++) {
+            if (username.equals(nutzers.elementAt(i).getUsername()))
+                nutzer = nutzers.elementAt(i);
+        }
+        if (nutzer != null){
+            if (password.equals(nutzer.getPassword())) {
+                return nutzer;
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
