@@ -1,6 +1,7 @@
 package SocialMedia_Data;
 
 import SocialMedia_Logic.SocialMediaLogicImpl;
+import java.rmi.RemoteException;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -18,8 +19,10 @@ public interface Abonnement extends DataReference {
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public int getPinnwandID ();
+    public int getPinnwandID ()
+            throws RemoteException;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.CEE0B0A3-45CB-A3FE-D990-AF2358894EC7]
@@ -27,8 +30,10 @@ public interface Abonnement extends DataReference {
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
-    public void setPinnwandID (int val);
+    public void setPinnwandID (int val)
+            throws RemoteException;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C6252FA8-05D7-5CCB-DA2B-1A0531F2BF0E]
@@ -36,8 +41,10 @@ public interface Abonnement extends DataReference {
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public int getNutzerID ();
+    public int getNutzerID ()
+            throws RemoteException;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3EAF494D-794D-E648-FA6B-1504A7AF2165]
@@ -45,14 +52,18 @@ public interface Abonnement extends DataReference {
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
-    public void setNutzerID (int val);
+    public void setNutzerID (int val)
+            throws RemoteException;
 
     /**
      * 
      * @param verwaltung
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public Pinnwand getAbonnementPinnwand (SocialMediaLogicImpl verwaltung);
+    public Pinnwand getAbonnementPinnwand (SocialMediaLogicImpl verwaltung)
+            throws RemoteException;
 }
 

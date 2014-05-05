@@ -3,6 +3,7 @@ package SocialMedia_Data;
 //import SocialMedia_DatabaseManager.Vector<Kommentar>;
 //import SocialMedia_DatabaseManager.Vector<Like>;
 import SocialMedia_Logic.SocialMediaLogicImpl;
+import java.rmi.RemoteException;
 import java.util.Vector;
 
 
@@ -26,7 +27,8 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     /**
      * 
      */
-    public BeitragImpl () {
+    public BeitragImpl () 
+            throws RemoteException{
     }
 
 
@@ -37,7 +39,8 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
      * 
      * @return 
      */
-    public int getPinnwandID () {
+    public int getPinnwandID () 
+            throws RemoteException{
         return pinnwandID;
     }
 
@@ -48,7 +51,8 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
      * 
      * @param val 
      */
-    public void setPinnwandID (int val) {
+    public void setPinnwandID (int val) 
+            throws RemoteException{
         this.pinnwandID = val;
     }
 
@@ -60,7 +64,8 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
      * @param verwaltung
      * @return 
      */
-    public Vector<Kommentar> getAllBeitragKommentar (SocialMediaLogicImpl verwaltung) {
+    public Vector<Kommentar> getAllBeitragKommentar (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
         Vector<Kommentar> kommentare = verwaltung.getAllKommentar();
         Vector<Kommentar> beitragKommentare = null;
 
@@ -80,7 +85,8 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
      * @param verwaltung
      * @return 
      */
-    public Vector<Like> getAllBeitragLikes (SocialMediaLogicImpl verwaltung) {
+    public Vector<Like> getAllBeitragLikes (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
         Vector<Like> likes = verwaltung.getAllLike();
         Vector<Like> beitragLikes = null;
         
@@ -100,7 +106,8 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
      * @param verwaltung
      * @return 
      */
-    public Nutzer getCreatorOfBeitrag (SocialMediaLogicImpl verwaltung) {
+    public Nutzer getCreatorOfBeitrag (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
         Vector<Nutzer> nutzers = verwaltung.getAllNutzer();
 
         for (int i = 0; i < nutzers.size(); i++) {

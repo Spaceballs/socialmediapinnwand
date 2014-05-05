@@ -5,6 +5,8 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Client.SocialMediaClient;
+import SocialMedia_Logic.SocialMediaLogic;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,8 +17,21 @@ import java.awt.event.ActionListener;
  * @author Max
  */
 public class DialogRegistrieren extends JFrame {
+    
+    private SocialMediaLogic server;
+    
+    JTextField username = new JTextField();
+    
+    JPasswordField password = new JPasswordField();
 
-    public DialogRegistrieren() {
+    public DialogRegistrieren(SocialMediaLogic server, String username, String password) {
+        this.server = server;
+        initalize();
+        this.username.setText(username);
+        this.password.setText(password);
+    }
+
+    private void initalize() {
         // GridBagLayout mit Abstand zwischen den Elementen.
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -31,7 +46,7 @@ public class DialogRegistrieren extends JFrame {
         c.gridy = 0;
         this.add(new JLabel("Username:", JLabel.RIGHT), c);
 
-        JTextField username = new JTextField();
+        
         c.gridx = 1;
         c.gridy = 0;
         this.add(username, c);
@@ -58,7 +73,7 @@ public class DialogRegistrieren extends JFrame {
         c.gridy = 3;
         this.add(new JLabel("Passwort:", JLabel.RIGHT), c);
 
-        JPasswordField password = new JPasswordField();
+        
         c.gridx = 1;
         c.gridy = 3;
         this.add(password, c);
@@ -73,7 +88,7 @@ public class DialogRegistrieren extends JFrame {
         registrieren.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                dispose();
-               new DialogAnmelden();
+               new DialogAnmelden(server);
            }
         });
 
@@ -85,5 +100,4 @@ public class DialogRegistrieren extends JFrame {
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-
 }

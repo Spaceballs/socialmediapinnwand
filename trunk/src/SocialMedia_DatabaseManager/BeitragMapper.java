@@ -3,6 +3,7 @@ package SocialMedia_DatabaseManager;
 import SocialMedia_Data.Beitrag; 
 import SocialMedia_Data.BeitragImpl;
 import java.awt.image.RescaleOp;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -85,6 +86,8 @@ public class BeitragMapper extends DBStatementFactory {
                 val.setID((resultSet.getInt(COLUMN_ID)));
         } catch (SQLException ex) {
             Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return val;
     }
@@ -115,6 +118,8 @@ public class BeitragMapper extends DBStatementFactory {
                                     COLUMN_ID + " = " + val.getID());
         } catch (SQLException ex) {
             Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -138,6 +143,8 @@ public class BeitragMapper extends DBStatementFactory {
                     WHERE + " " +
                             COLUMN_ID + " =\"" + val.getID() + "\"");
         } catch (SQLException ex) {
+            Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
             Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -179,6 +186,8 @@ public class BeitragMapper extends DBStatementFactory {
                 catch(SQLException e) {
                     Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, e);
                     break;
+                } catch (RemoteException ex) {
+                    Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } catch (SQLException e) {

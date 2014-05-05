@@ -2,6 +2,7 @@ package SocialMedia_Data;
 
 //import SocialMedia_DatabaseManager.Vector<Abonnement>;
 import SocialMedia_Logic.SocialMediaLogicImpl;
+import java.rmi.RemoteException;
 import java.util.Vector;
 
 
@@ -39,8 +40,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // </editor-fold> 
     /**
      * 
+     * @throws java.rmi.RemoteException
      */
-    public NutzerImpl () {
+    public NutzerImpl () 
+            throws RemoteException{
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -49,8 +52,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public String getName () {
+    public String getName () 
+            throws RemoteException{
         return name;
     }
 
@@ -60,8 +65,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
-    public void setName (String val) {
+    public void setName (String val) 
+            throws RemoteException{
         this.name = val;
     }
 
@@ -71,8 +78,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public String getPassword () {
+    public String getPassword () 
+            throws RemoteException{
         return password;
     }
 
@@ -82,8 +91,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
-    public void setPassword (String val) {
+    public void setPassword (String val) 
+            throws RemoteException{
         this.password = val;
     }
 
@@ -93,8 +104,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public String getSurname () {
+    public String getSurname () 
+            throws RemoteException{
         return surname;
     }
 
@@ -104,8 +117,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
-    public void setSurname (String val) {
+    public void setSurname (String val) 
+            throws RemoteException{
         this.surname = val;
     }
 
@@ -115,8 +130,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     /**
      * 
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public String getUsername () {
+    public String getUsername () 
+            throws RemoteException{
         return username;
     }
 
@@ -126,8 +143,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     /**
      * 
      * @param val 
+     * @throws java.rmi.RemoteException 
      */
-    public void setUsername (String val) {
+    public void setUsername (String val) 
+            throws RemoteException{
         this.username = val;
     }
 
@@ -138,8 +157,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
      * 
      * @param verwaltung
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public Pinnwand getNutzerPinnwand (SocialMediaLogicImpl verwaltung) {
+    public Pinnwand getNutzerPinnwand (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
         Vector<Pinnwand> pinnwaende = verwaltung.getAllPinnwand();
 
         for (int i = 0; i < pinnwaende.size(); i++) {
@@ -157,8 +178,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
      * 
      * @param verwaltung
      * @return 
+     * @throws java.rmi.RemoteException 
      */
-    public Vector<Abonnement> getAllNutzerAbonnement (SocialMediaLogicImpl verwaltung) {
+    public Vector<Abonnement> getAllNutzerAbonnement (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
         Vector<Abonnement> abonnements = verwaltung.getAllAbonnement();
         Vector<Abonnement> nutzerAbonnements = null;
 

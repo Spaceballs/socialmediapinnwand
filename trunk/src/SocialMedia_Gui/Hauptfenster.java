@@ -1,6 +1,9 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Client.SocialMediaClient;
+import SocialMedia_Data.Nutzer;
+import SocialMedia_Logic.SocialMediaLogic;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,8 +14,11 @@ import java.awt.event.ActionListener;
  * @author Max
  */
 public class Hauptfenster extends JFrame {
+    
+    private SocialMediaLogic server;
 
-    public Hauptfenster(){
+    public Hauptfenster(SocialMediaLogic server, Nutzer clientNutzer){
+        this.server = server;
         initialize();
     }
 
@@ -46,7 +52,7 @@ public class Hauptfenster extends JFrame {
         //ActionListener Nutzer suchen
         suchen.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               new DialogSuchen();
+               new DialogSuchen(server);
            }
         });
 
@@ -55,7 +61,7 @@ public class Hauptfenster extends JFrame {
         //ActionListener Accountdaten ändern
         accountdaten.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               new DialogNutzer();
+               new DialogNutzer(server);
            }
         });
 

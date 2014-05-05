@@ -5,21 +5,39 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Client.SocialMediaClient;
+import SocialMedia_Data.Nutzer;
+import SocialMedia_Logic.SocialMediaLogic;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Max
  */
 public class DialogAnmelden extends JFrame implements ActionListener{
+    
+    private SocialMediaLogic server;
+    
+    JTextField username = new JTextField();;
+    JPasswordField password = new JPasswordField();
 
-    public DialogAnmelden() {
+    public DialogAnmelden(SocialMediaLogic server) {
+        this.server = server; 
         initialize();
+    }
+    public DialogAnmelden(SocialMediaLogic server, String username, String password) {
+        this.server = server; 
+        initialize();
+        this.username.setText(username);
+        this.password.setText(password);
     }
 
     private void initialize() {
@@ -37,7 +55,6 @@ public class DialogAnmelden extends JFrame implements ActionListener{
         c.gridy = 0;
         this.add(new JLabel("Username:", JLabel.RIGHT), c);
 
-        JTextField username = new JTextField();
         c.gridx = 1;
         c.gridy = 0;
         this.add(username, c);
@@ -46,7 +63,6 @@ public class DialogAnmelden extends JFrame implements ActionListener{
         c.gridy = 1;
         this.add(new JLabel("Passwort:", JLabel.RIGHT), c);
 
-        JPasswordField password = new JPasswordField();
         c.gridx = 1;
         c.gridy = 1;
         this.add(password, c);
@@ -65,8 +81,19 @@ public class DialogAnmelden extends JFrame implements ActionListener{
         //ActionListener Button Anmelden
         anmelden.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               dispose();
-               new Hauptfenster();
+               Nutzer clientNutzer = null;
+               try {
+                   clientNutzer = server.authenticateNutzer(username.getText(), password.getPassword().toString());
+               } catch (RemoteException ex) {
+                   Logger.getLogger(DialogAnmelden.class.getName()).log(Level.SEVERE, null, ex);
+               }
+               if (clientNutzer != null){
+                   dispose();
+                   Hauptfenster hauptfenster = new Hauptfenster(server, clientNutzer);
+               } else {
+                   dispose();
+                   DialogAnmelden  anmelden = new DialogAnmelden(server, username.getText(), password.getPassword().toString());
+               }
            }
         });
 
@@ -74,7 +101,7 @@ public class DialogAnmelden extends JFrame implements ActionListener{
         registrieren.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                dispose();
-               new DialogRegistrieren();
+               DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, username.getText(), password.getPassword().toString());
            }
         });
 

@@ -1,5 +1,6 @@
 package SocialMedia_Data;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 
 
@@ -10,7 +11,7 @@ import java.util.Date;
  * 
  * @author Sebastian
  */
-public class DataReferenceImpl implements DataReference {
+public class DataReferenceImpl extends java.rmi.server.UnicastRemoteObject implements DataReference {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.E45F6BC3-9767-A2D8-6CEB-9DB94A1BEEFD]
@@ -27,8 +28,11 @@ public class DataReferenceImpl implements DataReference {
     // </editor-fold> 
     /**
      * 
+     * @throws java.rmi.RemoteException
      */
-    public DataReferenceImpl () {
+    public DataReferenceImpl () 
+            throws RemoteException{
+        super();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -38,7 +42,8 @@ public class DataReferenceImpl implements DataReference {
      * 
      * @return 
      */
-    public int getID () {
+    public int getID () 
+            throws RemoteException{
         return ID;
     }
 
@@ -49,7 +54,8 @@ public class DataReferenceImpl implements DataReference {
      * 
      * @param val 
      */
-    public void setID (int val) {
+    public void setID (int val) 
+            throws RemoteException{
         this.ID = val;
     }
 
@@ -60,7 +66,8 @@ public class DataReferenceImpl implements DataReference {
      * 
      * @return 
      */
-    public Date getCreationDate () {
+    public Date getCreationDate () 
+            throws RemoteException{
         return creationDate;
     }
 
@@ -71,7 +78,8 @@ public class DataReferenceImpl implements DataReference {
      * 
      * @param val 
      */
-    public void setCreationDate (Date val) {
+    public void setCreationDate (Date val) 
+            throws RemoteException{
         this.creationDate = val;
     }
 }

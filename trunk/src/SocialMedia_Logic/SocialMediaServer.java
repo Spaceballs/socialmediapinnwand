@@ -54,13 +54,8 @@ public class SocialMediaServer {
                                             SocialMedia_DatabaseManager.AbonnementMapper.abonnementMapper(),
                                             SocialMedia_DatabaseManager.NutzerMapper.nutzerMapper(),
                                             SocialMedia_DatabaseManager.PinnwandMapper.pinnwandMapper());
-            
-            
+
             sometests();
-            
-            
-            
-            
             
             Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);
             System.out.println("RMI Gestartet...");
@@ -74,11 +69,9 @@ public class SocialMediaServer {
             Naming.rebind("rmi://" + rmiRegistryServer + ":" + serverPort + "/socialMediaLogic",(Remote) socialMediaLogic);
             Naming.lookup("rmi://" + rmiRegistryServer + ":" + serverPort + "/socialMediaLogic");
             System.out.println("RMI Verbindung hergestellt...");
-            
-            
-            System.exit(0);
-            
-            
+
+            //System.exit(0);
+
         } catch (RemoteException ex) {
             Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
