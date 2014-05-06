@@ -1,4 +1,4 @@
-package SocialMedia_ReportGenerator;
+package SocialMedia_Report;
 
 import java.util.Vector;
 

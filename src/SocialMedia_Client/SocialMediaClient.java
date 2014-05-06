@@ -27,20 +27,11 @@ public class SocialMediaClient {
     private final String serverAdress = "localhost";
     private SocialMediaLogic socialMediaLogic = null;
     
-    
     /**
      * 
      */
     private SocialMediaClient (){
         DialogServerData serverData = new DialogServerData(this, serverAdress, serverPort, clientPort);
-
-    }
-    
-    /**
-     * 
-     */
-    public void createAndShowGUI() {
-        DialogAnmelden  anmelden = new DialogAnmelden(socialMediaLogic);
     }
 
     /**
@@ -66,6 +57,13 @@ public class SocialMediaClient {
         javax.swing.SwingUtilities.invokeLater(
                 new Runnable() { public void run() { createAndShowGUI();}});
     }
+    
+    /**
+     * 
+     */
+    public void createAndShowGUI() {
+        DialogAnmelden  anmelden = new DialogAnmelden(socialMediaLogic);
+    }    
        
     /**
      * 

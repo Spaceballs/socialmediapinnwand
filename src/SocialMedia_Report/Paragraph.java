@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package SocialMedia_ReportGenerator;
+package SocialMedia_Report;
 
 /**
  *

@@ -1,4 +1,4 @@
-package SocialMedia_ReportGenerator;
+package SocialMedia_Report;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
