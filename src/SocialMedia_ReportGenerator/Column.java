@@ -35,6 +35,7 @@ public class Column {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.2FD23B39-7046-715C-3BA7-7FC20E86B691]
     // </editor-fold> 
+    @Override
     public String toString () {
         return null;
     }

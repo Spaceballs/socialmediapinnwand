@@ -371,8 +371,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         pinnwandMapper.delete(val);
         Vector<Beitrag> zuLoeschendeBeitraege = val.getAllPinnwandBeitraege(this);
         for (int i = 0; i < zuLoeschendeBeitraege.size(); i++) {
-            beitragMapper.delete(zuLoeschendeBeitraege.elementAt(i));
-
+            deleteBeitrag(zuLoeschendeBeitraege.elementAt(i));
         }
     }
 
