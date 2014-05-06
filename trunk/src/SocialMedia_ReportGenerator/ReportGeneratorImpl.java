@@ -1,5 +1,7 @@
 package SocialMedia_ReportGenerator;
 
+import SocialMedia_Report.ContributionOfNutzer;
+import SocialMedia_Report.PopularityOfBeitrag;
 import SocialMedia_Data.Beitrag;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic; 
@@ -17,7 +19,9 @@ import java.util.logging.Logger;
  * 
  * @author Sebastian
  */
-public class ReportGeneratorImpl implements ReportGenerator {
+public class ReportGeneratorImpl 
+    extends java.rmi.server.UnicastRemoteObject 
+    implements ReportGenerator {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.5F731C06-B576-8C5F-7EB5-3ED06DFC5D1B]
@@ -34,7 +38,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
      * 
      * @param val - SocialMediaLogic will be needed to get some data for the reports.
      */
-    public ReportGeneratorImpl (SocialMediaLogic val) {
+    public ReportGeneratorImpl (SocialMediaLogic val) throws RemoteException {
         socialMediaLogic = val;
     }
 
@@ -51,7 +55,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
      * @param endDateVal - End Date of the timespan.
      * @return ContributionOfNutzer - Returns created the Report object.
      */
-    public ContributionOfNutzer createContributionOfNutzerReport (Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) {
+    public ContributionOfNutzer createContributionOfNutzerReport (Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
         ContributionOfNutzer report = new ContributionOfNutzer();
         try {
             
@@ -82,7 +86,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
      * @param endDateVal - End Date of the timespan.
      * @return PopularityOfBeitrag - Returns created the Report object.
      */
-    public PopularityOfBeitrag createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) {
+    public PopularityOfBeitrag createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
         PopularityOfBeitrag report = new PopularityOfBeitrag();
         try {
             

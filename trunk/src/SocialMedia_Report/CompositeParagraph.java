@@ -1,4 +1,4 @@
-package SocialMedia_ReportGenerator;
+package SocialMedia_Report;
 
 import java.util.Vector;
 
@@ -89,17 +89,16 @@ public class CompositeParagraph extends Paragraph{
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.647D8A4E-7C3A-4CB2-9C69-9705DE65AF52]
     // </editor-fold> 
+    @Override
     public String toString () {
-        	// Leerer Buffer anlegen
-		StringBuffer result = new StringBuffer();
-        	// Schleife über alle Unterabseätze
-		for ( int i = 0; i < this.subParagraphs.size(); i++ ) {
-			SimpleParagraph p = this.subParagraphs.elementAt(i);
-			// den entsprechenden Unterabsatz in einen String wandeln und an den Buffer übergeben.
-			result.append(p.toString() + "\n");
-		}
-		// In String umgewandeltes ergebniss ausgeben
-		return result.toString();
+        StringBuffer buffer = new StringBuffer();
+        for (int i = 0; i < subParagraphs.size(); i++) {
+            SimpleParagraph simpleParagraph = subParagraphs.elementAt(i);
+            buffer.append(" %p ");
+            buffer.append(simpleParagraph.toString());
+            buffer.append(" %/p ");
+        }
+	return buffer.toString();
     }
 }
 

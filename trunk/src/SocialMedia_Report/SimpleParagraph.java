@@ -1,4 +1,4 @@
-package SocialMedia_ReportGenerator;
+package SocialMedia_Report;
 
 
 /**
@@ -72,7 +72,11 @@ public class SimpleParagraph extends Paragraph{
      */
     @Override
     public String toString () {
-        return this.text;
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(" %p ");
+        buffer.append(text);
+        buffer.append(" %/p ");   
+        return buffer.toString();
     }
 
 }

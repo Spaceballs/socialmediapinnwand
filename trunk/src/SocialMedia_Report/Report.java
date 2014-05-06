@@ -1,4 +1,4 @@
-package SocialMedia_ReportGenerator;
+package SocialMedia_Report;
 
 import java.util.Date;
 import java.util.Vector;
@@ -27,27 +27,6 @@ public class Report {
 
     private Vector<Paragraph> mParagraphs = null;
 
-    public Vector<Paragraph> getmParagraphs() {
-        return mParagraphs;
-    }
-
-    public void setmParagraphs(Vector<Paragraph> mParagraphs) {
-        this.mParagraphs = mParagraphs;
-    }
-    public void setmParagraph(Paragraph mParagraph) {
-        mParagraphs.add(mParagraph);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.337EFAD5-50E8-9171-8E9E-33811BD3CE75]
-    // </editor-fold> 
-    //private mheader;
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.5E37A5B1-9B94-6FA0-A4F3-C5A45C504909]
-    // </editor-fold> 
-    //private mImprint;
-
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3A56DCBA-88E9-DEDF-0689-5B42C1C3471E]
     // </editor-fold> 
@@ -67,25 +46,14 @@ public class Report {
     public void setCreationDate (Date val) {
         this.creationDate = val;
     }
-/**
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.E7F13085-F143-4E05-9F5C-77EB225D1BC1]
-    // </editor-fold> 
-    public getMheader () {
-        return mheader;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.9E97DF53-997D-C999-C17B-9F50ADDF2DBE]
-    // </editor-fold> 
-    public void setMheader ( val) {
-        this.mheader = val;
-    }
- */
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.71D76669-894D-09DE-8726-1490EAAF6F4C]
     // </editor-fold> 
+    /**
+     * 
+     * @return 
+     */
     public String getReportTitle () {
         return reportTitle;
     }
@@ -93,6 +61,10 @@ public class Report {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.2825BBE1-A6B3-F481-3693-EE16A3B47B0C]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void setReportTitle (String val) {
         this.reportTitle = val;
     }
@@ -100,6 +72,10 @@ public class Report {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.88FBC6E4-CD3B-4E19-1904-6B13A7DF387D]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void addRow (Row val) {
         sRows.add(val);
     }
@@ -107,6 +83,10 @@ public class Report {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.6B817044-83CA-F739-4038-CAB9BC5D19F9]
     // </editor-fold> 
+    /**
+     * 
+     * @param val 
+     */
     public void removeRow (Row val) {
         sRows.remove(val);
     }
@@ -114,24 +94,36 @@ public class Report {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C4845CAD-6489-79E9-8793-09FBE313D345]
     // </editor-fold> 
+    /**
+     * 
+     * @return 
+     */
     public Vector<Row> getAllRows () {
         return sRows;
     }
-/**
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.8A555855-D915-27CF-8EFA-94450C4A9DFD]
-    // </editor-fold> 
-    public getImprint () {
-        return mImprint;
+    
+    /**
+     * 
+     * @return 
+     */
+    public Vector<Paragraph> getAllParagraphs() {
+        return mParagraphs;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.7D60DA78-85B4-CAF0-46E8-F8D6827EF05A]
-    // </editor-fold> 
-    public void setImprint ( val) {
-        this.mImprint = val;
+    /**
+     * 
+     * @param mParagraph 
+     */
+    public void removeParagraph(Paragraph mParagraph) {
+        this.mParagraphs.remove(mParagraph);
     }
- */
-
+    
+    /**
+     * 
+     * @param mParagraph 
+     */
+    public void setParagraph(Paragraph mParagraph) {
+        mParagraphs.add(mParagraph);
+    }
 }
 
