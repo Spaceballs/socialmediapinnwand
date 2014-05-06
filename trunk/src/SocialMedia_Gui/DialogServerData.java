@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
 import javax.swing.JTextField;
 
 /**
@@ -79,13 +80,16 @@ public class DialogServerData extends JFrame implements ActionListener{
         
         
         
-        JButton anmelden = new JButton("Übernehmen");
+        JButton uebernehmen = new JButton("Übernehmen");
         c.gridx = 0;
         c.gridy = 3;
-        this.add(anmelden, c);
+        this.add(uebernehmen, c);
+
+        JRootPane rootPane = this.getRootPane();
+        rootPane.setDefaultButton(uebernehmen);
 
         //ActionListener Button Anmelden
-        anmelden.addActionListener(new ActionListener() {
+        uebernehmen.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                client.executeClient(adresse.getText(), serverPort.getText(), clientPort.getText());
                dispose();
