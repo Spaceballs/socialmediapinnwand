@@ -1,8 +1,13 @@
 package SocialMedia_ReportGenerator;
 
+import SocialMedia_Data.Beitrag;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic; 
+import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.E7C2C07C-F969-9A30-C188-C220A1AD2C41]
@@ -48,14 +53,20 @@ public class ReportGeneratorImpl implements ReportGenerator {
      */
     public ContributionOfNutzer createContributionOfNutzerReport (Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) {
         ContributionOfNutzer report = new ContributionOfNutzer();
-        
-        // TO-DO: Report code
-        // TO-DO: Report code
-        // TO-DO: Report code
-        
-        report.setCreationDate(new Date());
-        report.setReportTitle(("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
-        
+        try {
+            
+            
+            // TO-DO: Report code
+            // TO-DO: Report code
+            // TO-DO: Report code
+            
+            report.setCreationDate(new Date());
+            report.setReportTitle(("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
+            
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return report;
     }
 
@@ -73,14 +84,20 @@ public class ReportGeneratorImpl implements ReportGenerator {
      */
     public PopularityOfBeitrag createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) {
         PopularityOfBeitrag report = new PopularityOfBeitrag();
-        
-        // TO-DO: Report code
-        // TO-DO: Report code
-        // TO-DO: Report code
-        
-        report.setCreationDate(new Date());
-        report.setReportTitle(("Report über die Popularität von Beiträgen zwischen dem " + startDateVal + " und dem " + endDateVal));
-        
+        try {
+            
+            
+            // TO-DO: Report code
+            // TO-DO: Report code
+            // TO-DO: Report code
+            
+            report.setCreationDate(new Date());
+            report.setReportTitle(("Report über die Popularität von Beiträgen zwischen dem " + startDateVal + " und dem " + endDateVal));
+            Vector<Beitrag> b = socialMediaLogic.getAllBeitrag();
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return report;
     }
 }
