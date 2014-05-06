@@ -67,7 +67,6 @@ public class ReportGeneratorImpl
             report.setCreationDate(new Date());
             report.setReportTitle(("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
             
-            
         } catch (RemoteException ex) {
             Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -4,6 +4,7 @@ import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.AbonnementImpl; 
 import SocialMedia_Data.Beitrag; 
 import SocialMedia_Data.BeitragImpl; 
+import SocialMedia_Data.DataReference;
 import SocialMedia_Data.Kommentar; 
 import SocialMedia_Data.KommentarImpl; 
 import SocialMedia_Data.Like; 
@@ -668,6 +669,31 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     public Nutzer getOwnerOfPinnwand (Pinnwand p) throws RemoteException{
         return p.getOwner(this);
     }
-
+    /**
+     * 
+     * @param n
+     * @param o
+     * @return
+     * @throws RemoteException 
+     */
+    public Boolean ownerCheck (Nutzer n, Object o) throws RemoteException{
+        if (o instanceof BeitragImpl){
+            Beitrag b = (Beitrag) o;
+            return b.getNutzerID() == n.getID();
+        }
+        if (o instanceof KommentarImpl){
+            Kommentar k = (Kommentar) o;
+            return k.getNutzerID() == n.getID();
+        }
+        if (o instanceof LikeImpl){
+            Like l = (Like) o;
+            return l.getNutzerID() == n.getID();
+        }
+        if (o instanceof PinnwandImpl) {
+            Pinnwand p = (Pinnwand) o;
+            return p.getNutzerID() == n.getID();
+        }
+        return null;
+    }
 }
 
