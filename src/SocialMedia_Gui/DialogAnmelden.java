@@ -78,6 +78,9 @@ public class DialogAnmelden extends JFrame implements ActionListener{
         c.gridy = 2;
         this.add(registrieren, c);
 
+        JRootPane rootPane = this.getRootPane();
+        rootPane.setDefaultButton(anmelden);
+    
         //ActionListener Button Anmelden
         anmelden.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
