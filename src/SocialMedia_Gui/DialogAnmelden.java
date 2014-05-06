@@ -26,11 +26,13 @@ public class DialogAnmelden extends JFrame implements ActionListener{
     
     private SocialMediaLogic server;
     
-    JTextField username = new JTextField();;
+    JTextField username = new JTextField();
     JPasswordField password = new JPasswordField();
 
     public DialogAnmelden(SocialMediaLogic server) {
-        this.server = server; 
+        this.server = server;
+        username.setText("MaxK");
+        password.setText("dooonuts");
         initialize();
     }
     public DialogAnmelden(SocialMediaLogic server, String username, String password) {

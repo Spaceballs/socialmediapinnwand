@@ -28,7 +28,9 @@ public class Hauptfenster extends JFrame {
     private JMenuItem accountdaten = new JMenuItem("Accountdaten ändern");
     private JMenuItem abmelden = new JMenuItem("Abmelden");
     private JPanel panelLinks = new JPanel();
-    private JPanel panelRechts = new JPanel();
+    private JPanel panelRechtsOben = new JPanel();
+    private JPanel panelRechtsUnten = new JPanel();
+
 
     /**
      * 
@@ -99,11 +101,20 @@ public class Hauptfenster extends JFrame {
      * 
      */
     private void initalizePane() {
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, panelRechts);
+        NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
+
+
+        JSplitPane splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, panelRechtsUnten);
+        splitPaneRechts.setResizeWeight(0.3); //Position des Dividers relativ zu Framegroesse
+        splitPaneRechts.setEnabled(false); //Divider fixieren
+        
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, splitPaneRechts);
         splitPane.setResizeWeight(0.7); //Position des Dividers relativ zu Framegroesse
         splitPane.setEnabled(false); //Divider fixieren
-
         this.getContentPane().add(splitPane);
+
+
+
         try {
             this.setTitle("Social Media von " + clientNutzer.getUsername());
         } catch (RemoteException ex) {
