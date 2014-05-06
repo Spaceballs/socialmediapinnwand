@@ -8,7 +8,6 @@ package SocialMedia_Client;
 
 import SocialMedia_Gui.DialogAnmelden;
 import SocialMedia_Gui.DialogServerData;
-import static SocialMedia_Gui.Main.createAndShowGUI;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.io.IOException;
 import java.net.MalformedURLException;

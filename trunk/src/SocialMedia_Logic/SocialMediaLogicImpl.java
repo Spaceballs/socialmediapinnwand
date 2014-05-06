@@ -356,6 +356,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     public void deactivateNutzer (Nutzer val) throws RemoteException{
         val.setUsername("Deaktivierter Nutzer");
         val.setPassword(new Date().toString());
+        deletePinnwand(val.getNutzerPinnwand(this));
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -367,6 +368,12 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public void deletePinnwand (Pinnwand val) throws RemoteException{
+        pinnwandMapper.delete(val);
+        Vector<Beitrag> zuLoeschendeBeitraege = val.getAllPinnwandBeitraege(this);
+        for (int i = 0; i < zuLoeschendeBeitraege.size(); i++) {
+            beitragMapper.delete(zuLoeschendeBeitraege.elementAt(i));
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
