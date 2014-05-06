@@ -1,6 +1,7 @@
 package SocialMedia_ReportGenerator;
 
 import java.util.Date;
+import java.util.Vector;
 
  
 
@@ -22,7 +23,20 @@ public class Report {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.6C37A6A4-26A4-83AC-CC6C-E9599681DD35]
     // </editor-fold> 
-    private Row mColumn;
+    private Vector<Row> sRows = null;
+
+    private Vector<Paragraph> mParagraphs = null;
+
+    public Vector<Paragraph> getmParagraphs() {
+        return mParagraphs;
+    }
+
+    public void setmParagraphs(Vector<Paragraph> mParagraphs) {
+        this.mParagraphs = mParagraphs;
+    }
+    public void setmParagraph(Paragraph mParagraph) {
+        mParagraphs.add(mParagraph);
+    }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.337EFAD5-50E8-9171-8E9E-33811BD3CE75]
@@ -87,19 +101,21 @@ public class Report {
     // #[regen=yes,id=DCE.88FBC6E4-CD3B-4E19-1904-6B13A7DF387D]
     // </editor-fold> 
     public void addRow (Row val) {
+        sRows.add(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.6B817044-83CA-F739-4038-CAB9BC5D19F9]
     // </editor-fold> 
     public void removeRow (Row val) {
+        sRows.remove(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C4845CAD-6489-79E9-8793-09FBE313D345]
     // </editor-fold> 
-    public Row getAllRows () {
-        return null;
+    public Vector<Row> getAllRows () {
+        return sRows;
     }
 /**
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
