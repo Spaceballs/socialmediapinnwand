@@ -104,10 +104,12 @@ public class Hauptfenster extends JFrame {
         JSplitPane splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
         splitPaneRechts.setResizeWeight(0.1);
         splitPaneRechts.setEnabled(false);
+        splitPaneRechts.setDividerSize(1);
         
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, splitPaneRechts);
         splitPane.setResizeWeight(0.8);
         splitPane.setEnabled(false);
+        splitPane.setDividerSize(0);
         this.getContentPane().add(splitPane);
 
 
