@@ -4,7 +4,6 @@ package SocialMedia_Gui;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -12,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Creates the main frame of the client
  * @author Max
  */
 public class Hauptfenster extends JFrame {
@@ -22,20 +21,18 @@ public class Hauptfenster extends JFrame {
     private JMenuBar menueLeiste = new JMenuBar();
     private JMenu meinAccount = new JMenu("Mein Account");
     private JMenu menue = new JMenu("Menü");
-    private JMenuItem newsfeed = new JMenuItem("Newsfeed"); //Untermenue erzeugen
+    private JMenuItem newsfeed = new JMenuItem("Newsfeed");
     private JMenuItem meinePinnwand = new JMenuItem("Meine Pinnwand");
     private JMenuItem suchen = new JMenuItem("Nutzer suchen");
     private JMenuItem accountdaten = new JMenuItem("Accountdaten ändern");
     private JMenuItem abmelden = new JMenuItem("Abmelden");
     private JPanel panelLinks = new JPanel();
-    private JPanel panelRechtsOben = new JPanel();
-    private JPanel panelRechtsUnten = new JPanel();
 
 
     /**
-     * 
-     * @param server
-     * @param clientNutzer 
+     * Constructor
+     * @param server - the server
+     * @param clientNutzer - the logged-in Nutzer
      */
     public Hauptfenster(SocialMediaLogic server, Nutzer clientNutzer){
         this.clientNutzer = clientNutzer;
@@ -44,47 +41,46 @@ public class Hauptfenster extends JFrame {
     }
 
     /**
-     * 
+     * Initializes all components (menu, listeners and frame)
      */
     private void initialize() {
-        initalizeMenu();
-        initalizeListeners();
-        initalizePane();
+        initializeMenu();
+        initializeListeners();
+        initializePane();
     }
 
     /**
-     * 
+     * Creates the menuBar and menus
      */
-    private void initalizeMenu() {
-        //Menueleiste erzeugen
-        menueLeiste.add(menue); //Menue zu Menueleiste hinzufuegen
+    private void initializeMenu() {
+        menueLeiste.add(menue);
         menueLeiste.add(meinAccount);
-        menue.add(newsfeed); //Untermenue zum Menue hinzufuegen
+        menue.add(newsfeed);
         menue.add(meinePinnwand);
         menue.add(suchen);
         meinAccount.add(accountdaten);
         meinAccount.add(abmelden);
-        this.setJMenuBar(menueLeiste); //Menueleiste zu Frame hinzufuegen
+        this.setJMenuBar(menueLeiste);
     }
 
     /**
-     * 
+     * All required listeners
      */
-    private void initalizeListeners() {
+    private void initializeListeners() {
         //ActionListener Nutzer suchen
         suchen.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               DialogSuchen dialogSuchen;
-               dialogSuchen = new DialogSuchen(server);
+               DialogSuchen dialogSuchen = new DialogSuchen(server);
            }
         });
+
         //ActionListener Accountdaten ändern
         accountdaten.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               DialogNutzer dialogNutzer;
-               dialogNutzer = new DialogNutzer(server, clientNutzer);
+               DialogNutzer dialogNutzer = new DialogNutzer(server, clientNutzer);
            }
         });
+
         //ActionListener Abmelden
         abmelden.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -98,21 +94,21 @@ public class Hauptfenster extends JFrame {
     }
 
     /**
-     * 
+     * Creates the structure of the frame
+     * with SplitPanes
      */
-    private void initalizePane() {
+    private void initializePane() {
         NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
+        AbonnementInfo abonnementInfo = new AbonnementInfo(server, clientNutzer);
 
-
-        JSplitPane splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, panelRechtsUnten);
-        splitPaneRechts.setResizeWeight(0.3); //Position des Dividers relativ zu Framegroesse
-        splitPaneRechts.setEnabled(false); //Divider fixieren
+        JSplitPane splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
+        splitPaneRechts.setResizeWeight(0.1);
+        splitPaneRechts.setEnabled(false);
         
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, splitPaneRechts);
-        splitPane.setResizeWeight(0.7); //Position des Dividers relativ zu Framegroesse
-        splitPane.setEnabled(false); //Divider fixieren
+        splitPane.setResizeWeight(0.8);
+        splitPane.setEnabled(false);
         this.getContentPane().add(splitPane);
-
 
 
         try {
@@ -121,12 +117,11 @@ public class Hauptfenster extends JFrame {
             Logger.getLogger(Hauptfenster.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        this.pack(); //Komplettes Frame auf optimale Größe packen
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize(); //Frame an Bildschirmgroesse anpassen
-        //frame.setSize(d);
-        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        this.setLocationRelativeTo(null); //Position des Fensters
-        this.setVisible(true); //Anzeigen des Frames
+        this.pack();
+
+        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH); // Frame is maximized on start
+        this.setLocationRelativeTo(null); // frame is at the center of the screen
+        this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

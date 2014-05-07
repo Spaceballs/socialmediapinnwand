@@ -1,30 +1,32 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package SocialMedia_Gui;
 
-import SocialMedia_Client.SocialMediaClient;
 import SocialMedia_Logic.SocialMediaLogic;
 import javax.swing.*;
 import java.awt.*;
 
 
 /**
- *
+ * Dialog where user can search for other users
  * @author Max
  */
 public class DialogSuchen extends JFrame {
     
     private SocialMediaLogic server;
 
+    /**
+     * Constructor
+     * @param server - the server
+     */
     DialogSuchen(SocialMediaLogic server) {
         this.server = server;
-        initialize();
+        initializeDialog();
     }
-        
-    private void initialize() {
+
+    /**
+     * Creates the Dialog with Label, TextField and Button
+     */
+    private void initializeDialog() {
         JPanel p = new JPanel(new BorderLayout(5,5));
 
         JPanel labels = new JPanel(new GridLayout(0,1,2,2));
