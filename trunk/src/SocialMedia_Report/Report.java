@@ -18,25 +18,20 @@ public class Report {
     // #[regen=yes,id=DCE.C01546F6-1230-9D1A-E8B7-1C6BA18AA572]
     // </editor-fold> 
     private String reportTitle = "Report";
-    
     private String imprint = "";
-
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.DD0CA414-A7D3-3EE0-28C4-6DDA3EBB3A5F]
     // </editor-fold> 
     private Date creationDate = new Date();
-    
     private Date startDate;
-            
     private Date endDate;
-
+    private Vector<String> tableHeader = new Vector<String>();
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.6C37A6A4-26A4-83AC-CC6C-E9599681DD35]
     // </editor-fold> 
     private Vector<Row> rows = null;
-
     private Vector<Paragraph> paragraphs = null;
-
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3A56DCBA-88E9-DEDF-0689-5B42C1C3471E]
     // </editor-fold> 
