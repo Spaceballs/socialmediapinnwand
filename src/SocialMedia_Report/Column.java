@@ -48,6 +48,5 @@ public class Column {
         }
         return buffer.toString();
     }
-
 }
 
