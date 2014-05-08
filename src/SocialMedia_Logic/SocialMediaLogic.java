@@ -6,6 +6,7 @@ import SocialMedia_Data.Kommentar;
 import SocialMedia_Data.Like; 
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Data.Pinnwand; 
+import SocialMedia_ReportGenerator.ReportGenerator;
 import java.util.Vector;
 
 //import SocialMedia_DatabaseManager.Vector<Abonnement>;
@@ -160,6 +161,8 @@ public interface SocialMediaLogic extends java.rmi.Remote{
     public Beitrag saveBeitrag (Beitrag val)throws java.rmi.RemoteException;
     
     public Kommentar saveKommentar (Kommentar val)throws java.rmi.RemoteException;
+
+    public ReportGenerator getReportGenerator()throws java.rmi.RemoteException;
     
 }
 

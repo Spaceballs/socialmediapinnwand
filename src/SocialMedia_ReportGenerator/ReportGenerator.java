@@ -1,8 +1,8 @@
 package SocialMedia_ReportGenerator;
 
+import SocialMedia_Data.Nutzer;
 import SocialMedia_Report.ContributionOfNutzer;
 import SocialMedia_Report.PopularityOfBeitrag;
-import SocialMedia_Data.Nutzer;
 import java.rmi.RemoteException;
 import java.util.Date;
 
