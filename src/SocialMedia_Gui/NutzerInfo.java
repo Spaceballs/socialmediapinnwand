@@ -42,16 +42,16 @@ public class NutzerInfo extends JPanel {
      * changes the font.
      */
     private void initialize() {
+        this.setLayout(new GridLayout(3,1,0,0));
+        EmptyBorder border = new EmptyBorder(20,40,20,40);
+        this.setBorder(border);
+
         try {
             username.setText(clientNutzer.getUsername());
             name.setText(clientNutzer.getSurname() + " " + clientNutzer.getName());
         } catch (RemoteException ex) {
             Logger.getLogger(NutzerInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        this.setLayout(new GridLayout(3,1,0,0));
-        EmptyBorder border = new EmptyBorder(20,40,20,40);
-        this.setBorder(border);
 
         username.setFont(new Font("Arial", Font.BOLD, 48));
         alias.setFont(new Font("Arial", Font.ITALIC, 20));
