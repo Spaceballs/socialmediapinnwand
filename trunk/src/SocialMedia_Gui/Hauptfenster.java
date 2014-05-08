@@ -121,7 +121,7 @@ public class Hauptfenster extends JFrame {
 
 
         try {
-            this.setTitle("Social Media von " + clientNutzer.getUsername());
+            this.setTitle("Social Media Pinnwand von " + clientNutzer.getUsername());
         } catch (RemoteException ex) {
             Logger.getLogger(Hauptfenster.class.getName()).log(Level.SEVERE, null, ex);
         }
