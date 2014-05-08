@@ -1,10 +1,12 @@
 package SocialMedia_ReportGenerator;
 
-import SocialMedia_Report.ContributionOfNutzer;
-import SocialMedia_Report.PopularityOfBeitrag;
+import SocialMedia_Report.ContributionOfNutzerImpl;
+import SocialMedia_Report.PopularityOfBeitragImpl;
 import SocialMedia_Data.Beitrag;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic; 
+import SocialMedia_Report.ContributionOfNutzer;
+import SocialMedia_Report.PopularityOfBeitrag;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Vector;
@@ -46,17 +48,18 @@ public class ReportGeneratorImpl
     // #[regen=yes,id=DCE.975F3159-35F0-CCCD-CB7B-ACA6F8F16C17]
     // </editor-fold> 
     /**
-     * ContributionOfNutzer
+     * ContributionOfNutzerImpl
      * 
      * 
      * @param nutzerVal - Defines the user over which should be reported.
      * @param sortByVal - 
      * @param startDateVal - Start Date of the timespan.
      * @param endDateVal - End Date of the timespan.
-     * @return ContributionOfNutzer - Returns created the Report object.
+     * @return ContributionOfNutzerImpl - Returns created the Report object.
+     * @throws java.rmi.RemoteException
      */
     public ContributionOfNutzer createContributionOfNutzerReport (Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
-        ContributionOfNutzer report = new ContributionOfNutzer();
+        ContributionOfNutzer report = new ContributionOfNutzerImpl();
         try {
             
             
@@ -77,16 +80,17 @@ public class ReportGeneratorImpl
     // #[regen=yes,id=DCE.A085AD62-913F-0C59-690A-A589531FAEA9]
     // </editor-fold> 
     /**
-     * Method to create the PopularityOfBeitrag-Report by the given criteria.
+     * Method to create the PopularityOfBeitragImpl-Report by the given criteria.
      * 
      * 
      * @param sortByVal - 
      * @param startDateVal - Start Date of the timespan.
      * @param endDateVal - End Date of the timespan.
-     * @return PopularityOfBeitrag - Returns created the Report object.
+     * @return PopularityOfBeitragImpl - Returns created the Report object.
+     * @throws java.rmi.RemoteException
      */
     public PopularityOfBeitrag createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
-        PopularityOfBeitrag report = new PopularityOfBeitrag();
+        PopularityOfBeitrag report = new PopularityOfBeitragImpl();
         try {
             
             

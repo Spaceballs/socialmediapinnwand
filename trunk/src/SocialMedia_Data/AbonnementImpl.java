@@ -29,6 +29,7 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // </editor-fold> 
     /**
      * Konstruktor von Abonnement.
+     * @throws java.rmi.RemoteException
      */
     public AbonnementImpl () 
             throws RemoteException{

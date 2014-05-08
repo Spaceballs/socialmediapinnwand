@@ -553,7 +553,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @param name
      * @param surname
      * @param password
-     * @param n
+     * @param val
      * @return 
      * @throws java.rmi.RemoteException 
      */
@@ -694,6 +694,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
             return p.getNutzerID() == n.getID();
         }
         return null;
+    }
+    public ReportGenerator getReportGenerator()throws java.rmi.RemoteException{
+        return this.reportGenerator;
     }
 }
 

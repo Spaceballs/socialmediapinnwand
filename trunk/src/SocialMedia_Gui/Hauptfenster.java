@@ -1,12 +1,18 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Client.SocialMediaClient;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
+import SocialMedia_Report.HTMLWriter;
+import SocialMedia_Report.Report;
+import SocialMedia_Report.ReportImpl;
+import SocialMedia_ReportGenerator.ReportGenerator;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,6 +53,7 @@ public class Hauptfenster extends JFrame {
         initializeMenu();
         initializeListeners();
         initializePane();
+        sometests();
     }
 
     /**
@@ -125,5 +132,17 @@ public class Hauptfenster extends JFrame {
         this.setLocationRelativeTo(null); // frame is at the center of the screen
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private void sometests() {
+        ReportGenerator reportGenerator;
+        try {
+            reportGenerator = server.getReportGenerator();
+            Report report = (Report) reportGenerator.createContributionOfNutzerReport(clientNutzer, 1, clientNutzer.getCreationDate(), new Date());
+            HTMLWriter writer = new HTMLWriter(report);
+        } catch (RemoteException ex) {
+            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

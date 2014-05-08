@@ -9,6 +9,7 @@ package SocialMedia_Client;
 import SocialMedia_Gui.DialogAnmelden;
 import SocialMedia_Gui.DialogServerData;
 import SocialMedia_Logic.SocialMediaLogic;
+import SocialMedia_ReportGenerator.ReportGenerator;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
