@@ -26,8 +26,7 @@ public class AbonnementInfo extends JPanel{
 
     private SocialMediaLogic server;
     private Nutzer clientNutzer = null;
-    JLabel abonnementsOfNutzer = new JLabel("",JLabel.LEFT);
-    JLabel abonnement = new JLabel("",JLabel.LEFT);
+    JLabel abonnements = new JLabel("Abonnements",JLabel.LEFT);
     JButton button1 = new JButton("Button 1");
 
     /**
@@ -48,52 +47,42 @@ public class AbonnementInfo extends JPanel{
      */
     private void initialize() {
         this.setLayout(new BorderLayout());
-        EmptyBorder border = new EmptyBorder(20,40,0,0);
+        EmptyBorder border = new EmptyBorder(20,20,20,20);
         this.setBorder(border);
 
-        try {
-            abonnementsOfNutzer.setText("Abonnements von " + clientNutzer.getUsername());
-        } catch (RemoteException ex) {
-            Logger.getLogger(NutzerInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        abonnementsOfNutzer.setFont(new Font("Arial", Font.BOLD, 28));
-        this.add(abonnementsOfNutzer,BorderLayout.PAGE_START);
-
-//        String[][] rowData = {
-//            { "Japan", "245" }, { "USA", "240" }, { "Italien", "220" },
-//            { "Spanien", "217" }, {"Türkei", "215"} ,{ "England", "214" },
-//            { "Frankreich", "190" }, {"Griechenland", "185" },
-//            { "Deutschland", "180" }, {"Portugal", "170" }, {"Portugal", "170" }
-//            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-//            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-//            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-//            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-//            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-//            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-//            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-//            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-//            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-//        };
+        abonnements.setFont(new Font("Arial", Font.BOLD, 28));
+        this.add(abonnements,BorderLayout.PAGE_START);
 
         String[][] rowData = {
-            {"Nutzer 1", "Button 1"
-
-            }
+            { "Japan", "245" }, { "USA", "240" }, { "Italien", "220" },
+            { "Spanien", "217" }, {"Türkei", "215"} ,{ "England", "214" },
+            { "Frankreich", "190" }, {"Griechenland", "185" },
+            { "Deutschland", "180" }, {"Portugal", "170" }, {"Portugal", "170" }
+            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
+            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
+            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
+            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
+            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
+            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
+            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
+            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
+            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
         };
 
-        String[] columnNames = {
-          "Abonnierter Nutzer", "Gehe zu Pinnwand"
-        };
+        String[] columnNames = {"",""};
 
         JTable table = new JTable(rowData,columnNames);
-//        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//        TableColumnModel columnModel = table.getColumnModel();
-//        columnModel.getColumn(0).setPreferredWidth(150);
-//        columnModel.getColumn(1).setPreferredWidth(50);
+        table.setRowHeight(50);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel columnModel = table.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(200);
+        columnModel.getColumn(1).setPreferredWidth(100);
 
         JScrollPane scrollPane = new JScrollPane(table);
+        Dimension dim = new Dimension(0, 0);
+        scrollPane.setPreferredSize(dim);
 
         this.add(scrollPane,BorderLayout.CENTER);
+        this.setPreferredSize(dim);
     }
 }
