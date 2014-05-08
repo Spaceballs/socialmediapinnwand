@@ -4,7 +4,10 @@ package SocialMedia_Gui;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,10 +45,11 @@ public class NutzerInfo extends JPanel {
      * changes the font.
      */
     private void initialize() {
-        this.setLayout(new GridLayout(3,1,0,0));
-        EmptyBorder border = new EmptyBorder(20,40,20,40);
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        EmptyBorder border = new EmptyBorder(20,0,20,20);
         this.setBorder(border);
-
+        
         try {
             username.setText(clientNutzer.getUsername());
             name.setText(clientNutzer.getSurname() + " " + clientNutzer.getName());
@@ -57,10 +61,21 @@ public class NutzerInfo extends JPanel {
         alias.setFont(new Font("Arial", Font.ITALIC, 20));
         name.setFont(new Font("Arial", Font.BOLD, 28));
 
-        this.add(username);
-        this.add(alias);
-        this.add(name);
+        c.fill = GridBagConstraints.HORIZONTAL;
+//        c.anchor = GridBagConstraints.LINE_START;
+//        c.insets = new Insets(5, 5, 5, 5);
 
+        c.gridx = 0;
+        c.gridy = 0;
+        this.add(username, c);
+
+        c.gridx = 0;
+        c.gridy = 1;
+        this.add(alias, c);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        this.add(name, c);
     }
 
 }

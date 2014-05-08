@@ -8,6 +8,7 @@ import SocialMedia_Report.HTMLWriter;
 import SocialMedia_Report.Report;
 import SocialMedia_Report.ReportImpl;
 import SocialMedia_ReportGenerator.ReportGenerator;
+import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +34,8 @@ public class Hauptfenster extends JFrame {
     private JMenuItem accountdaten = new JMenuItem("Accountdaten ändern");
     private JMenuItem abmelden = new JMenuItem("Abmelden");
     private JPanel panelLinks = new JPanel();
+    private JPanel panelRechtsOben = new JPanel();
+    private JPanel panelRechtsUnten = new JPanel();
 
 
     /**
@@ -107,14 +110,15 @@ public class Hauptfenster extends JFrame {
     private void initializePane() {
         NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
         AbonnementInfo abonnementInfo = new AbonnementInfo(server, clientNutzer);
+        Newsfeed newsfeed = new Newsfeed(server, clientNutzer);
 
         JSplitPane splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
-        splitPaneRechts.setResizeWeight(0.1);
+        splitPaneRechts.setResizeWeight(0);
         splitPaneRechts.setEnabled(false);
         splitPaneRechts.setDividerSize(1);
         
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, splitPaneRechts);
-        splitPane.setResizeWeight(0.8);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, newsfeed, splitPaneRechts);
+        splitPane.setResizeWeight(0.7);
         splitPane.setEnabled(false);
         splitPane.setDividerSize(0);
         this.getContentPane().add(splitPane);
