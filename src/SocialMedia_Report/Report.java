@@ -14,139 +14,48 @@ import java.util.Vector;
  *
  * @author Sebastian
  */
-public interface Report extends java.rmi.Remote {
+public interface Report extends java.rmi.Remote{
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.88FBC6E4-CD3B-4E19-1904-6B13A7DF387D]
-    // </editor-fold>
-    /**
-     *
-     * @param val
-     * @throws java.rmi.RemoteException
-     */
-    public void addRow(Row val) throws RemoteException;
+    Paragraph getBodyParagraph() 
+            throws RemoteException;
 
-    /**
-     *
-     * @return
-     * @throws java.rmi.RemoteException
-     */
-    public Vector<Paragraph> getAllParagraphs() throws RemoteException;
+    Date getCreationDate() 
+            throws RemoteException;
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.C4845CAD-6489-79E9-8793-09FBE313D345]
-    // </editor-fold>
-    /**
-     *
-     * @return
-     * @throws java.rmi.RemoteException
-     */
-    public Vector<Row> getAllRows() throws RemoteException;
+    Date getEndDate() 
+            throws RemoteException;
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,regenBody=yes,id=DCE.736AE163-DD52-AE45-73DA-F720D296BEBF]
-    // </editor-fold>
-    /**
-     *
-     * @return
-     * @throws java.rmi.RemoteException
-     */
-    public Date getCreationDate() throws RemoteException;
+    Paragraph getHeaderAndTitleParagraph() 
+            throws RemoteException;
 
-    /**
-     *
-     * @return
-     * @throws java.rmi.RemoteException
-     */
-    public Date getEndDate() throws RemoteException;
+    Paragraph getImprintParagraph() 
+            throws RemoteException;
 
-    /**
-     *
-     * @return
-     * @throws java.rmi.RemoteException
-     */
-    public String getImprint() throws RemoteException;
+    Vector<Row> getRows() 
+            throws RemoteException;
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,regenBody=yes,id=DCE.71D76669-894D-09DE-8726-1490EAAF6F4C]
-    // </editor-fold>
-    /**
-     *
-     * @return
-     * @throws java.rmi.RemoteException
-     */
-    public String getReportTitle() throws RemoteException;
+    Date getStartDate() 
+            throws RemoteException;
 
-    /**
-     *
-     * @return
-     * @throws java.rmi.RemoteException
-     */
-    public Date getStartDate() throws RemoteException;
+    void setBodyParagraph(Paragraph bodyParagraph) 
+            throws RemoteException;
 
-    /**
-     *
-     * @param Paragraph
-     * @throws java.rmi.RemoteException
-     */
-    public void removeParagraph(Paragraph Paragraph) throws RemoteException;
+    void setCreationDate(Date creationDate) 
+            throws RemoteException;
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.6B817044-83CA-F739-4038-CAB9BC5D19F9]
-    // </editor-fold>
-    /**
-     *
-     * @param val
-     * @throws java.rmi.RemoteException
-     */
-    public void removeRow(Row val) throws RemoteException;
+    void setEndDate(Date endDate) 
+            throws RemoteException;
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,regenBody=yes,id=DCE.DF9B67FA-09D6-BC6D-AFAD-6C11C9D79470]
-    // </editor-fold>
-    /**
-     *
-     * @param val
-     * @throws java.rmi.RemoteException
-     */
-    public void setCreationDate(Date val) throws RemoteException;
+    void setHeaderAndTitleParagraph(Paragraph headerAndTitleParagraph) 
+            throws RemoteException;
 
-    /**
-     *
-     * @param endDate
-     * @throws java.rmi.RemoteException
-     */
-    public void setEndDate(Date endDate) throws RemoteException;
+    void setImprintParagraph(Paragraph imprintParagraph) 
+            throws RemoteException;
 
-    /**
-     *
-     * @param imprint
-     * @throws java.rmi.RemoteException
-     */
-    public void setImprint(String imprint) throws RemoteException;
+    void setRows(Vector<Row> rows) 
+            throws RemoteException;
 
-    /**
-     *
-     * @param Paragraph
-     * @throws java.rmi.RemoteException
-     */
-    public void setParagraph(Paragraph Paragraph) throws RemoteException;
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,regenBody=yes,id=DCE.2825BBE1-A6B3-F481-3693-EE16A3B47B0C]
-    // </editor-fold>
-    /**
-     *
-     * @param val
-     * @throws java.rmi.RemoteException
-     */
-    public void setReportTitle(String val) throws RemoteException;
-
-    /**
-     *
-     * @param startDate
-     * @throws java.rmi.RemoteException
-     */
-    public void setStartDate(Date startDate) throws RemoteException;
+    void setStartDate(Date startDate) 
+            throws RemoteException;
     
 }

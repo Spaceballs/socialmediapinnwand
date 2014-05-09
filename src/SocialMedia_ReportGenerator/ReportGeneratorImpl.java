@@ -5,8 +5,15 @@ import SocialMedia_Report.PopularityOfBeitragImpl;
 import SocialMedia_Data.Beitrag;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic; 
+import SocialMedia_Report.CompositeParagraph;
+import SocialMedia_Report.CompositeParagraphImpl;
 import SocialMedia_Report.ContributionOfNutzer;
 import SocialMedia_Report.PopularityOfBeitrag;
+import SocialMedia_Report.Paragraph;
+import SocialMedia_Report.ParagraphImpl;
+import SocialMedia_Report.SimpleParagraph;
+import SocialMedia_Report.SimpleParagraphImpl;
+import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Vector;
@@ -68,7 +75,7 @@ public class ReportGeneratorImpl
             // TO-DO: Report code
             
             report.setCreationDate(new Date());
-            report.setReportTitle(("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
+            report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
             
         } catch (RemoteException ex) {
             Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,20 +98,6 @@ public class ReportGeneratorImpl
      */
     public PopularityOfBeitrag createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
         PopularityOfBeitrag report = new PopularityOfBeitragImpl();
-        try {
-            
-            
-            // TO-DO: Report code
-            // TO-DO: Report code
-            // TO-DO: Report code
-            
-            report.setCreationDate(new Date());
-            report.setReportTitle(("Report über die Popularität von Beiträgen zwischen dem " + startDateVal + " und dem " + endDateVal));
-            Vector<Beitrag> b = socialMediaLogic.getAllBeitrag();
-            
-        } catch (RemoteException ex) {
-            Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return report;
     }
 }

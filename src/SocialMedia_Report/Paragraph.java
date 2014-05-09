@@ -10,6 +10,6 @@ package SocialMedia_Report;
  *
  * @author Sebastian
  */
-abstract interface Paragraph extends java.rmi.Remote{
+public abstract interface Paragraph extends java.rmi.Remote{
     
 }

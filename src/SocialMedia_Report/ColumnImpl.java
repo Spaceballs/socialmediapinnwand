@@ -1,54 +1,16 @@
 package SocialMedia_Report;
 
-import java.util.Vector;
+import java.rmi.RemoteException;
 
  
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.E2835B7A-5082-CB02-F27E-C9D66453A1DE]
 // </editor-fold> 
-public class ColumnImpl implements Column {
+public abstract class ColumnImpl extends CompositeParagraphImpl implements Column {
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.CBA10476-D4E4-FC22-0E9F-25C6DE9A2328]
-    // </editor-fold> 
-    private Vector<String> text;
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.576A2131-45C5-3278-3191-2C951EC15E14]
-    // </editor-fold> 
-    public ColumnImpl (Vector<String> val) {
-        text = val;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.EE824E0A-E1CC-A136-A270-3296FD5B60B2]
-    // </editor-fold> 
-    @Override
-    public Vector<String> getText () {
-        return text;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.EA1C9E86-F80C-78AB-903D-A40831A430D8]
-    // </editor-fold> 
-    @Override
-    public void setText (String val) {
-        this.text.add(val);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.2FD23B39-7046-715C-3BA7-7FC20E86B691]
-    // </editor-fold> 
-    @Override
-    public String toString () {
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < text.size(); i++) {
-            buffer.append(" %p ");
-            buffer.append(text.elementAt(i));
-            buffer.append(" %/p ");
-        }
-        return buffer.toString();
+    public ColumnImpl () throws RemoteException{
+        
     }
 }
 

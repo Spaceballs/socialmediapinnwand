@@ -20,7 +20,7 @@ public class CompositeParagraphImpl extends ParagraphImpl implements CompositePa
     // </editor-fold> 
     private Vector<SimpleParagraph> subParagraphs = new Vector<SimpleParagraph>();
     
-    protected CompositeParagraphImpl () throws RemoteException{
+    public CompositeParagraphImpl () throws RemoteException{
         
     }
 

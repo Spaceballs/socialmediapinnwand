@@ -14,24 +14,20 @@ import java.util.Vector;
  * @author Sebastian
  */
 public class ReportImpl extends java.rmi.server.UnicastRemoteObject implements Report{
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.C01546F6-1230-9D1A-E8B7-1C6BA18AA572]
-    // </editor-fold> 
-    private String reportTitle = "Report";
-    private String imprint = "";
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.DD0CA414-A7D3-3EE0-28C4-6DDA3EBB3A5F]
     // </editor-fold> 
     private Date creationDate = new Date();
-    private Date startDate;
-    private Date endDate;
-    private Vector<String> tableHeader = new Vector<String>();
+    private Date startDate = null;
+    private Date endDate = null;
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.6C37A6A4-26A4-83AC-CC6C-E9599681DD35]
     // </editor-fold> 
     private Vector<Row> rows = null;
-    private Vector<Paragraph> paragraphs = null;
+    private Paragraph headerAndTitleParagraph = null;
+    private Paragraph bodyParagraph = null;
+    private Paragraph imprintParagraph = null;
     
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3A56DCBA-88E9-DEDF-0689-5B42C1C3471E]
@@ -44,185 +40,75 @@ public class ReportImpl extends java.rmi.server.UnicastRemoteObject implements R
             throws RemoteException{
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.736AE163-DD52-AE45-73DA-F720D296BEBF]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
     @Override
-    public Date getCreationDate ()
-            throws RemoteException {
-        return this.creationDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.DF9B67FA-09D6-BC6D-AFAD-6C11C9D79470]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
     @Override
-    public void setCreationDate (Date val) 
-            throws RemoteException{
-        this.creationDate = val;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.71D76669-894D-09DE-8726-1490EAAF6F4C]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
     @Override
-    public String getReportTitle () 
-            throws RemoteException{
-        return this.reportTitle;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.2825BBE1-A6B3-F481-3693-EE16A3B47B0C]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    @Override
-    public void setReportTitle (String val) 
-            throws RemoteException{
-        this.reportTitle = val;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.88FBC6E4-CD3B-4E19-1904-6B13A7DF387D]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    @Override
-    public void addRow (Row val) 
-            throws RemoteException{
-        this.rows.add(val);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.6B817044-83CA-F739-4038-CAB9BC5D19F9]
-    // </editor-fold> 
-    /**
-     * 
-     * @param val 
-     */
-    @Override
-    public void removeRow (Row val) 
-            throws RemoteException{
-        this.rows.remove(val);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.C4845CAD-6489-79E9-8793-09FBE313D345]
-    // </editor-fold> 
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public Vector<Row> getAllRows () 
-            throws RemoteException{
-        return this.rows;
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public Vector<Paragraph> getAllParagraphs() 
-            throws RemoteException{
-        return this.paragraphs;
-    }
-
-    /**
-     * 
-     * @param Paragraph 
-     */
-    @Override
-    public void removeParagraph(Paragraph Paragraph) 
-            throws RemoteException{
-        this.paragraphs.remove(Paragraph);
-    }
-    
-    /**
-     * 
-     * @param Paragraph
-     */
-    @Override
-    public void setParagraph(Paragraph Paragraph) 
-            throws RemoteException{
-        this.paragraphs.add(Paragraph);
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getImprint() 
-            throws RemoteException{
-        return imprint;
-    }
-
-    /**
-     * 
-     * @param imprint 
-     */
-    @Override
-    public void setImprint(String imprint) 
-            throws RemoteException{
-        this.imprint = imprint;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public Date getStartDate() 
-            throws RemoteException{
+    public Date getStartDate() {
         return startDate;
     }
 
-    /**
-     * 
-     * @param startDate 
-     */
     @Override
-    public void setStartDate(Date startDate) 
-            throws RemoteException{
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    /**
-     * 
-     * @return 
-     */
     @Override
-    public Date getEndDate() 
-            throws RemoteException{
+    public Date getEndDate() {
         return endDate;
     }
 
-    /**
-     * 
-     * @param endDate 
-     */
     @Override
-    public void setEndDate(Date endDate) 
-            throws RemoteException{
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    public Vector<Row> getRows() {
+        return rows;
+    }
+
+    @Override
+    public void setRows(Vector<Row> rows) {
+        this.rows = rows;
+    }
+
+    @Override
+    public Paragraph getHeaderAndTitleParagraph() {
+        return headerAndTitleParagraph;
+    }
+
+    @Override
+    public void setHeaderAndTitleParagraph(Paragraph headerAndTitleParagraph) {
+        this.headerAndTitleParagraph = headerAndTitleParagraph;
+    }
+
+    @Override
+    public Paragraph getBodyParagraph() {
+        return bodyParagraph;
+    }
+
+    @Override
+    public void setBodyParagraph(Paragraph bodyParagraph) {
+        this.bodyParagraph = bodyParagraph;
+    }
+
+    @Override
+    public Paragraph getImprintParagraph() {
+        return imprintParagraph;
+    }
+
+    @Override
+    public void setImprintParagraph(Paragraph imprintParagraph) {
+        this.imprintParagraph = imprintParagraph;
+    }
+    
 }
 
