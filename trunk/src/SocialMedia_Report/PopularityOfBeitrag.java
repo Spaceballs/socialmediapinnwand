@@ -11,5 +11,6 @@ package SocialMedia_Report;
  * @author Sebastian
  */
 public interface PopularityOfBeitrag extends Report{
+
     
 }
