@@ -155,6 +155,7 @@ public class Hauptfenster extends JFrame {
         this.pack();
 
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH); // Frame is maximized on start
+        this.setMinimumSize(new Dimension(400, 200));
         this.setLocationRelativeTo(null); // frame is at the center of the screen
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -176,7 +177,7 @@ public class Hauptfenster extends JFrame {
         splitPaneRechts.setDividerSize(1);
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, splitPaneRechts);
-        splitPane.setResizeWeight(0.7);
+        splitPane.setResizeWeight(0);
         splitPane.setEnabled(false);
         splitPane.setDividerSize(0);
         this.getContentPane().add(splitPane);
