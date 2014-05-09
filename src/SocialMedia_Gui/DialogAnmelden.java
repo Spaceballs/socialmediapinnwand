@@ -113,7 +113,7 @@ public class DialogAnmelden extends JFrame implements ActionListener{
                }
                if (clientNutzer != null){
                    dispose();
-                   Hauptfenster hauptfenster = new Hauptfenster(server, clientNutzer);
+                   Hauptfenster hauptfenster = SocialMedia_Gui.Hauptfenster.hauptfenster(server, clientNutzer);
                } else {
                    dispose();
                    DialogAnmelden  anmelden = new DialogAnmelden(server, username.getText(), new String(password.getPassword()));

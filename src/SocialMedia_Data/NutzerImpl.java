@@ -190,6 +190,7 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
             if(abonnement.getNutzerID() == this.getID())
                 nutzerAbonnements.addElement(abonnement);
         }
+        System.out.println(nutzerAbonnements);
         return nutzerAbonnements;
     }
 }
