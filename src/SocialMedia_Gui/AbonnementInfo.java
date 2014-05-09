@@ -33,6 +33,7 @@ public class AbonnementInfo extends JPanel{
     private JLabel titleAbonnements = new JLabel("Abonnements",JLabel.LEFT);
     private JButton button1 = new JButton("Button 1");
     private Vector<Nutzer> abonnementNutzer = new Vector<Nutzer>();
+    private JList abonnementList = new JList();
 
     /**
      * Constructor
@@ -67,6 +68,7 @@ public class AbonnementInfo extends JPanel{
             for (int i = 0; i < abonnements.size(); i++) {
                 abonnement = abonnements.elementAt(i);
                 AbonnementPanel abonnementPanel = new AbonnementPanel(server,clientNutzer,abonnement);
+                abonnementList.add(abonnementPanel);
             }
         } catch (RemoteException ex) {
             Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,8 +91,6 @@ public class AbonnementInfo extends JPanel{
         };
 
         String[] columnNames = {"",""};
-
-//        JList abonnementList = new JList(abonnementNutzer);
 
         JTable table = new JTable(rowData,columnNames);
         table.setRowHeight(50);
