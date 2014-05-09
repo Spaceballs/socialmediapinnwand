@@ -26,7 +26,7 @@ public class NutzerInfo extends JPanel {
     private Nutzer clientNutzer = null;
     JLabel username = new JLabel("",JLabel.LEFT);
     JLabel name = new JLabel("", JLabel.LEFT);
-    JLabel alias = new JLabel("aliasjdsajkla", JLabel.LEFT);
+    JLabel alias = new JLabel("alias", JLabel.LEFT);
 
     /**
      * Constructor

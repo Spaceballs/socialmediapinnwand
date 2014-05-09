@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 
 /**
  * Creates the main frame of the client
@@ -28,14 +29,18 @@ public class Hauptfenster extends JFrame {
     private JMenuBar menueLeiste = new JMenuBar();
     private JMenu meinAccount = new JMenu("Mein Account");
     private JMenu menue = new JMenu("Menü");
-    private JMenuItem newsfeed = new JMenuItem("Newsfeed");
-    private JMenuItem meinePinnwand = new JMenuItem("Meine Pinnwand");
+    private JMenuItem newsfeedMenu = new JMenuItem("Newsfeed");
+    private JMenuItem meinePinnwandMenu = new JMenuItem("Meine Pinnwand");
     private JMenuItem suchen = new JMenuItem("Nutzer suchen");
     private JMenuItem accountdaten = new JMenuItem("Accountdaten ändern");
     private JMenuItem abmelden = new JMenuItem("Abmelden");
     private JPanel panelLinks = new JPanel();
     private JPanel panelRechtsOben = new JPanel();
     private JPanel panelRechtsUnten = new JPanel();
+    private JSplitPane splitPane;
+    private JSplitPane splitPaneRechts;
+    private MeinePinnwand meinePinnwand;
+    private Newsfeed newsfeed;
 
 
     /**
@@ -56,7 +61,7 @@ public class Hauptfenster extends JFrame {
         initializeMenu();
         initializeListeners();
         initializePane();
-        sometests();
+//        sometests();
     }
 
     /**
@@ -65,8 +70,8 @@ public class Hauptfenster extends JFrame {
     private void initializeMenu() {
         menueLeiste.add(menue);
         menueLeiste.add(meinAccount);
-        menue.add(newsfeed);
-        menue.add(meinePinnwand);
+        menue.add(newsfeedMenu);
+        menue.add(meinePinnwandMenu);
         menue.add(suchen);
         meinAccount.add(accountdaten);
         meinAccount.add(abmelden);
@@ -77,6 +82,23 @@ public class Hauptfenster extends JFrame {
      * All required listeners
      */
     private void initializeListeners() {
+
+        //ActionListener Newsfeed
+        newsfeedMenu.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+               newsfeed = new Newsfeed(server, clientNutzer);
+               setPanelLinks(newsfeed);
+           }
+        });
+
+        //ActionListener Meine Pinnwand
+        meinePinnwandMenu.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+               meinePinnwand = new MeinePinnwand(server, clientNutzer);
+               setPanelLinks(meinePinnwand);
+           }
+        });
+
         //ActionListener Nutzer suchen
         suchen.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
@@ -112,12 +134,12 @@ public class Hauptfenster extends JFrame {
         AbonnementInfo abonnementInfo = new AbonnementInfo(server, clientNutzer);
         Newsfeed newsfeed = new Newsfeed(server, clientNutzer);
 
-        JSplitPane splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
+        splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
         splitPaneRechts.setResizeWeight(0);
         splitPaneRechts.setEnabled(false);
         splitPaneRechts.setDividerSize(1);
         
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, newsfeed, splitPaneRechts);
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, newsfeed, splitPaneRechts);
         splitPane.setResizeWeight(0.7);
         splitPane.setEnabled(false);
         splitPane.setDividerSize(0);
@@ -136,6 +158,30 @@ public class Hauptfenster extends JFrame {
         this.setLocationRelativeTo(null); // frame is at the center of the screen
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    /**
+     * Removes all panels and sets them again with the given panel as panelLinks
+     * @param panelLinks - JPanel on the left side (newsfeed or meinePinnwand) 
+     */
+    private void setPanelLinks(JPanel panelLinks) {
+        this.getContentPane().removeAll();
+        NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
+        AbonnementInfo abonnementInfo = new AbonnementInfo(server, clientNutzer);
+        Newsfeed newsfeed = new Newsfeed(server, clientNutzer);
+
+        splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
+        splitPaneRechts.setResizeWeight(0);
+        splitPaneRechts.setEnabled(false);
+        splitPaneRechts.setDividerSize(1);
+
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, splitPaneRechts);
+        splitPane.setResizeWeight(0.7);
+        splitPane.setEnabled(false);
+        splitPane.setDividerSize(0);
+        this.getContentPane().add(splitPane);
+
+        this.setVisible(true);
     }
 
     private void sometests() {

@@ -24,7 +24,7 @@ import javax.swing.border.EmptyBorder;
 public class Newsfeed extends JPanel {
     private SocialMediaLogic server;
     private Nutzer clientNutzer = null;
-    JLabel newsfeedOfNutzer = new JLabel("",JLabel.LEFT);
+    JLabel newsfeed = new JLabel("Newsfeed",JLabel.LEFT);
     JLabel abonnement = new JLabel("",JLabel.LEFT);
     JButton button1 = new JButton("Button 1");
 
@@ -49,14 +49,8 @@ public class Newsfeed extends JPanel {
         EmptyBorder border = new EmptyBorder(20,20,20,20);
         this.setBorder(border);
 
-        try {
-            newsfeedOfNutzer.setText("Newsfeed von " + clientNutzer.getUsername());
-        } catch (RemoteException ex) {
-            Logger.getLogger(NutzerInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        newsfeedOfNutzer.setFont(new Font("Arial", Font.BOLD, 48));
-        this.add(newsfeedOfNutzer,BorderLayout.PAGE_START);
+        newsfeed.setFont(new Font("Arial", Font.BOLD, 48));
+        this.add(newsfeed,BorderLayout.PAGE_START);
 
         String[][] rowData = {
             { "Japan", "245" }, { "USA", "240" }, { "Italien", "220" },
