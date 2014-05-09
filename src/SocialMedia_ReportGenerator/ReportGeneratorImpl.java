@@ -2,21 +2,13 @@ package SocialMedia_ReportGenerator;
 
 import SocialMedia_Report.ContributionOfNutzerImpl;
 import SocialMedia_Report.PopularityOfBeitragImpl;
-import SocialMedia_Data.Beitrag;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic; 
-import SocialMedia_Report.CompositeParagraph;
-import SocialMedia_Report.CompositeParagraphImpl;
 import SocialMedia_Report.ContributionOfNutzer;
 import SocialMedia_Report.PopularityOfBeitrag;
-import SocialMedia_Report.Paragraph;
-import SocialMedia_Report.ParagraphImpl;
-import SocialMedia_Report.SimpleParagraph;
 import SocialMedia_Report.SimpleParagraphImpl;
-import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.util.Date;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,6 +38,7 @@ public class ReportGeneratorImpl
      * Each Server has his own ReportGenerator.
      * 
      * @param val - SocialMediaLogic will be needed to get some data for the reports.
+     * @throws java.rmi.RemoteException
      */
     public ReportGeneratorImpl (SocialMediaLogic val) throws RemoteException {
         socialMediaLogic = val;
