@@ -1,16 +1,20 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Nutzer;
+import SocialMedia_Data.Pinnwand;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.rmi.RemoteException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,8 +30,9 @@ public class AbonnementInfo extends JPanel{
 
     private SocialMediaLogic server;
     private Nutzer clientNutzer = null;
-    JLabel abonnements = new JLabel("Abonnements",JLabel.LEFT);
-    JButton button1 = new JButton("Button 1");
+    private JLabel titleAbonnements = new JLabel("Abonnements",JLabel.LEFT);
+    private JButton button1 = new JButton("Button 1");
+    private Vector<Nutzer> abonnementNutzer = new Vector<Nutzer>();
 
     /**
      * Constructor
@@ -50,8 +55,22 @@ public class AbonnementInfo extends JPanel{
         EmptyBorder border = new EmptyBorder(20,20,20,20);
         this.setBorder(border);
 
-        abonnements.setFont(new Font("Arial", Font.BOLD, 28));
-        this.add(abonnements,BorderLayout.PAGE_START);
+        titleAbonnements.setFont(new Font("Arial", Font.BOLD, 28));
+        this.add(titleAbonnements,BorderLayout.PAGE_START);
+
+        Abonnement abonnement;
+
+
+
+        try {
+            Vector<Abonnement> abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
+            for (int i = 0; i < abonnements.size(); i++) {
+                abonnement = abonnements.elementAt(i);
+                AbonnementPanel abonnementPanel = new AbonnementPanel(server,clientNutzer,abonnement);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String[][] rowData = {
             { "Japan", "245" }, { "USA", "240" }, { "Italien", "220" },
@@ -70,6 +89,8 @@ public class AbonnementInfo extends JPanel{
         };
 
         String[] columnNames = {"",""};
+
+//        JList abonnementList = new JList(abonnementNutzer);
 
         JTable table = new JTable(rowData,columnNames);
         table.setRowHeight(50);
