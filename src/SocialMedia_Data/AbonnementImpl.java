@@ -39,8 +39,8 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,regenBody=yes,id=DCE.34CD4721-4808-AC12-AB06-15C640C1C70A]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the nutzerID.
+     * @return Integer - Returns the id of the Nutzer.
      */
     public int getNutzerID () 
             throws RemoteException{
@@ -51,8 +51,8 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,regenBody=yes,id=DCE.8D1AACC7-2B0D-F458-8544-FC736F4D62B6]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the nutzerID.
+     * @param val - Needs a integer id to set.
      */
     public void setNutzerID (int val) 
             throws RemoteException{
