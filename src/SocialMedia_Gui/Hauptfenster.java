@@ -101,7 +101,6 @@ public class Hauptfenster extends JFrame {
         NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
         AbonnementInfo abonnementInfo = new AbonnementInfo(server, clientNutzer);
         
-
         splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
         splitPaneRechts.setResizeWeight(0);
         splitPaneRechts.setEnabled(false);
@@ -113,16 +112,13 @@ public class Hauptfenster extends JFrame {
         splitPane.setDividerSize(0);
         this.getContentPane().add(splitPane);
 
-
         try {
             this.setTitle("Social Media Pinnwand von " + clientNutzer.getUsername());
         } catch (RemoteException ex) {
             Logger.getLogger(Hauptfenster.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-
-        this.setVisible(true);
-  
+        this.setVisible(true);  
     }
 
     /**
@@ -133,20 +129,20 @@ public class Hauptfenster extends JFrame {
         this.getContentPane().removeAll();
         if (panelLinks != null)
             this.panelLinks = panelLinks;
-//        NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
-//        AbonnementInfo abonnementInfo = new AbonnementInfo(server, clientNutzer);
-//        Newsfeed newsfeed = new Newsfeed(server, clientNutzer);
-//
-//        splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
-//        splitPaneRechts.setResizeWeight(0);
-//        splitPaneRechts.setEnabled(false);
-//        splitPaneRechts.setDividerSize(1);
-//
-//        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, splitPaneRechts);
-//        splitPane.setResizeWeight(0);
-//        splitPane.setEnabled(false);
-//        splitPane.setDividerSize(0);
-//        this.getContentPane().add(splitPane);
+        NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
+        AbonnementInfo abonnementInfo = new AbonnementInfo(server, clientNutzer);
+        Newsfeed newsfeed = new Newsfeed(server, clientNutzer);
+
+        splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
+        splitPaneRechts.setResizeWeight(0);
+        splitPaneRechts.setEnabled(false);
+        splitPaneRechts.setDividerSize(1);
+
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLinks, splitPaneRechts);
+        splitPane.setResizeWeight(0.7);
+        splitPane.setEnabled(false);
+        splitPane.setDividerSize(0);
+        this.getContentPane().add(splitPane);
 
         this.setVisible(true);
     }
@@ -155,8 +151,10 @@ public class Hauptfenster extends JFrame {
     private void initializeOptions() {
         this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH); // Frame is maximized on start
-        this.setMinimumSize(new Dimension(400, 200));
+//        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH); // Frame is maximized on start
+//        this.setMinimumSize(new Dimension(400, 200));
+        this.setSize(1024, 768);
+        this.setResizable(false);
         this.setLocationRelativeTo(null); // frame is at the center of the screen
     }    
 
