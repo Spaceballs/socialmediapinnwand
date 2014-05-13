@@ -4,6 +4,8 @@ package SocialMedia_Gui;
 import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -27,13 +29,14 @@ import javax.swing.JPanel;
  */
 class AbonnementPanel extends JPanel {
     
-    JButton goDeleteButton;
-    JButton goPinnwandButton;    
-    SocialMediaLogic server;
-    Nutzer clientNutzer;
-    Abonnement abonnement;
-    ImageIcon goDelete = new ImageIcon("zahnrad.jpg");
-    ImageIcon goPinnwand = new ImageIcon("pfeil.jpg");
+    private JButton goDeleteButton;
+    private JButton goPinnwandButton;    
+    private SocialMediaLogic server;
+    private Nutzer clientNutzer;
+    private Abonnement abonnement;
+    private JLabel abonnementLabel;
+    private ImageIcon goDelete = new ImageIcon("zahnrad.jpg");
+    private ImageIcon goPinnwand = new ImageIcon("pfeil.jpg");
 
     /**
      * 
@@ -68,7 +71,8 @@ class AbonnementPanel extends JPanel {
      * 
      */
     private void initalizeContent() {
-        this.setSize(30, 70);
+
+        this.setBackground(Color.red);
         this.setLayout(new GridBagLayout());
         GridBagConstraints gridBagLayout = new GridBagConstraints();
         gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
@@ -77,21 +81,23 @@ class AbonnementPanel extends JPanel {
 
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 0;
+//        gridBagLayout.weightx = 2;
+        this.add(new JLabel("Nutzer",JLabel.LEFT), gridBagLayout);
         
         gridBagLayout.gridx = 2;
-        gridBagLayout.gridy = 1;
-        goDeleteButton = new JButton(goDelete);
+        gridBagLayout.gridy = 0;
+        goDeleteButton = new JButton("Delete");
         this.add(goDeleteButton, gridBagLayout);
 
         gridBagLayout.gridx = 3;
-        gridBagLayout.gridy = 1;
-        goPinnwandButton = new JButton(goPinnwand);
+        gridBagLayout.gridy = 0;
+        goPinnwandButton = new JButton("Pinnwand");
         this.add(goPinnwandButton, gridBagLayout);
-        try {
-            this.add(new JLabel( server.getOwnerOfPinnwandOfAbonnement(abonnement).getUsername(), JLabel.RIGHT), gridBagLayout);
-        } catch (RemoteException ex) {
-            Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            this.add(new JLabel( server.getOwnerOfPinnwandOfAbonnement(abonnement).getUsername(), JLabel.RIGHT), gridBagLayout);
+//        } catch (RemoteException ex) {
+//            Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         goDeleteButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
@@ -114,7 +120,7 @@ class AbonnementPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-        });
+        });this.setSize(30, 70);
     }
 
 

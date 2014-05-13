@@ -5,10 +5,15 @@ import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Data.Pinnwand;
 import SocialMedia_Logic.SocialMediaLogic;
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,9 +36,8 @@ public class AbonnementInfo extends JPanel{
     private SocialMediaLogic server;
     private Nutzer clientNutzer = null;
     private JLabel titleAbonnements = new JLabel("Abonnements",JLabel.LEFT);
-    private JButton button1 = new JButton("Button 1");
     private Vector<Nutzer> abonnementNutzer = new Vector<Nutzer>();
-    private JList abonnementList = new JList();
+    private AbonnementPanel abonnementPanel = new AbonnementPanel(server, clientNutzer, null);
 
     /**
      * Constructor
@@ -58,52 +62,24 @@ public class AbonnementInfo extends JPanel{
 
         titleAbonnements.setFont(new Font("Arial", Font.BOLD, 28));
         this.add(titleAbonnements,BorderLayout.PAGE_START);
+        
+        this.add(abonnementPanel,BorderLayout.CENTER);
+        
 
-        Abonnement abonnement;
+//        Abonnement abonnement;
+//
+//
+//
+//        try {
+//            Vector<Abonnement> abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
+//            for (int i = 0; i < abonnements.size(); i++) {
+//                abonnement = abonnements.elementAt(i);
+//                AbonnementPanel abonnementPanel = new AbonnementPanel(server,clientNutzer,abonnement);
+//                this.add(abonnementPanel,BorderLayout.CENTER);
+//            }
+//        } catch (RemoteException ex) {
+//            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
-
-
-        try {
-            Vector<Abonnement> abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
-            for (int i = 0; i < abonnements.size(); i++) {
-                abonnement = abonnements.elementAt(i);
-                AbonnementPanel abonnementPanel = new AbonnementPanel(server,clientNutzer,abonnement);
-                abonnementList.add(abonnementPanel);
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        String[][] rowData = {
-            { "Japan", "245" }, { "USA", "240" }, { "Italien", "220" },
-            { "Spanien", "217" }, {"Türkei", "215"} ,{ "England", "214" },
-            { "Frankreich", "190" }, {"Griechenland", "185" },
-            { "Deutschland", "180" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-        };
-
-        String[] columnNames = {"",""};
-
-        JTable table = new JTable(rowData,columnNames);
-        table.setRowHeight(50);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        TableColumnModel columnModel = table.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(200);
-        columnModel.getColumn(1).setPreferredWidth(100);
-
-        JScrollPane scrollPane = new JScrollPane(table);
-        Dimension dim = new Dimension(0, 0);
-        scrollPane.setPreferredSize(dim);
-
-        this.add(scrollPane,BorderLayout.CENTER);
-        this.setPreferredSize(dim);
     }
 }
