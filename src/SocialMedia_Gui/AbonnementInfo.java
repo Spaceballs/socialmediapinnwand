@@ -3,28 +3,16 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Nutzer;
-import SocialMedia_Data.Pinnwand;
 import SocialMedia_Logic.SocialMediaLogic;
-import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.rmi.RemoteException;
-import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.TableColumnModel;
 
 /**
  * Creates the content of the panelRechtsUnten
@@ -65,21 +53,17 @@ public class AbonnementInfo extends JPanel{
         
         this.add(abonnementPanel,BorderLayout.CENTER);
         
-
-//        Abonnement abonnement;
-//
-//
-//
-//        try {
-//            Vector<Abonnement> abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
-//            for (int i = 0; i < abonnements.size(); i++) {
-//                abonnement = abonnements.elementAt(i);
-//                AbonnementPanel abonnementPanel = new AbonnementPanel(server,clientNutzer,abonnement);
-//                this.add(abonnementPanel,BorderLayout.CENTER);
-//            }
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            Vector<Abonnement> abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
+            for (int i = 0; i < abonnements.size(); i++) {
+                Abonnement abonnement = abonnements.elementAt(i);
+                Nutzer nutzer = server.getOwnerOfPinnwandOfAbonnement(abonnement);
+                System.out.println(nutzer.getUsername());
+                
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 }
