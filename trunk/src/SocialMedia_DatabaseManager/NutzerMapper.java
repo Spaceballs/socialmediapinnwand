@@ -205,9 +205,42 @@ public class NutzerMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.D23558EA-2F26-4617-294C-70420DD1EA3B]
     // </editor-fold> 
     /**
+     * 
+     * @param val
+     * @return 
+     */
     public Nutzer findByID(int val) {
         Connection con = DBConnection.connection();
+        try {
+            Nutzer nutzer = new NutzerImpl();
+            ResultSet resultSet = con.createStatement().executeQuery(
+                    SELECT + " " +
+                    FROM + " " +
+                            TABLE_NAME_NUTZER + " " +
+                    WHERE + " " +
+                            COLUMN_ID + " =\"" + val + "\"");
+            while (resultSet.next()) {
+                try {
+                    nutzer.setID(resultSet.getInt(COLUMN_ID));
+                    nutzer.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                    nutzer.setUsername(resultSet.getString(COLUMN_NICKNAME) );
+                    nutzer.setSurname(resultSet.getString(COLUMN_VORNAME));
+                    nutzer.setName(resultSet.getString(COLUMN_NACHNAME));
+                    nutzer.setPassword(resultSet.getString(COLUMN_PASSWORD));
+                }
+                catch(SQLException e) {
+                    Logger.getLogger(NutzerMapper.class.getName()).log(Level.SEVERE, null, e);
+                    break;
+                } catch (RemoteException ex) {
+                    Logger.getLogger(NutzerMapper.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return nutzer;
+        } catch (SQLException ex) {
+            Logger.getLogger(NutzerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(NutzerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
-    */
 }

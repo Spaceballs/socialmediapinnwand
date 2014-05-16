@@ -200,10 +200,42 @@ public class BeitragMapper extends DBStatementFactory {
     // #[regen=yes,id=DCE.D12ED43A-5458-0A9B-A33B-4670D16CC3F1]
     // </editor-fold> 
     /**
+     * 
+     * @param val
+     * @return 
+     */
     public Beitrag findByID (int val) {
         Connection con = DBConnection.connection();
+        try {
+            Beitrag beitrag = new BeitragImpl();
+            ResultSet resultSet = con.createStatement().executeQuery(
+                    SELECT + " " +
+                    FROM + " " +
+                            TABLE_NAME_BEITRAG + " " +
+                    WHERE + " " +
+                            COLUMN_ID + " =\"" + val + "\"");
+            while (resultSet.next()) {
+                try {
+                    beitrag.setID(resultSet.getInt(COLUMN_ID));
+                    beitrag.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                    beitrag.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                    beitrag.setPinnwandID(resultSet.getInt(COLUMN_PINNWAND_ID));
+                    beitrag.setText(resultSet.getString(COLUMN_TEXT));
+                }
+                catch(SQLException e) {
+                    Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, e);
+                    break;
+                } catch (RemoteException ex) {
+                    Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return beitrag;
+        } catch (SQLException ex) {
+            Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
-    */
 }
 

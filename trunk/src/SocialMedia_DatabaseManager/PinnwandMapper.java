@@ -191,10 +191,40 @@ public class PinnwandMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.C0658A8A-FA2D-12E1-4BCA-21F0FDF7D437]
     // </editor-fold> 
     /**
-    public Pinnwand findByID () {
+     * 
+     * @param val
+     * @return 
+     */
+    public Pinnwand findByID (int val) {
         Connection con = DBConnection.connection();
+        try {
+            Pinnwand pinnwand = new PinnwandImpl();
+            ResultSet resultSet = con.createStatement().executeQuery(
+                    SELECT + " " +
+                    FROM + " " +
+                            TABLE_NAME_ABONNEMENT + " " +
+                    WHERE + " " +
+                            COLUMN_ID + " =\"" + val + "\"");
+            while (resultSet.next()) {
+                try {
+                    pinnwand.setID(resultSet.getInt(COLUMN_ID));
+                    pinnwand.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                    pinnwand.setNutzerID(resultSet.getInt(COLUMN_NUTZER_ID) );
+                }
+                catch(SQLException e) {
+                    Logger.getLogger(PinnwandMapper.class.getName()).log(Level.SEVERE, null, e);
+                    break;
+                } catch (RemoteException ex) {
+                    Logger.getLogger(PinnwandMapper.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return pinnwand;
+        } catch (SQLException ex) {
+            Logger.getLogger(PinnwandMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(PinnwandMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
-    */
 }
 
