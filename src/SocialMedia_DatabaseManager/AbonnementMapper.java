@@ -197,10 +197,41 @@ public class AbonnementMapper extends DBStatementFactory {
     // #[regen=yes,id=DCE.8FEA238D-153E-6EFA-188A-255C783AA53D]
     // </editor-fold> 
     /**
+     * 
+     * @param val
+     * @return 
+     */
     public Abonnement findByID (int val) {
         Connection con = DBConnection.connection();
+        try {
+            Abonnement abonnement = new AbonnementImpl();
+            ResultSet resultSet = con.createStatement().executeQuery(
+                    SELECT + " " +
+                    FROM + " " +
+                            TABLE_NAME_ABONNEMENT + " " +
+                    WHERE + " " +
+                            COLUMN_ID + " =\"" + val + "\"");
+            while (resultSet.next()) {
+                try {
+                    abonnement.setID(resultSet.getInt(COLUMN_ID));
+                    abonnement.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                    abonnement.setNutzerID(resultSet.getInt(COLUMN_NUTZER_ID) );
+                    abonnement.setPinnwandID(resultSet.getInt(COLUMN_PINNWAND_ID));
+                }
+                catch(SQLException e) {
+                    Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, e);
+                    break;
+                } catch (RemoteException ex) {
+                    Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return abonnement;
+        } catch (SQLException ex) {
+            Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(AbonnementMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
-    */
 }
 

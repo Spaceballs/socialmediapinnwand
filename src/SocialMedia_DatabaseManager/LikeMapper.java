@@ -196,10 +196,41 @@ public class LikeMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.2F208909-213E-7E00-A86E-FFABCE2016FE]
     // </editor-fold> 
     /**
+     * 
+     * @param val
+     * @return 
+     */
     public Like findByID (int val) {
         Connection con = DBConnection.connection();
+        try {
+            Like like = new LikeImpl();
+            ResultSet resultSet = con.createStatement().executeQuery(
+                    SELECT + " " +
+                    FROM + " " +
+                            TABLE_NAME_LIKE + " " +
+                    WHERE + " " +
+                            COLUMN_ID + " =\"" + val + "\"");
+            while (resultSet.next()) {
+                try {
+                    like.setID(resultSet.getInt(COLUMN_ID));
+                    like.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                    like.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                    like.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
+                }
+                catch(SQLException e) {
+                    Logger.getLogger(LikeMapper.class.getName()).log(Level.SEVERE, null, e);
+                    break;
+                } catch (RemoteException ex) {
+                    Logger.getLogger(LikeMapper.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return like;
+        } catch (SQLException ex) {
+            Logger.getLogger(LikeMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(LikeMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
-    */
 }
 

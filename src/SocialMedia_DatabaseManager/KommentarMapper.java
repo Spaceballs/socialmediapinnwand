@@ -198,10 +198,42 @@ public class KommentarMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.5A7836AD-406C-422D-ADA6-76B6D52AF31F]
     // </editor-fold> 
     /**
+     * 
+     * @param val
+     * @return 
+     */
     public Kommentar findByID (int val) {
         Connection con = DBConnection.connection();
+        try {
+            Kommentar kommentar = new KommentarImpl();
+            ResultSet resultSet = con.createStatement().executeQuery(
+                    SELECT + " " +
+                    FROM + " " +
+                            TABLE_NAME_KOMMENTAR + " " +
+                    WHERE + " " +
+                            COLUMN_ID + " =\"" + val + "\"");
+            while (resultSet.next()) {
+                try {
+                    kommentar.setID(resultSet.getInt(COLUMN_ID));
+                    kommentar.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                    kommentar.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                    kommentar.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
+                    kommentar.setText(resultSet.getString(COLUMN_TEXT));
+                }
+                catch(SQLException e) {
+                    Logger.getLogger(KommentarMapper.class.getName()).log(Level.SEVERE, null, e);
+                    break;
+                } catch (RemoteException ex) {
+                    Logger.getLogger(KommentarMapper.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return kommentar;
+        } catch (SQLException ex) {
+            Logger.getLogger(KommentarMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(KommentarMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
-    */
 }
 
