@@ -28,6 +28,7 @@ public class MeinePinnwand extends JPanel {
     JLabel newsfeedOfNutzer = new JLabel("",JLabel.LEFT);
     JLabel abonnement = new JLabel("",JLabel.LEFT);
     JButton button1 = new JButton("Button 1");
+    private JButton beitragVerfassen = new JButton("Neuer Beitrag");
 
     /**
      * Constructor
