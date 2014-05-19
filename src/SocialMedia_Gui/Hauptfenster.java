@@ -8,7 +8,6 @@ import SocialMedia_Report.HTMLWriter;
 import SocialMedia_Report.Report;
 import SocialMedia_Report.ReportImpl;
 import SocialMedia_ReportGenerator.ReportGenerator;
-import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +15,6 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 
 /**
  * Creates the main frame of the client

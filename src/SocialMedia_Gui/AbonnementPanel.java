@@ -5,10 +5,8 @@ import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,15 +47,15 @@ class AbonnementPanel extends JPanel {
         this.server = server;
         this.clientNutzer = clientNutzer;
         this.abonnement = abonnement;
-        initalize();
+        initialize();
     }
 
     /**
      * 
      */
-    private void initalize() {
+    private void initialize() {
         initializeData();
-        initalizeContent();
+        initializeContent();
     }
 
     /**
@@ -70,8 +68,9 @@ class AbonnementPanel extends JPanel {
     /**
      * 
      */
-    private void initalizeContent() {
+    private void initializeContent() {
 
+        this.setSize(30,70);
         this.setBackground(Color.red);
         this.setLayout(new GridBagLayout());
         GridBagConstraints gridBagLayout = new GridBagConstraints();
@@ -93,18 +92,20 @@ class AbonnementPanel extends JPanel {
         gridBagLayout.gridy = 0;
         goPinnwandButton = new JButton("Pinnwand");
         this.add(goPinnwandButton, gridBagLayout);
+        
 //        try {
 //            this.add(new JLabel( server.getOwnerOfPinnwandOfAbonnement(abonnement).getUsername(), JLabel.RIGHT), gridBagLayout);
 //        } catch (RemoteException ex) {
 //            Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+        
         goDeleteButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
 
                     
                     if (JOptionPane.showConfirmDialog(SocialMedia_Gui.Hauptfenster.hauptfenster(null, null),
-                            "Den Account wirklich löschen?", "Account löschen",
+                            "Das Abonnement wirklich löschen?", "Abonnement löschen",
                             JOptionPane.YES_NO_OPTION) == 0) {
                         try {
                             server.deleteAbonnement(abonnement);
@@ -115,12 +116,14 @@ class AbonnementPanel extends JPanel {
                     }
             }
         });
+        
         goPinnwandButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-        });this.setSize(30, 70);
+        });
+        
     }
 
 

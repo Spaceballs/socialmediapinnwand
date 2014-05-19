@@ -51,19 +51,19 @@ public class AbonnementInfo extends JPanel{
         titleAbonnements.setFont(new Font("Arial", Font.BOLD, 28));
         this.add(titleAbonnements,BorderLayout.PAGE_START);
         
-        this.add(abonnementPanel,BorderLayout.CENTER);
+        this.add(abonnementPanel);
         
-        try {
-            Vector<Abonnement> abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
-            for (int i = 0; i < abonnements.size(); i++) {
-                Abonnement abonnement = abonnements.elementAt(i);
-                Nutzer nutzer = server.getOwnerOfPinnwandOfAbonnement(abonnement);
-                System.out.println(nutzer.getUsername());
-                
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            Vector<Abonnement> abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
+//            for (int i = 0; i < abonnements.size(); i++) {
+//                Abonnement abonnement = abonnements.elementAt(i);
+//                Nutzer nutzer = server.getOwnerOfPinnwandOfAbonnement(abonnement);
+//                System.out.println(nutzer.getUsername());
+//                
+//            }
+//        } catch (RemoteException ex) {
+//            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 }
