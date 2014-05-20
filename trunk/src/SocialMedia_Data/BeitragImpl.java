@@ -36,8 +36,9 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // #[regen=yes,regenBody=yes,id=DCE.793C9FA5-83AA-F5C8-A0D7-5DF4C6DFEBD0]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the Pinnwand ID attribute.
+     * @return  Returns the ID for the object.
+     * @throws java.rmi.RemoteException
      */
     public int getPinnwandID () 
             throws RemoteException{
@@ -48,8 +49,9 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // #[regen=yes,regenBody=yes,id=DCE.675365E9-6660-CDB7-8379-12169A6F449E]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the Pinnwand ID attribute.
+     * @param val - The Pinnwand ID value which is to be set.
+     * @throws java.rmi.RemoteException 
      */
     public void setPinnwandID (int val) 
             throws RemoteException{
