@@ -183,14 +183,14 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     public Vector<Abonnement> getAllNutzerAbonnement (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
         Vector<Abonnement> abonnements = verwaltung.getAllAbonnement();
-        Vector<Abonnement> nutzerAbonnements = null;
-
+        Vector<Abonnement> nutzerAbonnements = new Vector<Abonnement>();
+        System.out.println(abonnements);
         for (int i = 0; i < abonnements.size(); i++) {
             Abonnement abonnement = abonnements.elementAt(i);
-            if(abonnement.getNutzerID() == this.getID())
+            if(abonnement.getNutzerID() == getID())
                 nutzerAbonnements.addElement(abonnement);
+            System.out.println(abonnement.getNutzerID() == getID());
         }
-        System.out.println(nutzerAbonnements);
         return nutzerAbonnements;
     }
 }

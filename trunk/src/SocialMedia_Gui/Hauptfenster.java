@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class Hauptfenster extends JFrame {
     
     private SocialMediaLogic server;
-    private Nutzer clientNutzer = null;
+    private Nutzer clientNutzer;
     private JMenuBar menueLeiste = new JMenuBar();
     private JMenu meinAccount = new JMenu("Mein Account");
     private JMenu menue = new JMenu("Menü");
@@ -48,6 +48,7 @@ public class Hauptfenster extends JFrame {
      * @param clientNutzer - the logged-in Nutzer
      */
     public Hauptfenster(SocialMediaLogic server, Nutzer clientNutzer){
+        
         this.clientNutzer = clientNutzer;
         this.server = server;
         initialize();

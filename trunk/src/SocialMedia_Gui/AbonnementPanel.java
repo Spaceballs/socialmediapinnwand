@@ -7,13 +7,16 @@ import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,14 +30,14 @@ import javax.swing.JPanel;
  */
 class AbonnementPanel extends JPanel {
     
-    private JButton goDeleteButton;
-    private JButton goPinnwandButton;    
-    private SocialMediaLogic server;
-    private Nutzer clientNutzer;
-    private Abonnement abonnement;
+    private final JButton goDeleteButton = new JButton();
+    private final JButton goPinnwandButton = new JButton();    
+    private final SocialMediaLogic server;
+    private final Nutzer clientNutzer;
+    private final Abonnement abonnement;
+    private String username;
     private JLabel abonnementLabel;
-    private ImageIcon goDelete = new ImageIcon("zahnrad.jpg");
-    private ImageIcon goPinnwand = new ImageIcon("pfeil.jpg");
+    private Nutzer user;
 
     /**
      * 
@@ -46,6 +49,7 @@ class AbonnementPanel extends JPanel {
         super();
         this.server = server;
         this.clientNutzer = clientNutzer;
+        System.out.println(abonnement);
         this.abonnement = abonnement;
         initialize();
     }
@@ -56,75 +60,81 @@ class AbonnementPanel extends JPanel {
     private void initialize() {
         initializeData();
         initializeContent();
+        initializeListeners();
     }
 
     /**
      * 
      */
     private void initializeData() {
-        
+        try {
+            System.out.println(abonnement == null);
+            System.out.println(abonnement);
+            
+            user =  server.getOwnerOfPinnwandOfAbonnement(abonnement);
+            username = user.getUsername();
+            //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
+            goPinnwandButton.setIcon(new ImageIcon("delete"/*goPinnwandButtonImage*/));
+            //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
+            goPinnwandButton.setIcon(new ImageIcon("go to User"/*goDeleteButtonImage*/));
+        } catch (IOException ex) {
+            Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
+    
     /**
      * 
      */
     private void initializeContent() {
-
-        this.setSize(30,70);
-        this.setBackground(Color.red);
         this.setLayout(new GridBagLayout());
         GridBagConstraints gridBagLayout = new GridBagConstraints();
         gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
         gridBagLayout.anchor = GridBagConstraints.LINE_START;
-        gridBagLayout.insets = new Insets(5, 5, 5, 5);
+        gridBagLayout.insets = new Insets(2, 2, 2, 2);
 
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 0;
-//        gridBagLayout.weightx = 2;
-        this.add(new JLabel("Nutzer",JLabel.LEFT), gridBagLayout);
+        this.add(new JLabel( username, JLabel.RIGHT), gridBagLayout);
         
         gridBagLayout.gridx = 2;
         gridBagLayout.gridy = 0;
-        goDeleteButton = new JButton("Delete");
+        //goDeleteButton.setBorder(null);
+        //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
         this.add(goDeleteButton, gridBagLayout);
 
         gridBagLayout.gridx = 3;
         gridBagLayout.gridy = 0;
-        goPinnwandButton = new JButton("Pinnwand");
+        //goDeleteButton.setBorder(null);
+        //goPinnwandButton.setMargin(new Insets(0, 0, 0, 0));
         this.add(goPinnwandButton, gridBagLayout);
         
-//        try {
-//            this.add(new JLabel( server.getOwnerOfPinnwandOfAbonnement(abonnement).getUsername(), JLabel.RIGHT), gridBagLayout);
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        this.setSize(70, 150);
+    }
+    
+    /**
+     * 
+     */
+    private void initializeListeners() {
         
         goDeleteButton.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
-
-                    
-                    if (JOptionPane.showConfirmDialog(SocialMedia_Gui.Hauptfenster.hauptfenster(null, null),
-                            "Das Abonnement wirklich löschen?", "Abonnement löschen",
-                            JOptionPane.YES_NO_OPTION) == 0) {
-                        try {
-                            server.deleteAbonnement(abonnement);
-                            SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(null);
-                        } catch (RemoteException ex) {
-                            Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                if (JOptionPane.showConfirmDialog(SocialMedia_Gui.Hauptfenster.hauptfenster(null, null),
+                        "Das Abonnement wirklich löschen?", "Account löschen",
+                        JOptionPane.YES_NO_OPTION) == 0) {
+                    try {
+                        server.deleteAbonnement(abonnement);
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(null);
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }
             }
         });
         
         goPinnwandButton.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new MeinePinnwand(server, clientNutzer));
             }
         });
-        
     }
-
-
 }

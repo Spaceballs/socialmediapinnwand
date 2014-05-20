@@ -206,23 +206,24 @@ public class LikeMapper extends DBStatementFactory{
             Like like = new LikeImpl();
             ResultSet resultSet = con.createStatement().executeQuery(
                     SELECT + " " +
+                        COLUMN_ID + ", " + 
+                        COLUMN_CREATION_DATE + ", " + 
+                        COLUMN_NUTZER_ID + ", " + 
+                        COLUMN_BEITRAG_ID + " " +
                     FROM + " " +
                             TABLE_NAME_LIKE + " " +
                     WHERE + " " +
                             COLUMN_ID + " =\"" + val + "\"");
-            while (resultSet.next()) {
-                try {
-                    like.setID(resultSet.getInt(COLUMN_ID));
-                    like.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
-                    like.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
-                    like.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
-                }
-                catch(SQLException e) {
-                    Logger.getLogger(LikeMapper.class.getName()).log(Level.SEVERE, null, e);
-                    break;
-                } catch (RemoteException ex) {
-                    Logger.getLogger(LikeMapper.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            resultSet.next();
+            try {
+                like.setID(resultSet.getInt(COLUMN_ID));
+                like.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                like.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                like.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
+            } catch(SQLException e) {
+                Logger.getLogger(LikeMapper.class.getName()).log(Level.SEVERE, null, e);
+            } catch (RemoteException ex) {
+                Logger.getLogger(LikeMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             return like;
         } catch (SQLException ex) {

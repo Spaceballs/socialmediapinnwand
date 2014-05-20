@@ -208,24 +208,26 @@ public class KommentarMapper extends DBStatementFactory{
             Kommentar kommentar = new KommentarImpl();
             ResultSet resultSet = con.createStatement().executeQuery(
                     SELECT + " " +
+                        COLUMN_ID + ", " + 
+                        COLUMN_CREATION_DATE + ", " + 
+                        COLUMN_NUTZER_ID + ", " + 
+                        COLUMN_BEITRAG_ID + ", " + 
+                        COLUMN_TEXT + " " +
                     FROM + " " +
                             TABLE_NAME_KOMMENTAR + " " +
                     WHERE + " " +
                             COLUMN_ID + " =\"" + val + "\"");
-            while (resultSet.next()) {
-                try {
-                    kommentar.setID(resultSet.getInt(COLUMN_ID));
-                    kommentar.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
-                    kommentar.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
-                    kommentar.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
-                    kommentar.setText(resultSet.getString(COLUMN_TEXT));
-                }
-                catch(SQLException e) {
-                    Logger.getLogger(KommentarMapper.class.getName()).log(Level.SEVERE, null, e);
-                    break;
-                } catch (RemoteException ex) {
-                    Logger.getLogger(KommentarMapper.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            resultSet.next();
+            try {
+                kommentar.setID(resultSet.getInt(COLUMN_ID));
+                kommentar.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                kommentar.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                kommentar.setBeitragID(resultSet.getInt(COLUMN_BEITRAG_ID));
+                kommentar.setText(resultSet.getString(COLUMN_TEXT));
+            } catch(SQLException e) {
+                Logger.getLogger(KommentarMapper.class.getName()).log(Level.SEVERE, null, e);
+            } catch (RemoteException ex) {
+                Logger.getLogger(KommentarMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             return kommentar;
         } catch (SQLException ex) {

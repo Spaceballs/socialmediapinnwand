@@ -210,24 +210,26 @@ public class BeitragMapper extends DBStatementFactory {
             Beitrag beitrag = new BeitragImpl();
             ResultSet resultSet = con.createStatement().executeQuery(
                     SELECT + " " +
+                        COLUMN_ID + ", " + 
+                        COLUMN_CREATION_DATE + ", " + 
+                        COLUMN_NUTZER_ID + ", " + 
+                        COLUMN_PINNWAND_ID + ", " + 
+                        COLUMN_TEXT + " " +
                     FROM + " " +
                             TABLE_NAME_BEITRAG + " " +
                     WHERE + " " +
                             COLUMN_ID + " =\"" + val + "\"");
-            while (resultSet.next()) {
-                try {
-                    beitrag.setID(resultSet.getInt(COLUMN_ID));
-                    beitrag.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
-                    beitrag.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
-                    beitrag.setPinnwandID(resultSet.getInt(COLUMN_PINNWAND_ID));
-                    beitrag.setText(resultSet.getString(COLUMN_TEXT));
-                }
-                catch(SQLException e) {
-                    Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, e);
-                    break;
-                } catch (RemoteException ex) {
-                    Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            resultSet.next();
+            try {
+                beitrag.setID(resultSet.getInt(COLUMN_ID));
+                beitrag.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                beitrag.setNutzerID( resultSet.getInt(COLUMN_NUTZER_ID) );
+                beitrag.setPinnwandID(resultSet.getInt(COLUMN_PINNWAND_ID));
+                beitrag.setText(resultSet.getString(COLUMN_TEXT));
+            } catch(SQLException e) {
+                Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, e);
+            } catch (RemoteException ex) {
+                Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             return beitrag;
         } catch (SQLException ex) {

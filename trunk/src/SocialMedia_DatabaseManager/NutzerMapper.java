@@ -215,25 +215,29 @@ public class NutzerMapper extends DBStatementFactory{
             Nutzer nutzer = new NutzerImpl();
             ResultSet resultSet = con.createStatement().executeQuery(
                     SELECT + " " +
+                            COLUMN_ID + ", " + 
+                            COLUMN_CREATION_DATE + ", " + 
+                            COLUMN_NICKNAME + ", " + 
+                            COLUMN_VORNAME + ", " + 
+                            COLUMN_NACHNAME + ", " + 
+                            COLUMN_PASSWORD + " " +
                     FROM + " " +
                             TABLE_NAME_NUTZER + " " +
                     WHERE + " " +
                             COLUMN_ID + " =\"" + val + "\"");
-            while (resultSet.next()) {
-                try {
-                    nutzer.setID(resultSet.getInt(COLUMN_ID));
-                    nutzer.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
-                    nutzer.setUsername(resultSet.getString(COLUMN_NICKNAME) );
-                    nutzer.setSurname(resultSet.getString(COLUMN_VORNAME));
-                    nutzer.setName(resultSet.getString(COLUMN_NACHNAME));
-                    nutzer.setPassword(resultSet.getString(COLUMN_PASSWORD));
-                }
-                catch(SQLException e) {
-                    Logger.getLogger(NutzerMapper.class.getName()).log(Level.SEVERE, null, e);
-                    break;
-                } catch (RemoteException ex) {
-                    Logger.getLogger(NutzerMapper.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            resultSet.next();
+            try {
+                nutzer.setID(resultSet.getInt(COLUMN_ID));
+                nutzer.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                nutzer.setUsername(resultSet.getString(COLUMN_NICKNAME));
+                nutzer.setSurname(resultSet.getString(COLUMN_VORNAME));
+                nutzer.setName(resultSet.getString(COLUMN_NACHNAME));
+                nutzer.setPassword(resultSet.getString(COLUMN_PASSWORD));
+            }
+            catch(SQLException e) {
+                Logger.getLogger(NutzerMapper.class.getName()).log(Level.SEVERE, null, e);
+            } catch (RemoteException ex) {
+                Logger.getLogger(NutzerMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             return nutzer;
         } catch (SQLException ex) {
