@@ -1,6 +1,7 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -9,8 +10,11 @@ import javax.swing.JFrame;
  * @author Max
  */
 public class HauptfensterReport extends JFrame {
+    
+    private SocialMediaLogic server = null;
 
-    public HauptfensterReport() {
+    public HauptfensterReport(SocialMediaLogic server) {
+        this.server = server;
         initialize();
     }
 

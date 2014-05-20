@@ -2,6 +2,7 @@
 package SocialMedia_Gui;
 
 import SocialMedia_Client.SocialMediaClient;
+import SocialMedia_Client.SocialMediaReportClient;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -19,7 +20,8 @@ import javax.swing.JTextField;
  */
 public class DialogServerData extends JFrame implements ActionListener{
     
-    private SocialMediaClient client;
+    private SocialMediaClient client = null;
+    private SocialMediaReportClient rClient = null;
     
     JTextField adresse = new JTextField();;
     JTextField serverPort = new JTextField();
@@ -40,7 +42,21 @@ public class DialogServerData extends JFrame implements ActionListener{
         this.clientPort.setText(clientPort);
         initialize();
     }
-
+    
+    /**
+     * Constructor
+     * @param client
+     * @param adresse
+     * @param serverPort
+     * @param clientPort
+     */
+    public DialogServerData(SocialMediaReportClient client, String adresse, String serverPort, String clientPort) {
+        this.rClient = client;
+        this.adresse.setText(adresse);
+        this.serverPort.setText(serverPort);
+        this.clientPort.setText(clientPort);
+        initialize();
+    }
     /**
      * Initializes the Dialog and the ActionListener of the Button
      */
@@ -99,10 +115,18 @@ public class DialogServerData extends JFrame implements ActionListener{
     private void initializeListeners() {
         //ActionListener Button Uebernehmen
         uebernehmen.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               client.executeClient(adresse.getText(), serverPort.getText(), clientPort.getText());
-               dispose();
-           }
+            public void actionPerformed(ActionEvent e) {
+
+                if (client != null){
+                    client.executeClient(adresse.getText(), serverPort.getText(), clientPort.getText());
+                    dispose();
+                }
+                if(rClient != null){
+                    rClient.executeClient(adresse.getText(), serverPort.getText(), clientPort.getText());
+                    dispose();
+                }
+
+            }
         });
     }
 
