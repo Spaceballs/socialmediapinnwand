@@ -75,7 +75,6 @@ public class Hauptfenster extends JFrame {
         initializeListeners();
         initializePane();
         initializeOptions();
-//        sometests();
     }
 
     /**
@@ -157,17 +156,7 @@ public class Hauptfenster extends JFrame {
         this.setLocationRelativeTo(null); // frame is at the center of the screen
     }    
 
-    private void sometests() {
-        ReportGenerator reportGenerator;
-        try {
-            reportGenerator = server.getReportGenerator();
-            Report report = (Report) reportGenerator.createContributionOfNutzerReport(clientNutzer, 1, clientNutzer.getCreationDate(), new Date());
-            HTMLWriter writer = new HTMLWriter(report);
-        } catch (RemoteException ex) {
-            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+
     
     /**
      * All required listeners

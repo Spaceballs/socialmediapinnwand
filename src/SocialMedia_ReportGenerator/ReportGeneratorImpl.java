@@ -1,14 +1,20 @@
 package SocialMedia_ReportGenerator;
 
-import SocialMedia_Report.ContributionOfNutzerImpl;
-import SocialMedia_Report.PopularityOfBeitragImpl;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic; 
+import SocialMedia_Report.Column;
+import SocialMedia_Report.ColumnImpl;
+import SocialMedia_Report.CompositeParagraphImpl;
 import SocialMedia_Report.ContributionOfNutzer;
+import SocialMedia_Report.ContributionOfNutzerImpl;
 import SocialMedia_Report.PopularityOfBeitrag;
+import SocialMedia_Report.PopularityOfBeitragImpl;
+import SocialMedia_Report.Row;
+import SocialMedia_Report.RowImpl;
 import SocialMedia_Report.SimpleParagraphImpl;
 import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,7 +75,16 @@ public class ReportGeneratorImpl
             
             report.setCreationDate(new Date());
             report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
-            
+            report.setBodyParagraph(null);
+            Column column = (Column)new CompositeParagraphImpl();
+            column.addSubParagraph(new SimpleParagraphImpl("TEST"));
+            column.addSubParagraph(new SimpleParagraphImpl("TEST"));
+            Row row = new RowImpl();
+            row.addColumn(column);
+            Vector<Row> rows = new Vector<Row>();
+            rows.add(row);
+            report.setRows(rows);
+            report.setImprintParagraph(null);
         } catch (RemoteException ex) {
             Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
