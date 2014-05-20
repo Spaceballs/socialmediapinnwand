@@ -6,12 +6,19 @@ import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.rmi.RemoteException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneLayout;
+import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -21,11 +28,11 @@ import javax.swing.border.EmptyBorder;
  */
 public class AbonnementInfo extends JPanel{
 
-    private SocialMediaLogic server;
+    private final SocialMediaLogic server;
     private Nutzer clientNutzer = null;
-    private JLabel titleAbonnements = new JLabel("Abonnements",JLabel.LEFT);
-    private Vector<Nutzer> abonnementNutzer = new Vector<Nutzer>();
-    private AbonnementPanel abonnementPanel = new AbonnementPanel(server, clientNutzer, null);
+    private JLabel titleAbonnements;
+    private Vector<Abonnement> abonnements;
+
 
     /**
      * Constructor
@@ -35,6 +42,7 @@ public class AbonnementInfo extends JPanel{
     public AbonnementInfo(SocialMediaLogic server, Nutzer clientNutzer){
         this.clientNutzer = clientNutzer;
         this.server = server;
+        initializeData();
         initialize();
     }
 
@@ -45,25 +53,41 @@ public class AbonnementInfo extends JPanel{
      */
     private void initialize() {
         this.setLayout(new BorderLayout());
-        EmptyBorder border = new EmptyBorder(20,20,20,20);
-        this.setBorder(border);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBorder(null); 
+        scrollPane.getInsets().set(0,0,0,0);
+        scrollPane.setViewportBorder(null);
+        scrollPane.getViewport().setBorder(null);
+        
+        JPanel scrollPanePane = new JPanel();
+        scrollPanePane.setLayout(new GridBagLayout());
 
+        
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridx = 0;
+        c.gridy = 0;
+        
+        titleAbonnements = new JLabel("Abonnements",JLabel.LEFT);
         titleAbonnements.setFont(new Font("Arial", Font.BOLD, 28));
-        this.add(titleAbonnements,BorderLayout.PAGE_START);
         
-        this.add(abonnementPanel);
-        
-//        try {
-//            Vector<Abonnement> abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
-//            for (int i = 0; i < abonnements.size(); i++) {
-//                Abonnement abonnement = abonnements.elementAt(i);
-//                Nutzer nutzer = server.getOwnerOfPinnwandOfAbonnement(abonnement);
-//                System.out.println(nutzer.getUsername());
-//                
-//            }
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        for (int i = 0; i < abonnements.size(); i++) {
+            c.gridy = i;
+            scrollPanePane.add(new AbonnementPanel(server, clientNutzer, abonnements.elementAt(i)), c);            
+        }
+        scrollPane.getViewport().setView(scrollPanePane);
+        this.add(titleAbonnements, BorderLayout.NORTH);
+        this.add(scrollPane, BorderLayout.CENTER);
+    }
 
+    private void initializeData() {
+        try {
+            abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
+        } catch (RemoteException ex) {
+            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

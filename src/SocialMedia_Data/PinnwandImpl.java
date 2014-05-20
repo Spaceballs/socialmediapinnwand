@@ -64,6 +64,10 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
 
         for (int i = 0; i < nutzers.size(); i++) {
             Nutzer nutzer = nutzers.elementAt(i);
+            System.out.println("nutzer.getID() = " + nutzer.getID());
+            System.out.println("nutzerID = " + nutzerID);
+            System.out.println("----");
+            
             if(nutzer.getID() == nutzerID)
                 return nutzer;
         }

@@ -201,22 +201,23 @@ public class PinnwandMapper extends DBStatementFactory{
             Pinnwand pinnwand = new PinnwandImpl();
             ResultSet resultSet = con.createStatement().executeQuery(
                     SELECT + " " +
+                        COLUMN_ID + ", " + 
+                        COLUMN_CREATION_DATE + ", " + 
+                        COLUMN_NUTZER_ID + " " + 
                     FROM + " " +
                             TABLE_NAME_ABONNEMENT + " " +
                     WHERE + " " +
                             COLUMN_ID + " =\"" + val + "\"");
-            while (resultSet.next()) {
-                try {
-                    pinnwand.setID(resultSet.getInt(COLUMN_ID));
-                    pinnwand.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
-                    pinnwand.setNutzerID(resultSet.getInt(COLUMN_NUTZER_ID) );
-                }
-                catch(SQLException e) {
-                    Logger.getLogger(PinnwandMapper.class.getName()).log(Level.SEVERE, null, e);
-                    break;
-                } catch (RemoteException ex) {
-                    Logger.getLogger(PinnwandMapper.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            resultSet.next();
+            try {
+                pinnwand.setID(resultSet.getInt(COLUMN_ID));
+                pinnwand.setCreationDate(resultSet.getTimestamp(COLUMN_CREATION_DATE));
+                pinnwand.setNutzerID(resultSet.getInt(COLUMN_NUTZER_ID) );
+            }
+            catch(SQLException e) {
+                Logger.getLogger(PinnwandMapper.class.getName()).log(Level.SEVERE, null, e);
+            } catch (RemoteException ex) {
+                Logger.getLogger(PinnwandMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             return pinnwand;
         } catch (SQLException ex) {

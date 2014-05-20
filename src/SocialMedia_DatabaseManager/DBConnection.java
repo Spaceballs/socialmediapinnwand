@@ -23,30 +23,26 @@ public class DBConnection {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.82C17374-FFED-AA2D-BAAE-8FC453E9BEF6]
     // </editor-fold> 
-	public static Connection connection() {
-		if ( con == null ) {
-			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				con = DriverManager.getConnection(url);
-			}
-			catch (SQLException e) {
-				con = null;
-				e.printStackTrace();
-			}
-			catch (InstantiationException e) {
-				con = null;
-				e.printStackTrace();
-			}
-			catch (IllegalAccessException e) {
-				con = null;
-				e.printStackTrace();
-			}
-			catch (ClassNotFoundException e) {
-				con = null;
-				e.printStackTrace();
-			}
-		}
-		return con;
-	}
+    public static Connection connection() {
+        if ( con == null ) {
+            try {
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    con = DriverManager.getConnection(url);
+            } catch (SQLException e) {
+                    con = null;
+                    e.printStackTrace();
+            } catch (InstantiationException e) {
+                    con = null;
+                    e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                    con = null;
+                    e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                    con = null;
+                    e.printStackTrace();
+            }
+        }
+        return con;
+    }
 }
 
