@@ -25,7 +25,8 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // #[regen=yes,id=DCE.64B1D205-0A3A-C365-8CF0-423F6D3F24FA]
     // </editor-fold> 
     /**
-     * 
+     * Konstruktor von Beitrag.
+     * @throws java.rmi.RemoteException
      */
     public BeitragImpl () 
             throws RemoteException{
@@ -63,8 +64,9 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // </editor-fold> 
     /**
      * 
-     * @param verwaltung
-     * @return 
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @throws java.rmi.RemoteException
+     * @return - Returns the Kommentare of the Beitrag
      */
     public Vector<Kommentar> getAllBeitragKommentar (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
@@ -84,8 +86,9 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // </editor-fold> 
     /**
      * 
-     * @param verwaltung
-     * @return 
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @throws java.rmi.RemoteException
+     * @return - Returns the number of Likes of a Beitrag.
      */
     public Vector<Like> getAllBeitragLikes (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
@@ -104,9 +107,10 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // #[regen=yes,id=DCE.A58E4ADA-B07B-F1DF-555A-F2302C150E60]
     // </editor-fold> 
     /**
-     * 
-     * @param verwaltung
-     * @return 
+     * Collects all Nutzer and compares them with the current NutzerID
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @throws java.rmi.RemoteException
+     * @return - Returns the Nutzer object.
      */
     public Nutzer getCreatorOfBeitrag (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
