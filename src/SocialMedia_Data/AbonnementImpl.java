@@ -39,8 +39,9 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,regenBody=yes,id=DCE.34CD4721-4808-AC12-AB06-15C640C1C70A]
     // </editor-fold> 
     /**
-     * Getter for the nutzerID.
-     * @return Integer - Returns the id of the Nutzer.
+     * Getter for the NutzerID attribute.
+     * @throws java.rmi.RemoteException
+     * @return Integer - Returns the int ID of the object.
      */
     public int getNutzerID () 
             throws RemoteException{
@@ -51,8 +52,9 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,regenBody=yes,id=DCE.8D1AACC7-2B0D-F458-8544-FC736F4D62B6]
     // </editor-fold> 
     /**
-     * Setter for the nutzerID.
-     * @param val - Needs a integer id to set.
+     * Setter for the NutzerID attribute.
+     * @throws java.rmi.RemoteException
+     * @param val - Needs an int ID to be set.
      */
     public void setNutzerID (int val) 
             throws RemoteException{
@@ -63,8 +65,9 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,regenBody=yes,id=DCE.DF61E533-860E-7335-9C70-C524D9188253]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the PinnwandID attribute.
+     * @throws java.rmi.RemoteException
+     * @return - Returns the int ID of the object.
      */
     public int getPinnwandID () 
             throws RemoteException{
@@ -75,8 +78,9 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,regenBody=yes,id=DCE.7999840B-C95C-CF02-2B24-1C5DC8ACE910]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the PinnwandID attribute.
+     * @throws java.rmi.RemoteException
+     * @param val - Needs an int ID to be set.
      */
     public void setPinnwandID (int val) 
             throws RemoteException{
@@ -87,9 +91,10 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,id=DCE.3F4ABB83-B7D5-73F1-C799-438A3E6484D4]
     // </editor-fold> 
     /**
-     * 
-     * @param verwaltung
-     * @return 
+     * Collects all Pinnwand Abonnements and compares them with the current PinnwandID
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @throws java.rmi.RemoteException
+     * @return - Returns the Pinnwand object.
      */
     public Pinnwand getAbonnementPinnwand (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
