@@ -2,7 +2,9 @@ package SocialMedia_Data;
 // #[regen=yes,id=DCE.10E903FF-6500-1EBC-DEF5-09B7199BA578]
 // </editor-fold> 
 
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
+import java.util.Vector;
 
 public class LikeImpl extends DataReferenceImpl implements Like {
 
@@ -78,6 +80,21 @@ public class LikeImpl extends DataReferenceImpl implements Like {
             throws RemoteException{
         this.nutzerID = val;
     }
+    
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.A095AC40-10D1-77A9-0A67-2D41CC05B201]
+    // </editor-fold> 
+    public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
+        Vector<Nutzer> nutzers = verwaltung.getAllNutzer();
 
+        for (int i = 0; i < nutzers.size(); i++) {
+            Nutzer nutzer = nutzers.elementAt(i);
+            
+            if(nutzer.getID() == nutzerID)
+                return nutzer;
+        }
+        return null;
+    }
 }
 

@@ -2,6 +2,7 @@ package SocialMedia_Data;
 // #[regen=yes,id=DCE.EDC6A4F4-9793-6127-38E0-93F94550207C]
 // </editor-fold> 
 
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
 
 /**
@@ -52,6 +53,9 @@ public interface Like extends DataReference {
      * @throws java.rmi.RemoteException 
      */
     public void setNutzerID (int val)
+            throws RemoteException;
+    
+    public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
             throws RemoteException;
 
 }

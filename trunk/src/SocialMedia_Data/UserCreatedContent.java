@@ -6,6 +6,7 @@
 
 package SocialMedia_Data;
 
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
 
 /**
@@ -56,6 +57,9 @@ public interface UserCreatedContent extends DataReference{
      * @throws java.rmi.RemoteException 
      */
     void setText(String val)
+            throws RemoteException;
+    
+    public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
             throws RemoteException;
     
 }

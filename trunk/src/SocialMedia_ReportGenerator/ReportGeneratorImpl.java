@@ -1,5 +1,7 @@
 package SocialMedia_ReportGenerator;
 
+import SocialMedia_Data.Beitrag;
+import SocialMedia_Data.Kommentar;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic; 
 import SocialMedia_Report.Column;
@@ -17,6 +19,7 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sun.rmi.server.Util;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.E7C2C07C-F969-9A30-C188-C220A1AD2C41]
@@ -76,7 +79,7 @@ public class ReportGeneratorImpl
             report.setCreationDate(new Date());
             report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
             report.setBodyParagraph(null);
-            Column column = (Column)new CompositeParagraphImpl();
+            Column column = new ColumnImpl();
             column.addSubParagraph(new SimpleParagraphImpl("TEST"));
             column.addSubParagraph(new SimpleParagraphImpl("TEST"));
             Row row = new RowImpl();
@@ -107,6 +110,23 @@ public class ReportGeneratorImpl
     public PopularityOfBeitrag createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
         PopularityOfBeitrag report = new PopularityOfBeitragImpl();
         return report;
+    }
+    
+    
+    private Column writeBeitrag(Beitrag b) throws RemoteException{
+        Column column = new ColumnImpl();
+        column.addSubParagraph(new SimpleParagraphImpl("User: " + socialMediaLogic.));
+        column.addSubParagraph(new SimpleParagraphImpl(b.getCreationDate().toString()));
+        column.addSubParagraph(new SimpleParagraphImpl(b.getText()));
+        column.addSubParagraph(new SimpleParagraphImpl("Likes: " + socialMediaLogic.getAllLikeOfBeitrag(b).size()));
+        return column;
+    }
+    private Column writeKommentar(Kommentar k) throws RemoteException{
+        Column column = new ColumnImpl();
+        
+        column.addSubParagraph(new SimpleParagraphImpl(k.getCreationDate().toString()));
+        column.addSubParagraph(new SimpleParagraphImpl(k.getText()));
+        return null;
     }
 }
 
