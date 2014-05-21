@@ -2,7 +2,9 @@ package SocialMedia_Data;
 
 // #[regen=yes,id=DCE.8AE5A633-3062-4D82-1BEC-55C100571D26]
 
+import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
+import java.util.Vector;
 
 // </editor-fold> 
 
@@ -80,6 +82,28 @@ public class UserCreatedContentImpl extends DataReferenceImpl implements UserCre
     public void setText (String val) 
             throws RemoteException{
         this.text = val;
+    }
+    
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.A095AC40-10D1-77A9-0A67-2D41CC05B201]
+    // </editor-fold> 
+    /**
+     * Collects all Nutzer and compares them with the current NutzerID
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @throws java.rmi.RemoteException
+     * @return - Returns the Nutzer object.
+     */
+    public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
+            throws RemoteException{
+        Vector<Nutzer> nutzers = verwaltung.getAllNutzer();
+
+        for (int i = 0; i < nutzers.size(); i++) {
+            Nutzer nutzer = nutzers.elementAt(i);
+            
+            if(nutzer.getID() == nutzerID)
+                return nutzer;
+        }
+        return null;
     }
 }
 

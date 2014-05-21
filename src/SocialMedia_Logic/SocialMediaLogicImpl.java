@@ -698,8 +698,37 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         }
         return null;
     }
+    
+    /**
+     * 
+     * @return
+     * @throws java.rmi.RemoteException 
+     */
     public ReportGenerator getReportGenerator()throws java.rmi.RemoteException{
         return this.reportGenerator;
+    }
+    
+    /**
+     * 
+     */
+    public Nutzer getNutzerOf (Object o) throws RemoteException{
+        if (o instanceof BeitragImpl){
+            Beitrag b = (Beitrag) o;
+            return b.getOwner(this);
+        }
+        if (o instanceof KommentarImpl){
+            Kommentar k = (Kommentar) o;
+            return k.getOwner(this);
+        }
+        if (o instanceof LikeImpl){
+            Like l = (Like) o;
+            return l.getOwner(this);
+        }
+        if (o instanceof PinnwandImpl) {
+            Pinnwand p = (Pinnwand) o;
+            return p.getOwner(this);
+        }
+        return null;
     }
 }
 

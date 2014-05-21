@@ -49,14 +49,5 @@ public interface Beitrag extends UserCreatedContent {
      */
     public Vector<Like> getAllBeitragLikes (SocialMediaLogicImpl verwaltung)
             throws RemoteException;
-
-    /**
-     * 
-     * @param verwaltung
-     * @return 
-     */
-    public Nutzer getCreatorOfBeitrag (SocialMediaLogicImpl verwaltung)
-            throws RemoteException;
-
 }
 

@@ -102,26 +102,5 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
         }
         return beitragLikes;
     }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.A58E4ADA-B07B-F1DF-555A-F2302C150E60]
-    // </editor-fold> 
-    /**
-     * Collects all Nutzer and compares them with the current NutzerID
-     * @param verwaltung - This object is needed for getting data from the DB.
-     * @throws java.rmi.RemoteException
-     * @return - Returns the Nutzer object.
-     */
-    public Nutzer getCreatorOfBeitrag (SocialMediaLogicImpl verwaltung) 
-            throws RemoteException{
-        Vector<Nutzer> nutzers = verwaltung.getAllNutzer();
-
-        for (int i = 0; i < nutzers.size(); i++) {
-            Nutzer nutzer = nutzers.elementAt(i);
-            if(nutzer.getID() == this.getNutzerID())
-                return nutzer;
-        }
-        return null;
-    }
 }
 

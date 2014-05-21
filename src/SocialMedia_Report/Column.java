@@ -12,5 +12,5 @@ import java.rmi.RemoteException;
  *
  * @author Sebastian
  */
-public abstract interface Column extends CompositeParagraph {
+public interface Column extends CompositeParagraph {
 }
