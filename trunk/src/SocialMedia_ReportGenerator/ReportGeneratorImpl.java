@@ -6,7 +6,6 @@ import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic; 
 import SocialMedia_Report.Column;
 import SocialMedia_Report.ColumnImpl;
-import SocialMedia_Report.CompositeParagraphImpl;
 import SocialMedia_Report.ContributionOfNutzer;
 import SocialMedia_Report.ContributionOfNutzerImpl;
 import SocialMedia_Report.PopularityOfBeitrag;
@@ -19,7 +18,6 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.rmi.server.Util;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.E7C2C07C-F969-9A30-C188-C220A1AD2C41]
@@ -115,7 +113,7 @@ public class ReportGeneratorImpl
     
     private Column writeBeitrag(Beitrag b) throws RemoteException{
         Column column = new ColumnImpl();
-        column.addSubParagraph(new SimpleParagraphImpl("User: " + socialMediaLogic.));
+        column.addSubParagraph(new SimpleParagraphImpl("User: " + socialMediaLogic.getNutzerOf(b)));
         column.addSubParagraph(new SimpleParagraphImpl(b.getCreationDate().toString()));
         column.addSubParagraph(new SimpleParagraphImpl(b.getText()));
         column.addSubParagraph(new SimpleParagraphImpl("Likes: " + socialMediaLogic.getAllLikeOfBeitrag(b).size()));
@@ -123,7 +121,7 @@ public class ReportGeneratorImpl
     }
     private Column writeKommentar(Kommentar k) throws RemoteException{
         Column column = new ColumnImpl();
-        
+        column.addSubParagraph(new SimpleParagraphImpl("User: " + socialMediaLogic.getNutzerOf(k)));
         column.addSubParagraph(new SimpleParagraphImpl(k.getCreationDate().toString()));
         column.addSubParagraph(new SimpleParagraphImpl(k.getText()));
         return null;

@@ -9,7 +9,6 @@ package SocialMedia_Client;
 import SocialMedia_Gui.DialogAnmelden;
 import SocialMedia_Gui.DialogServerData;
 import SocialMedia_Logic.SocialMediaLogic;
-import SocialMedia_ReportGenerator.ReportGenerator;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -19,7 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Client starting class. The client is started by the main class embedded in this one.
+ * 
  * @author Sebastian
  */
 public class SocialMediaClient {
@@ -29,16 +29,25 @@ public class SocialMediaClient {
     private SocialMediaLogic socialMediaLogic = null;
     
     /**
-     * 
+     * Constructor of the client start class.
      */
     private SocialMediaClient (){
+        javax.swing.SwingUtilities.invokeLater(
+                new Runnable() { public void run() { createAndShowDialogue();}});
+    }
+    
+    /**
+     * Creates an window to ask for the server data.
+     */
+    public void createAndShowDialogue(){
         DialogServerData serverData = new DialogServerData(this, serverAdress, serverPort, clientPort);
     }
 
     /**
-     * 
-     * @param adresse
-     * @param serverPort 
+     * This Method starts the real client grafical user interface and the rmi connection.
+     * @param adresse - String for the url.
+     * @param serverPort - String for the server rmi port.
+     * @param clientPort - String for the client rmi port.
      */
     public void executeClient(String adresse, String serverPort, String clientPort) {
          try {
@@ -60,15 +69,15 @@ public class SocialMediaClient {
     }
     
     /**
-     * 
+     * Method for crating the graphical user interface of the client.
      */
     public void createAndShowGUI() {
         DialogAnmelden  anmelden = new DialogAnmelden(socialMediaLogic);
     }    
        
     /**
-     * 
-     * @param args 
+     * Main class and start class for the client.
+     * @param args - Deprecated
      */
     public static void main(String[] args) {
         SocialMediaClient c = new SocialMediaClient();

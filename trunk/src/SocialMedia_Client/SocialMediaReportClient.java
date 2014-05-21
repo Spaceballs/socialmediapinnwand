@@ -20,7 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Client starting class. The client is started by the main class embedded in this one.
+ * 
  * @author Sebastian
  */
 public class SocialMediaReportClient {
@@ -30,16 +31,25 @@ public class SocialMediaReportClient {
     private SocialMediaLogic socialMediaLogic = null;
     
     /**
-     * 
+     * Constructor of the client start class.
      */
     private SocialMediaReportClient (){
+        javax.swing.SwingUtilities.invokeLater(
+                new Runnable() { public void run() { createAndShowDialogue();}});
+    }
+    
+    /**
+     * Creates an window to ask for the server data.
+     */
+    public void createAndShowDialogue(){
         DialogServerData serverData = new DialogServerData(this, serverAdress, serverPort, clientPort);
     }
-
+    
     /**
-     * 
-     * @param adresse
-     * @param serverPort 
+     * This Method starts the real client grafical user interface and the rmi connection.
+     * @param adresse - String for the url.
+     * @param serverPort - String for the server rmi port.
+     * @param clientPort - String for the client rmi port.
      */
     public void executeClient(String adresse, String serverPort, String clientPort) {
          try {
@@ -61,15 +71,15 @@ public class SocialMediaReportClient {
     }
     
     /**
-     * 
+     * Method for crating the graphical user interface for the report client.
      */
     public void createAndShowGUI() {
         HauptfensterReport  report = new HauptfensterReport(socialMediaLogic);
     }    
        
     /**
-     * 
-     * @param args 
+     * Main class and start class for the client.
+     * @param args - Deprecated
      */
     public static void main(String[] args) {
         SocialMediaReportClient c = new SocialMediaReportClient();

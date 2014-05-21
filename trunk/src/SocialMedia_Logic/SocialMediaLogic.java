@@ -167,5 +167,7 @@ public interface SocialMediaLogic extends java.rmi.Remote{
     
     public Boolean ownerCheck (Nutzer n, Object o) throws RemoteException;
     
+    public Nutzer getNutzerOf (Object o) throws RemoteException;
+    
 }
 
