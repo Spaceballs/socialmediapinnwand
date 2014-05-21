@@ -709,7 +709,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     }
     
     /**
+     * Method which checks the type of the parameter and returns its creator.
      * 
+     * @param o - Beitrag, Kommentar, Like or Pinnwand is needed for determination.
+     * @return Returns the Nutzer object which is referenced in the parameters nutzerID.
+     * @throws java.rmi.RemoteException
      */
     public Nutzer getNutzerOf (Object o) throws RemoteException{
         if (o instanceof BeitragImpl){

@@ -2,7 +2,10 @@
 package SocialMedia_Gui;
 
 import SocialMedia_Client.SocialMediaClient;
+import SocialMedia_Data.Kommentar;
+import SocialMedia_Data.KommentarImpl;
 import SocialMedia_Data.Nutzer;
+import SocialMedia_Data.NutzerImpl;
 import SocialMedia_Logic.SocialMediaLogic;
 import SocialMedia_Report.HTMLWriter;
 import SocialMedia_Report.Report;
@@ -21,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -158,6 +162,9 @@ public class HauptfensterReport extends JFrame {
         calendarEndDateField = new JFormattedTextField(new Date());
         textFieldPanel.add(new JLabel("End Date: "), BorderLayout.NORTH);
         textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
+        JComboBox sortByBox = new JComboBox();
+
+        textFieldPanel.add(sortByBox, BorderLayout.NORTH);
         contributionOfNutzerReportPanel.add(textFieldPanel, BorderLayout.NORTH);
         
         nutzerlisteScrollPane = new ScrollPane();
@@ -195,7 +202,12 @@ public class HauptfensterReport extends JFrame {
         textFieldPanel.add(new JLabel("End Date: "), BorderLayout.NORTH);
         calendarEndDateField = new JFormattedTextField(new Date());
         textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
+        JComboBox sortByBox = new JComboBox();
+
+        textFieldPanel.add(sortByBox, BorderLayout.NORTH);
         popularityOfBeitragReportPanel.add(textFieldPanel, BorderLayout.NORTH);
+        
+        
         
         
         runBeitragReportButton = new JButton("Go!");
