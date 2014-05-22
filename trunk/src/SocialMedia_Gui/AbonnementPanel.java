@@ -94,7 +94,7 @@ class AbonnementPanel extends JPanel {
 
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 0;
-        this.add(new JLabel( username, JLabel.RIGHT), gridBagLayout);
+        this.add(new JLabel(username, JLabel.RIGHT), gridBagLayout);
         
         gridBagLayout.gridx = 2;
         gridBagLayout.gridy = 0;
