@@ -6,6 +6,8 @@ import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic; 
 import SocialMedia_Report.Column;
 import SocialMedia_Report.ColumnImpl;
+import SocialMedia_Report.CompositeParagraph;
+import SocialMedia_Report.CompositeParagraphImpl;
 import SocialMedia_Report.ContributionOfNutzer;
 import SocialMedia_Report.ContributionOfNutzerImpl;
 import SocialMedia_Report.PopularityOfBeitrag;
@@ -68,15 +70,25 @@ public class ReportGeneratorImpl
     public ContributionOfNutzer createContributionOfNutzerReport (Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
         ContributionOfNutzer report = new ContributionOfNutzerImpl();
         try {
-            
-            
-            // TO-DO: Report code
-            // TO-DO: Report code
-            // TO-DO: Report code
-            
             report.setCreationDate(new Date());
             report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
             report.setBodyParagraph(null);
+            
+            report.setImprintParagraph(addImprint());
+            
+            Vector<Beitrag> reportBeitraege = socialMediaLogic.getAllBeitrag();
+            for (int i = 0; i < reportBeitraege.size(); i++) {
+                if (!socialMediaLogic.ownerCheck(nutzerVal, reportBeitraege.elementAt(i)))
+                    reportBeitraege.removeElementAt(i);
+            }
+            
+            Vector<Kommentar> reportKommentare = socialMediaLogic.getAllKommentar();
+            for (int i = 0; i < reportKommentare.size(); i++) {
+                if (!socialMediaLogic.ownerCheck(nutzerVal, reportKommentare.elementAt(i)))
+                    reportKommentare.removeElementAt(i);
+            }
+            Vector<Object> sammlung = new Vector<Object>();
+
             Column column = new ColumnImpl();
             column.addSubParagraph(new SimpleParagraphImpl("TEST"));
             column.addSubParagraph(new SimpleParagraphImpl("TEST"));
@@ -85,7 +97,7 @@ public class ReportGeneratorImpl
             Vector<Row> rows = new Vector<Row>();
             rows.add(row);
             report.setRows(rows);
-            report.setImprintParagraph(null);
+            
         } catch (RemoteException ex) {
             Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -110,7 +122,13 @@ public class ReportGeneratorImpl
         return report;
     }
     
-    
+    /**
+     * Helper method for the report generation.
+     * 
+     * @param b - The Beitrag which should be written into the report.
+     * @return Returns the column entry for the report.
+     * @throws RemoteException 
+     */
     private Column writeBeitrag(Beitrag b) throws RemoteException{
         Column column = new ColumnImpl();
         column.addSubParagraph(new SimpleParagraphImpl("User: " + socialMediaLogic.getNutzerOf(b)));
@@ -119,12 +137,36 @@ public class ReportGeneratorImpl
         column.addSubParagraph(new SimpleParagraphImpl("Likes: " + socialMediaLogic.getAllLikeOfBeitrag(b).size()));
         return column;
     }
+    
+    /**
+     * Helper method for the report generation.
+     * 
+     * @param k - The Kommentar which should be written into the report.
+     * @return Returns the column entry for the report.
+     * @throws RemoteException 
+     */    
     private Column writeKommentar(Kommentar k) throws RemoteException{
         Column column = new ColumnImpl();
         column.addSubParagraph(new SimpleParagraphImpl("User: " + socialMediaLogic.getNutzerOf(k)));
         column.addSubParagraph(new SimpleParagraphImpl(k.getCreationDate().toString()));
         column.addSubParagraph(new SimpleParagraphImpl(k.getText()));
-        return null;
+        return column;
+    }
+
+    /**
+     * 
+     * @throws RemoteException 
+     */
+    private CompositeParagraph addImprint() throws RemoteException {
+        CompositeParagraph imprintCompositeParagraph = new CompositeParagraphImpl();
+        imprintCompositeParagraph.addSubParagraph(new SimpleParagraphImpl("Dieser Report wird ihnen Präsentiert von: IT3-Team 02"));
+        imprintCompositeParagraph.addSubParagraph(new SimpleParagraphImpl("Sebastian Fink"));
+        imprintCompositeParagraph.addSubParagraph(new SimpleParagraphImpl("Max Kobald"));
+        imprintCompositeParagraph.addSubParagraph(new SimpleParagraphImpl("Benjamin Kiss"));
+        imprintCompositeParagraph.addSubParagraph(new SimpleParagraphImpl("Riccardo Antonio Giugno"));
+        imprintCompositeParagraph.addSubParagraph(new SimpleParagraphImpl("Leo Christ"));
+        imprintCompositeParagraph.addSubParagraph(new SimpleParagraphImpl("Kevin Hüber"));
+        return imprintCompositeParagraph;
     }
 }
 
