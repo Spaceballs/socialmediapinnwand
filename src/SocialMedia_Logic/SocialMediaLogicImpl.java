@@ -105,6 +105,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Vector<Like> getAllLikeOfBeitrag (Beitrag val) throws RemoteException{
+        val = beitragMapper.findByID(val.getID());
         return val.getAllBeitragLikes(this);
     }
 
@@ -118,6 +119,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Vector<Kommentar> getAllKommentarOfBeitrag (Beitrag val) throws RemoteException{
+        val = beitragMapper.findByID(val.getID());
         return val.getAllBeitragKommentar(this);
     }
     
@@ -144,7 +146,6 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      */
     public Vector<Abonnement> getAllAbonnementOfNutzer (Nutzer val) throws RemoteException{
         Nutzer n = nutzerMapper.findByID(val.getID());
-        System.out.println(n);
         return n.getAllNutzerAbonnement(this);
     }
 
@@ -158,8 +159,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Pinnwand getPinnwandOfAbonnement (Abonnement val) throws RemoteException{
-        Abonnement a = abonnementMapper.findByID(val.getID());
-        return a.getAbonnementPinnwand(this);
+        val = abonnementMapper.findByID(val.getID());
+        return val.getAbonnementPinnwand(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -433,6 +434,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Pinnwand getPinnwandOfNutzer (Nutzer val) throws RemoteException{
+        val = nutzerMapper.findByID(val.getID());
         return val.getNutzerPinnwand(this);
     }
 
@@ -508,8 +510,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Nutzer getOwnerOfPinnwandOfAbonnement (Abonnement val) throws RemoteException{
-        Abonnement a = abonnementMapper.findByID(val.getID());
-        Pinnwand p = a.getAbonnementPinnwand(this);
+        val = abonnementMapper.findByID(val.getID());
+        Pinnwand p = val.getAbonnementPinnwand(this);
         return p.getOwner(this);
     }
 
@@ -671,6 +673,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Nutzer getOwnerOfPinnwand (Pinnwand p) throws RemoteException{
+        p = pinnwandMapper.findByID(p.getID());
         return p.getOwner(this);
     }
     /**
