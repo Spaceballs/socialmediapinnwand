@@ -458,6 +458,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Vector<Beitrag> getAllBeitragOfPinnwand (Pinnwand val) throws RemoteException{
+        val = pinnwandMapper.findByID(val.getID());
         return val.getAllPinnwandBeitraege(this);
     }
 
