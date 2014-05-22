@@ -36,7 +36,6 @@ class AbonnementPanel extends JPanel {
     private final Nutzer clientNutzer;
     private final Abonnement abonnement;
     private String username;
-    private JLabel abonnementLabel;
     private Nutzer user;
 
     /**
@@ -74,9 +73,9 @@ class AbonnementPanel extends JPanel {
             user =  server.getOwnerOfPinnwandOfAbonnement(abonnement);
             username = user.getUsername();
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
-            goPinnwandButton.setIcon(new ImageIcon("delete"/*goPinnwandButtonImage*/));
+            goPinnwandButton.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
             //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
-            goPinnwandButton.setIcon(new ImageIcon("go to User"/*goDeleteButtonImage*/));
+            goDeleteButton.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
         } catch (IOException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -119,7 +118,7 @@ class AbonnementPanel extends JPanel {
         goDeleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(SocialMedia_Gui.Hauptfenster.hauptfenster(null, null),
-                        "Das Abonnement wirklich löschen?", "Account löschen",
+                        "Das Abonnement wirklich löschen?", "Abonnement löschen",
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
                         server.deleteAbonnement(abonnement);

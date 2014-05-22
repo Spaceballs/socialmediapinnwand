@@ -2,7 +2,9 @@
 package SocialMedia_Gui;
 
 import SocialMedia_Data.Abonnement;
+import SocialMedia_Data.Beitrag;
 import SocialMedia_Data.Nutzer;
+import SocialMedia_Data.Pinnwand;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -31,6 +33,8 @@ public class Newsfeed extends JPanel {
     private JLabel titleNewsfeed;
     private JButton beitragVerfassen = new JButton("Neuer Beitrag");
     private Vector<Abonnement> abonnements;
+    private Pinnwand pinnwand;
+    private Vector<Beitrag> beitraege;
 
     /**
      * Constructor
@@ -40,8 +44,8 @@ public class Newsfeed extends JPanel {
     public Newsfeed(SocialMediaLogic server, Nutzer clientNutzer){
         this.clientNutzer = clientNutzer;
         this.server = server;
-        initialize();
         initializeData();
+        initialize();
     }
 
     /**
@@ -71,10 +75,11 @@ public class Newsfeed extends JPanel {
         titleNewsfeed = new JLabel("Newsfeed",JLabel.LEFT);
         titleNewsfeed.setFont(new Font("Arial", Font.BOLD, 28));
         
-        for (int i = 0; i < abonnements.size(); i++) {
-            c.gridy = i;
-            scrollPanePane.add(new AbonnementPanel(server, clientNutzer, abonnements.elementAt(i)), c);            
-        }
+//        for (int i = 0; i < beitraege.size(); i++) {
+//            c.gridy = i;
+//            scrollPanePane.add(new BeitragPanel(server, clientNutzer, beitraege.elementAt(i)), c);            
+//        }
+        
         scrollPane.getViewport().setView(scrollPanePane);
         this.add(titleNewsfeed, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);      
@@ -89,6 +94,22 @@ public class Newsfeed extends JPanel {
         } catch (RemoteException ex) {
             Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        for (int i = 0; i < abonnements.size(); i++) {
+            Abonnement abonnement = abonnements.elementAt(i);
+            
+            try {
+                pinnwand = server.getPinnwandOfAbonnement(abonnement);
+                
+                try {
+                    beitraege = server.getAllBeitragOfPinnwand(pinnwand);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            } catch (RemoteException ex) {
+                Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }        
     }
-
 }
