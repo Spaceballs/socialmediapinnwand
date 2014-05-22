@@ -1,6 +1,7 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.BorderLayout;
@@ -8,9 +9,14 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.rmi.RemoteException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -20,13 +26,11 @@ import javax.swing.border.EmptyBorder;
  * @author Max
  */
 public class Newsfeed extends JPanel {
-    private SocialMediaLogic server;
+    private final SocialMediaLogic server;
     private Nutzer clientNutzer = null;
-    private JLabel newsfeedLabel = new JLabel("Newsfeed");
-    private BeitragPanel beitragPanel = new BeitragPanel(server, clientNutzer, null);
-    private KommentarPanel kommentarPanel = new KommentarPanel(server, clientNutzer, null);
+    private JLabel titleNewsfeed;
     private JButton beitragVerfassen = new JButton("Neuer Beitrag");
-    private JPanel header = new JPanel();
+    private Vector<Abonnement> abonnements;
 
     /**
      * Constructor
@@ -37,6 +41,7 @@ public class Newsfeed extends JPanel {
         this.clientNutzer = clientNutzer;
         this.server = server;
         initialize();
+        initializeData();
     }
 
     /**
@@ -46,29 +51,44 @@ public class Newsfeed extends JPanel {
      */
     private void initialize() {
         this.setLayout(new BorderLayout());
-        EmptyBorder border = new EmptyBorder(20,20,20,20);
-        this.setBorder(border);
-
-        newsfeedLabel.setFont(new Font("Arial", Font.BOLD, 48));
         
-        header.setLayout(new GridBagLayout());
-        GridBagConstraints gridBagLayout = new GridBagConstraints();
-        gridBagLayout.gridwidth = GridBagConstraints.REMAINDER;
-        gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
-        gridBagLayout.anchor = GridBagConstraints.WEST;
-//        gridBagLayout.insets = new Insets(5, 5, 5, 5);
-
-        gridBagLayout.gridx = 0;
-        gridBagLayout.gridy = 0;
-        header.add(newsfeedLabel, gridBagLayout);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBorder(null); 
+        scrollPane.getInsets().set(0,0,0,0);
+        scrollPane.setViewportBorder(null);
+        scrollPane.getViewport().setBorder(null);
         
-//        gridBagLayout.gridx = 1;
-//        gridBagLayout.gridy = 1;
-//        header.add(beitragVerfassen, gridBagLayout);
+        JPanel scrollPanePane = new JPanel();
+        scrollPanePane.setLayout(new GridBagLayout());
         
-        this.add(header,BorderLayout.NORTH);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridx = 0;
+        c.gridy = 0;
         
-        this.add(beitragPanel,BorderLayout.CENTER);
+        titleNewsfeed = new JLabel("Newsfeed",JLabel.LEFT);
+        titleNewsfeed.setFont(new Font("Arial", Font.BOLD, 28));
+        
+        for (int i = 0; i < abonnements.size(); i++) {
+            c.gridy = i;
+            scrollPanePane.add(new AbonnementPanel(server, clientNutzer, abonnements.elementAt(i)), c);            
+        }
+        scrollPane.getViewport().setView(scrollPanePane);
+        this.add(titleNewsfeed, BorderLayout.NORTH);
+        this.add(scrollPane, BorderLayout.CENTER);      
+    }
+    
+    /**
+     * 
+     */
+    private void initializeData() {
+        try {
+            abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
+        } catch (RemoteException ex) {
+            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
