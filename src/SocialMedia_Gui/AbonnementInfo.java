@@ -14,11 +14,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneLayout;
-import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -78,11 +75,15 @@ public class AbonnementInfo extends JPanel{
             c.gridy = i;
             scrollPanePane.add(new AbonnementPanel(server, clientNutzer, abonnements.elementAt(i)), c);            
         }
+        
         scrollPane.getViewport().setView(scrollPanePane);
         this.add(titleAbonnements, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
+    /**
+     * 
+     */
     private void initializeData() {
         try {
             abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
