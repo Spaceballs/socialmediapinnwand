@@ -71,7 +71,7 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     public Vector<Kommentar> getAllBeitragKommentar (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
         Vector<Kommentar> kommentare = verwaltung.getAllKommentar();
-        Vector<Kommentar> beitragKommentare = null;
+        Vector<Kommentar> beitragKommentare = new Vector<Kommentar>();
 
         for (int i = 0; i < kommentare.size(); i++) {
             Kommentar kommentar = kommentare.elementAt(i);
@@ -93,7 +93,7 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     public Vector<Like> getAllBeitragLikes (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
         Vector<Like> likes = verwaltung.getAllLike();
-        Vector<Like> beitragLikes = null;
+        Vector<Like> beitragLikes = new Vector<Like>();
         
         for (int i = 0; i < likes.size(); i++) {
             Like like = likes.elementAt(i);

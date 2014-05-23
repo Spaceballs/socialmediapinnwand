@@ -1,11 +1,9 @@
 
 package SocialMedia_Gui;
 
-import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Beitrag;
+import SocialMedia_Data.Like;
 import SocialMedia_Data.Nutzer;
-import SocialMedia_Data.Pinnwand;
-import SocialMedia_DatabaseManager.PinnwandMapper;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -31,16 +29,17 @@ public class BeitragPanel extends JPanel {
     
     private final SocialMediaLogic server;
     private final Nutzer clientNutzer;
+    private final Beitrag beitrag;
     private Nutzer user;
-    private Beitrag beitrag;
     private String text;
     private String verfasser;
     private String datum;
-    private String likes;
-    private JLabel datumLabel = new JLabel("");
-    private JLabel beitragLabel = new JLabel("");
-    private JButton goEditButton = new JButton("Bearbeiten");
-    private JButton goDeleteButton = new JButton("Löschen");
+    private Vector<Like> likes;
+    private int anzahlLikes;
+    private String likeString;
+    private final JButton goEditButton = new JButton("Bearbeiten");
+    private final JButton goDeleteButton = new JButton("Löschen");
+    private final JButton goLikeButton = new JButton("Like");
     
     /**
      * 
@@ -69,7 +68,7 @@ public class BeitragPanel extends JPanel {
      * 
      */
     private void initializeData() {
-        try {
+        try {            
             user = server.getNutzerOf(beitrag);
             verfasser = user.getUsername();
             
@@ -77,7 +76,10 @@ public class BeitragPanel extends JPanel {
             
             datum = beitrag.getCreationDate().toString();
             
-//            likes = server.getAllLikeOfBeitrag(beitrag);
+            likes = new Vector<Like>();
+            likes = server.getAllLikeOfBeitrag(beitrag);
+            anzahlLikes = likes.size();
+            likeString = Integer.toString(anzahlLikes);
 
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
             goEditButton.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
@@ -94,7 +96,7 @@ public class BeitragPanel extends JPanel {
      * 
      */
     private void initializeContent() {
-          this.setLayout(new GridBagLayout());
+        this.setLayout(new GridBagLayout());
         GridBagConstraints gridBagLayout = new GridBagConstraints();
         gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
         gridBagLayout.anchor = GridBagConstraints.LINE_START;
@@ -108,9 +110,9 @@ public class BeitragPanel extends JPanel {
         gridBagLayout.gridy = 0;
         this.add(new JLabel(datum, JLabel.RIGHT), gridBagLayout);
         
-//        gridBagLayout.gridx = 2;
-//        gridBagLayout.gridy = 0;
-//        this.add(new JLabel(likes, JLabel.RIGHT), gridBagLayout);
+        gridBagLayout.gridx = 2;
+        gridBagLayout.gridy = 0;
+        this.add(new JLabel(likeString + " Like(s)", JLabel.RIGHT), gridBagLayout);
         
         gridBagLayout.gridx = 3;
         gridBagLayout.gridy = 0;
@@ -127,6 +129,10 @@ public class BeitragPanel extends JPanel {
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 1;
         this.add(new JLabel(text, JLabel.RIGHT), gridBagLayout);
+        
+        gridBagLayout.gridx = 4;
+        gridBagLayout.gridy = 1;
+        this.add(goLikeButton, gridBagLayout);
         
         this.setSize(70, 150);
     }
@@ -153,6 +159,16 @@ public class BeitragPanel extends JPanel {
         goEditButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new MeinePinnwand(server, clientNutzer));
+            }
+        });
+        
+        goLikeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    server.createLike(beitrag, clientNutzer);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }   

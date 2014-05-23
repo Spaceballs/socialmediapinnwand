@@ -3,6 +3,7 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Beitrag;
+import SocialMedia_Data.Kommentar;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Data.Pinnwand;
 import SocialMedia_Logic.SocialMediaLogic;
@@ -35,6 +36,7 @@ public class Newsfeed extends JPanel {
     private Vector<Abonnement> abonnements;
     private Pinnwand pinnwand;
     private Vector<Beitrag> beitraege;
+    private Vector<Kommentar> kommentare;
 
     /**
      * Constructor
@@ -78,6 +80,12 @@ public class Newsfeed extends JPanel {
         for (int i = 0; i < beitraege.size(); i++) {
             c.gridy = i;
             scrollPanePane.add(new BeitragPanel(server, clientNutzer, beitraege.elementAt(i)), c);
+            
+            for (int j = 0; j < kommentare.size(); j++) {
+                c.gridy = i;
+                c.gridx = 2;
+                scrollPanePane.add(new KommentarPanel(server, clientNutzer, kommentare.elementAt(j)), c);
+            }
         }
         
         scrollPane.getViewport().setView(scrollPanePane);
@@ -86,20 +94,28 @@ public class Newsfeed extends JPanel {
     }
     
     /**
-     * 
+     * Gets the data needed from the database via the server
+     * and makes it useable for the BeitragPanel
      */
     private void initializeData() {
         abonnements = new Vector<Abonnement>();
         beitraege = new Vector<Beitrag>();
+        kommentare = new Vector<Kommentar>();
         
         try {
             abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
-            System.out.println("Anzahl Abos: " + abonnements.size());
+
             for (int i = 0; i < abonnements.size(); i++) {
                 Abonnement abonnement = abonnements.elementAt(i);            
                 pinnwand = server.getPinnwandOfAbonnement(abonnement);
                 beitraege.addAll(server.getAllBeitragOfPinnwand(pinnwand));
             }
+            
+            for (int i = 0; i < beitraege.size(); i++) {
+                Beitrag beitrag = beitraege.elementAt(i);
+                kommentare.addAll(server.getAllKommentarOfBeitrag(beitrag));
+            }
+            
         } catch (RemoteException ex) {
             Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
         }            
