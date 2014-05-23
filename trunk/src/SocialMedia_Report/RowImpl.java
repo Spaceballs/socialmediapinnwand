@@ -17,7 +17,7 @@ public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.87B7D440-CC12-4BCB-8CD3-A5E2A8E2F594]
     // </editor-fold> 
-    private Vector<Column> mColumn;
+    private Vector<Column> mColumn = new Vector<Column>();
     
     public RowImpl() 
             throws RemoteException{
