@@ -1,11 +1,7 @@
 
 package SocialMedia_Gui;
 
-import SocialMedia_Client.SocialMediaClient;
-import SocialMedia_Data.Kommentar;
-import SocialMedia_Data.KommentarImpl;
 import SocialMedia_Data.Nutzer;
-import SocialMedia_Data.NutzerImpl;
 import SocialMedia_Logic.SocialMediaLogic;
 import SocialMedia_Report.HTMLWriter;
 import SocialMedia_Report.Report;
@@ -19,13 +15,21 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Formatter;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.InputVerifier;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -36,6 +40,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.MaskFormatter;
 
 /**
  * Report Generator class for the graphical user interface.
@@ -57,9 +62,10 @@ public class HauptfensterReport extends JFrame {
     private DefaultListModel listModel;
     private JButton runNutzerReportButton;
     private JButton runBeitragReportButton;
-    private JTextField calendarStartDateField;
-    private JTextField calendarEndDateField;
-
+    private JFormattedTextField calendarStartDateField;
+    private JFormattedTextField calendarEndDateField;
+    private SimpleDateFormat df = new SimpleDateFormat("dd.mm.yyyy", Locale.GERMANY);
+    // TO-DO
     /**
      * Constructor of the HauptfensterReport class.
      * The data displayed by this class is obtained from the server object.
@@ -157,11 +163,17 @@ public class HauptfensterReport extends JFrame {
         
         JPanel textFieldPanel = new JPanel();
         textFieldPanel.add(new JLabel("Start Date: "), BorderLayout.NORTH);
-        calendarStartDateField = new JFormattedTextField(new Date());
+        calendarStartDateField = new JFormattedTextField(df);
+        calendarStartDateField.setText(df.format(new Date()));
+        calendarStartDateField.setInputVerifier(new FormattedTextFieldVerifier());
         textFieldPanel.add(calendarStartDateField, BorderLayout.NORTH);
-        calendarEndDateField = new JFormattedTextField(new Date());
+        
         textFieldPanel.add(new JLabel("End Date: "), BorderLayout.NORTH);
+        calendarEndDateField = new JFormattedTextField(df);
+        calendarEndDateField.setText(df.format(new Date()));
+        calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
         textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
+        
         JComboBox sortByBox = new JComboBox();
 
         textFieldPanel.add(sortByBox, BorderLayout.NORTH);
@@ -177,9 +189,13 @@ public class HauptfensterReport extends JFrame {
         runNutzerReportButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Report report = (Report) reportGenerator.createContributionOfNutzerReport(reportUser, 1, reportUser.getCreationDate(), new Date());
+                    Date dateStart = df.parse(calendarStartDateField.getText());
+                    Date dateEnd = df.parse(calendarEndDateField.getText());
+                    Report report = (Report) reportGenerator.createContributionOfNutzerReport(reportUser, 1, dateStart, dateEnd);
                     HTMLWriter writer = new HTMLWriter(report);
                 } catch (RemoteException ex) {
+                    Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
                     Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -197,11 +213,17 @@ public class HauptfensterReport extends JFrame {
         
         JPanel textFieldPanel = new JPanel();
         textFieldPanel.add(new JLabel("Start Date: "), BorderLayout.NORTH);
-        calendarStartDateField = new JFormattedTextField(new Date());
+        calendarStartDateField = new JFormattedTextField(df);
+        calendarStartDateField.setText(df.format(new Date()));
+        calendarStartDateField.setInputVerifier(new FormattedTextFieldVerifier());
         textFieldPanel.add(calendarStartDateField, BorderLayout.NORTH);
+        
         textFieldPanel.add(new JLabel("End Date: "), BorderLayout.NORTH);
-        calendarEndDateField = new JFormattedTextField(new Date());
+        calendarEndDateField = new JFormattedTextField(df);
+        calendarEndDateField.setText(df.format(new Date()));
+        calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
         textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
+        
         JComboBox sortByBox = new JComboBox();
 
         textFieldPanel.add(sortByBox, BorderLayout.NORTH);
@@ -214,9 +236,13 @@ public class HauptfensterReport extends JFrame {
         runBeitragReportButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Report report = (Report) reportGenerator.createPopularityOfBeitragReport(1, reportUser.getCreationDate(), new Date());
+                    Date dateStart = new SimpleDateFormat("mm.dd.yyyy", Locale.GERMANY).parse(calendarStartDateField.getText());
+                    Date dateEnd = new SimpleDateFormat("mm.dd.yyyy", Locale.GERMANY).parse(calendarEndDateField.getText());
+                    Report report = (Report) reportGenerator.createPopularityOfBeitragReport(1, dateStart, dateEnd);
                     HTMLWriter writer = new HTMLWriter(report);
                 } catch (RemoteException ex) {
+                    Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
                     Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -279,3 +305,27 @@ public class HauptfensterReport extends JFrame {
          return this;
      }
  }
+
+
+
+class FormattedTextFieldVerifier extends InputVerifier {
+     public boolean verify(JComponent input) {
+         if (input instanceof JFormattedTextField) {
+             JFormattedTextField ftf = (JFormattedTextField)input;
+             AbstractFormatter formatter = ftf.getFormatter();
+             if (formatter != null) {
+                 String text = ftf.getText();
+                 try {
+                      formatter.stringToValue(text);
+                      return true;
+                  } catch (ParseException pe) {
+                      return false;
+                  }
+              }
+          }
+          return true;
+      }
+      public boolean shouldYieldFocus(JComponent input) {
+          return verify(input);
+      }
+  }
