@@ -48,7 +48,6 @@ class AbonnementPanel extends JPanel {
         super();
         this.server = server;
         this.clientNutzer = clientNutzer;
-        System.out.println(abonnement);
         this.abonnement = abonnement;
         initialize();
     }
@@ -66,10 +65,7 @@ class AbonnementPanel extends JPanel {
      * 
      */
     private void initializeData() {
-        try {
-            System.out.println(abonnement == null);
-            System.out.println(abonnement);
-            
+        try {            
             user =  server.getOwnerOfPinnwandOfAbonnement(abonnement);
             username = user.getUsername();
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));

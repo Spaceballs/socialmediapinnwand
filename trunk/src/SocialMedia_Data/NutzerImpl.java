@@ -184,12 +184,10 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
             throws RemoteException{
         Vector<Abonnement> abonnements = verwaltung.getAllAbonnement();
         Vector<Abonnement> nutzerAbonnements = new Vector<Abonnement>();
-        System.out.println(abonnements);
         for (int i = 0; i < abonnements.size(); i++) {
             Abonnement abonnement = abonnements.elementAt(i);
             if(abonnement.getNutzerID() == getID())
                 nutzerAbonnements.addElement(abonnement);
-            System.out.println(abonnement.getNutzerID() == getID());
         }
         return nutzerAbonnements;
     }

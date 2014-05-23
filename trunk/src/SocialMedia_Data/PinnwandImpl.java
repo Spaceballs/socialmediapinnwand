@@ -45,7 +45,7 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     public Vector<Beitrag> getAllPinnwandBeitraege (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
         Vector<Beitrag> beitraege = verwaltung.getAllBeitrag();
-        Vector<Beitrag> pinnwandBeitraege = null;
+        Vector<Beitrag> pinnwandBeitraege = new Vector<Beitrag>();
 
         for (int i = 0; i < beitraege.size(); i++) {
             Beitrag beitrag = beitraege.elementAt(i);

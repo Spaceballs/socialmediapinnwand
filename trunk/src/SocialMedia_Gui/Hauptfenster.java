@@ -48,7 +48,6 @@ public class Hauptfenster extends JFrame {
      * @param clientNutzer - the logged-in Nutzer
      */
     public Hauptfenster(SocialMediaLogic server, Nutzer clientNutzer){
-        System.out.println(server);
         this.clientNutzer = clientNutzer;
         this.server = server;
         initialize();

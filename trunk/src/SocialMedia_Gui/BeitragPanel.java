@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -35,11 +36,18 @@ public class BeitragPanel extends JPanel {
     private String text;
     private String verfasser;
     private String datum;
+    private String likes;
     private JLabel datumLabel = new JLabel("");
     private JLabel beitragLabel = new JLabel("");
     private JButton goEditButton = new JButton("Bearbeiten");
     private JButton goDeleteButton = new JButton("Löschen");
     
+    /**
+     * 
+     * @param server
+     * @param clientNutzer
+     * @param beitrag 
+     */
     BeitragPanel(SocialMediaLogic server, Nutzer clientNutzer, Beitrag beitrag) {
         super();
         this.server = server;
@@ -48,32 +56,43 @@ public class BeitragPanel extends JPanel {
         initialize();
     }
     
+    /**
+     * 
+     */
     private void initialize() {
         initializeData();
         initializeContent();
-        initializeListeners();
+//        initializeListeners();
     }
     
+    /**
+     * 
+     */
     private void initializeData() {
         try {
-            System.out.println(beitrag == null);
-            System.out.println(beitrag);
-            
-//            user = beitrag.getOwner(server);
-//            verfasser = user.getUsername();
+            user = server.getNutzerOf(beitrag);
+            verfasser = user.getUsername();
             
             text = beitrag.getText();
             
+            datum = beitrag.getCreationDate().toString();
             
+//            likes = server.getAllLikeOfBeitrag(beitrag);
+
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
             goEditButton.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
+            goEditButton.setVisible(server.ownerCheck(clientNutzer, beitrag));
             //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
             goDeleteButton.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
+            goDeleteButton.setVisible(server.ownerCheck(clientNutzer, beitrag));
         } catch (IOException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    /**
+     * 
+     */
     private void initializeContent() {
           this.setLayout(new GridBagLayout());
         GridBagConstraints gridBagLayout = new GridBagConstraints();
@@ -83,19 +102,27 @@ public class BeitragPanel extends JPanel {
 
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 0;
-        this.add(new JLabel("Username", JLabel.RIGHT), gridBagLayout);
+        this.add(new JLabel(verfasser, JLabel.RIGHT), gridBagLayout);
         
-        gridBagLayout.gridx = 2;
+        gridBagLayout.gridx = 1;
+        gridBagLayout.gridy = 0;
+        this.add(new JLabel(datum, JLabel.RIGHT), gridBagLayout);
+        
+//        gridBagLayout.gridx = 2;
+//        gridBagLayout.gridy = 0;
+//        this.add(new JLabel(likes, JLabel.RIGHT), gridBagLayout);
+        
+        gridBagLayout.gridx = 3;
+        gridBagLayout.gridy = 0;
+        //goEditButton.setBorder(null);
+        //goEditButton.setMargin(new Insets(0, 0, 0, 0));
+        this.add(goEditButton, gridBagLayout);
+
+        gridBagLayout.gridx = 4;
         gridBagLayout.gridy = 0;
         //goDeleteButton.setBorder(null);
         //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
         this.add(goDeleteButton, gridBagLayout);
-
-        gridBagLayout.gridx = 3;
-        gridBagLayout.gridy = 0;
-        //goDeleteButton.setBorder(null);
-        //goPinnwandButton.setMargin(new Insets(0, 0, 0, 0));
-        this.add(goEditButton, gridBagLayout);
         
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 1;
@@ -104,6 +131,9 @@ public class BeitragPanel extends JPanel {
         this.setSize(70, 150);
     }
     
+    /**
+     * 
+     */
     private void initializeListeners() {        
         goDeleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
