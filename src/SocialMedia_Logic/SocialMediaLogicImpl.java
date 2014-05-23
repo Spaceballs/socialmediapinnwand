@@ -684,19 +684,19 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws RemoteException 
      */
     public Boolean ownerCheck (Nutzer n, Object o) throws RemoteException{
-        if (o instanceof BeitragImpl){
+        if (o instanceof Beitrag){
             Beitrag b = (Beitrag) o;
             return b.getNutzerID() == n.getID();
         }
-        if (o instanceof KommentarImpl){
+        if (o instanceof Kommentar){
             Kommentar k = (Kommentar) o;
             return k.getNutzerID() == n.getID();
         }
-        if (o instanceof LikeImpl){
+        if (o instanceof Like){
             Like l = (Like) o;
             return l.getNutzerID() == n.getID();
         }
-        if (o instanceof PinnwandImpl) {
+        if (o instanceof Pinnwand) {
             Pinnwand p = (Pinnwand) o;
             return p.getNutzerID() == n.getID();
         }
@@ -720,20 +720,25 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException
      */
     public Nutzer getNutzerOf (Object o) throws RemoteException{
-        if (o instanceof BeitragImpl){
+        if (o instanceof Beitrag){
             Beitrag b = (Beitrag) o;
+            b = beitragMapper.findByID(b.getID());
+            
             return b.getOwner(this);
         }
-        if (o instanceof KommentarImpl){
+        if (o instanceof Kommentar){
             Kommentar k = (Kommentar) o;
+            k = kommentarMapper.findByID(k.getID());
             return k.getOwner(this);
         }
-        if (o instanceof LikeImpl){
+        if (o instanceof Like){
             Like l = (Like) o;
+            l = likeMapper.findByID(l.getID());
             return l.getOwner(this);
         }
-        if (o instanceof PinnwandImpl) {
+        if (o instanceof Pinnwand) {
             Pinnwand p = (Pinnwand) o;
+            p = pinnwandMapper.findByID(p.getID());
             return p.getOwner(this);
         }
         return null;

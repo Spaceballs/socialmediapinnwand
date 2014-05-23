@@ -74,11 +74,11 @@ public class Newsfeed extends JPanel {
         
         titleNewsfeed = new JLabel("Newsfeed",JLabel.LEFT);
         titleNewsfeed.setFont(new Font("Arial", Font.BOLD, 28));
-        
-//        for (int i = 0; i < beitraege.size(); i++) {
-//            c.gridy = i;
-//            scrollPanePane.add(new BeitragPanel(server, clientNutzer, beitraege.elementAt(i)), c);            
-//        }
+       
+        for (int i = 0; i < beitraege.size(); i++) {
+            c.gridy = i;
+            scrollPanePane.add(new BeitragPanel(server, clientNutzer, beitraege.elementAt(i)), c);
+        }
         
         scrollPane.getViewport().setView(scrollPanePane);
         this.add(titleNewsfeed, BorderLayout.NORTH);
@@ -89,27 +89,19 @@ public class Newsfeed extends JPanel {
      * 
      */
     private void initializeData() {
+        abonnements = new Vector<Abonnement>();
+        beitraege = new Vector<Beitrag>();
+        
         try {
             abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
-        } catch (RemoteException ex) {
-            Logger.getLogger(AbonnementInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        for (int i = 0; i < abonnements.size(); i++) {
-            Abonnement abonnement = abonnements.elementAt(i);
-            
-            try {
+            System.out.println("Anzahl Abos: " + abonnements.size());
+            for (int i = 0; i < abonnements.size(); i++) {
+                Abonnement abonnement = abonnements.elementAt(i);            
                 pinnwand = server.getPinnwandOfAbonnement(abonnement);
-                
-                try {
-                    beitraege = server.getAllBeitragOfPinnwand(pinnwand);
-                } catch (RemoteException ex) {
-                    Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            } catch (RemoteException ex) {
-                Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
-            }            
-        }        
+                beitraege.addAll(server.getAllBeitragOfPinnwand(pinnwand));
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
+        }            
     }
 }

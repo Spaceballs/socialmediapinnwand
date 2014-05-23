@@ -205,7 +205,7 @@ public class PinnwandMapper extends DBStatementFactory{
                         COLUMN_CREATION_DATE + ", " + 
                         COLUMN_NUTZER_ID + " " + 
                     FROM + " " +
-                            TABLE_NAME_ABONNEMENT + " " +
+                            TABLE_NAME_PINNWAND + " " +
                     WHERE + " " +
                             COLUMN_ID + " =\"" + val + "\"");
             resultSet.next();
