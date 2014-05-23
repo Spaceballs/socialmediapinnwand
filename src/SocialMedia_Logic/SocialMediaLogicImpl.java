@@ -168,10 +168,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // </editor-fold> 
     /**
      * 
-     * @param username
-     * @param name
-     * @param surname
-     * @param password
+     * @param username - Username of the new Nutzer object.
+     * @param name - Name of the new Nutzer object.
+     * @param surname - Surname of the new Nutzer object.
+     * @param password - Password of the new Nutzer object.
      * @return 
      * @throws java.rmi.RemoteException 
      */
