@@ -3,7 +3,6 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Beitrag;
-import SocialMedia_Data.Kommentar;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Data.Pinnwand;
 import SocialMedia_Logic.SocialMediaLogic;
@@ -12,6 +11,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -31,12 +32,12 @@ import javax.swing.border.EmptyBorder;
 public class Newsfeed extends JPanel {
     private final SocialMediaLogic server;
     private Nutzer clientNutzer = null;
-    private JLabel titleNewsfeed;
-    private JButton beitragVerfassen = new JButton("Neuer Beitrag");
+    private JLabel titleNewsfeed;    
+    private final JButton buttonNeuerBeitrag = new JButton("Neuer Beitrag");
     private Vector<Abonnement> abonnements;
     private Pinnwand pinnwand;
     private Vector<Beitrag> beitraege;
-    private Vector<Kommentar> kommentare;
+    private Pinnwand meinePinnwand;
 
     /**
      * Constructor
@@ -48,6 +49,7 @@ public class Newsfeed extends JPanel {
         this.server = server;
         initializeData();
         initialize();
+        initializeListeners();
     }
 
     /**
@@ -57,6 +59,15 @@ public class Newsfeed extends JPanel {
      */
     private void initialize() {
         this.setLayout(new BorderLayout());
+        
+        titleNewsfeed = new JLabel("Newsfeed",JLabel.LEFT);
+        titleNewsfeed.setFont(new Font("Arial", Font.BOLD, 28));
+        
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new BorderLayout());
+        titlePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        titlePanel.add(titleNewsfeed, BorderLayout.WEST);
+        titlePanel.add(buttonNeuerBeitrag, BorderLayout.EAST);
         
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBorder(null); 
@@ -68,29 +79,22 @@ public class Newsfeed extends JPanel {
         scrollPanePane.setLayout(new GridBagLayout());
         
         GridBagConstraints c = new GridBagConstraints();
+        
         c.fill = GridBagConstraints.HORIZONTAL;
         c.anchor = GridBagConstraints.LINE_START;
         c.insets = new Insets(5, 5, 5, 5);
-        c.gridx = 0;
-        c.gridy = 0;
         
-        titleNewsfeed = new JLabel("Newsfeed",JLabel.LEFT);
-        titleNewsfeed.setFont(new Font("Arial", Font.BOLD, 28));
-       
+        c.gridx = 0;
+        c.gridy = 0;        
         for (int i = 0; i < beitraege.size(); i++) {
             c.gridy = i;
             scrollPanePane.add(new BeitragPanel(server, clientNutzer, beitraege.elementAt(i)), c);
-            
-            for (int j = 0; j < kommentare.size(); j++) {
-                c.gridy = i;
-                c.gridx = 2;
-                scrollPanePane.add(new KommentarPanel(server, clientNutzer, kommentare.elementAt(j)), c);
-            }
         }
         
         scrollPane.getViewport().setView(scrollPanePane);
-        this.add(titleNewsfeed, BorderLayout.NORTH);
-        this.add(scrollPane, BorderLayout.CENTER);      
+        
+        this.add(titlePanel, BorderLayout.NORTH);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
     
     /**
@@ -100,7 +104,6 @@ public class Newsfeed extends JPanel {
     private void initializeData() {
         abonnements = new Vector<Abonnement>();
         beitraege = new Vector<Beitrag>();
-        kommentare = new Vector<Kommentar>();
         
         try {
             abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
@@ -109,15 +112,25 @@ public class Newsfeed extends JPanel {
                 Abonnement abonnement = abonnements.elementAt(i);            
                 pinnwand = server.getPinnwandOfAbonnement(abonnement);
                 beitraege.addAll(server.getAllBeitragOfPinnwand(pinnwand));
-            }
-            
-            for (int i = 0; i < beitraege.size(); i++) {
-                Beitrag beitrag = beitraege.elementAt(i);
-                kommentare.addAll(server.getAllKommentarOfBeitrag(beitrag));
-            }
-            
+            }            
         } catch (RemoteException ex) {
             Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
-        }            
+        }
+    }
+
+    /**
+     * 
+     */
+    private void initializeListeners() {
+        try {
+            meinePinnwand = server.getPinnwandOfNutzer(clientNutzer);
+            buttonNeuerBeitrag.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, meinePinnwand);
+                }
+            });
+        } catch (RemoteException ex) {
+            Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

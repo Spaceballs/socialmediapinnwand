@@ -3,11 +3,18 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 
 /**
@@ -17,14 +24,14 @@ import java.util.logging.Logger;
  */
 public class DialogNutzer extends JFrame {
     
-    private SocialMediaLogic server;
-    private JTextField username = new JTextField();
-    private JTextField name = new JTextField();
-    private JTextField surname = new JTextField();
-    private JPasswordField password = new JPasswordField();
-    private JPanel controls = new JPanel(new GridLayout(0,1,2,2));
-    private JPanel p = new JPanel(new BorderLayout(5,5));
+    private final SocialMediaLogic server;
     private Nutzer clientNutzer = null;
+    private final JTextField username = new JTextField();
+    private final JTextField name = new JTextField();
+    private final JTextField surname = new JTextField();
+    private final JPasswordField password = new JPasswordField();
+    private final JPanel controls = new JPanel(new GridLayout(0,1,2,2));
+    private final JPanel p = new JPanel(new BorderLayout(5,5));
     public JPanel labels;
     
     /**

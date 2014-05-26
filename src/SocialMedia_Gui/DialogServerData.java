@@ -21,12 +21,11 @@ import javax.swing.JTextField;
 public class DialogServerData extends JFrame implements ActionListener{
     
     private SocialMediaClient client = null;
-    private SocialMediaReportClient rClient = null;
-    
+    private SocialMediaReportClient rClient = null;    
     JTextField adresse = new JTextField();;
     JTextField serverPort = new JTextField();
     JTextField clientPort = new JTextField();
-    JButton uebernehmen = new JButton("Übernehmen");
+    JButton buttonUebernehmen = new JButton("Übernehmen");
 
     /**
      * Constructor
@@ -97,10 +96,10 @@ public class DialogServerData extends JFrame implements ActionListener{
                        
         c.gridx = 0;
         c.gridy = 3;
-        this.add(uebernehmen, c);
+        this.add(buttonUebernehmen, c);
 
         JRootPane rootPane = this.getRootPane();
-        rootPane.setDefaultButton(uebernehmen);
+        rootPane.setDefaultButton(buttonUebernehmen);
 
         this.setTitle("Server Data");
         this.pack();
@@ -114,7 +113,7 @@ public class DialogServerData extends JFrame implements ActionListener{
      */
     private void initializeListeners() {
         //ActionListener Button Uebernehmen
-        uebernehmen.addActionListener(new ActionListener() {
+        buttonUebernehmen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 if (client != null){

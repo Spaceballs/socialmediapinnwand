@@ -2,8 +2,14 @@
 package SocialMedia_Gui;
 
 import SocialMedia_Logic.SocialMediaLogic;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 
 /**
@@ -12,7 +18,7 @@ import java.awt.*;
  */
 public class DialogSuchen extends JFrame {
     
-    private SocialMediaLogic server;
+    private final SocialMediaLogic server;
 
     /**
      * Constructor

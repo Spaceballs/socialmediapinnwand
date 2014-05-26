@@ -4,20 +4,15 @@ package SocialMedia_Gui;
 import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,8 +25,8 @@ import javax.swing.JPanel;
  */
 class AbonnementPanel extends JPanel {
     
-    private final JButton goDeleteButton = new JButton();
-    private final JButton goPinnwandButton = new JButton();    
+    private final JButton buttonLoeschen = new JButton();
+    private final JButton buttonPinnwand = new JButton();    
     private final SocialMediaLogic server;
     private final Nutzer clientNutzer;
     private final Abonnement abonnement;
@@ -69,9 +64,9 @@ class AbonnementPanel extends JPanel {
             user =  server.getOwnerOfPinnwandOfAbonnement(abonnement);
             username = user.getUsername();
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
-            goPinnwandButton.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
+            buttonPinnwand.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
             //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
-            goDeleteButton.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
+            buttonLoeschen.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
         } catch (IOException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,13 +90,13 @@ class AbonnementPanel extends JPanel {
         gridBagLayout.gridy = 0;
         //goDeleteButton.setBorder(null);
         //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
-        this.add(goDeleteButton, gridBagLayout);
+        this.add(buttonLoeschen, gridBagLayout);
 
         gridBagLayout.gridx = 3;
         gridBagLayout.gridy = 0;
         //goDeleteButton.setBorder(null);
         //goPinnwandButton.setMargin(new Insets(0, 0, 0, 0));
-        this.add(goPinnwandButton, gridBagLayout);
+        this.add(buttonPinnwand, gridBagLayout);
         
         this.setSize(70, 150);
     }
@@ -111,7 +106,7 @@ class AbonnementPanel extends JPanel {
      */
     private void initializeListeners() {
         
-        goDeleteButton.addActionListener(new ActionListener() {
+        buttonLoeschen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(SocialMedia_Gui.Hauptfenster.hauptfenster(null, null),
                         "Das Abonnement wirklich löschen?", "Abonnement löschen",
@@ -126,7 +121,7 @@ class AbonnementPanel extends JPanel {
             }
         });
         
-        goPinnwandButton.addActionListener(new ActionListener() {
+        buttonPinnwand.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new MeinePinnwand(server, clientNutzer));
             }

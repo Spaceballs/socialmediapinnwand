@@ -1,18 +1,26 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Data.Beitrag;
 import SocialMedia_Data.Nutzer;
+import SocialMedia_Data.Pinnwand;
+import SocialMedia_DatabaseManager.PinnwandMapper;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -23,12 +31,12 @@ import javax.swing.border.EmptyBorder;
  */
 public class MeinePinnwand extends JPanel {
 
-    private SocialMediaLogic server;
+    private final SocialMediaLogic server;
     private Nutzer clientNutzer = null;
-    JLabel newsfeedOfNutzer = new JLabel("",JLabel.LEFT);
-    JLabel abonnement = new JLabel("",JLabel.LEFT);
-    JButton button1 = new JButton("Button 1");
-    private JButton beitragVerfassen = new JButton("Neuer Beitrag");
+    private final JLabel titlePinnwand = new JLabel("",JLabel.LEFT);
+    private final JButton buttonNeuerBeitrag = new JButton("Neuer Beitrag");
+    private Vector<Beitrag> beitraege;
+    private Pinnwand pinnwand;
 
     /**
      * Constructor
@@ -38,7 +46,9 @@ public class MeinePinnwand extends JPanel {
     public MeinePinnwand(SocialMediaLogic server, Nutzer clientNutzer){
         this.clientNutzer = clientNutzer;
         this.server = server;
+        initializeData();
         initialize();
+        initializeListeners();
     }
 
     /**
@@ -48,49 +58,71 @@ public class MeinePinnwand extends JPanel {
      */
     private void initialize() {
         this.setLayout(new BorderLayout());
-        EmptyBorder border = new EmptyBorder(20,20,20,20);
-        this.setBorder(border);
-
+        
         try {
-            newsfeedOfNutzer.setText("Pinnwand von " + clientNutzer.getUsername());
+            titlePinnwand.setText("Pinnwand von " + clientNutzer.getUsername());
         } catch (RemoteException ex) {
             Logger.getLogger(NutzerInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        newsfeedOfNutzer.setFont(new Font("Arial", Font.BOLD, 48));
-        this.add(newsfeedOfNutzer,BorderLayout.PAGE_START);
-
-        String[][] rowData = {
-            { "Japan", "245" }, { "USA", "240" }, { "Italien", "220" },
-            { "Spanien", "217" }, {"Türkei", "215"} ,{ "England", "214" },
-            { "Frankreich", "190" }, {"Griechenland", "185" },
-            { "Deutschland", "180" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-            , {"Portugal", "170" }, {"Portugal", "170" }, {"Portugal", "170" }
-        };
-
-        String[] columnNames = {
-          "Abonnierter Nutzer", "Gehe zu Pinnwand"
-        };
-
-        JTable table = new JTable(rowData,columnNames);
-//        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//        TableColumnModel columnModel = table.getColumnModel();
-//        columnModel.getColumn(0).setPreferredWidth(150);
-//        columnModel.getColumn(1).setPreferredWidth(50);
-
-        JScrollPane scrollPane = new JScrollPane(table);
-//        Dimension dim = new Dimension(50, 200);
-//        scrollPane.setPreferredSize(dim);
-
-        this.add(scrollPane,BorderLayout.CENTER);
+        titlePinnwand.setFont(new Font("Arial", Font.BOLD, 28));
+        
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new BorderLayout());
+        titlePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        titlePanel.add(titlePinnwand, BorderLayout.WEST);
+        titlePanel.add(buttonNeuerBeitrag, BorderLayout.EAST);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBorder(null); 
+        scrollPane.getInsets().set(0,0,0,0);
+        scrollPane.setViewportBorder(null);
+        scrollPane.getViewport().setBorder(null);
+        
+        JPanel scrollPanePane = new JPanel();
+        scrollPanePane.setLayout(new GridBagLayout());
+        
+        GridBagConstraints c = new GridBagConstraints();
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 5, 5);
+        
+        c.gridx = 0;
+        c.gridy = 0;        
+        for (int i = 0; i < beitraege.size(); i++) {
+            c.gridy = i;
+            scrollPanePane.add(new BeitragPanel(server, clientNutzer, beitraege.elementAt(i)), c);
+        }
+        
+        scrollPane.getViewport().setView(scrollPanePane);
+        
+        this.add(titlePanel, BorderLayout.NORTH);
+        this.add(scrollPane, BorderLayout.CENTER);
+    }
+    
+    /**
+     * 
+     */
+    private void initializeData() {
+            beitraege = new Vector<Beitrag>();
+            
+        try {
+            pinnwand = server.getPinnwandOfNutzer(clientNutzer);
+            beitraege.addAll(server.getAllBeitragOfPinnwand(pinnwand));
+        } catch (RemoteException ex) {
+            Logger.getLogger(MeinePinnwand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * 
+     */
+    private void initializeListeners() {
+        buttonNeuerBeitrag.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, pinnwand);
+            }
+        });
     }
 
 }

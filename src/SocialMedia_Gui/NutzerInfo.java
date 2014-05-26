@@ -3,11 +3,8 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
+import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,11 +19,11 @@ import javax.swing.border.EmptyBorder;
  */
 public class NutzerInfo extends JPanel {
 
-    private SocialMediaLogic server;
+    private final SocialMediaLogic server;
     private Nutzer clientNutzer = null;
-    JLabel username = new JLabel("",JLabel.LEFT);
-    JLabel name = new JLabel("", JLabel.LEFT);
-    JLabel alias = new JLabel("alias", JLabel.LEFT);
+    private final JLabel username = new JLabel("",JLabel.LEFT);
+    private final JLabel name = new JLabel("", JLabel.LEFT);
+    private final JLabel alias = new JLabel("alias", JLabel.LEFT);
 
     /**
      * Constructor
@@ -45,10 +42,8 @@ public class NutzerInfo extends JPanel {
      * changes the font.
      */
     private void initialize() {
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        EmptyBorder border = new EmptyBorder(20,0,20,20);
-        this.setBorder(border);
+        this.setLayout(new BorderLayout());
+        this.setBorder(new EmptyBorder(5,5,5,5));
         
         try {
             username.setText(clientNutzer.getUsername());
@@ -60,22 +55,9 @@ public class NutzerInfo extends JPanel {
         username.setFont(new Font("Arial", Font.BOLD, 48));
         alias.setFont(new Font("Arial", Font.ITALIC, 20));
         name.setFont(new Font("Arial", Font.BOLD, 28));
-
-        c.fill = GridBagConstraints.HORIZONTAL;
-//        c.anchor = GridBagConstraints.LINE_START;
-//        c.insets = new Insets(5, 5, 5, 5);
-
-        c.gridx = 0;
-        c.gridy = 0;
-        this.add(username, c);
-
-        c.gridx = 0;
-        c.gridy = 1;
-        this.add(alias, c);
-
-        c.gridx = 0;
-        c.gridy = 2;
-        this.add(name, c);
+        
+        this.add(username, BorderLayout.NORTH);
+        this.add(alias, BorderLayout.WEST);
+        this.add(name, BorderLayout.SOUTH);
     }
-
 }

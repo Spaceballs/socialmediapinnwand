@@ -50,6 +50,7 @@ public class AbonnementInfo extends JPanel{
      */
     private void initialize() {
         this.setLayout(new BorderLayout());
+        this.setBorder(new EmptyBorder(5, 5, 5, 5));
         
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBorder(null); 
