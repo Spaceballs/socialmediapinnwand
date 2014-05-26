@@ -2,19 +2,21 @@
 package SocialMedia_Gui;
 
 import SocialMedia_Data.Beitrag;
+import SocialMedia_Data.Kommentar;
 import SocialMedia_Data.Like;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -37,9 +39,12 @@ public class BeitragPanel extends JPanel {
     private Vector<Like> likes;
     private int anzahlLikes;
     private String likeString;
-    private final JButton goEditButton = new JButton("Bearbeiten");
-    private final JButton goDeleteButton = new JButton("Löschen");
-    private final JButton goLikeButton = new JButton("Like");
+    private Vector<Kommentar> kommentare;
+    private final JButton buttonBearbeiten = new JButton("Bearbeiten");
+    private final JButton buttonLoeschen = new JButton("Löschen");
+    private final JButton buttonKommentieren = new JButton("Kommentieren");
+    private final JButton buttonLike = new JButton("Like");
+    private final JButton buttonUnlike = new JButton("Unlike");
     
     /**
      * 
@@ -82,12 +87,12 @@ public class BeitragPanel extends JPanel {
             likeString = Integer.toString(anzahlLikes);
 
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
-            goEditButton.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
-            goEditButton.setVisible(server.ownerCheck(clientNutzer, beitrag));
+            buttonBearbeiten.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
+            buttonBearbeiten.setVisible(server.ownerCheck(clientNutzer, beitrag));
             //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
-            goDeleteButton.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
-            goDeleteButton.setVisible(server.ownerCheck(clientNutzer, beitrag));
-        } catch (IOException ex) {
+            buttonLoeschen.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
+            buttonLoeschen.setVisible(server.ownerCheck(clientNutzer, beitrag));           
+        } catch (RemoteException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -96,52 +101,76 @@ public class BeitragPanel extends JPanel {
      * 
      */
     private void initializeContent() {
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints gridBagLayout = new GridBagConstraints();
-        gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
-        gridBagLayout.anchor = GridBagConstraints.LINE_START;
-        gridBagLayout.insets = new Insets(2, 2, 2, 2);
-
-        gridBagLayout.gridx = 0;
-        gridBagLayout.gridy = 0;
-        this.add(new JLabel(verfasser, JLabel.RIGHT), gridBagLayout);
-        
-        gridBagLayout.gridx = 1;
-        gridBagLayout.gridy = 0;
-        this.add(new JLabel(datum, JLabel.RIGHT), gridBagLayout);
-        
-        gridBagLayout.gridx = 2;
-        gridBagLayout.gridy = 0;
-        this.add(new JLabel(likeString + " Like(s)", JLabel.RIGHT), gridBagLayout);
-        
-        gridBagLayout.gridx = 3;
-        gridBagLayout.gridy = 0;
-        //goEditButton.setBorder(null);
-        //goEditButton.setMargin(new Insets(0, 0, 0, 0));
-        this.add(goEditButton, gridBagLayout);
-
-        gridBagLayout.gridx = 4;
-        gridBagLayout.gridy = 0;
-        //goDeleteButton.setBorder(null);
-        //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
-        this.add(goDeleteButton, gridBagLayout);
-        
-        gridBagLayout.gridx = 0;
-        gridBagLayout.gridy = 1;
-        this.add(new JLabel(text, JLabel.RIGHT), gridBagLayout);
-        
-        gridBagLayout.gridx = 4;
-        gridBagLayout.gridy = 1;
-        this.add(goLikeButton, gridBagLayout);
-        
-        this.setSize(70, 150);
+        try {
+            this.setLayout(new GridBagLayout());
+            this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+            this.setBackground(Color.LIGHT_GRAY);
+            GridBagConstraints gridBagLayout = new GridBagConstraints();
+            gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
+            gridBagLayout.anchor = GridBagConstraints.LINE_START;
+            gridBagLayout.insets = new Insets(2, 2, 2, 2);
+            
+            gridBagLayout.gridx = 0;
+            gridBagLayout.gridy = 0;
+            this.add(new JLabel(verfasser, JLabel.RIGHT), gridBagLayout);
+            
+            gridBagLayout.gridx = 1;
+            gridBagLayout.gridy = 0;
+            this.add(new JLabel(datum, JLabel.RIGHT), gridBagLayout);
+            
+            gridBagLayout.gridx = 2;
+            gridBagLayout.gridy = 0;
+            this.add(new JLabel(likeString + " Like(s)", JLabel.RIGHT), gridBagLayout);
+            
+            gridBagLayout.gridx = 3;
+            gridBagLayout.gridy = 0;
+            //goEditButton.setBorder(null);
+            //goEditButton.setMargin(new Insets(0, 0, 0, 0));
+            this.add(buttonBearbeiten, gridBagLayout);
+            
+            gridBagLayout.gridx = 4;
+            gridBagLayout.gridy = 0;
+            //goDeleteButton.setBorder(null);
+            //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
+            this.add(buttonLoeschen, gridBagLayout);
+            
+            gridBagLayout.gridx = 0;
+            gridBagLayout.gridy = 1;
+            this.add(new JLabel(text, JLabel.RIGHT), gridBagLayout);
+            
+            gridBagLayout.gridx = 4;
+            gridBagLayout.gridy = 1;
+            this.add(buttonKommentieren, gridBagLayout);
+            
+//            if () {
+                gridBagLayout.gridx = 5;
+                gridBagLayout.gridy = 1;
+                this.add(buttonLike, gridBagLayout);
+//            } else {
+//                gridBagLayout.gridx = 5;
+//                gridBagLayout.gridy = 1;
+//                this.add(goUnlikeButton, gridBagLayout);
+//            }
+            
+            kommentare = new Vector<Kommentar>();
+            kommentare = server.getAllKommentarOfBeitrag(beitrag);
+            for (int i = 0; i < kommentare.size(); i++) {
+                gridBagLayout.gridx = 0;
+                gridBagLayout.gridy = i+2;
+                this.add(new KommentarPanel(server, clientNutzer, kommentare.elementAt(i)), gridBagLayout);
+            }
+            
+            this.setSize(70, 150);
+        } catch (RemoteException ex) {
+            Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
      * 
      */
     private void initializeListeners() {        
-        goDeleteButton.addActionListener(new ActionListener() {
+        buttonLoeschen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(SocialMedia_Gui.Hauptfenster.hauptfenster(null, null),
                         "Den Beitrag wirklich löschen?", "Beitrag löschen",
@@ -156,19 +185,31 @@ public class BeitragPanel extends JPanel {
             }
         });
         
-        goEditButton.addActionListener(new ActionListener() {
+        buttonBearbeiten.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new MeinePinnwand(server, clientNutzer));
+                
             }
         });
         
-        goLikeButton.addActionListener(new ActionListener() {
+        buttonLike.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     server.createLike(beitrag, clientNutzer);
                 } catch (RemoteException ex) {
                     Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        });
+        
+        buttonKommentieren.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        
+        buttonUnlike.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
             }
         });
     }   

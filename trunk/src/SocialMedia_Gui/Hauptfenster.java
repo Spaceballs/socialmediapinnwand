@@ -1,20 +1,20 @@
 
 package SocialMedia_Gui;
 
-import SocialMedia_Client.SocialMediaClient;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
-import SocialMedia_Report.HTMLWriter;
-import SocialMedia_Report.Report;
-import SocialMedia_Report.ReportImpl;
-import SocialMedia_ReportGenerator.ReportGenerator;
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 /**
  * Creates the main frame of the client
@@ -22,19 +22,19 @@ import java.util.logging.Logger;
  */
 public class Hauptfenster extends JFrame {
     
-    private SocialMediaLogic server;
-    private Nutzer clientNutzer;
-    private JMenuBar menueLeiste = new JMenuBar();
-    private JMenu meinAccount = new JMenu("Mein Account");
-    private JMenu menue = new JMenu("Menü");
-    private JMenuItem newsfeedMenu = new JMenuItem("Newsfeed");
-    private JMenuItem meinePinnwandMenu = new JMenuItem("Meine Pinnwand");
-    private JMenuItem suchen = new JMenuItem("Nutzer suchen");
-    private JMenuItem accountdaten = new JMenuItem("Accountdaten ändern");
-    private JMenuItem abmelden = new JMenuItem("Abmelden");
+    private final SocialMediaLogic server;
+    private final Nutzer clientNutzer;
+    private final JMenuBar menueLeiste = new JMenuBar();
+    private final JMenu meinAccount = new JMenu("Mein Account");
+    private final JMenu menue = new JMenu("Menü");
+    private final JMenuItem newsfeedMenu = new JMenuItem("Newsfeed");
+    private final JMenuItem meinePinnwandMenu = new JMenuItem("Meine Pinnwand");
+    private final JMenuItem suchen = new JMenuItem("Nutzer suchen");
+    private final JMenuItem accountdaten = new JMenuItem("Accountdaten ändern");
+    private final JMenuItem abmelden = new JMenuItem("Abmelden");
     private JPanel panelLinks = new JPanel();
-    private JPanel panelRechtsOben = new JPanel();
-    private JPanel panelRechtsUnten = new JPanel();
+    private final JPanel panelRechtsOben = new JPanel();
+    private final JPanel panelRechtsUnten = new JPanel();
     private JSplitPane splitPane;
     private JSplitPane splitPaneRechts;
     private MeinePinnwand meinePinnwand;

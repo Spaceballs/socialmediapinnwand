@@ -2,7 +2,6 @@
 package SocialMedia_Gui;
 
 import SocialMedia_Data.Kommentar;
-import SocialMedia_Data.Like;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.Color;
@@ -11,11 +10,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -35,8 +33,8 @@ public class KommentarPanel extends JPanel {
     private String verfasser;
     private String text;
     private String datum;
-    private final JButton goEditButton = new JButton("Bearbeiten");
-    private final JButton goDeleteButton = new JButton("Löschen");
+    private final JButton buttonBearbeiten = new JButton("Bearbeiten");
+    private final JButton buttonLoeschen = new JButton("Löschen");
     
     KommentarPanel(SocialMediaLogic server, Nutzer clientNutzer, Kommentar kommentar) {
         super();
@@ -62,18 +60,20 @@ public class KommentarPanel extends JPanel {
             datum = kommentar.getCreationDate().toString();
 
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
-            goEditButton.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
-            goEditButton.setVisible(server.ownerCheck(clientNutzer, kommentar));
+            buttonBearbeiten.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
+            buttonBearbeiten.setVisible(server.ownerCheck(clientNutzer, kommentar));
             //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
-            goDeleteButton.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
-            goDeleteButton.setVisible(server.ownerCheck(clientNutzer, kommentar));
-        } catch (IOException ex) {
+            buttonLoeschen.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
+            buttonLoeschen.setVisible(server.ownerCheck(clientNutzer, kommentar));
+        } catch (RemoteException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     private void initializeContent() {
         this.setLayout(new GridBagLayout());
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+
         GridBagConstraints gridBagLayout = new GridBagConstraints();
         gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
         gridBagLayout.anchor = GridBagConstraints.LINE_START;
@@ -91,13 +91,13 @@ public class KommentarPanel extends JPanel {
         gridBagLayout.gridy = 0;
         //goEditButton.setBorder(null);
         //goEditButton.setMargin(new Insets(0, 0, 0, 0));
-        this.add(goEditButton, gridBagLayout);
+        this.add(buttonBearbeiten, gridBagLayout);
 
         gridBagLayout.gridx = 3;
         gridBagLayout.gridy = 0;
         //goDeleteButton.setBorder(null);
         //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
-        this.add(goDeleteButton, gridBagLayout);
+        this.add(buttonLoeschen, gridBagLayout);
         
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 1;
@@ -107,7 +107,7 @@ public class KommentarPanel extends JPanel {
     }
     
     private void initializeListeners() {
-        goDeleteButton.addActionListener(new ActionListener() {
+        buttonLoeschen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(SocialMedia_Gui.Hauptfenster.hauptfenster(null, null),
                         "Den Kommentar wirklich löschen?", "Kommentar löschen",
@@ -122,7 +122,7 @@ public class KommentarPanel extends JPanel {
             }
         });
         
-        goEditButton.addActionListener(new ActionListener() {
+        buttonBearbeiten.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new MeinePinnwand(server, clientNutzer));
             }

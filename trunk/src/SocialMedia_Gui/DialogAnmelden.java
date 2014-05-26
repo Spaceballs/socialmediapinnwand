@@ -3,13 +3,20 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
+import javax.swing.JTextField;
 
 /**
  * Dialog where user inserts username and password
@@ -17,12 +24,11 @@ import java.util.logging.Logger;
  */
 public class DialogAnmelden extends JFrame implements ActionListener{
     
-    private SocialMediaLogic server;
-    
-    JTextField username = new JTextField();
-    JPasswordField password = new JPasswordField();
-    JButton anmelden = new JButton("Anmelden");
-    JButton registrieren = new JButton("Registrieren");
+    private final SocialMediaLogic server;    
+    private final JTextField username = new JTextField();
+    private final JPasswordField password = new JPasswordField();
+    private final JButton buttonAnmelden = new JButton("Anmelden");
+    private final JButton buttonRegistrieren = new JButton("Registrieren");
 
     /**
      * Constructor
@@ -82,14 +88,14 @@ public class DialogAnmelden extends JFrame implements ActionListener{
 
         c.gridx = 0;
         c.gridy = 2;
-        this.add(anmelden, c);
+        this.add(buttonAnmelden, c);
 
         c.gridx = 1;
         c.gridy = 2;
-        this.add(registrieren, c);
+        this.add(buttonRegistrieren, c);
 
         JRootPane rootPane = this.getRootPane();
-        rootPane.setDefaultButton(anmelden);
+        rootPane.setDefaultButton(buttonAnmelden);
 
         this.setTitle("Anmelden");
         this.pack();
@@ -103,7 +109,7 @@ public class DialogAnmelden extends JFrame implements ActionListener{
      */
     private void initializeListeners() {    
         //ActionListener Button Anmelden
-        anmelden.addActionListener(new ActionListener() {
+        buttonAnmelden.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                Nutzer clientNutzer = null;
                try {
@@ -121,7 +127,7 @@ public class DialogAnmelden extends JFrame implements ActionListener{
            }
         });
         //ActionListener Button Registrieren
-        registrieren.addActionListener(new ActionListener() {
+        buttonRegistrieren.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                dispose();
                DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, username.getText(), new String(password.getPassword()));

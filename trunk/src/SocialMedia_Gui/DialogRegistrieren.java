@@ -3,13 +3,20 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
+import javax.swing.JTextField;
 
 /**
  * Dialog where user can register himself
@@ -17,13 +24,12 @@ import java.util.logging.Logger;
  */
 public class DialogRegistrieren extends JFrame {
     
-    private SocialMediaLogic server;
-    
-    JTextField username = new JTextField();
-    JTextField name = new JTextField();
-    JTextField surname = new JTextField();    
-    JPasswordField password = new JPasswordField();
-    JButton registrieren = new JButton("Registrieren");
+    private final SocialMediaLogic server;   
+    private final JTextField username = new JTextField();
+    private final JTextField name = new JTextField();
+    private final JTextField surname = new JTextField();    
+    private final JPasswordField password = new JPasswordField();
+    private final JButton buttonRegistrieren = new JButton("Registrieren");
 
     /**
      * Constructor
@@ -103,10 +109,10 @@ public class DialogRegistrieren extends JFrame {
  
         c.gridx = 1;
         c.gridy = 4;
-        this.add(registrieren, c);
+        this.add(buttonRegistrieren, c);
 
         JRootPane rootPane = this.getRootPane();
-        rootPane.setDefaultButton(registrieren);
+        rootPane.setDefaultButton(buttonRegistrieren);
               
         this.setTitle("Registrieren");
         this.pack();
@@ -120,7 +126,7 @@ public class DialogRegistrieren extends JFrame {
      */
     public void initializeListeners() {
         //ActionListener Button Registrieren
-        registrieren.addActionListener(new ActionListener() {
+        buttonRegistrieren.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                
                 if(username.getText().length() >= 3 && name.getText().length() >= 3 && surname.getText().length() >= 3 && new String(password.getPassword()).length()  >= 4 ){
