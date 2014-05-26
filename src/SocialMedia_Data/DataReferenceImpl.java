@@ -27,7 +27,7 @@ public class DataReferenceImpl extends java.rmi.server.UnicastRemoteObject imple
     // #[regen=yes,id=DCE.E53B2245-E1F6-6A0E-54A8-36E265C8BD5F]
     // </editor-fold> 
     /**
-     * 
+     * Konstruktor von DataReference
      * @throws java.rmi.RemoteException
      */
     public DataReferenceImpl () 
@@ -39,8 +39,9 @@ public class DataReferenceImpl extends java.rmi.server.UnicastRemoteObject imple
     // #[regen=yes,regenBody=yes,id=DCE.FCABA384-0469-0962-060E-28BE0D0E7C82]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the ID attribute.
+     * @return Integer - Returns the int ID of the object.
+     * @throws java.rmi.RemoteException
      */
     public int getID () 
             throws RemoteException{
@@ -51,8 +52,9 @@ public class DataReferenceImpl extends java.rmi.server.UnicastRemoteObject imple
     // #[regen=yes,regenBody=yes,id=DCE.FDCE10AB-E236-B3C7-2407-6A09EA4717F4]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the ID attribute.
+     * @param val - Needs an int ID to be set.
+     * @throws java.rmi.RemoteException
      */
     public void setID (int val) 
             throws RemoteException{
@@ -63,8 +65,9 @@ public class DataReferenceImpl extends java.rmi.server.UnicastRemoteObject imple
     // #[regen=yes,regenBody=yes,id=DCE.4BCCE1AB-78B5-AA3C-932B-883E5D1775B5]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the CreationDate attribute.
+     * @return Date - Returns a date object.
+     * @throws java.rmi.RemoteException
      */
     public Date getCreationDate () 
             throws RemoteException{
@@ -75,8 +78,9 @@ public class DataReferenceImpl extends java.rmi.server.UnicastRemoteObject imple
     // #[regen=yes,regenBody=yes,id=DCE.86FD70C6-270D-42C5-EFB5-AB6602CF95B1]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the CreationDate attribute.
+     * @param val - Needs a Date attribute to be set.
+     * @throws java.rmi.RemoteException
      */
     public void setCreationDate (Date val) 
             throws RemoteException{

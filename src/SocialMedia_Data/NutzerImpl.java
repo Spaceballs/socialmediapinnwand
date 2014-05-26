@@ -39,7 +39,7 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,id=DCE.98F2AE72-D7D0-D7AC-4E04-53CF14F84A72]
     // </editor-fold> 
     /**
-     * 
+     * Konstruktor von Nutzer
      * @throws java.rmi.RemoteException
      */
     public NutzerImpl () 
@@ -50,8 +50,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,regenBody=yes,id=DCE.567D7DB3-BF90-870F-C713-BCCF4C636E5A]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the Name attribute.
+     * @return String - Returns a string pbject of the name.
      * @throws java.rmi.RemoteException 
      */
     public String getName () 
@@ -63,8 +63,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,regenBody=yes,id=DCE.E6DC5A45-7CF6-3E7C-3DAF-119DA22511B2]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the Name attribute.
+     * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setName (String val) 
@@ -76,8 +76,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,regenBody=yes,id=DCE.D1992486-44F1-AA40-E8AD-2FB13793AC9E]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the Password attribute.
+     * @return String - Returns a string object of the password.
      * @throws java.rmi.RemoteException 
      */
     public String getPassword () 
@@ -89,8 +89,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,regenBody=yes,id=DCE.08A7888A-8EAF-5D9A-562D-0D2EA0E99350]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the Password attribute.
+     * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setPassword (String val) 
@@ -102,8 +102,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,regenBody=yes,id=DCE.A9A9B425-7C26-9DB0-4914-F2F4B9DFEC88]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the Surname attribute.
+     * @return String - returns a string object of the surname.
      * @throws java.rmi.RemoteException 
      */
     public String getSurname () 
@@ -115,8 +115,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,regenBody=yes,id=DCE.1F77A8CC-9095-B7EC-BA42-1992AF559AC2]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the Surname attribute
+     * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setSurname (String val) 
@@ -128,8 +128,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,regenBody=yes,id=DCE.97AE0FAE-FB1C-C535-4F41-C0409F1F0C2F]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the Username attribute.
+     * @return String - Returns a string object of the username.
      * @throws java.rmi.RemoteException 
      */
     public String getUsername () 
@@ -141,8 +141,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,regenBody=yes,id=DCE.9C720026-A954-59B5-8742-41752CAF391E]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the Username.
+     * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setUsername (String val) 
@@ -155,8 +155,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // </editor-fold> 
     /**
      * 
-     * @param verwaltung
-     * @return 
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @return - Returns the pinnwand object.
      * @throws java.rmi.RemoteException 
      */
     public Pinnwand getNutzerPinnwand (SocialMediaLogicImpl verwaltung) 
@@ -176,8 +176,8 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // </editor-fold> 
     /**
      * 
-     * @param verwaltung
-     * @return 
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @return - Returns all Abonnements of the Nutzer.
      * @throws java.rmi.RemoteException 
      */
     public Vector<Abonnement> getAllNutzerAbonnement (SocialMediaLogicImpl verwaltung) 
