@@ -22,7 +22,7 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     // #[regen=yes,id=DCE.7CFB53F5-D920-C232-8F9A-29A12BD1521C]
     // </editor-fold> 
     /**
-     * 
+     * Konstruktor von LikeImpl
      * @throws java.rmi.RemoteException
      */
     public LikeImpl () 
@@ -33,8 +33,8 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     // #[regen=yes,regenBody=yes,id=DCE.1CEDDD1F-7E5F-0544-8139-963D27603812]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the BeitragID attribute.
+     * @return Integer - Returns the int ID of the object.  
      * @throws java.rmi.RemoteException 
      */
     public int getBeitragID () 
@@ -46,8 +46,8 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     // #[regen=yes,regenBody=yes,id=DCE.EC09937C-CAAB-C140-161B-0AE8991B4937]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the BeitragID attribute.
+     * @param val - Needs an int ID to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setBeitragID (int val) 
@@ -59,8 +59,8 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     // #[regen=yes,regenBody=yes,id=DCE.59BCCE90-17A4-3B37-F84E-7BE592E9ECE9]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the NutzerID attribute.
+     * @return Integer - Returns the int ID of the object.
      * @throws java.rmi.RemoteException 
      */
     public int getNutzerID () 
@@ -72,8 +72,8 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     // #[regen=yes,regenBody=yes,id=DCE.94FDDF80-9772-FB4D-1B30-AD2A2D73E78A]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the NutzerID attribute.
+     * @param val - Needs an int ID to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setNutzerID (int val) 
@@ -84,6 +84,12 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A095AC40-10D1-77A9-0A67-2D41CC05B201]
     // </editor-fold> 
+    /**
+     * 
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @return - Returns the nutzer object. 
+     * @throws RemoteException 
+     */
     public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
         Vector<Nutzer> nutzers = verwaltung.getAllNutzer();

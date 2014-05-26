@@ -19,7 +19,7 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
     // #[regen=yes,id=DCE.F298D0BE-9649-8BB0-3B54-FBD7D203EFBB]
     // </editor-fold> 
     /**
-     * 
+     * Konstruktor von Kommentar
      * @throws java.rmi.RemoteException
      */
     public KommentarImpl () 
@@ -30,8 +30,8 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
     // #[regen=yes,regenBody=yes,id=DCE.B74E178E-1D04-F219-F66B-C4E5E6A9994E]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the BeitragID attribute.
+     * @return Integer - Returns the int ID of the object.
      * @throws java.rmi.RemoteException 
      */
     public int getBeitragID () 
@@ -43,8 +43,8 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
     // #[regen=yes,regenBody=yes,id=DCE.DC731636-254D-A471-997E-0123D0DC0144]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the BeitragID attribute.
+     * @param val - Needs an int ID to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setBeitragID (int val) 
