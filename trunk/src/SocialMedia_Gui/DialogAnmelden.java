@@ -22,7 +22,7 @@ import javax.swing.JTextField;
  * Dialog where user inserts username and password
  * @author Max
  */
-public class DialogAnmelden extends JFrame implements ActionListener{
+public class DialogAnmelden extends JFrame{
     
     private final SocialMediaLogic server;    
     private final JTextField username = new JTextField();
@@ -133,13 +133,5 @@ public class DialogAnmelden extends JFrame implements ActionListener{
                DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, username.getText(), new String(password.getPassword()));
            }
         });
-    }
-
-    /**
-     * UnsupportedOperationException
-     * @param e - ActionEvent
-     */
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
