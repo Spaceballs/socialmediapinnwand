@@ -169,5 +169,9 @@ public interface SocialMediaLogic extends java.rmi.Remote{
     
     public Nutzer getNutzerOf (Object o) throws RemoteException;
     
+    public Boolean isAlreadyLiked(Nutzer n, Beitrag b) throws RemoteException;
+    
+    public Boolean isAlreadyBooked(Nutzer n, Pinnwand p) throws RemoteException;
+    
 }
 
