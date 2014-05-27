@@ -34,12 +34,15 @@ public class BeitragPanel extends JPanel {
     private final Beitrag beitrag;
     private Nutzer user;
     private String text;
+    private StringBuffer buffer;
     private String verfasser;
     private String datum;
     private Vector<Like> likes;
     private int anzahlLikes;
     private String likeString;
     private Vector<Kommentar> kommentare;
+    private GridBagConstraints gridBagLayout;
+    private int textfieldOffset;
     private final JButton buttonBearbeiten = new JButton("Bearbeiten");
     private final JButton buttonLoeschen = new JButton("Löschen");
     private final JButton buttonKommentieren = new JButton("Kommentieren");
@@ -75,11 +78,11 @@ public class BeitragPanel extends JPanel {
     private void initializeData() {
         try {            
             user = server.getNutzerOf(beitrag);
-            verfasser = user.getUsername();
+            verfasser = "Verfasst von " + user.getUsername();
             
             text = beitrag.getText();
             
-            datum = beitrag.getCreationDate().toString();
+            datum = "am " + beitrag.getCreationDate().toString();
             
             likes = new Vector<Like>();
             likes = server.getAllLikeOfBeitrag(beitrag);
@@ -105,7 +108,7 @@ public class BeitragPanel extends JPanel {
             this.setLayout(new GridBagLayout());
             this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             this.setBackground(Color.LIGHT_GRAY);
-            GridBagConstraints gridBagLayout = new GridBagConstraints();
+            gridBagLayout = new GridBagConstraints();
             gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
             gridBagLayout.anchor = GridBagConstraints.LINE_START;
             gridBagLayout.insets = new Insets(2, 2, 2, 2);
@@ -113,17 +116,17 @@ public class BeitragPanel extends JPanel {
             gridBagLayout.gridx = 0;
             gridBagLayout.gridy = 0;
             gridBagLayout.gridwidth = 1;
-            this.add(new JLabel(verfasser, JLabel.RIGHT), gridBagLayout);
+            this.add(new JLabel(verfasser, JLabel.LEFT), gridBagLayout);
             
             gridBagLayout.gridx = 1;
             gridBagLayout.gridy = 0;
             gridBagLayout.gridwidth = 1;
-            this.add(new JLabel(datum, JLabel.RIGHT), gridBagLayout);
+            this.add(new JLabel(datum, JLabel.LEFT), gridBagLayout);
             
             gridBagLayout.gridx = 2;
             gridBagLayout.gridy = 0;
             gridBagLayout.gridwidth = 1;
-            this.add(new JLabel(likeString + " Like(s)", JLabel.RIGHT), gridBagLayout);
+            this.add(new JLabel(likeString + " Like(s)", JLabel.LEFT), gridBagLayout);
             
             gridBagLayout.gridx = 3;
             gridBagLayout.gridy = 0;
@@ -139,17 +142,12 @@ public class BeitragPanel extends JPanel {
             //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
             this.add(buttonLoeschen, gridBagLayout);
             
-            gridBagLayout.gridx = 0;
-            gridBagLayout.gridy = 1;
-            gridBagLayout.gridwidth = 2;
-            this.add(new JLabel(text, JLabel.RIGHT), gridBagLayout);
+            initializeTextfield();
             
             gridBagLayout.gridx = 3;
             gridBagLayout.gridy = 1;
             gridBagLayout.gridwidth = 1;
             this.add(buttonKommentieren, gridBagLayout);
-            
-            System.out.println(server.isAlreadyLiked(clientNutzer, beitrag));
             
             gridBagLayout.gridx = 4;
             gridBagLayout.gridy = 1;
@@ -164,7 +162,7 @@ public class BeitragPanel extends JPanel {
             kommentare = server.getAllKommentarOfBeitrag(beitrag);
             for (int i = 0; i < kommentare.size(); i++) {
                 gridBagLayout.gridx = 0;
-                gridBagLayout.gridy = i+2;
+                gridBagLayout.gridy = i + textfieldOffset + 1;
                 gridBagLayout.gridwidth = 2;
                 this.add(new KommentarPanel(server, clientNutzer, kommentare.elementAt(i)), gridBagLayout);
             }
@@ -222,4 +220,24 @@ public class BeitragPanel extends JPanel {
             }
         });
     }   
+
+    private void initializeTextfield() {
+        buffer = new StringBuffer();
+        buffer.append(text);
+        do {
+            if (buffer.length() >= 60) {
+                text = buffer.substring(0, 60);
+                buffer.delete(0, 60);
+            } else {
+                text = buffer.toString();
+                buffer.setLength(0);
+            }
+            
+            gridBagLayout.gridx = 0;
+            gridBagLayout.gridy = gridBagLayout.gridy + 1;
+            gridBagLayout.gridwidth = 2;
+            this.add(new JLabel(text, JLabel.LEFT), gridBagLayout);
+        } while (buffer.length() != 0);
+        textfieldOffset = gridBagLayout.gridy;
+    }
 }
