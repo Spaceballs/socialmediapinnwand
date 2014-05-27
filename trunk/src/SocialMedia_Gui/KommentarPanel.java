@@ -53,11 +53,11 @@ public class KommentarPanel extends JPanel {
     private void initializeData() {
         try {            
             user = server.getNutzerOf(kommentar);
-            verfasser = user.getUsername();
+            verfasser = "Verfasst von " + user.getUsername();
             
             text = kommentar.getText();
             
-            datum = kommentar.getCreationDate().toString();
+            datum = "am " + kommentar.getCreationDate().toString();
 
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
             buttonBearbeiten.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
@@ -81,11 +81,11 @@ public class KommentarPanel extends JPanel {
 
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 0;
-        this.add(new JLabel(verfasser, JLabel.RIGHT), gridBagLayout);
+        this.add(new JLabel(verfasser, JLabel.LEFT), gridBagLayout);
         
         gridBagLayout.gridx = 1;
         gridBagLayout.gridy = 0;
-        this.add(new JLabel(datum, JLabel.RIGHT), gridBagLayout);
+        this.add(new JLabel(datum, JLabel.LEFT), gridBagLayout);
         
         gridBagLayout.gridx = 2;
         gridBagLayout.gridy = 0;
@@ -101,7 +101,7 @@ public class KommentarPanel extends JPanel {
         
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 1;
-        this.add(new JLabel(text, JLabel.RIGHT), gridBagLayout);
+        this.add(new JLabel(text, JLabel.LEFT), gridBagLayout);
         
         this.setSize(70, 150);        
     }
