@@ -4,7 +4,6 @@ import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.AbonnementImpl; 
 import SocialMedia_Data.Beitrag; 
 import SocialMedia_Data.BeitragImpl; 
-import SocialMedia_Data.DataReference;
 import SocialMedia_Data.Kommentar; 
 import SocialMedia_Data.KommentarImpl; 
 import SocialMedia_Data.Like; 
@@ -19,11 +18,6 @@ import SocialMedia_DatabaseManager.KommentarMapper;
 import SocialMedia_DatabaseManager.LikeMapper; 
 import SocialMedia_DatabaseManager.NutzerMapper; 
 import SocialMedia_DatabaseManager.PinnwandMapper; 
-//import SocialMedia_DatabaseManager.Vector<Abonnement>;
-//import SocialMedia_DatabaseManager.Vector<Beitrag>;
-//import SocialMedia_DatabaseManager.Vector<Kommentar>;
-//import SocialMedia_DatabaseManager.Vector<Like>;
-//import SocialMedia_DatabaseManager.Vector<Nutzer>;
 import SocialMedia_ReportGenerator.ReportGenerator; 
 import SocialMedia_ReportGenerator.ReportGeneratorImpl;
 import java.rmi.RemoteException;
@@ -162,6 +156,49 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         val = abonnementMapper.findByID(val.getID());
         return val.getAbonnementPinnwand(this);
     }
+    
+    /**
+     * Pinnwand und nutzer für abo button
+     * beitrag und nutzer für like button
+     */
+    /**
+     * 
+     * @param n
+     * @param p
+     * @return 
+     * @throws java.rmi.RemoteException 
+     */
+    public Boolean isAlreadyBooked(Nutzer n, Pinnwand p) throws RemoteException {
+        n = nutzerMapper.findByID(n.getID());
+        p = pinnwandMapper.findByID(p.getID());
+        Vector<Abonnement> nutzerAbonnements = n.getAllNutzerAbonnement(this);
+        for (int i = 0; i < nutzerAbonnements.size(); i++) {
+            Abonnement abonnement = nutzerAbonnements.elementAt(i);
+            if (abonnement.getPinnwandID() == p.getID())
+                return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 
+     * @param n
+     * @param b
+     * @return 
+     * @throws java.rmi.RemoteException 
+     */
+    public Boolean isAlreadyLiked(Nutzer n, Beitrag b) throws RemoteException {
+        n = nutzerMapper.findByID(n.getID());
+        b = beitragMapper.findByID(b.getID());
+        Vector<Like> beitragLikes = b.getAllBeitragLikes(this);
+        for (int i = 0; i < beitragLikes.size(); i++) {
+            Like like = beitragLikes.elementAt(i);
+            if (like.getBeitragID() == b.getID())
+                return true;
+        }
+        return false;        
+    }
+    
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.332BE2CD-E2F2-7B46-7CF6-53FA4A82274E]
