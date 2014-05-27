@@ -66,6 +66,7 @@ public class HauptfensterReport extends JFrame {
     private JFormattedTextField calendarEndDateField;
     private SimpleDateFormat df = new SimpleDateFormat("dd.mm.yyyy", Locale.GERMANY);
     // TO-DO
+
     /**
      * Constructor of the HauptfensterReport class.
      * The data displayed by this class is obtained from the server object.
