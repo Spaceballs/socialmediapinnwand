@@ -70,7 +70,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // </editor-fold>
 
     /**
-     *
+     * Konstrukter of the SocialMediaLogicImpl class
      * @param likeMapper
      * @param kommentarMapper
      * @param beitragMapper
@@ -93,9 +93,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.F512BA95-062D-B7B4-5874-8D2D04E7A001]
     // </editor-fold>
     /**
-     * 
-     * @param val
-     * @return 
+     * Read out the <code>Like</code>-objects from Beitrag.
+     * @param val - Beitrag to read out the data
+     * @return vector with object Beitrag
      * @throws java.rmi.RemoteException 
      */
     public Vector<Like> getAllLikeOfBeitrag (Beitrag val) throws RemoteException{
@@ -107,9 +107,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.99C8403B-5BBC-E69A-9FC6-F0E8428FA93D]
     // </editor-fold> 
     /**
-     * 
-     * @param val
-     * @return 
+     * Read out the <code>Kommentar</code>-objects from Beitrag.
+     * @param val - Beitrag to read out the data
+     * @return vector with object Beitrag
      * @throws java.rmi.RemoteException 
      */
     public Vector<Kommentar> getAllKommentarOfBeitrag (Beitrag val) throws RemoteException{
@@ -121,8 +121,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.EE7AEF7E-9E77-F835-A78D-1EEAC56AAD77]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getting all Beiträge
+     * @return vector with all Beiträge
      * @throws java.rmi.RemoteException 
      */
     public Vector<Beitrag> getAllBeitrag () throws RemoteException{
@@ -133,9 +133,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.9B4DF46F-B156-4748-2520-2D5835471895]
     // </editor-fold> 
     /**
-     * 
-     * @param val
-     * @return 
+     * Read out the <code>Abonnement</code>-objects from Nutzer.
+     * @param val - Nutzer to read out the data
+     * @return vector with object Nutzer
      * @throws java.rmi.RemoteException 
      */
     public Vector<Abonnement> getAllAbonnementOfNutzer (Nutzer val) throws RemoteException{
@@ -200,12 +200,12 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.332BE2CD-E2F2-7B46-7CF6-53FA4A82274E]
     // </editor-fold> 
     /**
-     * 
+     * Construktor for createNutzer.
      * @param username - Username of the new Nutzer object.
      * @param name - Name of the new Nutzer object.
      * @param surname - Surname of the new Nutzer object.
      * @param password - Password of the new Nutzer object.
-     * @return 
+     * @return the createdNutzer Object.
      * @throws java.rmi.RemoteException 
      */
     public Nutzer createNutzer (String username, String name, String surname, String password) throws RemoteException{
@@ -237,9 +237,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.FC04FC00-E24A-98F2-3349-B9FD920145AE]
     // </editor-fold> 
     /**
-     * 
-     * @param n
-     * @return 
+     * Creating new Pinnwand
+     * @param n - Nutzer
+     * @return the createdPinnwand Object
      * @throws java.rmi.RemoteException 
      */
     public Pinnwand createPinnwand (Nutzer n) throws RemoteException{
@@ -254,11 +254,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.88BE6958-5E18-14BA-A610-1D88707C5B09]
     // </editor-fold> 
     /**
-     * 
-     * @param p
-     * @param n
-     * @param text
-     * @return 
+     * Creating a new Beitrag
+     * @param p - Parameter for Pinnwand
+     * @param n - Parameter for Nutzer
+     * @param text - Format String
+     * @return the createdBeitrag Object
      * @throws java.rmi.RemoteException 
      */
     public Beitrag createBeitrag (Pinnwand p, Nutzer n, String text) throws RemoteException{
@@ -276,11 +276,11 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.A02DB77D-0CF1-4106-4F71-8156B34213A9]
     // </editor-fold> 
     /**
-     * 
-     * @param b
-     * @param n
-     * @param text
-     * @return 
+     * Creating a new Kommentar
+     * @param b - Beitrag
+     * @param n - Nutzer
+     * @param text - String for text
+     * @return the createdKommentar Object 
      * @throws java.rmi.RemoteException 
      */
     public Kommentar createKommentar (Beitrag b, Nutzer n, String text) throws RemoteException{
@@ -298,10 +298,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.9F06F9DF-CAE9-CF4B-A623-71CD19435718]
     // </editor-fold> 
     /**
-     * 
-     * @param b
-     * @param n
-     * @return 
+     * Creating a new Like
+     * @param b - Beitrag
+     * @param n - Nutzer
+     * @return the createdLike Object
      * @throws java.rmi.RemoteException 
      */
     public Like createLike (Beitrag b, Nutzer n) throws RemoteException{
@@ -318,10 +318,10 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.9C219BC2-CE4B-0A3F-F90A-6D9158230771]
     // </editor-fold> 
     /**
-     * 
-     * @param p
-     * @param n
-     * @return 
+     * Creating new Abonnement
+     * @param p - Pinnwand
+     * @param n - Nutzer
+     * @return the createdAbonnement Object
      * @throws java.rmi.RemoteException 
      */
     public Abonnement createAbonnement (Pinnwand p, Nutzer n) throws RemoteException{
@@ -338,8 +338,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.F096A7B4-B512-4224-39C4-0A1923FB1E76]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Deletes the given Beitrag from the sql table by id.
+     * @param val - Beitrag to be deleted.
      * @throws java.rmi.RemoteException 
      */
     public void deleteBeitrag (Beitrag val) throws RemoteException{
@@ -361,8 +361,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.54EA257F-BDC9-E395-06E2-C38930EA1C47]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Deletes the given Kommentar from the sql table by id.
+     * @param val - Kommentar to be deleted.
      * @throws java.rmi.RemoteException 
      */
     public void deleteKommentar (Kommentar val) throws RemoteException{
@@ -374,8 +374,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.F04E9C7D-DF39-D4C1-CA6F-F0C7E594FF23]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Deletes the given Like from the sql table by id.
+     * @param val - Like to be deleted.
      * @throws java.rmi.RemoteException 
      */
     public void deleteLike (Like val) throws RemoteException{
@@ -387,8 +387,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.D70A0C1C-C792-90AD-0451-23BE6ED0F91C]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Deletes the given Abonnement from the sql table by id.
+     * @param val - Abonnement to be deleted. 
      * @throws java.rmi.RemoteException 
      */
     public void deleteAbonnement (Abonnement val) throws RemoteException{
@@ -400,7 +400,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.44DCB352-14CA-B344-5BC9-140373F0D2B6]
     // </editor-fold> 
     /**
-     * 
+     * // TO DO
      * @param val 
      * @throws java.rmi.RemoteException 
      */
@@ -415,8 +415,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.5737DE0C-5D9D-A07C-31A1-2A9182689801]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Deletes the given Pinnwand from the sql table by id.
+     * @param val - Pinnwand to be deleted.
      * @throws java.rmi.RemoteException 
      */
     public void deletePinnwand (Pinnwand val) throws RemoteException{
@@ -431,7 +431,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.F430EEA6-50C6-02C3-918D-04DD28681A58]
     // </editor-fold> 
     /**
-     * 
+     * // TO DO
      * @param username
      * @param password
      * @return 
@@ -459,7 +459,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.F21F8D86-3A7A-9698-C19B-B697E5029F30]
     // </editor-fold> 
     /**
-     * 
+     * Construktor for registrateNutzer 
      * @param username
      * @param name
      * @param surname
@@ -489,8 +489,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.0C6ACEA3-8FF0-DA46-FB02-E756225055F9]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Method to get each entry in the Pinnwand table.
+     * @return Vector returns all the entrys in the sql table
      * @throws java.rmi.RemoteException 
      */
     public Vector<Pinnwand> getAllPinnwand () throws RemoteException{
@@ -501,9 +501,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.A778174E-5769-F86A-5D7A-3B24981B8141]
     // </editor-fold> 
     /**
-     * 
-     * @param val
-     * @return 
+     * Read out the <code>Beitrag</code>-objects from Pinnwand.
+     * @param val - Pinnwand to read out the data
+     * @return vector with object Pinnwand
      * @throws java.rmi.RemoteException 
      */
     public Vector<Beitrag> getAllBeitragOfPinnwand (Pinnwand val) throws RemoteException{
@@ -515,8 +515,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.57B75893-889C-FDFD-4B14-C8C32D7C6BF8]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getting all Likes
+     * @return Vector returns all the entrys in the sql table
      * @throws java.rmi.RemoteException 
      */
     public Vector<Like> getAllLike () throws RemoteException{
@@ -527,8 +527,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.9B8BB13C-9084-D93A-081F-3E5FCE5AD63F]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getting all comments
+     * @return vector with all comments
      * @throws java.rmi.RemoteException 
      */
     public Vector<Kommentar> getAllKommentar () throws RemoteException{
@@ -539,8 +539,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.0A2A6431-0899-945E-33F2-3D1BC5D84ABE]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getting all abonnements
+     * @return vector with all abonnements 
      * @throws java.rmi.RemoteException 
      */
     public Vector<Abonnement> getAllAbonnement () throws RemoteException{
@@ -566,8 +566,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.F73B11C8-1E12-4694-46DB-4CC2CADB0F4E]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Method to get each entry in the Nutzer table.
+     * @return Vector returns all the entrys in the sql table
      * @throws java.rmi.RemoteException 
      */
     public Vector<Nutzer> getAllNutzer () throws RemoteException{
@@ -578,9 +578,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.86E91838-6671-CE8D-5E33-D0DD3F055D7F]
     // </editor-fold> 
     /**
-     * 
+     * Method to search every entry in the Nutzer table.
      * @param val
-     * @return 
+     * @return Vector returns all the entrys in the sql table
      * @throws java.rmi.RemoteException 
      */
     public Vector<Nutzer> searchNutzer (String val) throws RemoteException{
@@ -601,7 +601,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.3AF91737-2A47-B29A-5E79-2E90649BA926]
     // </editor-fold> 
     /**
-     * 
+     * // TO DO
      * @param username
      * @param name
      * @param surname
@@ -647,7 +647,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * 
      * @param text
-     * @param b
+     * @param b - Beitrag
      * @return 
      * @throws java.rmi.RemoteException 
      */
@@ -675,9 +675,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.7E869C88-9B52-64C0-3A27-F54B650336BB]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
-     * @return  
+     * Save a nutzer object in the database
+     * @param val - Nutzer
+     * @return Nutzer object will be updated
      * @throws java.rmi.RemoteException 
      */
     public Nutzer saveNutzer (Nutzer val) throws RemoteException{
@@ -688,9 +688,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.96DF2B87-8D8D-F34E-C01E-85EDD102CA5A]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
-     * @return  
+     * Save a Beitrag object in the database
+     * @param val - Beitrag
+     * @return Beitrag object will be updated
      * @throws java.rmi.RemoteException 
      */
     public Beitrag saveBeitrag (Beitrag val) throws RemoteException{
@@ -701,9 +701,9 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // #[regen=yes,id=DCE.4C2FEF26-D39B-EA32-2139-40C512071758]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
-     * @return  
+     * Kommentar object will be saved in the database.
+     * @param val - Kommentar object to be saved
+     * @return Kommentar object will be updated  
      * @throws java.rmi.RemoteException 
      */
     public Kommentar saveKommentar (Kommentar val) throws RemoteException{
@@ -724,7 +724,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         return p.getOwner(this);
     }
     /**
-     * 
+     * //TO DO
      * @param n
      * @param o
      * @return
@@ -751,8 +751,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     }
     
     /**
-     * 
-     * @return
+     * Read out the ReportGenerator
+     * @return ReportGenerator object
      * @throws java.rmi.RemoteException 
      */
     public ReportGenerator getReportGenerator()throws java.rmi.RemoteException{
