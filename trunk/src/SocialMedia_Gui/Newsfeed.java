@@ -31,7 +31,7 @@ import javax.swing.border.EmptyBorder;
  */
 public class Newsfeed extends JPanel {
     private final SocialMediaLogic server;
-    private Nutzer clientNutzer = null;
+    private final Nutzer clientNutzer;
     private JLabel titleNewsfeed;    
     private final JButton buttonNeuerBeitrag = new JButton("Neuer Beitrag");
     private Vector<Abonnement> abonnements;

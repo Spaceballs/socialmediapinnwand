@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 public class NutzerInfo extends JPanel {
 
     private final SocialMediaLogic server;
-    private Nutzer clientNutzer = null;
+    private final Nutzer clientNutzer;
     private final JLabel username = new JLabel("",JLabel.LEFT);
     private final JLabel name = new JLabel("", JLabel.LEFT);
     private final JLabel alias = new JLabel("alias", JLabel.LEFT);

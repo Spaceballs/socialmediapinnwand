@@ -32,7 +32,7 @@ import javax.swing.border.EmptyBorder;
 public class MeinePinnwand extends JPanel {
 
     private final SocialMediaLogic server;
-    private Nutzer clientNutzer = null;
+    private final Nutzer clientNutzer;
     private final JLabel titlePinnwand = new JLabel("",JLabel.LEFT);
     private final JButton buttonNeuerBeitrag = new JButton("Neuer Beitrag");
     private Vector<Beitrag> beitraege;
