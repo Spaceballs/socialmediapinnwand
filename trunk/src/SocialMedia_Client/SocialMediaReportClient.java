@@ -18,6 +18,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Client starting class. The client is started by the main class embedded in this one.
@@ -34,6 +36,17 @@ public class SocialMediaReportClient {
      * Constructor of the client start class.
      */
     private SocialMediaReportClient (){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
         javax.swing.SwingUtilities.invokeLater(
                 new Runnable() { public void run() { createAndShowDialogue();}});
     }

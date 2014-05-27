@@ -64,7 +64,7 @@ public class HauptfensterReport extends JFrame {
     private JButton runBeitragReportButton;
     private JFormattedTextField calendarStartDateField;
     private JFormattedTextField calendarEndDateField;
-    private SimpleDateFormat df = new SimpleDateFormat("dd.mm.yyyy", Locale.GERMANY);
+    private SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
     // TO-DO
 
     /**
