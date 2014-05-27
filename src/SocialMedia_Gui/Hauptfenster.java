@@ -150,6 +150,7 @@ public class Hauptfenster extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH); // Frame is maximized on start
 //        this.setMinimumSize(new Dimension(400, 200));
+        
         this.setSize(1024, 768);
         this.setResizable(false);
         this.setLocationRelativeTo(null); // frame is at the center of the screen

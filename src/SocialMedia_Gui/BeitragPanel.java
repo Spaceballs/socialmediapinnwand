@@ -88,10 +88,10 @@ public class BeitragPanel extends JPanel {
 
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
             buttonBearbeiten.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
-            buttonBearbeiten.setVisible(server.ownerCheck(clientNutzer, beitrag));
+            buttonBearbeiten.setEnabled(server.ownerCheck(clientNutzer, beitrag));
             //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
             buttonLoeschen.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
-            buttonLoeschen.setVisible(server.ownerCheck(clientNutzer, beitrag));           
+            buttonLoeschen.setEnabled(server.ownerCheck(clientNutzer, beitrag));
         } catch (RemoteException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -112,51 +112,60 @@ public class BeitragPanel extends JPanel {
             
             gridBagLayout.gridx = 0;
             gridBagLayout.gridy = 0;
+            gridBagLayout.gridwidth = 1;
             this.add(new JLabel(verfasser, JLabel.RIGHT), gridBagLayout);
             
             gridBagLayout.gridx = 1;
             gridBagLayout.gridy = 0;
+            gridBagLayout.gridwidth = 1;
             this.add(new JLabel(datum, JLabel.RIGHT), gridBagLayout);
             
             gridBagLayout.gridx = 2;
             gridBagLayout.gridy = 0;
+            gridBagLayout.gridwidth = 1;
             this.add(new JLabel(likeString + " Like(s)", JLabel.RIGHT), gridBagLayout);
             
             gridBagLayout.gridx = 3;
             gridBagLayout.gridy = 0;
+            gridBagLayout.gridwidth = 1;
             //goEditButton.setBorder(null);
             //goEditButton.setMargin(new Insets(0, 0, 0, 0));
             this.add(buttonBearbeiten, gridBagLayout);
             
             gridBagLayout.gridx = 4;
             gridBagLayout.gridy = 0;
+            gridBagLayout.gridwidth = 1;
             //goDeleteButton.setBorder(null);
             //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
             this.add(buttonLoeschen, gridBagLayout);
             
             gridBagLayout.gridx = 0;
             gridBagLayout.gridy = 1;
+            gridBagLayout.gridwidth = 2;
             this.add(new JLabel(text, JLabel.RIGHT), gridBagLayout);
+            
+            gridBagLayout.gridx = 3;
+            gridBagLayout.gridy = 1;
+            gridBagLayout.gridwidth = 1;
+            this.add(buttonKommentieren, gridBagLayout);
+            
+            System.out.println(server.isAlreadyLiked(clientNutzer, beitrag));
             
             gridBagLayout.gridx = 4;
             gridBagLayout.gridy = 1;
-            this.add(buttonKommentieren, gridBagLayout);
-            
-//            if () {
-                gridBagLayout.gridx = 5;
-                gridBagLayout.gridy = 1;
+            gridBagLayout.gridwidth = 1;
+            if(server.isAlreadyLiked(clientNutzer, beitrag)) {
+                this.add(buttonUnlike, gridBagLayout);
+            } else {
                 this.add(buttonLike, gridBagLayout);
-//            } else {
-//                gridBagLayout.gridx = 5;
-//                gridBagLayout.gridy = 1;
-//                this.add(goUnlikeButton, gridBagLayout);
-//            }
+            }
             
             kommentare = new Vector<Kommentar>();
             kommentare = server.getAllKommentarOfBeitrag(beitrag);
             for (int i = 0; i < kommentare.size(); i++) {
                 gridBagLayout.gridx = 0;
                 gridBagLayout.gridy = i+2;
+                gridBagLayout.gridwidth = 2;
                 this.add(new KommentarPanel(server, clientNutzer, kommentare.elementAt(i)), gridBagLayout);
             }
             

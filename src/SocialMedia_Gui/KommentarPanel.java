@@ -61,10 +61,10 @@ public class KommentarPanel extends JPanel {
 
             //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
             buttonBearbeiten.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
-            buttonBearbeiten.setVisible(server.ownerCheck(clientNutzer, kommentar));
+            buttonBearbeiten.setEnabled(server.ownerCheck(clientNutzer, kommentar));
             //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
             buttonLoeschen.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
-            buttonLoeschen.setVisible(server.ownerCheck(clientNutzer, kommentar));
+            buttonLoeschen.setEnabled(server.ownerCheck(clientNutzer, kommentar));
         } catch (RemoteException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
