@@ -193,7 +193,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         Vector<Like> beitragLikes = b.getAllBeitragLikes(this);
         for (int i = 0; i < beitragLikes.size(); i++) {
             Like like = beitragLikes.elementAt(i);
-            if (like.getBeitragID() == b.getID())
+            if (like.getBeitragID() == n.getID())
                 return true;
         }
         return false;        
