@@ -9,6 +9,7 @@ package SocialMedia_Client;
 import SocialMedia_Gui.DialogAnmelden;
 import SocialMedia_Gui.DialogServerData;
 import SocialMedia_Logic.SocialMediaLogic;
+import com.sun.glass.ui.SystemClipboard;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -16,6 +17,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Client starting class. The client is started by the main class embedded in this one.
@@ -32,6 +35,17 @@ public class SocialMediaClient {
      * Constructor of the client start class.
      */
     private SocialMediaClient (){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
         javax.swing.SwingUtilities.invokeLater(
                 new Runnable() { public void run() { createAndShowDialogue();}});
     }
