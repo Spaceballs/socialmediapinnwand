@@ -36,34 +36,34 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.EB4714A1-545D-2CD4-C61F-CAB30CBEAB2D]
     // </editor-fold> 
-    private LikeMapper likeMapper;
+    private final LikeMapper likeMapper;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.7E384158-C838-6D19-388B-73F38973C24A]
     // </editor-fold> 
-    private KommentarMapper kommentarMapper;
+    private final KommentarMapper kommentarMapper;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A9627CE2-EE84-211B-8192-BFAAE5583435]
     // </editor-fold> 
-    private BeitragMapper beitragMapper;
+    private final BeitragMapper beitragMapper;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.6B7FBB1E-10AE-F884-F94B-121E46EF9F62]
     // </editor-fold> 
-    private AbonnementMapper abonnementMapper;
+    private final AbonnementMapper abonnementMapper;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.43F95F85-F37C-7558-2A76-EC8662964A63]
     // </editor-fold> 
-    private NutzerMapper nutzerMapper;
+    private final NutzerMapper nutzerMapper;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.AD32097B-46E4-1D92-AB48-48CDBC6877B5]
     // </editor-fold> 
-    private PinnwandMapper pinnwandMapper;
+    private final PinnwandMapper pinnwandMapper;
 
-    private ReportGenerator reportGenerator;
+    private final ReportGenerator reportGenerator;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A40EA4B1-D3AE-FBD5-8C74-CE69064D5075]
@@ -139,8 +139,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Vector<Abonnement> getAllAbonnementOfNutzer (Nutzer val) throws RemoteException{
-        Nutzer n = nutzerMapper.findByID(val.getID());
-        return n.getAllNutzerAbonnement(this);
+        val = nutzerMapper.findByID(val.getID());
+        return val.getAllNutzerAbonnement(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -156,11 +156,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         val = abonnementMapper.findByID(val.getID());
         return val.getAbonnementPinnwand(this);
     }
-    
-    /**
-     * Pinnwand und nutzer für abo button
-     * beitrag und nutzer für like button
-     */
+
     /**
      * 
      * @param n
@@ -247,6 +243,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Pinnwand createPinnwand (Nutzer n) throws RemoteException{
+        n = nutzerMapper.findByID(n.getID());
         Pinnwand pinnwand = new PinnwandImpl();
         pinnwand.setCreationDate(new Date());
         pinnwand.setNutzerID(n.getID());
@@ -265,6 +262,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Beitrag createBeitrag (Pinnwand p, Nutzer n, String text) throws RemoteException{
+        p = pinnwandMapper.findByID(p.getID());
+        n = nutzerMapper.findByID(n.getID());
         Beitrag beitrag = new BeitragImpl();
         beitrag.setCreationDate(new Date());
         beitrag.setPinnwandID(p.getID());
@@ -285,6 +284,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Kommentar createKommentar (Beitrag b, Nutzer n, String text) throws RemoteException{
+        b = beitragMapper.findByID(b.getID());
+        n = nutzerMapper.findByID(n.getID());
         Kommentar kommentar = new KommentarImpl();
         kommentar.setBeitragID(b.getID());
         kommentar.setCreationDate(new Date());
@@ -304,6 +305,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Like createLike (Beitrag b, Nutzer n) throws RemoteException{
+        b = beitragMapper.findByID(b.getID());
+        n = nutzerMapper.findByID(n.getID());
         Like like = new LikeImpl();
         like.setBeitragID(b.getID());
         like.setCreationDate(new Date());
@@ -322,6 +325,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Abonnement createAbonnement (Pinnwand p, Nutzer n) throws RemoteException{
+        p = pinnwandMapper.findByID(p.getID());
+        n = nutzerMapper.findByID(n.getID());
         Abonnement abonnement = new AbonnementImpl();
         abonnement.setCreationDate(new Date());
         abonnement.setNutzerID(n.getID());
@@ -338,6 +343,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public void deleteBeitrag (Beitrag val) throws RemoteException{
+        val = beitragMapper.findByID(val.getID());
         Vector<Kommentar> kommentareToDelete = val.getAllBeitragKommentar(this);
         for (int i = 0; i < kommentareToDelete.size(); i++) {
             Kommentar kommentar = kommentareToDelete.elementAt(i);
@@ -360,6 +366,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public void deleteKommentar (Kommentar val) throws RemoteException{
+        val = kommentarMapper.findByID(val.getID());
         kommentarMapper.delete(val);
     }
 
@@ -372,6 +379,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public void deleteLike (Like val) throws RemoteException{
+        val = likeMapper.findByID(val.getID());
         likeMapper.delete(val);
     }
 
@@ -384,6 +392,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public void deleteAbonnement (Abonnement val) throws RemoteException{
+        val = abonnementMapper.findByID(val.getID());
         abonnementMapper.delete(val);
     }
 
@@ -396,6 +405,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public void deactivateNutzer (Nutzer val) throws RemoteException{
+        val = nutzerMapper.findByID(val.getID());
         val.setUsername("Deaktivierter Nutzer");
         val.setPassword(new Date().toString());
         deletePinnwand(val.getNutzerPinnwand(this));
