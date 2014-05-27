@@ -28,12 +28,15 @@ import javax.swing.JTextField;
 public class DialogBeitrag extends JFrame {
     
     private final SocialMediaLogic server;
-    private Nutzer clientNutzer = null;
+    private final Nutzer clientNutzer;
     private Beitrag beitrag;
+    private Pinnwand pinnwand;
+    private String text;
     private final JButton buttonSpeichern = new JButton("Speichern");
     
     public DialogBeitrag(SocialMediaLogic server, Nutzer clientNutzer, Pinnwand pinnwand) {
         this.server = server;
+        this.clientNutzer = clientNutzer;
         
         initialize();
     }

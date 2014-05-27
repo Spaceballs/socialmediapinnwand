@@ -26,7 +26,7 @@ import javax.swing.border.EmptyBorder;
 public class AbonnementInfo extends JPanel{
 
     private final SocialMediaLogic server;
-    private Nutzer clientNutzer = null;
+    private final Nutzer clientNutzer;
     private JLabel titleAbonnements;
     private Vector<Abonnement> abonnements;
 

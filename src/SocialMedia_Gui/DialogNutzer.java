@@ -25,7 +25,7 @@ import javax.swing.SwingConstants;
 public class DialogNutzer extends JFrame {
     
     private final SocialMediaLogic server;
-    private Nutzer clientNutzer = null;
+    private final Nutzer clientNutzer;
     private final JTextField username = new JTextField();
     private final JTextField name = new JTextField();
     private final JTextField surname = new JTextField();
