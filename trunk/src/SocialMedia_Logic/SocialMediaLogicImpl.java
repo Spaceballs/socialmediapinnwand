@@ -188,18 +188,12 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Boolean isAlreadyLiked(Nutzer n, Beitrag b) throws RemoteException {
-        System.out.println("nutzer" + n);
-        System.out.println("beitrag" + b);
         n = nutzerMapper.findByID(n.getID());
         b = beitragMapper.findByID(b.getID());
-        System.out.println("nutzer" + n);
-        System.out.println("beitrag" + b);
         Vector<Like> beitragLikes = b.getAllBeitragLikes(this);
-        System.out.println("Likes" + beitragLikes);
         for (int i = 0; i < beitragLikes.size(); i++) {
             Like like = beitragLikes.elementAt(i);
-            System.out.println("like" + like);
-            System.out.println(like.getBeitragID() == n.getID());
+            System.out.println(like.getNutzerID() == n.getID());
             if (like.getBeitragID() == n.getID())
                 return true;
         }
