@@ -144,7 +144,9 @@ public class Hauptfenster extends JFrame {
         this.setVisible(true);
     }
     
-    
+    /**
+     * 
+     */
     private void initializeOptions() {
         this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -154,8 +156,7 @@ public class Hauptfenster extends JFrame {
         this.setSize(1024, 768);
         this.setResizable(false);
         this.setLocationRelativeTo(null); // frame is at the center of the screen
-    }    
-
+    }
 
     
     /**
@@ -203,7 +204,5 @@ public class Hauptfenster extends JFrame {
                 }
             }
         });
-    }    
-
-
+    }
 }

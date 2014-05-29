@@ -7,16 +7,23 @@ import SocialMedia_Data.Like;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -37,17 +44,19 @@ public class BeitragPanel extends JPanel {
     private StringBuffer buffer;
     private String verfasser;
     private String datum;
+    private Date date;
     private Vector<Like> likes;
     private int anzahlLikes;
     private String likeString;
     private Vector<Kommentar> kommentare;
     private GridBagConstraints gridBagLayout;
     private int textfieldOffset;
-    private final JButton buttonBearbeiten = new JButton("Bearbeiten");
-    private final JButton buttonLoeschen = new JButton("Löschen");
-    private final JButton buttonKommentieren = new JButton("Kommentieren");
-    private final JButton buttonLike = new JButton("Like");
-    private final JButton buttonUnlike = new JButton("Unlike");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+    private final JButton buttonBearbeiten = new JButton();
+    private final JButton buttonLoeschen = new JButton();
+    private final JButton buttonKommentieren = new JButton();
+    private final JButton buttonLike = new JButton();
+    private final JButton buttonUnlike = new JButton();
     
     /**
      * 
@@ -82,18 +91,21 @@ public class BeitragPanel extends JPanel {
             
             text = beitrag.getText();
             
-            datum = "am " + beitrag.getCreationDate().toString();
+            date = new Date();
+            date = beitrag.getCreationDate();
+            datum = "am " + dateFormat.format(date);
             
             likes = new Vector<Like>();
             likes = server.getAllLikeOfBeitrag(beitrag);
             anzahlLikes = likes.size();
             likeString = Integer.toString(anzahlLikes);
 
-            //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
-            buttonBearbeiten.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
+            buttonBearbeiten.setIcon(new ImageIcon("edit.jpg"));
+            buttonBearbeiten.setToolTipText("Beitrag bearbeiten");
             buttonBearbeiten.setEnabled(server.ownerCheck(clientNutzer, beitrag));
-            //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
-            buttonLoeschen.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
+
+            buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));
+            buttonLoeschen.setToolTipText("Beitrag löschen");
             buttonLoeschen.setEnabled(server.ownerCheck(clientNutzer, beitrag));
         } catch (RemoteException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,15 +143,11 @@ public class BeitragPanel extends JPanel {
             gridBagLayout.gridx = 3;
             gridBagLayout.gridy = 0;
             gridBagLayout.gridwidth = 1;
-            //goEditButton.setBorder(null);
-            //goEditButton.setMargin(new Insets(0, 0, 0, 0));
             this.add(buttonBearbeiten, gridBagLayout);
             
             gridBagLayout.gridx = 4;
             gridBagLayout.gridy = 0;
             gridBagLayout.gridwidth = 1;
-            //goDeleteButton.setBorder(null);
-            //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
             this.add(buttonLoeschen, gridBagLayout);
             
             initializeTextfield();
@@ -147,14 +155,20 @@ public class BeitragPanel extends JPanel {
             gridBagLayout.gridx = 3;
             gridBagLayout.gridy = 1;
             gridBagLayout.gridwidth = 1;
+            buttonKommentieren.setIcon(new ImageIcon("kommentar.jpg"));
+            buttonKommentieren.setToolTipText("Beitrag kommentieren");
             this.add(buttonKommentieren, gridBagLayout);
             
             gridBagLayout.gridx = 4;
             gridBagLayout.gridy = 1;
             gridBagLayout.gridwidth = 1;
             if(server.isAlreadyLiked(clientNutzer, beitrag)) {
+                buttonUnlike.setIcon(new ImageIcon("unlike.jpg"));
+                buttonUnlike.setToolTipText("Like zurücknehmen");
                 this.add(buttonUnlike, gridBagLayout);
             } else {
+                buttonLike.setIcon(new ImageIcon("like.jpg"));
+                buttonLike.setToolTipText("Beitrag liken");
                 this.add(buttonLike, gridBagLayout);
             }
             

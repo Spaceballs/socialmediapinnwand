@@ -52,6 +52,9 @@ public class AbonnementInfo extends JPanel{
         this.setLayout(new BorderLayout());
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
         
+        titleAbonnements = new JLabel("Abonnements",JLabel.LEFT);
+        titleAbonnements.setFont(new Font("Arial", Font.BOLD, 28));
+        
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBorder(null); 
         scrollPane.getInsets().set(0,0,0,0);
@@ -66,12 +69,9 @@ public class AbonnementInfo extends JPanel{
         c.fill = GridBagConstraints.HORIZONTAL;
         c.anchor = GridBagConstraints.LINE_START;
         c.insets = new Insets(5, 5, 5, 5);
+        
         c.gridx = 0;
         c.gridy = 0;
-        
-        titleAbonnements = new JLabel("Abonnements",JLabel.LEFT);
-        titleAbonnements.setFont(new Font("Arial", Font.BOLD, 28));
-        
         for (int i = 0; i < abonnements.size(); i++) {
             c.gridy = i;
             scrollPanePane.add(new AbonnementPanel(server, clientNutzer, abonnements.elementAt(i)), c);            
