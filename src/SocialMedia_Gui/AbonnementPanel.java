@@ -63,10 +63,14 @@ class AbonnementPanel extends JPanel {
         try {            
             user =  server.getOwnerOfPinnwandOfAbonnement(abonnement);
             username = user.getUsername();
-            //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
-            buttonPinnwand.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
-            //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
-            buttonLoeschen.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
+            
+            buttonPinnwand.setIcon(new ImageIcon("pinnwand.jpg"));
+            buttonPinnwand.setToolTipText("Gehe zur Pinnwand von " + username);
+            
+            buttonLoeschen.setSize(18, 18);
+            buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));
+            buttonLoeschen.setToolTipText("Abonnement löschen");
+            
         } catch (IOException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,7 +88,7 @@ class AbonnementPanel extends JPanel {
 
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 0;
-        this.add(new JLabel(username, JLabel.RIGHT), gridBagLayout);
+        this.add(new JLabel(username, JLabel.LEFT), gridBagLayout);
         
         gridBagLayout.gridx = 2;
         gridBagLayout.gridy = 0;

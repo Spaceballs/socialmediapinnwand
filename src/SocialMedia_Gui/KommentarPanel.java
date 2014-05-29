@@ -11,6 +11,9 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -32,9 +35,14 @@ public class KommentarPanel extends JPanel {
     private Nutzer user;
     private String verfasser;
     private String text;
+    private StringBuffer buffer;
     private String datum;
-    private final JButton buttonBearbeiten = new JButton("Bearbeiten");
-    private final JButton buttonLoeschen = new JButton("Löschen");
+    private Date date;
+    private GridBagConstraints gridBagLayout;
+    private int textfieldOffset;
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+    private final JButton buttonBearbeiten = new JButton();
+    private final JButton buttonLoeschen = new JButton();
     
     KommentarPanel(SocialMediaLogic server, Nutzer clientNutzer, Kommentar kommentar) {
         super();
@@ -57,13 +65,16 @@ public class KommentarPanel extends JPanel {
             
             text = kommentar.getText();
             
-            datum = "am " + kommentar.getCreationDate().toString();
+            date = new Date();
+            date = kommentar.getCreationDate();
+            datum = "am " + dateFormat.format(date);
 
-            //Image goPinnwandButtonImage = ImageIO.read(getClass().getResource("pfeil.jpg"));
-            buttonBearbeiten.setIcon(new ImageIcon("go to user"/*goPinnwandButtonImage*/));
+            buttonBearbeiten.setIcon(new ImageIcon("edit.jpg"));
+            buttonBearbeiten.setToolTipText("Kommentar bearbeiten");
             buttonBearbeiten.setEnabled(server.ownerCheck(clientNutzer, kommentar));
-            //Image goDeleteButtonImage = ImageIO.read(getClass().getResource("zahnrad.jpg"));
-            buttonLoeschen.setIcon(new ImageIcon("delete"/*goDeleteButtonImage*/));
+
+            buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));
+            buttonLoeschen.setToolTipText("Kommentar löschen");
             buttonLoeschen.setEnabled(server.ownerCheck(clientNutzer, kommentar));
         } catch (RemoteException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,36 +85,42 @@ public class KommentarPanel extends JPanel {
         this.setLayout(new GridBagLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
-        GridBagConstraints gridBagLayout = new GridBagConstraints();
+        gridBagLayout = new GridBagConstraints();
         gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
         gridBagLayout.anchor = GridBagConstraints.LINE_START;
         gridBagLayout.insets = new Insets(2, 2, 2, 2);
 
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 0;
+        gridBagLayout.gridwidth = 1;
         this.add(new JLabel(verfasser, JLabel.LEFT), gridBagLayout);
         
         gridBagLayout.gridx = 1;
         gridBagLayout.gridy = 0;
+        gridBagLayout.gridwidth = 1;
         this.add(new JLabel(datum, JLabel.LEFT), gridBagLayout);
         
         gridBagLayout.gridx = 2;
         gridBagLayout.gridy = 0;
+        gridBagLayout.gridwidth = 1;
         //goEditButton.setBorder(null);
         //goEditButton.setMargin(new Insets(0, 0, 0, 0));
         this.add(buttonBearbeiten, gridBagLayout);
 
         gridBagLayout.gridx = 3;
         gridBagLayout.gridy = 0;
+        gridBagLayout.gridwidth = 1;
         //goDeleteButton.setBorder(null);
         //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
         this.add(buttonLoeschen, gridBagLayout);
         
+//        initializeTextfield();
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 1;
+        gridBagLayout.gridwidth = 1;
         this.add(new JLabel(text, JLabel.LEFT), gridBagLayout);
         
-        this.setSize(70, 150);        
+        this.setSize(70, 150);
     }
     
     private void initializeListeners() {
@@ -127,5 +144,25 @@ public class KommentarPanel extends JPanel {
                 SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new MeinePinnwand(server, clientNutzer));
             }
         });
+    }
+
+    private void initializeTextfield() {
+        buffer = new StringBuffer();
+        buffer.append(text);
+        do {
+            if (buffer.length() >= 60) {
+                text = buffer.substring(0, 60);
+                buffer.delete(0, 60);
+            } else {
+                text = buffer.toString();
+                buffer.setLength(0);
+            }
+            
+            gridBagLayout.gridx = 0;
+            gridBagLayout.gridy = gridBagLayout.gridy + 1;
+            gridBagLayout.gridwidth = 2;
+            this.add(new JLabel(text, JLabel.LEFT), gridBagLayout);
+        } while (buffer.length() != 0);
+        textfieldOffset = gridBagLayout.gridy;
     }
 }
