@@ -82,8 +82,8 @@ class AbonnementPanel extends JPanel {
     private void initializeContent() {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gridBagLayout = new GridBagConstraints();
-        gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
-        gridBagLayout.anchor = GridBagConstraints.LINE_START;
+//        gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
+        gridBagLayout.anchor = GridBagConstraints.WEST;
         gridBagLayout.insets = new Insets(2, 2, 2, 2);
 
         gridBagLayout.gridx = 0;
