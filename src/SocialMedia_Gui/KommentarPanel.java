@@ -103,22 +103,19 @@ public class KommentarPanel extends JPanel {
         gridBagLayout.gridx = 2;
         gridBagLayout.gridy = 0;
         gridBagLayout.gridwidth = 1;
-        //goEditButton.setBorder(null);
-        //goEditButton.setMargin(new Insets(0, 0, 0, 0));
         this.add(buttonBearbeiten, gridBagLayout);
 
         gridBagLayout.gridx = 3;
         gridBagLayout.gridy = 0;
         gridBagLayout.gridwidth = 1;
-        //goDeleteButton.setBorder(null);
-        //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
         this.add(buttonLoeschen, gridBagLayout);
         
-//        initializeTextfield();
-        gridBagLayout.gridx = 0;
-        gridBagLayout.gridy = 1;
-        gridBagLayout.gridwidth = 1;
-        this.add(new JLabel(text, JLabel.LEFT), gridBagLayout);
+        initializeTextfield();
+        
+//        gridBagLayout.gridx = 0;
+//        gridBagLayout.gridy = 1;
+//        gridBagLayout.gridwidth = 1;
+//        this.add(new JLabel(text, JLabel.LEFT), gridBagLayout);
         
         this.setSize(70, 150);
     }
