@@ -7,9 +7,6 @@ import SocialMedia_Data.Like;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -17,13 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -42,9 +37,7 @@ public class BeitragPanel extends JPanel {
     private Nutzer user;
     private String text;
     private StringBuffer buffer;
-    private String verfasser;
-    private String datum;
-    private Date date;
+    private String beitragHeader;
     private Vector<Like> likes;
     private int anzahlLikes;
     private String likeString;
@@ -85,15 +78,9 @@ public class BeitragPanel extends JPanel {
      * 
      */
     private void initializeData() {
-        try {            
+        try {
             user = server.getNutzerOf(beitrag);
-            verfasser = "Verfasst von " + user.getUsername();
-            
-            text = beitrag.getText();
-            
-            date = new Date();
-            date = beitrag.getCreationDate();
-            datum = "am " + dateFormat.format(date);
+            beitragHeader = "Verfasst von " + user.getUsername() + " am " + dateFormat.format(beitrag.getCreationDate());
             
             likes = new Vector<Like>();
             likes = server.getAllLikeOfBeitrag(beitrag);
@@ -107,6 +94,17 @@ public class BeitragPanel extends JPanel {
             buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));
             buttonLoeschen.setToolTipText("Beitrag löschen");
             buttonLoeschen.setEnabled(server.ownerCheck(clientNutzer, beitrag));
+            
+            buttonKommentieren.setIcon(new ImageIcon("kommentar.jpg"));
+            buttonKommentieren.setToolTipText("Beitrag kommentieren");
+            
+            buttonUnlike.setIcon(new ImageIcon("unlike.jpg"));
+            buttonUnlike.setToolTipText("Like zurücknehmen");
+            
+            buttonLike.setIcon(new ImageIcon("like.jpg"));
+            buttonLike.setToolTipText("Beitrag liken");
+            
+            text = beitrag.getText();
         } catch (RemoteException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,20 +118,15 @@ public class BeitragPanel extends JPanel {
             this.setLayout(new GridBagLayout());
             this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             this.setBackground(Color.LIGHT_GRAY);
+            
             gridBagLayout = new GridBagConstraints();
-//            gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
             gridBagLayout.anchor = GridBagConstraints.WEST;
-            gridBagLayout.insets = new Insets(2, 2, 2, 2);
+            gridBagLayout.insets = new Insets(2, 10, 2, 2);
             
             gridBagLayout.gridx = 0;
             gridBagLayout.gridy = 0;
             gridBagLayout.gridwidth = 1;
-            this.add(new JLabel(verfasser, JLabel.LEFT), gridBagLayout);
-            
-            gridBagLayout.gridx = 1;
-            gridBagLayout.gridy = 0;
-            gridBagLayout.gridwidth = 1;
-            this.add(new JLabel(datum, JLabel.LEFT), gridBagLayout);
+            this.add(new JLabel(beitragHeader, JLabel.LEFT), gridBagLayout);
             
             gridBagLayout.gridx = 2;
             gridBagLayout.gridy = 0;
@@ -155,27 +148,21 @@ public class BeitragPanel extends JPanel {
             gridBagLayout.gridx = 3;
             gridBagLayout.gridy = 1;
             gridBagLayout.gridwidth = 1;
-            buttonKommentieren.setIcon(new ImageIcon("kommentar.jpg"));
-            buttonKommentieren.setToolTipText("Beitrag kommentieren");
             this.add(buttonKommentieren, gridBagLayout);
             
             gridBagLayout.gridx = 4;
             gridBagLayout.gridy = 1;
             gridBagLayout.gridwidth = 1;
             if(server.isAlreadyLiked(clientNutzer, beitrag)) {
-                buttonUnlike.setIcon(new ImageIcon("unlike.jpg"));
-                buttonUnlike.setToolTipText("Like zurücknehmen");
                 this.add(buttonUnlike, gridBagLayout);
             } else {
-                buttonLike.setIcon(new ImageIcon("like.jpg"));
-                buttonLike.setToolTipText("Beitrag liken");
                 this.add(buttonLike, gridBagLayout);
             }
             
             kommentare = new Vector<Kommentar>();
             kommentare = server.getAllKommentarOfBeitrag(beitrag);
             for (int i = 0; i < kommentare.size(); i++) {
-                gridBagLayout.gridx = 1;
+                gridBagLayout.gridx = 0;
                 gridBagLayout.gridy = i + textfieldOffset + 1;
                 gridBagLayout.gridwidth = 2;
                 this.add(new KommentarPanel(server, clientNutzer, kommentare.elementAt(i)), gridBagLayout);
@@ -212,6 +199,12 @@ public class BeitragPanel extends JPanel {
             }
         });
         
+        buttonKommentieren.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        
         buttonLike.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -222,12 +215,6 @@ public class BeitragPanel extends JPanel {
             }
         });
         
-        buttonKommentieren.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        
         buttonUnlike.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
@@ -235,13 +222,26 @@ public class BeitragPanel extends JPanel {
         });
     }   
 
+    /**
+     * 
+     */
     private void initializeTextfield() {
         buffer = new StringBuffer();
         buffer.append(text);
         do {
             if (buffer.length() >= 60) {
-                text = buffer.substring(0, 60);
-                buffer.delete(0, 60);
+                if (buffer.indexOf(" ", 50) == -1) {
+                    if (buffer.indexOf(" ", 40) == -1) {
+                        text = buffer.substring(0, 60);
+                        buffer.delete(0, 60);
+                    } else {
+                        text = buffer.substring(0, buffer.indexOf(" ", 40)+1);
+                        buffer.delete(0, buffer.indexOf(" ", 40)+1);
+                    }
+                } else {
+                    text = buffer.substring(0, buffer.indexOf(" ", 50)+1);
+                    buffer.delete(0, buffer.indexOf(" ", 50)+1);
+                }
             } else {
                 text = buffer.toString();
                 buffer.setLength(0);

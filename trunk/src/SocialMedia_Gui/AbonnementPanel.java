@@ -9,7 +9,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,7 +70,7 @@ class AbonnementPanel extends JPanel {
             buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));
             buttonLoeschen.setToolTipText("Abonnement löschen");
             
-        } catch (IOException ex) {
+        } catch (RemoteException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -82,7 +81,6 @@ class AbonnementPanel extends JPanel {
     private void initializeContent() {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gridBagLayout = new GridBagConstraints();
-//        gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
         gridBagLayout.anchor = GridBagConstraints.WEST;
         gridBagLayout.insets = new Insets(2, 2, 2, 2);
 
@@ -92,14 +90,10 @@ class AbonnementPanel extends JPanel {
         
         gridBagLayout.gridx = 2;
         gridBagLayout.gridy = 0;
-        //goDeleteButton.setBorder(null);
-        //goDeleteButton.setMargin(new Insets(0, 0, 0, 0));
         this.add(buttonLoeschen, gridBagLayout);
 
         gridBagLayout.gridx = 3;
         gridBagLayout.gridy = 0;
-        //goDeleteButton.setBorder(null);
-        //goPinnwandButton.setMargin(new Insets(0, 0, 0, 0));
         this.add(buttonPinnwand, gridBagLayout);
         
         this.setSize(70, 150);
