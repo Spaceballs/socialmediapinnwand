@@ -63,10 +63,8 @@ public class AbonnementInfo extends JPanel{
         
         JPanel scrollPanePane = new JPanel();
         scrollPanePane.setLayout(new GridBagLayout());
-
         
         GridBagConstraints c = new GridBagConstraints();
-//        c.fill = GridBagConstraints.HORIZONTAL;
         c.anchor = GridBagConstraints.LINE_START;
         c.insets = new Insets(5, 5, 5, 5);
         

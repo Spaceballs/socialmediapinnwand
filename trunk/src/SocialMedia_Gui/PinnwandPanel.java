@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,10 +29,11 @@ import javax.swing.border.EmptyBorder;
  * of the logged-in Nutzer
  * @author Max
  */
-public class MeinePinnwand extends JPanel {
+public class PinnwandPanel extends JPanel {
 
     private final SocialMediaLogic server;
     private final Nutzer clientNutzer;
+    private final Nutzer nutzer;
     private final JLabel titlePinnwand = new JLabel("",JLabel.LEFT);
     private final JButton buttonNeuerBeitrag = new JButton("Neuer Beitrag");
     private final JButton buttonAbonnieren = new JButton("Abonnieren");
@@ -42,11 +44,13 @@ public class MeinePinnwand extends JPanel {
     /**
      * Constructor
      * @param server - the server
-     * @param clientNutzer - the logged-in Nutzer
+     * @param clientNutzer - 
+     * @param nutzer - 
      */
-    public MeinePinnwand(SocialMediaLogic server, Nutzer clientNutzer){
-        this.clientNutzer = clientNutzer;
+    public PinnwandPanel(SocialMediaLogic server, Nutzer clientNutzer, Nutzer nutzer){
+        this.nutzer = nutzer;
         this.server = server;
+        this.clientNutzer = clientNutzer;
         initializeData();
         initialize();
         initializeListeners();
@@ -61,13 +65,19 @@ public class MeinePinnwand extends JPanel {
         try {
             this.setLayout(new BorderLayout());
             
-            titlePinnwand.setText("Pinnwand von " + clientNutzer.getUsername());
+            titlePinnwand.setText("Pinnwand von " + nutzer.getUsername());
             titlePinnwand.setFont(new Font("Arial", Font.BOLD, 28));
             
             JPanel titlePanel = new JPanel();
             titlePanel.setLayout(new BorderLayout());
             titlePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
             titlePanel.add(titlePinnwand, BorderLayout.WEST);
+            
+            buttonAbonnieren.setIcon(new ImageIcon("abonnieren.jpg"));
+            buttonAbonnieren.setToolTipText("Nutzer " + nutzer.getUsername() + "abonnieren");
+            
+            buttonAbonnementLoeschen.setIcon(new ImageIcon("delete.jpg"));
+            buttonAbonnementLoeschen.setToolTipText("Abonnement löschen");
             
             if(server.ownerCheck(clientNutzer, pinnwand)) {
                 titlePanel.add(buttonNeuerBeitrag, BorderLayout.EAST);
@@ -106,7 +116,7 @@ public class MeinePinnwand extends JPanel {
             this.add(titlePanel, BorderLayout.NORTH);
             this.add(scrollPane, BorderLayout.CENTER);
         } catch (RemoteException ex) {
-            Logger.getLogger(MeinePinnwand.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -117,10 +127,10 @@ public class MeinePinnwand extends JPanel {
             beitraege = new Vector<Beitrag>();
             
         try {
-            pinnwand = server.getPinnwandOfNutzer(clientNutzer);
+            pinnwand = server.getPinnwandOfNutzer(nutzer);
             beitraege.addAll(server.getAllBeitragOfPinnwand(pinnwand));
         } catch (RemoteException ex) {
-            Logger.getLogger(MeinePinnwand.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -130,7 +140,7 @@ public class MeinePinnwand extends JPanel {
     private void initializeListeners() {
         buttonNeuerBeitrag.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, pinnwand);
+                DialogBeitrag dialogBeitrag = new DialogBeitrag(server, nutzer, pinnwand);
             }
         });
     }

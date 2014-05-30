@@ -29,12 +29,13 @@ import javax.swing.border.EmptyBorder;
  * of all Abonnements of the logged-in Nutzer
  * @author Max
  */
-public class Newsfeed extends JPanel {
+public class NewsfeedPanel extends JPanel {
     private final SocialMediaLogic server;
     private final Nutzer clientNutzer;
     private JLabel titleNewsfeed;    
     private final JButton buttonNeuerBeitrag = new JButton("Neuer Beitrag");
     private Vector<Abonnement> abonnements;
+    private Pinnwand myPinnwand;
     private Pinnwand pinnwand;
     private Vector<Beitrag> beitraege;
     private Pinnwand meinePinnwand;
@@ -44,7 +45,7 @@ public class Newsfeed extends JPanel {
      * @param server - the server
      * @param clientNutzer - the logged-in Nutzer
      */
-    public Newsfeed(SocialMediaLogic server, Nutzer clientNutzer){
+    public NewsfeedPanel(SocialMediaLogic server, Nutzer clientNutzer){
         this.clientNutzer = clientNutzer;
         this.server = server;
         initializeData();
@@ -113,9 +114,11 @@ public class Newsfeed extends JPanel {
                 Abonnement abonnement = abonnements.elementAt(i);            
                 pinnwand = server.getPinnwandOfAbonnement(abonnement);
                 beitraege.addAll(server.getAllBeitragOfPinnwand(pinnwand));
-            }            
+            }
+            myPinnwand = server.getPinnwandOfNutzer(clientNutzer);
+            beitraege.addAll(server.getAllBeitragOfPinnwand(myPinnwand));
         } catch (RemoteException ex) {
-            Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -131,7 +134,7 @@ public class Newsfeed extends JPanel {
                 }
             });
         } catch (RemoteException ex) {
-            Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

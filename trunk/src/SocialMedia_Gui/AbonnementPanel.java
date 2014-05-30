@@ -111,7 +111,7 @@ class AbonnementPanel extends JPanel {
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
                         server.deleteAbonnement(abonnement);
-                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(null);
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
                     } catch (RemoteException ex) {
                         Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -121,7 +121,7 @@ class AbonnementPanel extends JPanel {
         
         buttonPinnwand.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new MeinePinnwand(server, clientNutzer));
+                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new PinnwandPanel(server, clientNutzer, user));
             }
         });
     }
