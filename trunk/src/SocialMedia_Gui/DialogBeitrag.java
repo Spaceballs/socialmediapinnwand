@@ -80,7 +80,11 @@ public class DialogBeitrag extends JFrame {
     private void initializeListeners() {
         buttonSpeichern.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               server.createBeitrag(pinnwand, clientNutzer, text);
+               try {
+                   server.createBeitrag(pinnwand, clientNutzer, text);
+               } catch (RemoteException ex) {
+                   Logger.getLogger(DialogBeitrag.class.getName()).log(Level.SEVERE, null, ex);
+               }
            }
         });
     }
