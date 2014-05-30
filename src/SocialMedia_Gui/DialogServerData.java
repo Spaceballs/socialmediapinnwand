@@ -37,9 +37,10 @@ public class DialogServerData extends JFrame{
      */
     public DialogServerData(SocialMediaClient client, String adresse, String serverPort, String clientPort) {
         this.client = client;
-        this.adresse.setText(adresse);
-        this.serverPort.setText(serverPort);
-        this.clientPort.setText(clientPort);
+        this.adresse = new JTextField(adresse);
+        this.adresse.setPreferredSize(new Dimension(140, 20));
+        this.serverPort = new JTextField(serverPort);
+        this.clientPort = new JTextField(clientPort);
         initialize();
     }
     

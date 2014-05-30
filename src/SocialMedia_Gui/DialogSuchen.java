@@ -46,6 +46,9 @@ public class DialogSuchen extends JFrame {
 
         JOptionPane.showMessageDialog(
             this, p, "Nutzer suchen", JOptionPane.PLAIN_MESSAGE);
+        
+        // http://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html#input
+        
     }
 
 }
