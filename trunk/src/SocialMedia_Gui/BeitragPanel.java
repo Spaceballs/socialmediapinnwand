@@ -121,8 +121,8 @@ public class BeitragPanel extends JPanel {
             this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             this.setBackground(Color.LIGHT_GRAY);
             gridBagLayout = new GridBagConstraints();
-            gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
-            gridBagLayout.anchor = GridBagConstraints.LINE_START;
+//            gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
+            gridBagLayout.anchor = GridBagConstraints.WEST;
             gridBagLayout.insets = new Insets(2, 2, 2, 2);
             
             gridBagLayout.gridx = 0;

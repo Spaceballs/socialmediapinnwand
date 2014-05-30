@@ -87,7 +87,7 @@ public class KommentarPanel extends JPanel {
 
         gridBagLayout = new GridBagConstraints();
         gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
-        gridBagLayout.anchor = GridBagConstraints.LINE_START;
+        gridBagLayout.anchor = GridBagConstraints.WEST;
         gridBagLayout.insets = new Insets(2, 2, 2, 2);
 
         gridBagLayout.gridx = 0;
