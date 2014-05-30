@@ -3,6 +3,7 @@ package SocialMedia_Gui;
 
 import SocialMedia_Client.SocialMediaClient;
 import SocialMedia_Client.SocialMediaReportClient;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -18,13 +19,13 @@ import javax.swing.JTextField;
  * Dialog where user inserts serverAdress, serverPort and clientPort
  * @author Sebastian
  */
-public class DialogServerData extends JFrame implements ActionListener{
+public class DialogServerData extends JFrame{
     
     private SocialMediaClient client = null;
     private SocialMediaReportClient rClient = null;    
-    JTextField adresse = new JTextField();;
-    JTextField serverPort = new JTextField();
-    JTextField clientPort = new JTextField();
+    JTextField adresse;
+    JTextField serverPort;
+    JTextField clientPort;
     JButton buttonUebernehmen = new JButton("Übernehmen");
 
     /**
@@ -51,11 +52,13 @@ public class DialogServerData extends JFrame implements ActionListener{
      */
     public DialogServerData(SocialMediaReportClient client, String adresse, String serverPort, String clientPort) {
         this.rClient = client;
-        this.adresse.setText(adresse);
-        this.serverPort.setText(serverPort);
-        this.clientPort.setText(clientPort);
+        this.adresse = new JTextField(adresse);
+        this.adresse.setPreferredSize(new Dimension(140, 20));
+        this.serverPort = new JTextField(serverPort);
+        this.clientPort = new JTextField(clientPort);
         initialize();
     }
+    
     /**
      * Initializes the Dialog and the ActionListener of the Button
      */
@@ -63,6 +66,7 @@ public class DialogServerData extends JFrame implements ActionListener{
         initializeDialog();
         initializeListeners();
     }
+    
     /**
      * Creates the Dialog with Labels, TextFields and Button
      */
@@ -75,27 +79,37 @@ public class DialogServerData extends JFrame implements ActionListener{
 
         c.gridx = 0;
         c.gridy = 0;
-        this.add(new JLabel("Server Adresse:", JLabel.RIGHT), c);        
+        c.gridwidth = 1;
+        this.add(new JLabel("Server Adresse:", JLabel.RIGHT), c); 
+        
         c.gridx = 1;
         c.gridy = 0;
+        c.gridwidth = 2;
         this.add(adresse, c);
         
         c.gridx = 0;
         c.gridy = 1;
-        this.add(new JLabel("Server Port:", JLabel.RIGHT), c);        
+        c.gridwidth = 1;
+        this.add(new JLabel("Server Port:", JLabel.RIGHT), c);   
+        
         c.gridx = 1;
         c.gridy = 1;
+        c.gridwidth = 2;
         this.add(serverPort, c);
         
         c.gridx = 0;
         c.gridy = 2;
+        c.gridwidth = 1;
         this.add(new JLabel("Client Port:", JLabel.RIGHT), c);        
+        
         c.gridx = 1;
         c.gridy = 2;
+        c.gridwidth = 2;
         this.add(clientPort, c);      
                        
         c.gridx = 0;
         c.gridy = 3;
+        c.gridwidth = 1;
         this.add(buttonUebernehmen, c);
 
         JRootPane rootPane = this.getRootPane();
@@ -127,14 +141,6 @@ public class DialogServerData extends JFrame implements ActionListener{
 
             }
         });
-    }
-
-    /**
-     * UnsupportedOperationException
-     * @param e - ActionEvent
-     */
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
 

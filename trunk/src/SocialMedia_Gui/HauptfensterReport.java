@@ -14,6 +14,8 @@ import java.awt.Font;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -75,6 +77,7 @@ public class HauptfensterReport extends JFrame {
     public HauptfensterReport(SocialMediaLogic server) {
         this.server = server;
         initialize();
+        
     }
 
     /**
@@ -94,11 +97,30 @@ public class HauptfensterReport extends JFrame {
     private void initList() {
         nutzerliste = new JList();
         nutzerliste.setCellRenderer(new NutzerListCellRenderer());
+        
         nutzerliste.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 runBeitragReportButton.setEnabled(true);
                 runNutzerReportButton.setEnabled(true);
                 reportUser = nutzerliste.getSelectedValue();
+            }
+        });
+        nutzerliste.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList)evt.getSource();
+                if (evt.getClickCount() == 2) {
+                    int index = list.locationToIndex(evt.getPoint());
+                    try {
+                        Date dateStart = df.parse(calendarStartDateField.getText());
+                        Date dateEnd = df.parse(calendarEndDateField.getText());
+                        Report report = (Report) reportGenerator.createContributionOfNutzerReport(reportUser, 1, dateStart, dateEnd);
+                        HTMLWriter writer = new HTMLWriter(report);
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
         });
     }
@@ -237,8 +259,8 @@ public class HauptfensterReport extends JFrame {
         runBeitragReportButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Date dateStart = new SimpleDateFormat("mm.dd.yyyy", Locale.GERMANY).parse(calendarStartDateField.getText());
-                    Date dateEnd = new SimpleDateFormat("mm.dd.yyyy", Locale.GERMANY).parse(calendarEndDateField.getText());
+                    Date dateStart = df.parse(calendarStartDateField.getText());
+                    Date dateEnd = df.parse(calendarEndDateField.getText());
                     Report report = (Report) reportGenerator.createPopularityOfBeitragReport(1, dateStart, dateEnd);
                     HTMLWriter writer = new HTMLWriter(report);
                 } catch (RemoteException ex) {
@@ -256,60 +278,81 @@ public class HauptfensterReport extends JFrame {
 
 
 
+
+
+
+
+
+
+
 /**
  * This class replaces the default ListCellRenderer and displays <code>val.getUsername()</code> instead of <code>val.toString()</code>.
  * @author Sebastian
  */
  class NutzerListCellRenderer extends JLabel implements ListCellRenderer<Object> {
+     
+     /**
+      * 
+      */
      public NutzerListCellRenderer() {
          setOpaque(true);
      }
      
-     public Component getListCellRendererComponent(JList<?> list,
-                                                   Object value,
-                                                   int index,
-                                                   boolean isSelected,
-                                                   boolean cellHasFocus) {
+     /**
+      * 
+      * @param list
+      * @param value
+      * @param index
+      * @param isSelected
+      * @param cellHasFocus
+      * @return 
+      */
+     public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
          Nutzer val = (Nutzer)value;
          try {
              setText(val.getUsername() + " (" + val.getName() + ", " + val.getSurname() + ")" + "(" + val.getCreationDate() + ")");
          } catch (RemoteException ex) {
              Logger.getLogger(NutzerListCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
          }
-
          Color background;
          Color foreground;
-
-         // check if this cell represents the current DnD drop location
          JList.DropLocation dropLocation = list.getDropLocation();
          if (dropLocation != null
                  && !dropLocation.isInsert()
                  && dropLocation.getIndex() == index) {
-
              background = Color.BLUE;
              foreground = Color.WHITE;
-
-         // check if this cell is selected
          } else if (isSelected) {
              background = Color.RED;
              foreground = Color.WHITE;
-
-         // unselected, and not the DnD drop location
          } else {
              background = Color.WHITE;
              foreground = Color.BLACK;
          };
-
          setBackground(background);
          setForeground(foreground);
-
          return this;
      }
- }
+}
 
 
 
+
+
+
+
+
+/**
+ * Class for controlling the correct user input.
+ * @author Sebastian
+ */
 class FormattedTextFieldVerifier extends InputVerifier {
+    
+    /**
+     * 
+     * @param input
+     * @return 
+     */
      public boolean verify(JComponent input) {
          if (input instanceof JFormattedTextField) {
              JFormattedTextField ftf = (JFormattedTextField)input;
@@ -320,12 +363,20 @@ class FormattedTextFieldVerifier extends InputVerifier {
                       formatter.stringToValue(text);
                       return true;
                   } catch (ParseException pe) {
+                      Logger.getLogger(FormattedTextFieldVerifier.class.getName()).log(Level.SEVERE, null, pe);
                       return false;
                   }
               }
           }
           return true;
       }
+     
+     /**
+      * 
+      * @param input
+      * @return 
+      */
+     @Override
       public boolean shouldYieldFocus(JComponent input) {
           return verify(input);
       }
