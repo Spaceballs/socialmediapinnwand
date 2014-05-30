@@ -85,7 +85,8 @@ public class Newsfeed extends JPanel {
         c.insets = new Insets(5, 5, 5, 5);
         
         c.gridx = 0;
-        c.gridy = 0;        
+        c.gridy = 0;
+        c.gridwidth = 5;
         for (int i = 0; i < beitraege.size(); i++) {
             c.gridy = i;
             scrollPanePane.add(new BeitragPanel(server, clientNutzer, beitraege.elementAt(i)), c);

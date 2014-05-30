@@ -175,7 +175,7 @@ public class BeitragPanel extends JPanel {
             kommentare = new Vector<Kommentar>();
             kommentare = server.getAllKommentarOfBeitrag(beitrag);
             for (int i = 0; i < kommentare.size(); i++) {
-                gridBagLayout.gridx = 0;
+                gridBagLayout.gridx = 1;
                 gridBagLayout.gridy = i + textfieldOffset + 1;
                 gridBagLayout.gridwidth = 2;
                 this.add(new KommentarPanel(server, clientNutzer, kommentare.elementAt(i)), gridBagLayout);

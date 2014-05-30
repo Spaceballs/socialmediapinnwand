@@ -86,7 +86,7 @@ public class KommentarPanel extends JPanel {
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
         gridBagLayout = new GridBagConstraints();
-        gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
+//        gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
         gridBagLayout.anchor = GridBagConstraints.WEST;
         gridBagLayout.insets = new Insets(2, 2, 2, 2);
 
@@ -147,9 +147,19 @@ public class KommentarPanel extends JPanel {
         buffer = new StringBuffer();
         buffer.append(text);
         do {
-            if (buffer.length() >= 60) {
-                text = buffer.substring(0, 60);
-                buffer.delete(0, 60);
+            if (buffer.length() >= 50) {
+                if (buffer.indexOf(" ", 40) == -1) {
+                    if (buffer.indexOf(" ", 30) == -1) {
+                        text = buffer.substring(0, 50);
+                        buffer.delete(0, 50);
+                    } else {
+                        text = buffer.substring(0, buffer.indexOf(" ", 30)+1);
+                        buffer.delete(0, buffer.indexOf(" ", 30)+1);
+                    }
+                } else {
+                    text = buffer.substring(0, buffer.indexOf(" ", 40)+1);
+                    buffer.delete(0, buffer.indexOf(" ", 40)+1);
+                }
             } else {
                 text = buffer.toString();
                 buffer.setLength(0);
