@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,13 +32,11 @@ public class KommentarPanel extends JPanel {
     private final Nutzer clientNutzer;
     private final Kommentar kommentar;
     private Nutzer user;
-    private String verfasser;
+    private String kommentarHeader;
     private String text;
     private StringBuffer buffer;
     private String datum;
-    private Date date;
     private GridBagConstraints gridBagLayout;
-    private int textfieldOffset;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
     private final JButton buttonBearbeiten = new JButton();
     private final JButton buttonLoeschen = new JButton();
@@ -61,13 +58,7 @@ public class KommentarPanel extends JPanel {
     private void initializeData() {
         try {            
             user = server.getNutzerOf(kommentar);
-            verfasser = "Verfasst von " + user.getUsername();
-            
-            text = kommentar.getText();
-            
-            date = new Date();
-            date = kommentar.getCreationDate();
-            datum = "am " + dateFormat.format(date);
+            kommentarHeader = "Verfasst von " + user.getUsername() + " am " + dateFormat.format(kommentar.getCreationDate());
 
             buttonBearbeiten.setIcon(new ImageIcon("edit.jpg"));
             buttonBearbeiten.setToolTipText("Kommentar bearbeiten");
@@ -76,6 +67,8 @@ public class KommentarPanel extends JPanel {
             buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));
             buttonLoeschen.setToolTipText("Kommentar löschen");
             buttonLoeschen.setEnabled(server.ownerCheck(clientNutzer, kommentar));
+            
+            text = kommentar.getText();
         } catch (RemoteException ex) {
             Logger.getLogger(AbonnementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -86,14 +79,13 @@ public class KommentarPanel extends JPanel {
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
         gridBagLayout = new GridBagConstraints();
-//        gridBagLayout.fill = GridBagConstraints.HORIZONTAL;
         gridBagLayout.anchor = GridBagConstraints.WEST;
-        gridBagLayout.insets = new Insets(2, 2, 2, 2);
+        gridBagLayout.insets = new Insets(2, 10, 2, 2);
 
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = 0;
         gridBagLayout.gridwidth = 1;
-        this.add(new JLabel(verfasser, JLabel.LEFT), gridBagLayout);
+        this.add(new JLabel(kommentarHeader, JLabel.LEFT), gridBagLayout);
         
         gridBagLayout.gridx = 1;
         gridBagLayout.gridy = 0;
@@ -111,13 +103,6 @@ public class KommentarPanel extends JPanel {
         this.add(buttonLoeschen, gridBagLayout);
         
         initializeTextfield();
-        
-//        gridBagLayout.gridx = 0;
-//        gridBagLayout.gridy = 1;
-//        gridBagLayout.gridwidth = 1;
-//        this.add(new JLabel(text, JLabel.LEFT), gridBagLayout);
-        
-        this.setSize(70, 150);
     }
     
     private void initializeListeners() {
@@ -143,6 +128,9 @@ public class KommentarPanel extends JPanel {
         });
     }
 
+    /**
+     * 
+     */
     private void initializeTextfield() {
         buffer = new StringBuffer();
         buffer.append(text);
@@ -170,6 +158,5 @@ public class KommentarPanel extends JPanel {
             gridBagLayout.gridwidth = 2;
             this.add(new JLabel(text, JLabel.LEFT), gridBagLayout);
         } while (buffer.length() != 0);
-        textfieldOffset = gridBagLayout.gridy;
     }
 }
