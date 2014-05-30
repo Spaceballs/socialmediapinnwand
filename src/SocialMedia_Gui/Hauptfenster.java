@@ -37,8 +37,8 @@ public class Hauptfenster extends JFrame {
     private final JPanel panelRechtsUnten = new JPanel();
     private JSplitPane splitPane;
     private JSplitPane splitPaneRechts;
-    private MeinePinnwand meinePinnwand;
-    private Newsfeed newsfeed;
+    private PinnwandPanel pinnwandPanel;
+    private NewsfeedPanel newsfeedPanel;
     private static Hauptfenster hauptfenster;
 
 
@@ -68,7 +68,7 @@ public class Hauptfenster extends JFrame {
      * Initializes all components (menu, listeners and frame)
      */
     private void initialize() {
-        Newsfeed newsfeed = new Newsfeed(server, clientNutzer);
+        NewsfeedPanel newsfeed = new NewsfeedPanel(server, clientNutzer);
         panelLinks = newsfeed;
         initializeMenu();
         initializeListeners();
@@ -128,7 +128,7 @@ public class Hauptfenster extends JFrame {
             this.panelLinks = panelLinks;
         NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
         AbonnementInfo abonnementInfo = new AbonnementInfo(server, clientNutzer);
-        Newsfeed newsfeed = new Newsfeed(server, clientNutzer);
+        NewsfeedPanel newsfeed = new NewsfeedPanel(server, clientNutzer);
 
         splitPaneRechts = new JSplitPane(JSplitPane.VERTICAL_SPLIT, nutzerInfo, abonnementInfo);
         splitPaneRechts.setResizeWeight(0);
@@ -167,16 +167,16 @@ public class Hauptfenster extends JFrame {
         //ActionListener Newsfeed
         newsfeedMenu.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               newsfeed = new Newsfeed(server, clientNutzer);
-               setPanelLinks(newsfeed);
+               newsfeedPanel = new NewsfeedPanel(server, clientNutzer);
+               setPanelLinks(newsfeedPanel);
            }
         });
 
         //ActionListener Meine Pinnwand
         meinePinnwandMenu.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               meinePinnwand = new MeinePinnwand(server, clientNutzer);
-               setPanelLinks(meinePinnwand);
+               pinnwandPanel = new PinnwandPanel(server, clientNutzer, clientNutzer);
+               setPanelLinks(pinnwandPanel);
            }
         });
 

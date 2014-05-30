@@ -52,7 +52,7 @@ public class KommentarPanel extends JPanel {
     private void initialize() {
         initializeData();
         initializeContent();
-//        initializeListeners();
+        initializeListeners();
     }
     
     private void initializeData() {
@@ -113,7 +113,7 @@ public class KommentarPanel extends JPanel {
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
                         server.deleteKommentar(kommentar);
-                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(null);
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
                     } catch (RemoteException ex) {
                         Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -123,7 +123,7 @@ public class KommentarPanel extends JPanel {
         
         buttonBearbeiten.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new MeinePinnwand(server, clientNutzer));
+                
             }
         });
     }
