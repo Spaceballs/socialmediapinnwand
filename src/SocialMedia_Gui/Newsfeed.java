@@ -80,8 +80,8 @@ public class Newsfeed extends JPanel {
         
         GridBagConstraints c = new GridBagConstraints();
         
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.LINE_START;
+//        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.WEST;
         c.insets = new Insets(5, 5, 5, 5);
         
         c.gridx = 0;
