@@ -71,7 +71,7 @@ public class BeitragPanel extends JPanel {
     private void initialize() {
         initializeData();
         initializeContent();
-//        initializeListeners();
+        initializeListeners();
     }
     
     /**
@@ -185,7 +185,7 @@ public class BeitragPanel extends JPanel {
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
                         server.deleteBeitrag(beitrag);
-                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(null);
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
                     } catch (RemoteException ex) {
                         Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -217,7 +217,11 @@ public class BeitragPanel extends JPanel {
         
         buttonUnlike.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                try {
+                    server.deleteLike(null);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }   

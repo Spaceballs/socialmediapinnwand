@@ -135,7 +135,7 @@ public class KommentarMapper extends DBStatementFactory{
     public void delete (Kommentar val) {
         Connection con = DBConnection.connection();
         try {
-            con.createStatement().executeQuery(
+            con.createStatement().executeUpdate(
                     DELETE + " " +
                     FROM + " " +
                             TABLE_NAME_KOMMENTAR + " " +

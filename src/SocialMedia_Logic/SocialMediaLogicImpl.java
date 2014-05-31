@@ -585,13 +585,13 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      */
     public Vector<Nutzer> searchNutzer (String val) throws RemoteException{
         Vector<Nutzer> nutzers = nutzerMapper.getAll();
-        Vector<Nutzer> filteredNutzers = null;
+        Vector<Nutzer> filteredNutzers = new Vector<Nutzer>();
         for (int i = 0; i < nutzers.size(); i++) {
             Nutzer nutzer = nutzers.elementAt(i);
-            if (
-                    nutzer.getSurname().toLowerCase().contains(val.toLowerCase())
-                    || nutzer.getName().toLowerCase().contains(val.toLowerCase())
-                    || nutzer.getUsername().toLowerCase().contains(val.toLowerCase()))
+            if (nutzer.getSurname().toLowerCase().contains(val.toLowerCase())
+                || nutzer.getName().toLowerCase().contains(val.toLowerCase())
+                || nutzer.getUsername().toLowerCase().contains(val.toLowerCase()))
+                
                 filteredNutzers.addElement(nutzer);
         }
         return filteredNutzers;

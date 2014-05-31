@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -99,9 +100,8 @@ public class PinnwandPanel extends JPanel {
             scrollPanePane.setLayout(new GridBagLayout());
             
             GridBagConstraints c = new GridBagConstraints();
-            
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.anchor = GridBagConstraints.LINE_START;
+
+            c.anchor = GridBagConstraints.WEST;
             c.insets = new Insets(5, 5, 5, 5);
             
             c.gridx = 0;
@@ -140,7 +140,33 @@ public class PinnwandPanel extends JPanel {
     private void initializeListeners() {
         buttonNeuerBeitrag.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DialogBeitrag dialogBeitrag = new DialogBeitrag(server, nutzer, pinnwand);
+                DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, pinnwand);
+            }
+        });
+        
+        buttonAbonnieren.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    server.createAbonnement(pinnwand, clientNutzer);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        buttonAbonnementLoeschen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (JOptionPane.showConfirmDialog(SocialMedia_Gui.Hauptfenster.hauptfenster(null, null),
+                        "Das Abonnement wirklich löschen?", "Abonnement löschen",
+                        JOptionPane.YES_NO_OPTION) == 0) {
+                    try {
+                        server.getNutzerOf(pinnwand);
+                        server.deleteAbonnement(null);
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new PinnwandPanel(server, clientNutzer, nutzer));
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
         });
     }

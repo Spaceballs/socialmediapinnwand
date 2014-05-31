@@ -136,7 +136,7 @@ public class BeitragMapper extends DBStatementFactory {
     public void delete (Beitrag val) {
         Connection con = DBConnection.connection();
         try {
-            con.createStatement().executeQuery(
+            con.createStatement().executeUpdate(
                     DELETE + " " +
                     FROM + " " +
                             TABLE_NAME_BEITRAG + " " +
