@@ -135,7 +135,7 @@ public class LikeMapper extends DBStatementFactory{
     public void delete (Like val) {
         Connection con = DBConnection.connection();
         try {
-            con.createStatement().executeQuery(
+            con.createStatement().executeUpdate(
                     DELETE + " " +
                     FROM + " " +
                             TABLE_NAME_LIKE + " " +
