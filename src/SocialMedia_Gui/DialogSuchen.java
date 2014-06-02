@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -27,6 +28,7 @@ public class DialogSuchen extends JFrame {
     private final SocialMediaLogic server;
     private String nutzerEingabe;
     private Vector<Nutzer> nutzerSuche;
+    private JList ergebnissListe = new JList();
 
     /**
      * Constructor
@@ -35,6 +37,9 @@ public class DialogSuchen extends JFrame {
     DialogSuchen(SocialMediaLogic server) {
         this.server = server;
         initializeDialog();
+        
+        
+        //JOptionPane.showMessageDialog(null, "alert", "alert", JOptionPane.ERROR_MESSAGE);
     }
 
     /**

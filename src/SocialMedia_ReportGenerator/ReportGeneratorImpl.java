@@ -69,11 +69,7 @@ public class ReportGeneratorImpl
      */
     public ContributionOfNutzer createContributionOfNutzerReport (Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
         ContributionOfNutzer report = new ContributionOfNutzerImpl();
-        // Welcher nutzer hat die meisten beiträge gemacht
-        // meiste likes erhalten
-        // meisten abonnenten
-        // in einem zeitraum
-        
+        //@todo createContributionOfNutzerReport// Welcher nutzer hat die meisten beiträge gemacht? meiste likes erhalten? meisten abonnenten? in einem zeitraum?
         try {
             report.setCreationDate(new Date());
             report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
@@ -125,10 +121,7 @@ public class ReportGeneratorImpl
     public PopularityOfBeitrag createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
         PopularityOfBeitrag report = new PopularityOfBeitragImpl();
         
-        // Beiträge mit den meisten...
-        // Likes
-        // Kommentaren
-        // in einem Zeitraum
+        // @todo createPopularityOfBeitragReport//Beiträge mit den meisten Likes, Kommentaren in einem Zeitraum
         
         return report;
     }
