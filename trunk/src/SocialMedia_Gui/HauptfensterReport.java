@@ -17,11 +17,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Formatter;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,12 +35,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.text.MaskFormatter;
 
 /**
  * Report Generator class for the graphical user interface.
@@ -66,7 +62,7 @@ public class HauptfensterReport extends JFrame {
     private JButton runBeitragReportButton;
     private JFormattedTextField calendarStartDateField;
     private JFormattedTextField calendarEndDateField;
-    private SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+    private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
     // TO-DO
 
     /**
@@ -328,7 +324,7 @@ public class HauptfensterReport extends JFrame {
          } else {
              background = Color.WHITE;
              foreground = Color.BLACK;
-         };
+         }
          setBackground(background);
          setForeground(foreground);
          return this;

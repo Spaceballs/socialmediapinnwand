@@ -16,6 +16,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -37,12 +38,16 @@ public class SocialMediaReportClient {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         javax.swing.SwingUtilities.invokeLater(
@@ -58,6 +63,7 @@ public class SocialMediaReportClient {
     
     /**
      * This Method starts the real client grafical user interface and the rmi connection.
+     * 
      * @param adresse - String for the url.
      * @param serverPort - String for the server rmi port.
      * @param clientPort - String for the client rmi port.
@@ -69,12 +75,16 @@ public class SocialMediaReportClient {
              socialMediaLogic = (SocialMediaLogic) Naming.lookup("rmi://" + adresse + ":" + serverPort + "/socialMediaLogic");
              System.out.println("Verbindung hergestellt...");
         } catch (NotBoundException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         javax.swing.SwingUtilities.invokeLater(
