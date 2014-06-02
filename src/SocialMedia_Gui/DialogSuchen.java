@@ -3,19 +3,13 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.rmi.RemoteException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 
@@ -28,7 +22,7 @@ public class DialogSuchen extends JFrame {
     private final SocialMediaLogic server;
     private String nutzerEingabe;
     private Vector<Nutzer> nutzerSuche;
-    private JList ergebnissListe = new JList();
+    private JList ergebnisListe = new JList();
 
     /**
      * Constructor
