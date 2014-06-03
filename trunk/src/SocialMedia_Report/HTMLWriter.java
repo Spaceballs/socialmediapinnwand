@@ -26,74 +26,38 @@ public class HTMLWriter {
     Report report;
     
     /**
+     * Constructor of the class. Checks for the type of the report and calls the method for the transformation.
      * 
-     * @param report 
+     * @param contributionOfNutzerReport
      */
-    public HTMLWriter (Object report){
+    public HTMLWriter (Report report){
         buffer = new StringBuilder();
-        
-        this.report = (Report) report;
-        if (report instanceof ContributionOfNutzer) {
-            System.out.println("ContributionOfNutzer");
-            ContributionOfNutzer contributionOfNutzerReport = (ContributionOfNutzer) report;
-            writeHTML(contributionOfNutzerReport);
+        this.report = report;
+        try {
+            writeHTML(report);
+        } catch (IOException ex) {
+            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (report instanceof PopularityOfBeitrag) {
-            System.out.println("PopularityOfBeitrag");
-            PopularityOfBeitrag contributionOfNutzerReport = (PopularityOfBeitrag) report;
-            writeHTML(contributionOfNutzerReport);
-        }
-
     }
     
     /**
      * 
      * @param r 
      */
-    private void writeHTML (ContributionOfNutzer r){
-        try {
-            
+    private void writeHTML (Report r) throws IOException{
             System.out.println("Writing Report...");
             writeHeader();
             buffer.append("<H1>");
             writeParagraph(r.getHeaderAndTitleParagraph());
             buffer.append("</H1>").append("<p></p>").append("Report Datum: ").append(r.getCreationDate()).append("<p></p>");
-            //writeParagraph(r.getBodyParagraph());
+            writeParagraph(r.getBodyParagraph());
             buffer.append("<p></p>");            
             tableToHTML(r.getRows());
             
-            // TO-DO: WRITE CODE
+            //@todo WRITE CODE
             writeImprint(r.getImprintParagraph());
             writeClosure();
             finalizeDocument(); 
-        } catch (RemoteException ex) {
-            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    /**
-     * 
-     * @param r 
-     */
-    private void writeHTML (PopularityOfBeitrag r){
-        try {
-            
-            System.out.println("Writing Report...");
-            writeHeader();
-            buffer.append("<H1>");
-            writeParagraph(r.getHeaderAndTitleParagraph());
-            buffer.append("</H1>").append("<p></p>").append("Report Datum: ").append(r.getCreationDate()).append("<p></p>");
-            //writeParagraph(r.getBodyParagraph());
-            buffer.append("<p></p>");            
-            tableToHTML(r.getRows());
-            
-            // TO-DO: WRITE CODE
-            writeImprint(r.getImprintParagraph());
-            writeClosure();
-            finalizeDocument();            
-        } catch (RemoteException ex) {
-            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     /**
@@ -116,7 +80,7 @@ public class HTMLWriter {
      * 
      * @param rows 
      */
-    private void tableToHTML(Vector<Row> rows){
+    private void tableToHTML(Vector<Row> rows) throws RemoteException{
         if (rows != null){
             buffer.append("<p></p>").append("<table>");
                 Row headRow = rows.firstElement();
@@ -134,7 +98,7 @@ public class HTMLWriter {
      * 
      * @param r 
      */
-    private void writeRow(Row r){
+    private void writeRow(Row r) throws RemoteException{
         buffer.append("<tr>");
         Vector<Column> columns = null; 
         try {
@@ -148,15 +112,17 @@ public class HTMLWriter {
                 writeColumn(columns.elementAt(i));
             }
         }
-        buffer.append("\"</tr>\"");
+        buffer.append("</tr>");
     }
     
     /**
      * 
      * @param c 
      */
-    private void writeColumn(Column c){
-        buffer.append("\"<td valign=\"top\">\"").append(c.toString()).append("\"</td>\"");
+    private void writeColumn(Column c) throws RemoteException{
+        buffer.append("<td valign=\"top\">");
+        writeParagraph(c);
+        buffer.append("</td>");
     }
     
     /**
@@ -164,10 +130,10 @@ public class HTMLWriter {
      * @param p 
      */
     private void writeParagraph(Paragraph p) throws RemoteException{
-        if ( p instanceof CompositeParagraphImpl ) {
+        if ( p instanceof CompositeParagraph && p != null) {
             System.out.println("Writing CompositeParagraph...");
             this.writeParagraph((CompositeParagraph)p);
-        } else {
+        } else if (p != null){
             System.out.println("Writing SimpleParagraph...");
             this.writeParagraph((SimpleParagraph)p);
         }
@@ -177,13 +143,9 @@ public class HTMLWriter {
      * 
      * @param p 
      */
-    private void writeParagraph(CompositeParagraph p){
-        try {
-            for ( int i = 0; i < p.getNumParagraphs(); i++ ) {
-                buffer.append(p.getParagraphAt(i));
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
+    private void writeParagraph(CompositeParagraph p) throws RemoteException{
+        for ( int i = 0; i < p.getNumParagraphs(); i++ ) {
+            writeParagraph(p.getParagraphAt(i));
         }
     }
     
@@ -198,39 +160,30 @@ public class HTMLWriter {
     /**
      * 
      */
-    private void finalizeDocument() {
+    private void finalizeDocument() throws FileNotFoundException, IOException {
         String result = buffer.toString();
-        result = result.replaceAll("%p", "<p>").replaceAll("%/p", "</p>");
-        try {
-            System.out.println(this.report.getClass().getSimpleName() + ".html");
-            File htmlFile = new File("report.html");
-            htmlFile.createNewFile();
-            PrintWriter writer = new PrintWriter(htmlFile);
-            writer.print(result);
-            writer.close();
-            Desktop.getDesktop().browse(htmlFile.toURI());
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        result = result.replaceAll("&", "&amp;").replaceAll("%p", "<p>").replaceAll("%/p", "</p>").replaceAll("ä", "&auml;").replaceAll("ü", "&uuml;").replaceAll("ö", "&ouml;").replaceAll("ß", "&szlig;")
+                .replaceAll("Ä", "&Auml;").replaceAll("Ü", "&Uuml;").replaceAll("Ö", "&Ouml;");
+        System.out.println(this.report.getClass().getSimpleName() + ".html");
+        File htmlFile = new File("report.html");
+        htmlFile.createNewFile();
+        PrintWriter writer = new PrintWriter(htmlFile);
+        writer.print(result);
+        writer.close();
+        Desktop.getDesktop().browse(htmlFile.toURI());
     }
 
     /**
      * 
      * @param headRow 
      */
-    private void writeHeadRow(Row headRow) {
-        try {
-            buffer.append("<tr>");
-            Vector<Column> columns = headRow.getColumns();
-            for (int i = 0; i < columns.size(); i++) {
-                writeHeadColumn(columns.elementAt(i));
-            }
-            buffer.append("</tr>");
-        } catch (RemoteException ex) {
-            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
+    private void writeHeadRow(Row headRow) throws RemoteException {
+        buffer.append("<tr>");
+        Vector<Column> columns = headRow.getColumns();
+        for (int i = 0; i < columns.size(); i++) {
+            writeHeadColumn(columns.elementAt(i));
         }
+        buffer.append("</tr>");
     }
 
     /**
@@ -243,7 +196,7 @@ public class HTMLWriter {
         buffer.append("\"</b>\"");
     }
 
-    private void writeImprint(Paragraph p) {
-
+    private void writeImprint(Paragraph p) throws RemoteException {
+        writeParagraph(p);
     }
 }

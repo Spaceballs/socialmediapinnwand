@@ -24,7 +24,7 @@ public class ReportImpl extends java.rmi.server.UnicastRemoteObject implements R
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.6C37A6A4-26A4-83AC-CC6C-E9599681DD35]
     // </editor-fold> 
-    private Vector<Row> rows = null;
+    private Vector<Row> rows = new Vector<Row>();
     private Paragraph headerAndTitleParagraph = null;
     private Paragraph bodyParagraph = null;
     private Paragraph imprintParagraph = null;
