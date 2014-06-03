@@ -131,9 +131,7 @@ public class KommentarPanel extends JPanel {
     /**
      * 
      */
-    private void initializeTextfield() {
-        String html1 = "<html><body style='width: ";
-        String html2 = "px'>";
+    private void initializeTextfield() { 
         /**
         buffer = new StringBuffer();
         buffer.append(text);
@@ -155,11 +153,14 @@ public class KommentarPanel extends JPanel {
                 text = buffer.toString();
                 buffer.setLength(0);
             }
-            **/
-            gridBagLayout.gridx = 0;
-            gridBagLayout.gridy = gridBagLayout.gridy + 1;
-            gridBagLayout.gridwidth = 2;
-            this.add(new JLabel(html1 + 200 + html2 + text, JLabel.LEFT), gridBagLayout);
-//        } while (buffer.length() != 0);
+        } while (buffer.length() != 0);
+        **/
+        String html1 = "<html><body style='width: ";
+        String html2 = "px'>"; 
+        gridBagLayout.gridx = 0;
+        gridBagLayout.gridy = gridBagLayout.gridy + 1;
+        gridBagLayout.gridwidth = 2;
+        this.add(new JLabel(html1 + 200 + html2 + text, JLabel.LEFT), gridBagLayout);
+//        
     }
 }

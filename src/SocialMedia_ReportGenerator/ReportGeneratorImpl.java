@@ -12,6 +12,7 @@ import SocialMedia_Report.ContributionOfNutzer;
 import SocialMedia_Report.ContributionOfNutzerImpl;
 import SocialMedia_Report.PopularityOfBeitrag;
 import SocialMedia_Report.PopularityOfBeitragImpl;
+import SocialMedia_Report.Report;
 import SocialMedia_Report.Row;
 import SocialMedia_Report.RowImpl;
 import SocialMedia_Report.SimpleParagraphImpl;
@@ -67,41 +68,64 @@ public class ReportGeneratorImpl
      * @return ContributionOfNutzerImpl - Returns created the Report object.
      * @throws java.rmi.RemoteException
      */
-    public ContributionOfNutzer createContributionOfNutzerReport (Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
+    public Report createContributionOfNutzerReport (Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
+        System.out.println(nutzerVal);
+        System.out.println(sortByVal);
+        System.out.println(startDateVal);
+        System.out.println(endDateVal);
         ContributionOfNutzer report = new ContributionOfNutzerImpl();
+        
         //@todo createContributionOfNutzerReport// Welcher nutzer hat die meisten beiträge gemacht? meiste likes erhalten? meisten abonnenten? in einem zeitraum?
-        try {
-            report.setCreationDate(new Date());
-            report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
-            report.setBodyParagraph(null);
-            
-            report.setImprintParagraph(addImprint());
-            
-            Vector<Beitrag> reportBeitraege = socialMediaLogic.getAllBeitrag();
-            for (int i = 0; i < reportBeitraege.size(); i++) {
-                if (!socialMediaLogic.ownerCheck(nutzerVal, reportBeitraege.elementAt(i)))
-                    reportBeitraege.removeElementAt(i);
-            }
-            
-            Vector<Kommentar> reportKommentare = socialMediaLogic.getAllKommentar();
-            for (int i = 0; i < reportKommentare.size(); i++) {
-                if (!socialMediaLogic.ownerCheck(nutzerVal, reportKommentare.elementAt(i)))
-                    reportKommentare.removeElementAt(i);
-            }
-            Vector<Object> sammlung = new Vector<Object>();
+        
+        report.setCreationDate(new Date());
+        report.setStartDate(startDateVal);
+        report.setEndDate(endDateVal);
+        report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Nutzer Popularitäts-/Aktivitäts Report"));
+        report.setBodyParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
 
-            Column column = new ColumnImpl();
-            column.addSubParagraph(new SimpleParagraphImpl("TEST"));
-            column.addSubParagraph(new SimpleParagraphImpl("TEST"));
-            Row row = new RowImpl();
-            row.addColumn(column);
-            Vector<Row> rows = new Vector<Row>();
-            rows.add(row);
-            report.setRows(rows);
-            
-        } catch (RemoteException ex) {
-            Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        Vector<Beitrag> reportBeitraege = socialMediaLogic.getAllBeitrag();
+//        for (int i = 0; i < reportBeitraege.size(); i++) {
+//            if (!socialMediaLogic.ownerCheck(nutzerVal, reportBeitraege.elementAt(i)))
+//                reportBeitraege.removeElementAt(i);
+//        }
+//
+//        Vector<Kommentar> reportKommentare = socialMediaLogic.getAllKommentar();
+//        for (int i = 0; i < reportKommentare.size(); i++) {
+//            if (!socialMediaLogic.ownerCheck(nutzerVal, reportKommentare.elementAt(i)))
+//                reportKommentare.removeElementAt(i);
+//        }
+//        Vector<Object> sammlung = new Vector<Object>();
+
+        Column column = new ColumnImpl();
+        column.addSubParagraph(new SimpleParagraphImpl("TEST00"));
+        Row row = new RowImpl();
+        row.addColumn(column);
+        column.addSubParagraph(new SimpleParagraphImpl("TEST01"));
+        row.addColumn(column);
+        column.addSubParagraph(new SimpleParagraphImpl("TEST02"));
+        row.addColumn(column);
+        Vector<Row> rows = new Vector<Row>();
+        rows.add(row);
+
+        column.addSubParagraph(new SimpleParagraphImpl("TEST10"));
+        row.addColumn(column);
+        column.addSubParagraph(new SimpleParagraphImpl("TEST11"));
+        row.addColumn(column);
+        column.addSubParagraph(new SimpleParagraphImpl("TEST12"));
+        row.addColumn(column);
+        rows.add(row);
+
+        column.addSubParagraph(new SimpleParagraphImpl("TEST20"));
+        row.addColumn(column);
+        column.addSubParagraph(new SimpleParagraphImpl("TEST21"));
+        row.addColumn(column);
+        column.addSubParagraph(new SimpleParagraphImpl("TEST22"));
+        row.addColumn(column);
+        rows.add(row);            
+
+        report.setRows(rows);
+
+        report.setImprintParagraph(addImprint());
         return report;
     }
 
@@ -118,7 +142,7 @@ public class ReportGeneratorImpl
      * @return PopularityOfBeitragImpl - Returns created the Report object.
      * @throws java.rmi.RemoteException
      */
-    public PopularityOfBeitrag createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
+    public Report createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
         PopularityOfBeitrag report = new PopularityOfBeitragImpl();
         
         // @todo createPopularityOfBeitragReport//Beiträge mit den meisten Likes, Kommentaren in einem Zeitraum

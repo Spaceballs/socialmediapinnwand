@@ -56,14 +56,16 @@ public class HauptfensterReport extends JFrame {
     private JPanel popularityOfBeitragReportPanel;
     private JTabbedPane tabbedPane;
     private JList<Nutzer> nutzerliste;
+    private JComboBox contributionOfNutzerReportPanelSortByBox;
+    private String[] data0 = {"Beiträge", "Likes", "Abonnenten"};
+    private JComboBox popularityOfBeitragReportPanelSortByBox;
+    private String[] data1 = {"Likes", "Kommentare"};
     private ScrollPane nutzerlisteScrollPane;
-    private DefaultListModel listModel;
     private JButton runNutzerReportButton;
     private JButton runBeitragReportButton;
     private JFormattedTextField calendarStartDateField;
     private JFormattedTextField calendarEndDateField;
     private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
-    // TO-DO
 
     /**
      * Constructor of the HauptfensterReport class.
@@ -73,14 +75,13 @@ public class HauptfensterReport extends JFrame {
     public HauptfensterReport(SocialMediaLogic server) {
         this.server = server;
         initialize();
-        
     }
 
     /**
      * Init method for the report generator main window.
      */
     private void initialize() {
-        initList();
+        initListAndComboBox();
         initData();
         initFrame();
         initPanel();
@@ -90,10 +91,13 @@ public class HauptfensterReport extends JFrame {
      * This method sets up the jlist and adds an selection listener to the list.
      * This listener sets, if selection occurs, the selected user for the report and sets the buttons <code>setEnabled(true)</code>.
      */
-    private void initList() {
+    private void initListAndComboBox() {
+        contributionOfNutzerReportPanelSortByBox = new JComboBox(data0);
+        popularityOfBeitragReportPanelSortByBox = new JComboBox(data1);
+        
+        
         nutzerliste = new JList();
         nutzerliste.setCellRenderer(new NutzerListCellRenderer());
-        
         nutzerliste.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 runBeitragReportButton.setEnabled(true);
@@ -102,6 +106,7 @@ public class HauptfensterReport extends JFrame {
             }
         });
         nutzerliste.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 2) {
@@ -109,8 +114,10 @@ public class HauptfensterReport extends JFrame {
                     try {
                         Date dateStart = df.parse(calendarStartDateField.getText());
                         Date dateEnd = df.parse(calendarEndDateField.getText());
-                        Report report = (Report) reportGenerator.createContributionOfNutzerReport(reportUser, 1, dateStart, dateEnd);
-                        HTMLWriter writer = new HTMLWriter(report);
+                        HTMLWriter htmlWriter = new HTMLWriter(reportGenerator.createContributionOfNutzerReport(reportUser, 
+                                contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
+                                dateStart, 
+                                dateEnd));
                     } catch (RemoteException ex) {
                         Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ParseException ex) {
@@ -193,9 +200,8 @@ public class HauptfensterReport extends JFrame {
         calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
         textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
         
-        JComboBox sortByBox = new JComboBox();
-
-        textFieldPanel.add(sortByBox, BorderLayout.NORTH);
+        textFieldPanel.add(new JLabel("Sort by... "), BorderLayout.NORTH);
+        textFieldPanel.add(contributionOfNutzerReportPanelSortByBox, BorderLayout.NORTH);
         contributionOfNutzerReportPanel.add(textFieldPanel, BorderLayout.NORTH);
         
         nutzerlisteScrollPane = new ScrollPane();
@@ -210,8 +216,10 @@ public class HauptfensterReport extends JFrame {
                 try {
                     Date dateStart = df.parse(calendarStartDateField.getText());
                     Date dateEnd = df.parse(calendarEndDateField.getText());
-                    Report report = (Report) reportGenerator.createContributionOfNutzerReport(reportUser, 1, dateStart, dateEnd);
-                    HTMLWriter writer = new HTMLWriter(report);
+                    HTMLWriter htmlWriter = new HTMLWriter(reportGenerator.createContributionOfNutzerReport(reportUser, 
+                            contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
+                            dateStart, 
+                            dateEnd));
                 } catch (RemoteException ex) {
                     Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
@@ -243,9 +251,8 @@ public class HauptfensterReport extends JFrame {
         calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
         textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
         
-        JComboBox sortByBox = new JComboBox();
-
-        textFieldPanel.add(sortByBox, BorderLayout.NORTH);
+        textFieldPanel.add(new JLabel("Sort by... "), BorderLayout.NORTH);
+        textFieldPanel.add(popularityOfBeitragReportPanelSortByBox, BorderLayout.NORTH);
         popularityOfBeitragReportPanel.add(textFieldPanel, BorderLayout.NORTH);
         
         
@@ -257,8 +264,9 @@ public class HauptfensterReport extends JFrame {
                 try {
                     Date dateStart = df.parse(calendarStartDateField.getText());
                     Date dateEnd = df.parse(calendarEndDateField.getText());
-                    Report report = (Report) reportGenerator.createPopularityOfBeitragReport(1, dateStart, dateEnd);
-                    HTMLWriter writer = new HTMLWriter(report);
+                    HTMLWriter htmlWriter = new HTMLWriter(reportGenerator.createPopularityOfBeitragReport(popularityOfBeitragReportPanelSortByBox.getSelectedIndex(), 
+                            dateStart, 
+                            dateEnd));
                 } catch (RemoteException ex) {
                     Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
