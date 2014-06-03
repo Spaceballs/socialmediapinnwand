@@ -198,8 +198,8 @@ public class AbonnementMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * 
-     * @param val
-     * @return 
+     * @param val int value to be set
+     * @return abonnement - Returns the abonnement with the chosen ID
      */
     public Abonnement findByID (int val) {
         Connection con = DBConnection.connection();
