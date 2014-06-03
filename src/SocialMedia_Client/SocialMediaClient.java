@@ -77,15 +77,19 @@ public class SocialMediaClient {
         } catch (NotBoundException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+            createAndShowDialogue();
         } catch (MalformedURLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+            createAndShowDialogue();
         } catch (RemoteException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+            createAndShowDialogue();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
+            createAndShowDialogue();
         }
         javax.swing.SwingUtilities.invokeLater(
                 new Runnable() { public void run() { createAndShowGUI();}});

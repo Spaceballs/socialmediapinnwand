@@ -20,7 +20,7 @@ import javax.swing.UIManager;
 public class DialogSuchen extends JFrame {
     
     private final SocialMediaLogic server;
-    private String nutzerEingabe;
+    private String nutzerEingabe = null;
     private Vector<Nutzer> nutzerSuche;
     private JList ergebnisListe = new JList();
 
@@ -31,9 +31,7 @@ public class DialogSuchen extends JFrame {
     DialogSuchen(SocialMediaLogic server) {
         this.server = server;
         initializeDialog();
-        
-        
-        //JOptionPane.showMessageDialog(null, "alert", "alert", JOptionPane.ERROR_MESSAGE);
+        initializeList();
     }
 
     /**
@@ -43,34 +41,28 @@ public class DialogSuchen extends JFrame {
         UIManager.put("OptionPane.okButtonText", "Suchen");
         nutzerEingabe = JOptionPane.showInputDialog(this, "Bitte Usernamen eingeben", "Nutzer suchen",JOptionPane.PLAIN_MESSAGE);
         
-        if (JOptionPane.OK_OPTION == 0) {
+        if (JOptionPane.OK_OPTION == 0 && nutzerEingabe != null) {
             try {
-                nutzerSuche = server.searchNutzer(nutzerEingabe);
-                System.out.println(server.searchNutzer(nutzerEingabe));
+                if (nutzerEingabe.contentEquals("") || nutzerEingabe.contentEquals(" ")) {
+                    UIManager.put("OptionPane.okButtonText", "OK");
+                    JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    new DialogSuchen(server);
+                } else {
+                    nutzerSuche = server.searchNutzer(nutzerEingabe);
                 
-                for (int i = 0; i < nutzerSuche.size(); i++) {
-                    Nutzer nutzer = nutzerSuche.elementAt(i);
-                    nutzer.getUsername();
-                    System.out.println(nutzer.getUsername());
+                    for (int i = 0; i < nutzerSuche.size(); i++) {
+                        Nutzer nutzer = nutzerSuche.elementAt(i);
+                        nutzer.getUsername();
+                        System.out.println(nutzer.getUsername());
+                    }
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(DialogSuchen.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-        }
-//        JPanel p = new JPanel(new BorderLayout());
-//
-//        JPanel labels = new JPanel(new GridLayout(1, 2));
-//        labels.add(new JLabel("Username", SwingConstants.RIGHT));
-//        p.add(labels, BorderLayout.WEST);
-//
-//        JPanel controls = new JPanel(new GridLayout(1, 2));
-//        JTextField username = new JTextField();
-//        controls.add(username);
-//        p.add(controls, BorderLayout.CENTER);
-//
-//        JOptionPane.showMessageDialog(
-//            this, p, "Nutzer suchen", JOptionPane.PLAIN_MESSAGE);
+        } 
     }
 
+    private void initializeList() {
+        ergebnisListe.setCellRenderer(new NutzerListCellRenderer());
+    }
 }
