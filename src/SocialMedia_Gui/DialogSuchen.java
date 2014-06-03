@@ -7,10 +7,14 @@ import java.rmi.RemoteException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
+import org.eclipse.persistence.eis.EISException;
 
 
 /**
@@ -19,19 +23,20 @@ import javax.swing.UIManager;
  */
 public class DialogSuchen extends JFrame {
     
+    private final Nutzer clientNutzer;
     private final SocialMediaLogic server;
     private String nutzerEingabe = null;
     private Vector<Nutzer> nutzerSuche;
-    private JList ergebnisListe = new JList();
+    private JList<Nutzer> ergebnisListe = new JList<Nutzer>();
 
     /**
      * Constructor
      * @param server - the server
      */
-    DialogSuchen(SocialMediaLogic server) {
+    DialogSuchen(SocialMediaLogic server, Nutzer clientNutzer) {
+        this.clientNutzer = clientNutzer;
         this.server = server;
         initializeDialog();
-        initializeList();
     }
 
     /**
@@ -46,15 +51,17 @@ public class DialogSuchen extends JFrame {
                 if (nutzerEingabe.contentEquals("") || nutzerEingabe.contentEquals(" ")) {
                     UIManager.put("OptionPane.okButtonText", "OK");
                     JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
-                    new DialogSuchen(server);
+                    new DialogSuchen(server, clientNutzer);
                 } else {
                     nutzerSuche = server.searchNutzer(nutzerEingabe);
+                    initializeList();
+                    selectionOptionPane();
                 
-                    for (int i = 0; i < nutzerSuche.size(); i++) {
-                        Nutzer nutzer = nutzerSuche.elementAt(i);
-                        nutzer.getUsername();
-                        System.out.println(nutzer.getUsername());
-                    }
+//                    for (int i = 0; i < nutzerSuche.size(); i++) {
+//                        Nutzer nutzer = nutzerSuche.elementAt(i);
+//                        nutzer.getUsername();
+//                        System.out.println(nutzer.getUsername());
+//                    }
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(DialogSuchen.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +69,38 @@ public class DialogSuchen extends JFrame {
         } 
     }
 
+    /**
+     * 
+     */
     private void initializeList() {
         ergebnisListe.setCellRenderer(new NutzerListCellRenderer());
+        ergebnisListe.setListData(nutzerSuche);
+    }
+
+    /**
+     * 
+     */
+    private void selectionOptionPane() {
+        ergebnisListe.setSelectedIndex(0);
+        JOptionPane abc = new JOptionPane(
+                new Object[] {
+                        new JLabel("Bitte Usernamen auswählen"), new JScrollPane(ergebnisListe)
+                }, 
+                JOptionPane.QUESTION_MESSAGE, 
+                JOptionPane.OK_CANCEL_OPTION) {
+                    @Override
+                    public void selectInitialValue(){
+                        super.selectInitialValue();
+                        ergebnisListe.requestFocus();
+                    }
+                    public Nutzer getSelectedNutzer(){
+                        return ergebnisListe.getSelectedValue();
+                    }
+        };
+        JDialog abcDialog = abc.createDialog(null, "Suchergebnis");
+        abcDialog.setVisible(true);
+        if (JOptionPane.OK_OPTION == 0){
+            SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new PinnwandPanel(server, clientNutzer, ergebnisListe.getSelectedValue()));
+        }
     }
 }

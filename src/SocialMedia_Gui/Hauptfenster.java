@@ -183,7 +183,7 @@ public class Hauptfenster extends JFrame {
         //ActionListener Nutzer suchen
         suchen.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               DialogSuchen dialogSuchen = new DialogSuchen(server);
+               DialogSuchen dialogSuchen = new DialogSuchen(server, clientNutzer);
            }
         });
 

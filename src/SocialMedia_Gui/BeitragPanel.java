@@ -36,9 +36,9 @@ public class BeitragPanel extends JPanel {
     private final Beitrag beitrag;
     private Nutzer user;
     private String text;
-    private StringBuffer buffer;
     private String beitragHeader;
     private Vector<Like> likes;
+    private Like userLike;
     private int anzahlLikes;
     private String likeString;
     private Vector<Kommentar> kommentare;
@@ -79,13 +79,18 @@ public class BeitragPanel extends JPanel {
      */
     private void initializeData() {
         try {
+            String html1 = "<html><body style='width: ";
+            String html2 = "px'>";
+        
             user = server.getNutzerOf(beitrag);
-            beitragHeader = "Verfasst von " + user.getUsername() + " am " + dateFormat.format(beitrag.getCreationDate());
+            beitragHeader = html1 + 200 + html2 + "Verfasst von " + user.getUsername() + " am " + dateFormat.format(beitrag.getCreationDate());
             
             likes = new Vector<Like>();
             likes = server.getAllLikeOfBeitrag(beitrag);
             anzahlLikes = likes.size();
-            likeString = Integer.toString(anzahlLikes);
+            likeString = html1 + 40 + html2 + Integer.toString(anzahlLikes) + " Like(s)";
+            
+            userLike = server.getUserLike(clientNutzer, beitrag);
 
             buttonBearbeiten.setIcon(new ImageIcon("edit.jpg"));
             buttonBearbeiten.setToolTipText("Beitrag bearbeiten");
@@ -131,7 +136,7 @@ public class BeitragPanel extends JPanel {
             gridBagLayout.gridx = 2;
             gridBagLayout.gridy = 0;
             gridBagLayout.gridwidth = 1;
-            this.add(new JLabel(likeString + " Like(s)", JLabel.LEFT), gridBagLayout);
+            this.add(new JLabel(likeString, JLabel.LEFT), gridBagLayout);
             
             gridBagLayout.gridx = 3;
             gridBagLayout.gridy = 0;
@@ -167,8 +172,6 @@ public class BeitragPanel extends JPanel {
                 gridBagLayout.gridwidth = 2;
                 this.add(new KommentarPanel(server, clientNutzer, kommentare.elementAt(i)), gridBagLayout);
             }
-            
-            this.setSize(70, 150);
         } catch (RemoteException ex) {
             Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -209,6 +212,7 @@ public class BeitragPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     server.createLike(beitrag, clientNutzer);
+                    SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
                 } catch (RemoteException ex) {
                     Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -218,7 +222,8 @@ public class BeitragPanel extends JPanel {
         buttonUnlike.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    server.deleteLike(null);
+                    server.deleteLike(userLike);
+                    SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
                 } catch (RemoteException ex) {
                     Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -230,30 +235,6 @@ public class BeitragPanel extends JPanel {
      * 
      */
     private void initializeTextfield() {
-
-        /**
-        buffer = new StringBuffer();
-        buffer.append(text);
-        do {
-            if (buffer.length() >= 60) {
-                if (buffer.indexOf(" ", 50) == -1) {
-                    if (buffer.indexOf(" ", 40) == -1) {
-                        text = buffer.substring(0, 60);
-                        buffer.delete(0, 60);
-                    } else {
-                        text = buffer.substring(0, buffer.indexOf(" ", 40)+1);
-                        buffer.delete(0, buffer.indexOf(" ", 40)+1);
-                    }
-                } else {
-                    text = buffer.substring(0, buffer.indexOf(" ", 50)+1);
-                    buffer.delete(0, buffer.indexOf(" ", 50)+1);
-                }
-            } else {
-                text = buffer.toString();
-                buffer.setLength(0);
-            }
-        } while (buffer.length() != 0);
-        **/
         String html1 = "<html><body style='width: ";
         String html2 = "px'>";        
         gridBagLayout.gridx = 0;
