@@ -195,6 +195,18 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         return false;        
     }
     
+    
+    public Like getUserLike(Nutzer n, Beitrag b) throws RemoteException {
+        n = nutzerMapper.findByID(n.getID());
+        b = beitragMapper.findByID(b.getID());
+        Vector<Like> beitragLikes = b.getAllBeitragLikes(this);
+        for (int i = 0; i < beitragLikes.size(); i++) {
+            Like like = beitragLikes.elementAt(i);
+            if (like.getNutzerID() == n.getID())
+                return like;
+        }
+        return null;
+    }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.332BE2CD-E2F2-7B46-7CF6-53FA4A82274E]
