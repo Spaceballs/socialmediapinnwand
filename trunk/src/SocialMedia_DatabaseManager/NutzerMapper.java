@@ -206,8 +206,8 @@ public class NutzerMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * 
-     * @param val
-     * @return 
+     * @param val int value to be set
+     * @return nutzer - Returns the nutzer with the chosen ID
      */
     public Nutzer findByID(int val) {
         Connection con = DBConnection.connection();

@@ -201,8 +201,8 @@ public class BeitragMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * 
-     * @param val
-     * @return 
+     * @param val int value to be set
+     * @return beitrag - Returns the beitrag with the chosen ID
      */
     public Beitrag findByID (int val) {
         Connection con = DBConnection.connection();

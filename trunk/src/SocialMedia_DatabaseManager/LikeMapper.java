@@ -197,8 +197,8 @@ public class LikeMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * 
-     * @param val
-     * @return 
+     * @param val int value to be set
+     * @return like - Returns the like with the chosen ID 
      */
     public Like findByID (int val) {
         Connection con = DBConnection.connection();

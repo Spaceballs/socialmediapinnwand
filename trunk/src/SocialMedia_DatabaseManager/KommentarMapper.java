@@ -30,7 +30,10 @@ public class KommentarMapper extends DBStatementFactory{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D3B5CF97-9DF3-0750-3151-0AD4546D3D35]
-    // </editor-fold> 
+    // </editor-fold>
+    /*
+     * Constructor of the KommentarMapper class.
+     */
     protected KommentarMapper () {
     }
 
@@ -199,8 +202,8 @@ public class KommentarMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * 
-     * @param val
-     * @return 
+     * @param val int value to be set
+     * @return kommentar - Returns the kommentar with the chosen ID
      */
     public Kommentar findByID (int val) {
         Connection con = DBConnection.connection();
