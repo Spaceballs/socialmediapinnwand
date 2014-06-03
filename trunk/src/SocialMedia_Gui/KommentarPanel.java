@@ -34,8 +34,6 @@ public class KommentarPanel extends JPanel {
     private Nutzer user;
     private String kommentarHeader;
     private String text;
-    private StringBuffer buffer;
-    private String datum;
     private GridBagConstraints gridBagLayout;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
     private final JButton buttonBearbeiten = new JButton();
@@ -56,9 +54,12 @@ public class KommentarPanel extends JPanel {
     }
     
     private void initializeData() {
-        try {            
+        try {
+            String html1 = "<html><body style='width: ";
+            String html2 = "px'>";
+            
             user = server.getNutzerOf(kommentar);
-            kommentarHeader = "Verfasst von " + user.getUsername() + " am " + dateFormat.format(kommentar.getCreationDate());
+            kommentarHeader = html1 + 200 + html2 + "Verfasst von " + user.getUsername() + " am " + dateFormat.format(kommentar.getCreationDate());
 
             buttonBearbeiten.setIcon(new ImageIcon("edit.jpg"));
             buttonBearbeiten.setToolTipText("Kommentar bearbeiten");
@@ -86,11 +87,6 @@ public class KommentarPanel extends JPanel {
         gridBagLayout.gridy = 0;
         gridBagLayout.gridwidth = 1;
         this.add(new JLabel(kommentarHeader, JLabel.LEFT), gridBagLayout);
-        
-        gridBagLayout.gridx = 1;
-        gridBagLayout.gridy = 0;
-        gridBagLayout.gridwidth = 1;
-        this.add(new JLabel(datum, JLabel.LEFT), gridBagLayout);
         
         gridBagLayout.gridx = 2;
         gridBagLayout.gridy = 0;
@@ -131,36 +127,12 @@ public class KommentarPanel extends JPanel {
     /**
      * 
      */
-    private void initializeTextfield() { 
-        /**
-        buffer = new StringBuffer();
-        buffer.append(text);
-        do {
-            if (buffer.length() >= 50) {
-                if (buffer.indexOf(" ", 40) == -1) {
-                    if (buffer.indexOf(" ", 30) == -1) {
-                        text = buffer.substring(0, 50);
-                        buffer.delete(0, 50);
-                    } else {
-                        text = buffer.substring(0, buffer.indexOf(" ", 30)+1);
-                        buffer.delete(0, buffer.indexOf(" ", 30)+1);
-                    }
-                } else {
-                    text = buffer.substring(0, buffer.indexOf(" ", 40)+1);
-                    buffer.delete(0, buffer.indexOf(" ", 40)+1);
-                }
-            } else {
-                text = buffer.toString();
-                buffer.setLength(0);
-            }
-        } while (buffer.length() != 0);
-        **/
+    private void initializeTextfield() {
         String html1 = "<html><body style='width: ";
         String html2 = "px'>"; 
         gridBagLayout.gridx = 0;
         gridBagLayout.gridy = gridBagLayout.gridy + 1;
         gridBagLayout.gridwidth = 2;
         this.add(new JLabel(html1 + 200 + html2 + text, JLabel.LEFT), gridBagLayout);
-//        
     }
 }

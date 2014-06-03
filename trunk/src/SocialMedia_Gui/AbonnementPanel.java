@@ -59,9 +59,12 @@ class AbonnementPanel extends JPanel {
      * 
      */
     private void initializeData() {
-        try {            
+        try {
+            String html1 = "<html><body style='width: ";
+            String html2 = "px'>";
+            
             user =  server.getOwnerOfPinnwandOfAbonnement(abonnement);
-            username = user.getUsername();
+            username = html1 + 75 + html2 + user.getUsername();
             
             buttonPinnwand.setIcon(new ImageIcon("pinnwand.jpg"));
             buttonPinnwand.setToolTipText("Gehe zur Pinnwand von " + username);
