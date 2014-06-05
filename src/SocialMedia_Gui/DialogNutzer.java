@@ -97,7 +97,7 @@ public class DialogNutzer extends JFrame {
                             new String(password.getPassword()),
                             clientNutzer);
                     if (clientNutzerBarbeitet == null){
-                        // TO-DO: Error Behaviour
+                        // @todo Error Behaviour
                     } else {
                         dispose();
                     }   

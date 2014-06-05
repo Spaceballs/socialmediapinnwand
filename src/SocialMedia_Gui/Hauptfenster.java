@@ -33,8 +33,6 @@ public class Hauptfenster extends JFrame {
     private final JMenuItem accountdaten = new JMenuItem("Accountdaten ändern");
     private final JMenuItem abmelden = new JMenuItem("Abmelden");
     private JPanel panelLinks = new JPanel();
-    private final JPanel panelRechtsOben = new JPanel();
-    private final JPanel panelRechtsUnten = new JPanel();
     private JSplitPane splitPane;
     private JSplitPane splitPaneRechts;
     private PinnwandPanel pinnwandPanel;
@@ -163,8 +161,6 @@ public class Hauptfenster extends JFrame {
      * All required listeners
      */    
     private void initializeListeners() {
-
-        //ActionListener Newsfeed
         newsfeedMenu.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                newsfeedPanel = new NewsfeedPanel(server, clientNutzer);
@@ -172,7 +168,6 @@ public class Hauptfenster extends JFrame {
            }
         });
 
-        //ActionListener Meine Pinnwand
         meinePinnwandMenu.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                pinnwandPanel = new PinnwandPanel(server, clientNutzer, clientNutzer);
@@ -180,21 +175,18 @@ public class Hauptfenster extends JFrame {
            }
         });
 
-        //ActionListener Nutzer suchen
         suchen.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                DialogSuchen dialogSuchen = new DialogSuchen(server, clientNutzer);
            }
         });
 
-        //ActionListener Accountdaten ändern
         accountdaten.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                DialogNutzer dialogNutzer = new DialogNutzer(server, clientNutzer);
            }
         });
 
-        //ActionListener Abmelden
         abmelden.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(Hauptfenster.this,

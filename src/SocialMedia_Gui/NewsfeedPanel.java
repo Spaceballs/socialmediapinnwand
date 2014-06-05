@@ -80,8 +80,7 @@ public class NewsfeedPanel extends JPanel {
         scrollPanePane.setLayout(new GridBagLayout());
         
         GridBagConstraints c = new GridBagConstraints();
-        
-//        c.fill = GridBagConstraints.HORIZONTAL;
+
         c.anchor = GridBagConstraints.WEST;
         c.insets = new Insets(5, 5, 5, 5);
         
@@ -130,7 +129,7 @@ public class NewsfeedPanel extends JPanel {
             meinePinnwand = server.getPinnwandOfNutzer(clientNutzer);
             buttonNeuerBeitrag.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, meinePinnwand);
+                    DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, meinePinnwand, null, null);
                 }
             });
         } catch (RemoteException ex) {

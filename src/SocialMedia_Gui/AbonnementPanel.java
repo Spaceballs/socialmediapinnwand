@@ -30,6 +30,7 @@ class AbonnementPanel extends JPanel {
     private final Nutzer clientNutzer;
     private final Abonnement abonnement;
     private String username;
+    private String usernameToolTip;
     private Nutzer user;
 
     /**
@@ -65,9 +66,10 @@ class AbonnementPanel extends JPanel {
             
             user =  server.getOwnerOfPinnwandOfAbonnement(abonnement);
             username = html1 + 75 + html2 + user.getUsername();
+            usernameToolTip = user.getUsername();
             
             buttonPinnwand.setIcon(new ImageIcon("pinnwand.jpg"));
-            buttonPinnwand.setToolTipText("Gehe zur Pinnwand von " + username);
+            buttonPinnwand.setToolTipText("Gehe zur Pinnwand von " + usernameToolTip);
             
             buttonLoeschen.setSize(18, 18);
             buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));

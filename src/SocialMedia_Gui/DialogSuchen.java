@@ -14,7 +14,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
-import org.eclipse.persistence.eis.EISException;
 
 
 /**
@@ -27,7 +26,7 @@ public class DialogSuchen extends JFrame {
     private final SocialMediaLogic server;
     private String nutzerEingabe = null;
     private Vector<Nutzer> nutzerSuche;
-    private JList<Nutzer> ergebnisListe = new JList<Nutzer>();
+    private final JList<Nutzer> ergebnisListe = new JList<Nutzer>();
 
     /**
      * Constructor
@@ -48,6 +47,7 @@ public class DialogSuchen extends JFrame {
         
         if (JOptionPane.OK_OPTION == 0 && nutzerEingabe != null) {
             try {
+                //@todo - Fehler bei Eingabe von 2 Leerzeichen oder mehr auswerfen
                 if (nutzerEingabe.contentEquals("") || nutzerEingabe.contentEquals(" ")) {
                     UIManager.put("OptionPane.okButtonText", "OK");
                     JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -56,12 +56,6 @@ public class DialogSuchen extends JFrame {
                     nutzerSuche = server.searchNutzer(nutzerEingabe);
                     initializeList();
                     selectionOptionPane();
-                
-//                    for (int i = 0; i < nutzerSuche.size(); i++) {
-//                        Nutzer nutzer = nutzerSuche.elementAt(i);
-//                        nutzer.getUsername();
-//                        System.out.println(nutzer.getUsername());
-//                    }
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(DialogSuchen.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,12 +75,14 @@ public class DialogSuchen extends JFrame {
      * 
      */
     private void selectionOptionPane() {
+        // @todo - Selektierte Pinnwand wird auch bei "Abbrechen" oder "X" angezeigt
         ergebnisListe.setSelectedIndex(0);
-        JOptionPane abc = new JOptionPane(
+        UIManager.put("OptionPane.okButtonText", "Zur Pinnwand");
+        JOptionPane ergebnisAuswahl = new JOptionPane(
                 new Object[] {
                         new JLabel("Bitte Usernamen auswählen"), new JScrollPane(ergebnisListe)
-                }, 
-                JOptionPane.QUESTION_MESSAGE, 
+                },
+                JOptionPane.PLAIN_MESSAGE, 
                 JOptionPane.OK_CANCEL_OPTION) {
                     @Override
                     public void selectInitialValue(){
@@ -97,8 +93,8 @@ public class DialogSuchen extends JFrame {
                         return ergebnisListe.getSelectedValue();
                     }
         };
-        JDialog abcDialog = abc.createDialog(null, "Suchergebnis");
-        abcDialog.setVisible(true);
+        JDialog dialogErgebnis = ergebnisAuswahl.createDialog(null, "Suchergebnis");
+        dialogErgebnis.setVisible(true);
         if (JOptionPane.OK_OPTION == 0){
             SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new PinnwandPanel(server, clientNutzer, ergebnisListe.getSelectedValue()));
         }

@@ -125,10 +125,8 @@ public class DialogRegistrieren extends JFrame {
      * All required Listeners
      */
     public void initializeListeners() {
-        //ActionListener Button Registrieren
         buttonRegistrieren.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               
                 if(username.getText().length() >= 3 && name.getText().length() >= 3 && surname.getText().length() >= 3 && new String(password.getPassword()).length()  >= 4 ){
                     Nutzer clientNutzer = null;
                     try {
@@ -149,6 +147,5 @@ public class DialogRegistrieren extends JFrame {
                 }
            }
         });
-        
     }
 }
