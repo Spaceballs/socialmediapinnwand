@@ -127,10 +127,8 @@ public class DialogServerData extends JFrame{
      * All required Listeners
      */
     private void initializeListeners() {
-        //ActionListener Button Uebernehmen
         buttonUebernehmen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 if (client != null){
                     client.executeClient(adresse.getText(), serverPort.getText(), clientPort.getText());
                     dispose();
@@ -139,7 +137,6 @@ public class DialogServerData extends JFrame{
                     rClient.executeClient(adresse.getText(), serverPort.getText(), clientPort.getText());
                     dispose();
                 }
-
             }
         });
     }

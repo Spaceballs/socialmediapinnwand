@@ -107,8 +107,7 @@ public class DialogAnmelden extends JFrame{
     /**
      * All required Listeners
      */
-    private void initializeListeners() {    
-        //ActionListener Button Anmelden
+    private void initializeListeners() {
         buttonAnmelden.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                Nutzer clientNutzer = null;
@@ -126,7 +125,7 @@ public class DialogAnmelden extends JFrame{
                }
            }
         });
-        //ActionListener Button Registrieren
+        
         buttonRegistrieren.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                dispose();

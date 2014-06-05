@@ -198,13 +198,13 @@ public class BeitragPanel extends JPanel {
         
         buttonBearbeiten.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                // @todo Implementierung Beitrag bearbeiten
             }
         });
         
         buttonKommentieren.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                // @todo Implementierung Beitrag kommentieren
             }
         });
         
@@ -212,6 +212,7 @@ public class BeitragPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     server.createLike(beitrag, clientNutzer);
+                    // @todo Unterscheidung Newsfeed/Pinnwand
                     SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
                 } catch (RemoteException ex) {
                     Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -223,6 +224,7 @@ public class BeitragPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     server.deleteLike(userLike);
+                    // @todo Unterscheidung Newsfeed/Pinnwand
                     SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
                 } catch (RemoteException ex) {
                     Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);

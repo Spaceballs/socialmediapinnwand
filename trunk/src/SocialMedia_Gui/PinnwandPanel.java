@@ -37,7 +37,7 @@ public class PinnwandPanel extends JPanel {
     private final Nutzer nutzer;
     private final JLabel titlePinnwand = new JLabel("",JLabel.LEFT);
     private final JButton buttonNeuerBeitrag = new JButton("Neuer Beitrag");
-    private final JButton buttonAbonnieren = new JButton("Abonnieren");
+    private final JButton buttonAbonnieren = new JButton();
     private final JButton buttonAbonnementLoeschen = new JButton();
     private Vector<Beitrag> beitraege;
     private Pinnwand pinnwand;
@@ -75,7 +75,7 @@ public class PinnwandPanel extends JPanel {
             titlePanel.add(titlePinnwand, BorderLayout.WEST);
             
             buttonAbonnieren.setIcon(new ImageIcon("abonnieren.jpg"));
-            buttonAbonnieren.setToolTipText("Nutzer " + nutzer.getUsername() + "abonnieren");
+            buttonAbonnieren.setToolTipText("Nutzer " + nutzer.getUsername() + " abonnieren");
             
             buttonAbonnementLoeschen.setIcon(new ImageIcon("delete.jpg"));
             buttonAbonnementLoeschen.setToolTipText("Abonnement löschen");
@@ -140,7 +140,7 @@ public class PinnwandPanel extends JPanel {
     private void initializeListeners() {
         buttonNeuerBeitrag.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, pinnwand);
+                DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, pinnwand, null, null);
             }
         });
         
