@@ -70,7 +70,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // </editor-fold>
 
     /**
-     * Konstrukter of the SocialMediaLogicImpl class
+     * Konstruktor of the SocialMediaLogicImpl class
      * @param likeMapper
      * @param kommentarMapper
      * @param beitragMapper

@@ -32,7 +32,7 @@ public class AbonnementInfo extends JPanel{
 
 
     /**
-     * Constructor
+     * Constructor of the AbonnementInfo class
      * @param server - the server
      * @param clientNutzer - the logged-in Nutzer
      */
@@ -45,7 +45,7 @@ public class AbonnementInfo extends JPanel{
 
     /**
      * Gets the username, name and surname of the logged-in Nutzer,
-     * puts in in a GridLayout and
+     * puts in a GridLayout and
      * changes the font.
      */
     private void initialize() {
