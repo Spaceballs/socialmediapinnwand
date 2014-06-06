@@ -62,7 +62,7 @@ public class SocialMediaReportClient {
     }
     
     /**
-     * This Method starts the real client grafical user interface and the rmi connection.
+     * This Method starts the real client graphical user interface and the rmi connection.
      * 
      * @param adresse - String for the url.
      * @param serverPort - String for the server rmi port.
@@ -92,7 +92,7 @@ public class SocialMediaReportClient {
     }
     
     /**
-     * Method for crating the graphical user interface for the report client.
+     * Method for creating the graphical user interface for the report client.
      */
     public void createAndShowGUI() {
         HauptfensterReport  report = new HauptfensterReport(socialMediaLogic);

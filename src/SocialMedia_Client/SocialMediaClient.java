@@ -96,7 +96,7 @@ public class SocialMediaClient {
     }
     
     /**
-     * Method for crating the graphical user interface of the client.
+     * Method for creating the graphical user interface of the client.
      */
     public void createAndShowGUI() {
         DialogAnmelden  anmelden = new DialogAnmelden(socialMediaLogic);

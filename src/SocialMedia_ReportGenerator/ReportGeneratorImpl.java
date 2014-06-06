@@ -45,7 +45,7 @@ public class ReportGeneratorImpl
     /**
      * Constructor of the ReportGeneratorImpl class.
      * This constructor will be called once when the server logic is started.
-     * Each Server has his own ReportGenerator.
+     * Each Server has its own ReportGenerator.
      * 
      * @param val - SocialMediaLogic will be needed to get some data for the reports.
      * @throws java.rmi.RemoteException
@@ -62,7 +62,7 @@ public class ReportGeneratorImpl
      * 
      * 
      * @param nutzerVal - Defines the user over which should be reported.
-     * @param sortByVal - 
+     * @param sortByVal - sorts the user by most beiträge, most likes get or most abonnenten in a specific timespan.
      * @param startDateVal - Start Date of the timespan.
      * @param endDateVal - End Date of the timespan.
      * @return ContributionOfNutzerImpl - Returns created the Report object.
@@ -136,7 +136,7 @@ public class ReportGeneratorImpl
      * Method to create the PopularityOfBeitragImpl-Report by the given criteria.
      * 
      * 
-     * @param sortByVal - 
+     * @param sortByVal - sorts the beiträge by most likes or most kommentare in a specific timespan.
      * @param startDateVal - Start Date of the timespan.
      * @param endDateVal - End Date of the timespan.
      * @return PopularityOfBeitragImpl - Returns created the Report object.
