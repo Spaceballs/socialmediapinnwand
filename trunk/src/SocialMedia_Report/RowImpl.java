@@ -16,7 +16,10 @@ public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.87B7D440-CC12-4BCB-8CD3-A5E2A8E2F594]
-    // </editor-fold> 
+    // </editor-fold>
+    /*
+     * @throws java.rmi.RemoteException
+     */
     private Vector<Column> mColumn = new Vector<Column>();
     
     public RowImpl() 
@@ -25,7 +28,10 @@ public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.870405DC-42B3-FD8B-4CFB-001C2E10EA37]
-    // </editor-fold> 
+    // </editor-fold>
+    /*
+     * @throws java.rmi.RemoteException
+     */
     public Vector<Column> getColumns () 
             throws RemoteException{
         return mColumn;
@@ -33,7 +39,10 @@ public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.DE4ECE83-B96C-13F7-DB39-D5DAEFB369D6]
-    // </editor-fold> 
+    // </editor-fold>
+    /*
+     * @throws java.rmi.RemoteException
+     */
     public void addColumn (Column val) 
             throws RemoteException{
         mColumn.add(val);
@@ -41,7 +50,10 @@ public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.6B02D72D-45F3-48C0-D580-3E7BBA4FEAD8]
-    // </editor-fold> 
+    // </editor-fold>
+    /*
+     * @throws java.rmi.RemoteException
+     */
     public void removeColumn (Column val) 
             throws RemoteException{
         mColumn.remove(val);
@@ -49,7 +61,10 @@ public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.68E6EBFF-642C-1041-2BEF-7F8120FEBC96]
-    // </editor-fold> 
+    // </editor-fold>
+    /*
+     * @throws java.rmi.RemoteException
+     */
     public int getNumOfColumn () 
             throws RemoteException{
         return mColumn.size();
@@ -60,9 +75,9 @@ public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{
     // </editor-fold>
     /**
      *
-     * @param val
+     * @param val - needs an int value to be set
      * @return
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
         public Column getColumnAt (int val) 
             throws RemoteException{

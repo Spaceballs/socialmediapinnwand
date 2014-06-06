@@ -15,6 +15,9 @@ public class SimpleParagraphImpl extends ParagraphImpl implements SimpleParagrap
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.5E408F32-89DC-3A7C-71A4-820980F3252C]
     // </editor-fold>
+    /*
+     * @throws java.rmi.RemoteException
+     */
     public SimpleParagraphImpl (String val) 
             throws RemoteException{
         this.text = val;
@@ -23,6 +26,9 @@ public class SimpleParagraphImpl extends ParagraphImpl implements SimpleParagrap
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.ABD5A780-991F-8EB7-9901-2929A1CBA75D]
     // </editor-fold>
+    /*
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public String getText () 
             throws RemoteException{
@@ -32,6 +38,9 @@ public class SimpleParagraphImpl extends ParagraphImpl implements SimpleParagrap
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.D0033BDC-E2EA-54A4-4419-6C910255DDE4]
     // </editor-fold>
+    /*
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public void setText (String val) 
             throws RemoteException{
@@ -41,6 +50,9 @@ public class SimpleParagraphImpl extends ParagraphImpl implements SimpleParagrap
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.193B4D3C-F228-B112-FBD8-4CE55F239E30]
     // </editor-fold>
+    /*
+     * @throws java.rmi.RemoteException
+     */
     public String toStrings () 
             throws RemoteException{
         StringBuffer buffer = new StringBuffer();
