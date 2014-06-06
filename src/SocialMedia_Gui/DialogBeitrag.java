@@ -21,13 +21,16 @@ import javax.swing.UIManager;
  */
 public class DialogBeitrag extends JFrame {
     
-    private final SocialMediaLogic server;
-    private final Nutzer clientNutzer;
     private String nutzerEingabe = null;
+    private JTextArea textFeld;
+ 
+    public DialogBeitrag() {
+        textFeld = new JTextArea(5, 20);
+        initialize();
+    }
     
-    public DialogBeitrag(SocialMediaLogic server, Nutzer clientNutzer, Pinnwand pinnwand, Beitrag beitrag, Kommentar kommentar) {
-        this.server = server;
-        this.clientNutzer = clientNutzer;
+    public DialogBeitrag(String text) {
+        textFeld = new JTextArea(text, 5, 20);
         initialize();
     }
 
@@ -42,21 +45,30 @@ public class DialogBeitrag extends JFrame {
      * 
      */
     private void initializeDialog() {
-        JTextArea textFeld = new JTextArea(5, 20);
         textFeld.setLineWrap(true);
         textFeld.setWrapStyleWord(true);
         textFeld.setFont(new Font("Arial", Font.PLAIN, 12));
         
         UIManager.put("OptionPane.okButtonText", "Speichern");
         JOptionPane ergebnisAuswahl = new JOptionPane(new Object[] {
-            new JLabel("Neuen Beitrag eingeben"), new JScrollPane(textFeld)
+            new JLabel("Text eingeben"), new JScrollPane(textFeld)
         }, JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
         
-        JDialog dialogErgebnis = ergebnisAuswahl.createDialog(null, "Neuer Beitrag");
+        JDialog dialogErgebnis = ergebnisAuswahl.createDialog(null, "Neuer Text");
         dialogErgebnis.setVisible(true);
         
+        final int value = ((Integer)ergebnisAuswahl.getValue()).intValue();
         
-        nutzerEingabe = textFeld.getText();
-        System.out.println(nutzerEingabe);
+        if (JOptionPane.OK_OPTION == value){
+            nutzerEingabe = textFeld.getText();
+        } else if (textFeld.getText().isEmpty() && JOptionPane.OK_OPTION == value) {
+            UIManager.put("OptionPane.okButtonText", "OK");
+            JOptionPane.showMessageDialog(null, "Kein Text eingegeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+            initializeDialog();
+        }
+    }
+    
+    public String getText() {
+        return this.nutzerEingabe;
     }
 }

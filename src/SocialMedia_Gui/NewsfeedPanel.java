@@ -129,7 +129,14 @@ public class NewsfeedPanel extends JPanel {
             meinePinnwand = server.getPinnwandOfNutzer(clientNutzer);
             buttonNeuerBeitrag.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, meinePinnwand, null, null);
+                    try {
+                        DialogBeitrag dialogBeitrag = new DialogBeitrag();
+                        if (!dialogBeitrag.getText().isEmpty() && dialogBeitrag.getText() != null)
+                            server.createBeitrag(pinnwand, clientNutzer, dialogBeitrag.getText());
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
         } catch (RemoteException ex) {

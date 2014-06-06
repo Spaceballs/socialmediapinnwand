@@ -14,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
+import org.eclipse.persistence.exceptions.SDOException;
 
 
 /**
@@ -45,7 +46,7 @@ public class DialogSuchen extends JFrame {
         UIManager.put("OptionPane.okButtonText", "Suchen");
         nutzerEingabe = JOptionPane.showInputDialog(this, "Bitte Usernamen eingeben", "Nutzer suchen",JOptionPane.PLAIN_MESSAGE);
         
-        if (JOptionPane.OK_OPTION == 0 && nutzerEingabe != null) {
+        if (nutzerEingabe != null) {
             try {
                 //@todo - Fehler bei Eingabe von 2 Leerzeichen oder mehr auswerfen
                 if (nutzerEingabe.contentEquals("") || nutzerEingabe.contentEquals(" ")) {
@@ -75,14 +76,12 @@ public class DialogSuchen extends JFrame {
      * 
      */
     private void selectionOptionPane() {
-        // @todo - Selektierte Pinnwand wird auch bei "Abbrechen" oder "X" angezeigt
-        ergebnisListe.setSelectedIndex(0);
         UIManager.put("OptionPane.okButtonText", "Zur Pinnwand");
         JOptionPane ergebnisAuswahl = new JOptionPane(
                 new Object[] {
                         new JLabel("Bitte Usernamen auswählen"), new JScrollPane(ergebnisListe)
                 },
-                JOptionPane.PLAIN_MESSAGE, 
+                JOptionPane.QUESTION_MESSAGE, 
                 JOptionPane.OK_CANCEL_OPTION) {
                     @Override
                     public void selectInitialValue(){
@@ -93,10 +92,16 @@ public class DialogSuchen extends JFrame {
                         return ergebnisListe.getSelectedValue();
                     }
         };
+        
         JDialog dialogErgebnis = ergebnisAuswahl.createDialog(null, "Suchergebnis");
         dialogErgebnis.setVisible(true);
-        if (JOptionPane.OK_OPTION == 0){
+        final int value = ((Integer)ergebnisAuswahl.getValue()).intValue();
+        if (ergebnisListe.getSelectedIndex() != (-1) && JOptionPane.OK_OPTION == value){
             SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new PinnwandPanel(server, clientNutzer, ergebnisListe.getSelectedValue()));
+        } else if (ergebnisListe.getSelectedIndex() == (-1) && JOptionPane.OK_OPTION == value) {
+            UIManager.put("OptionPane.okButtonText", "OK");
+            JOptionPane.showMessageDialog(null, "Kein Nutzer ausgewählt", "Fehler", JOptionPane.ERROR_MESSAGE);
+            selectionOptionPane();
         }
     }
 }

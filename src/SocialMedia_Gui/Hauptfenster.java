@@ -33,6 +33,7 @@ public class Hauptfenster extends JFrame {
     private final JMenuItem accountdaten = new JMenuItem("Accountdaten ändern");
     private final JMenuItem abmelden = new JMenuItem("Abmelden");
     private JPanel panelLinks = new JPanel();
+    private JPanel panel = null;
     private JSplitPane splitPane;
     private JSplitPane splitPaneRechts;
     private PinnwandPanel pinnwandPanel;
@@ -76,6 +77,7 @@ public class Hauptfenster extends JFrame {
     private void initialize() {
         NewsfeedPanel newsfeed = new NewsfeedPanel(server, clientNutzer);
         panelLinks = newsfeed;
+        panel = (JPanel)panelLinks;
         initializeMenu();
         initializeListeners();
         initializePane();
@@ -132,6 +134,7 @@ public class Hauptfenster extends JFrame {
         this.getContentPane().removeAll();
         if (panelLinks != null)
             this.panelLinks = panelLinks;
+        panel = (JPanel)panelLinks;
         NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
         AbonnementInfo abonnementInfo = new AbonnementInfo(server, clientNutzer);
         NewsfeedPanel newsfeed = new NewsfeedPanel(server, clientNutzer);
@@ -148,6 +151,16 @@ public class Hauptfenster extends JFrame {
         this.getContentPane().add(splitPane);
 
         this.setVisible(true);
+    }
+    
+    public void refreshPanelLinks() {
+        if (panel instanceof NewsfeedPanel) {
+            NewsfeedPanel newsfeedPanel = (NewsfeedPanel) panel;
+            setPanelLinks(new NewsfeedPanel(server, clientNutzer));
+        } else if (panel instanceof PinnwandPanel) {
+            PinnwandPanel pinnwandPanel = (PinnwandPanel) panel;
+            setPanelLinks(new PinnwandPanel(server, clientNutzer, pinnwandPanel.getNutzer()));
+        }
     }
     
     /**
