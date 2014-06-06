@@ -57,7 +57,7 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     // #[regen=yes,id=DCE.1C5670FC-1942-4082-13A2-408A385BBDAB]
     // </editor-fold> 
     /**
-     * 
+     * Gets all PinnwandBeitraege of the PinnwandID.
      * @param verwaltung - This object is needed for getting data from the DB.
      * @return - Returns all Beiträge of the Pinnwand.
      * @throws RemoteException 
@@ -79,7 +79,7 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     // #[regen=yes,id=DCE.A095AC40-10D1-77A9-0A67-2D41CC05B201]
     // </editor-fold> 
     /**
-     * 
+     * Gets all Nutzer and compares with the chosen ID.
      * @param verwaltung - This object is needed for getting data from the DB.
      * @return - Returns the nutzer object.
      * @throws RemoteException 

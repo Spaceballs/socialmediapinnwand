@@ -31,7 +31,10 @@ public class BeitragMapper extends DBStatementFactory {
     
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.3F9CA0CE-A15F-4755-D8B8-4637AD032631]
-    // </editor-fold> 
+    // </editor-fold>
+    /*
+    * Constructor of the BeitragMapper class
+    */
     protected BeitragMapper () {
     }
 
