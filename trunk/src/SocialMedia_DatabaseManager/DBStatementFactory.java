@@ -11,6 +11,7 @@ import java.sql.Statement;
 /**
  *
  * @author Sebastian
+ * 
  */
 public abstract class DBStatementFactory {
     
