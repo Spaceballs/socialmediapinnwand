@@ -93,7 +93,7 @@ public class UserCreatedContentImpl extends DataReferenceImpl implements UserCre
     // #[regen=yes,id=DCE.A095AC40-10D1-77A9-0A67-2D41CC05B201]
     // </editor-fold> 
     /**
-     * Collects all Nutzer and compares them with the current NutzerID
+     * Gets all Nutzer and compares them with the current NutzerID
      * @param verwaltung - This object is needed for getting data from the DB.
      * @throws java.rmi.RemoteException
      * @return - Returns the Nutzer object.

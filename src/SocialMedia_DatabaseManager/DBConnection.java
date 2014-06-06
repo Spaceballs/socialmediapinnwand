@@ -7,7 +7,10 @@ import java.sql.SQLException;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.A4ED5D05-F32A-7295-BD5A-592B6585AEDB]
-// </editor-fold> 
+// </editor-fold>
+/*
+* Class for connecting to database.
+*/
 public class DBConnection {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -17,12 +20,19 @@ public class DBConnection {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.152435AE-BD70-7A93-09A2-29A72C2F852F]
-    // </editor-fold> 
+    // </editor-fold>
+    /*
+    * Path to the database server.
+    */
     private static String url = "jdbc:mysql://mars.iuk.hdm-stuttgart.de/u-mk173?user=mk173&password=oof7eiM2ua";
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.82C17374-FFED-AA2D-BAAE-8FC453E9BEF6]
-    // </editor-fold> 
+    // </editor-fold>
+    /*
+    * load database driver
+    * set connection to the database url
+    */
     public static Connection connection() {
         if ( con == null ) {
             try {
