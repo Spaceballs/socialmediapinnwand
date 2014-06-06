@@ -40,7 +40,7 @@ public class Newsfeed extends JPanel {
     private Pinnwand meinePinnwand;
 
     /**
-     * Constructor
+     * Constructor of the Newsfeed class
      * @param server - the server
      * @param clientNutzer - the logged-in Nutzer
      */
