@@ -39,7 +39,13 @@ public class KommentarPanel extends JPanel {
     private final JButton buttonBearbeiten = new JButton();
     private final JButton buttonLoeschen = new JButton();
     
-    KommentarPanel(SocialMediaLogic server, Nutzer clientNutzer, Kommentar kommentar) {
+    /**
+     * Konstruktor of the KommentarPanel
+     * @param server - the server
+     * @param clientNutzer - the logged-in Nutzer
+     * @param kommentar - the kommentar
+     */
+    public KommentarPanel(SocialMediaLogic server, Nutzer clientNutzer, Kommentar kommentar) {
         super();
         this.server = server;
         this.clientNutzer = clientNutzer;

@@ -41,7 +41,7 @@ public class Hauptfenster extends JFrame {
 
 
     /**
-     * Constructor
+     * Constructor of the Hauptfenster class
      * @param server - the server
      * @param clientNutzer - the logged-in Nutzer
      */
@@ -50,6 +50,14 @@ public class Hauptfenster extends JFrame {
         this.server = server;
         initialize();
     }
+    
+
+    /**
+     *
+     * @param server - the server
+     * @param clientNutzer - the logged-in Nutzer
+     * @return - Returns the hauptfenster
+     */
     
     public static Hauptfenster hauptfenster(SocialMediaLogic server, Nutzer clientNutzer){
         if(server == null && clientNutzer == null){

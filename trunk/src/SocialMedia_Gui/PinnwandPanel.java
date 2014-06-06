@@ -45,8 +45,8 @@ public class PinnwandPanel extends JPanel {
     /**
      * Constructor
      * @param server - the server
-     * @param clientNutzer - 
-     * @param nutzer - 
+     * @param clientNutzer - the logged-in nutzer
+     * @param nutzer - nutzer of the pinnwand
      */
     public PinnwandPanel(SocialMediaLogic server, Nutzer clientNutzer, Nutzer nutzer){
         this.nutzer = nutzer;
