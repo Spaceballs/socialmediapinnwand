@@ -124,7 +124,7 @@ public class BeitragMapper extends DBStatementFactory {
         } catch (RemoteException ex) {
             Logger.getLogger(BeitragMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
