@@ -665,6 +665,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Beitrag editBeitrag (String text, Beitrag b) throws RemoteException{
+        b = beitragMapper.findByID(b.getID());
         b.setText(text);
         return saveBeitrag(b);
     }

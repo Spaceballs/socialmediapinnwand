@@ -31,6 +31,7 @@ public class KommentarPanel extends JPanel {
     private final SocialMediaLogic server;
     private final Nutzer clientNutzer;
     private final Kommentar kommentar;
+    private DialogBeitrag dialogBeitrag;
     private Nutzer user;
     private String kommentarHeader;
     private String text;
@@ -115,8 +116,7 @@ public class KommentarPanel extends JPanel {
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
                         server.deleteKommentar(kommentar);
-                        // @todo Unterscheidung Newsfeed/Pinnwand
-                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                     } catch (RemoteException ex) {
                         Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -126,7 +126,8 @@ public class KommentarPanel extends JPanel {
         
         buttonBearbeiten.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // @todo Implementierung Kommentar bearbeiten
+                dialogBeitrag = new DialogBeitrag(text);
+                editKommentar();
             }
         });
     }
@@ -141,5 +142,15 @@ public class KommentarPanel extends JPanel {
         gridBagLayout.gridy = gridBagLayout.gridy + 1;
         gridBagLayout.gridwidth = 2;
         this.add(new JLabel(html1 + 200 + html2 + text, JLabel.LEFT), gridBagLayout);
+    }
+    
+    private void editKommentar() {
+        if (dialogBeitrag.getText() != null)
+            try {
+                server.editKommentar(dialogBeitrag.getText(), kommentar);
+                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+            } catch (RemoteException ex) {
+                Logger.getLogger(KommentarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 }

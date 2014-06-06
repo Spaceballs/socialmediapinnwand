@@ -115,7 +115,7 @@ public class BeitragMapper extends DBStatementFactory {
                             SET + " " +
                                     COLUMN_CREATION_DATE + " =\"" + t + "\"" + ", " +
                                     COLUMN_NUTZER_ID + " =\"" + val.getNutzerID() + "\""  + ", " +
-                                    COLUMN_PINNWAND_ID + " =\"" + val.getPinnwandID() + "\""  + " " +
+                                    COLUMN_PINNWAND_ID + " =\"" + val.getPinnwandID() + "\""  + ", " +
                                     COLUMN_TEXT + " =\"" + val.getText() + "\""  + " " +
                             WHERE + " " +
                                     COLUMN_ID + " = " + val.getID());

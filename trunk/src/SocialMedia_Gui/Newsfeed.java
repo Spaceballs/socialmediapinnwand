@@ -126,7 +126,12 @@ public class Newsfeed extends JPanel {
             meinePinnwand = server.getPinnwandOfNutzer(clientNutzer);
             buttonNeuerBeitrag.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, meinePinnwand, null, null);
+                    try {
+                        DialogBeitrag dialogBeitrag = new DialogBeitrag();
+                        server.createBeitrag(pinnwand, clientNutzer, dialogBeitrag.getText());
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(Newsfeed.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
         } catch (RemoteException ex) {

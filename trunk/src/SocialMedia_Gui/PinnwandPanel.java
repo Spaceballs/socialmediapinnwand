@@ -140,7 +140,14 @@ public class PinnwandPanel extends JPanel {
     private void initializeListeners() {
         buttonNeuerBeitrag.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DialogBeitrag dialogBeitrag = new DialogBeitrag(server, clientNutzer, pinnwand, null, null);
+                try {
+                    DialogBeitrag dialogBeitrag = new DialogBeitrag();
+                    if (!dialogBeitrag.getText().isEmpty() && dialogBeitrag.getText() != null)
+                        server.createBeitrag(pinnwand, clientNutzer, dialogBeitrag.getText());
+                    SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
@@ -148,6 +155,7 @@ public class PinnwandPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     server.createAbonnement(pinnwand, clientNutzer);
+                    SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                 } catch (RemoteException ex) {
                     Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -162,13 +170,17 @@ public class PinnwandPanel extends JPanel {
                     try {
                         server.getNutzerOf(pinnwand);
                         server.deleteAbonnement(null);
-                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new PinnwandPanel(server, clientNutzer, nutzer));
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                     } catch (RemoteException ex) {
                         Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
         });
+    }
+    
+    public Nutzer getNutzer(){
+        return this.nutzer;
     }
 
 }

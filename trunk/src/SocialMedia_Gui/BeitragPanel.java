@@ -33,7 +33,8 @@ public class BeitragPanel extends JPanel {
     
     private final SocialMediaLogic server;
     private final Nutzer clientNutzer;
-    private final Beitrag beitrag;
+    private Beitrag beitrag;
+    private DialogBeitrag dialogBeitrag;
     private Nutzer user;
     private String text;
     private String beitragHeader;
@@ -188,7 +189,7 @@ public class BeitragPanel extends JPanel {
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
                         server.deleteBeitrag(beitrag);
-                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                     } catch (RemoteException ex) {
                         Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -198,13 +199,22 @@ public class BeitragPanel extends JPanel {
         
         buttonBearbeiten.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // @todo Implementierung Beitrag bearbeiten
+                dialogBeitrag = new DialogBeitrag(text);
+                editBeitrag();
             }
         });
         
         buttonKommentieren.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // @todo Implementierung Beitrag kommentieren
+                dialogBeitrag = new DialogBeitrag();
+                if (dialogBeitrag.getText() != null)
+                    try {
+                        server.createKommentar(beitrag, clientNutzer, dialogBeitrag.getText());
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         });
         
@@ -212,8 +222,7 @@ public class BeitragPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     server.createLike(beitrag, clientNutzer);
-                    // @todo Unterscheidung Newsfeed/Pinnwand
-                    SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
+                    SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                 } catch (RemoteException ex) {
                     Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -224,8 +233,7 @@ public class BeitragPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     server.deleteLike(userLike);
-                    // @todo Unterscheidung Newsfeed/Pinnwand
-                    SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
+                    SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                 } catch (RemoteException ex) {
                     Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -244,5 +252,15 @@ public class BeitragPanel extends JPanel {
         gridBagLayout.gridwidth = 2;
         this.add(new JLabel(html1 + 300 + html2 + text, JLabel.LEFT), gridBagLayout);
         textfieldOffset = gridBagLayout.gridy;
+    }
+    
+    private void editBeitrag() {
+        if (dialogBeitrag.getText() != null)
+            try {
+                beitrag = server.editBeitrag(dialogBeitrag.getText(), beitrag);
+                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+            } catch (RemoteException ex) {
+                Logger.getLogger(BeitragPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 }
