@@ -175,5 +175,7 @@ public interface SocialMediaLogic extends java.rmi.Remote{
     
     public Like getUserLike(Nutzer n, Beitrag b) throws RemoteException;
     
+    public Abonnement getPinnwandAbonnement(Nutzer n, Pinnwand p) throws RemoteException;
+    
 }
 

@@ -131,6 +131,8 @@ public class PinnwandPanel extends JPanel {
         try {    
             pinnwand = server.getPinnwandOfNutzer(nutzer);
             beitraege.addAll(server.getAllBeitragOfPinnwand(pinnwand));
+            
+            pinnwandAbonnement = server.getPinnwandAbonnement(clientNutzer, pinnwand);
         } catch (RemoteException ex) {
             Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -170,8 +172,7 @@ public class PinnwandPanel extends JPanel {
                         "Das Abonnement wirklich löschen?", "Abonnement löschen",
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
-                        // @todo - Abonnement Löschen mit Button Pinnwand
-                        server.deleteAbonnement(null);
+                        server.deleteAbonnement(pinnwandAbonnement);
                         SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                     } catch (RemoteException ex) {
                         Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
