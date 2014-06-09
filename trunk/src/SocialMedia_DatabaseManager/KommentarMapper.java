@@ -114,7 +114,7 @@ public class KommentarMapper extends DBStatementFactory{
                             SET + " " +
                                     COLUMN_CREATION_DATE + " =\"" + t + "\"" + ", " +
                                     COLUMN_NUTZER_ID + " =\"" + val.getNutzerID() + "\""  + ", " +
-                                    COLUMN_BEITRAG_ID + " =\"" + val.getBeitragID() + "\""  + " " +
+                                    COLUMN_BEITRAG_ID + " =\"" + val.getBeitragID() + "\""  + ", " +
                                     COLUMN_TEXT + " =\"" + val.getText() + "\""  + " " +
                             WHERE + " " +
                                     COLUMN_ID + " = " + val.getID());
