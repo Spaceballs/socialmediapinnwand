@@ -132,7 +132,7 @@ public class NewsfeedPanel extends JPanel {
                     try {
                         DialogBeitrag dialogBeitrag = new DialogBeitrag();
                         if (!dialogBeitrag.getText().isEmpty() && dialogBeitrag.getText() != null)
-                            server.createBeitrag(pinnwand, clientNutzer, dialogBeitrag.getText());
+                            server.createBeitrag(meinePinnwand, clientNutzer, dialogBeitrag.getText());
                         SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                     } catch (RemoteException ex) {
                         Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);

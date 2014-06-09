@@ -116,7 +116,7 @@ class AbonnementPanel extends JPanel {
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
                         server.deleteAbonnement(abonnement);
-                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new NewsfeedPanel(server, clientNutzer));
+                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                     } catch (RemoteException ex) {
                         Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
                     }

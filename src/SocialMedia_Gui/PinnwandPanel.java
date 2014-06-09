@@ -1,6 +1,7 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Beitrag;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Data.Pinnwand;
@@ -39,6 +40,7 @@ public class PinnwandPanel extends JPanel {
     private final JButton buttonNeuerBeitrag = new JButton("Neuer Beitrag");
     private final JButton buttonAbonnieren = new JButton();
     private final JButton buttonAbonnementLoeschen = new JButton();
+    private Abonnement pinnwandAbonnement;
     private Vector<Beitrag> beitraege;
     private Pinnwand pinnwand;
 
@@ -124,9 +126,9 @@ public class PinnwandPanel extends JPanel {
      * 
      */
     private void initializeData() {
-            beitraege = new Vector<Beitrag>();
-            
-        try {
+        beitraege = new Vector<Beitrag>();
+        
+        try {    
             pinnwand = server.getPinnwandOfNutzer(nutzer);
             beitraege.addAll(server.getAllBeitragOfPinnwand(pinnwand));
         } catch (RemoteException ex) {
@@ -168,7 +170,7 @@ public class PinnwandPanel extends JPanel {
                         "Das Abonnement wirklich löschen?", "Abonnement löschen",
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
-                        server.getNutzerOf(pinnwand);
+                        // @todo - Abonnement Löschen mit Button Pinnwand
                         server.deleteAbonnement(null);
                         SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
                     } catch (RemoteException ex) {
