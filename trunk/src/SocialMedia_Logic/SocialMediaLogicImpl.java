@@ -207,6 +207,18 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         }
         return null;
     }
+    
+    public Abonnement getPinnwandAbonnement(Nutzer n, Pinnwand p) throws RemoteException {
+        n = nutzerMapper.findByID(n.getID());
+        p = pinnwandMapper.findByID(p.getID());
+        Vector<Abonnement> pinnwandAbonnements = n.getAllNutzerAbonnement(this);
+        for (int i = 0; i < pinnwandAbonnements.size(); i++) {
+            Abonnement abonnement = pinnwandAbonnements.elementAt(i);
+            if (abonnement.getPinnwandID() == p.getID())
+                return abonnement;
+        }
+        return null;
+    }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.332BE2CD-E2F2-7B46-7CF6-53FA4A82274E]
