@@ -14,8 +14,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
-import org.eclipse.persistence.exceptions.SDOException;
-
 
 /**
  * Dialog where user can search for other users

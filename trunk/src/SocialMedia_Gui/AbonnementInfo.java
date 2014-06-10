@@ -56,6 +56,7 @@ public class AbonnementInfo extends JPanel{
         titleAbonnements.setFont(new Font("Arial", Font.BOLD, 28));
         
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
         scrollPane.setBorder(null); 
         scrollPane.getInsets().set(0,0,0,0);
         scrollPane.setViewportBorder(null);

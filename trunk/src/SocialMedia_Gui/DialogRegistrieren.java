@@ -3,6 +3,7 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -29,6 +30,7 @@ public class DialogRegistrieren extends JFrame {
     private final JTextField name = new JTextField();
     private final JTextField surname = new JTextField();    
     private final JPasswordField password = new JPasswordField();
+    private final JButton buttonAbbrechen = new JButton("Abbrechen");
     private final JButton buttonRegistrieren = new JButton("Registrieren");
 
     /**
@@ -39,6 +41,9 @@ public class DialogRegistrieren extends JFrame {
      */
     public DialogRegistrieren(SocialMediaLogic server, String username, String password) {
         this.server = server;
+        this.username.setPreferredSize(new Dimension(140, 20));
+        this.username.setDocument(new SetTextLength(25));
+        this.password.setDocument(new SetTextLength(25));
         this.username.setText(username);
         this.password.setText(password);
         initalize();
@@ -54,6 +59,11 @@ public class DialogRegistrieren extends JFrame {
      */
     private DialogRegistrieren(SocialMediaLogic server, String username, String name, String surname, String password) {
         this.server = server;
+        this.username.setPreferredSize(new Dimension(140, 20));
+        this.username.setDocument(new SetTextLength(25));
+        this.name.setDocument(new SetTextLength(25));
+        this.surname.setDocument(new SetTextLength(25));
+        this.password.setDocument(new SetTextLength(25));
         this.username.setText(username);
         this.name.setText(name);
         this.surname.setText(surname);
@@ -107,6 +117,10 @@ public class DialogRegistrieren extends JFrame {
         c.gridy = 3;
         this.add(password, c);
  
+        c.gridx = 0;
+        c.gridy = 4;
+        this.add(buttonAbbrechen, c);
+        
         c.gridx = 1;
         c.gridy = 4;
         this.add(buttonRegistrieren, c);
@@ -125,6 +139,13 @@ public class DialogRegistrieren extends JFrame {
      * All required Listeners
      */
     public void initializeListeners() {
+        buttonAbbrechen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new DialogAnmelden(server, username.getText(), new String(password.getPassword()));
+            }
+        });
+        
         buttonRegistrieren.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(username.getText().length() >= 3 && name.getText().length() >= 3 && surname.getText().length() >= 3 && new String(password.getPassword()).length()  >= 4 ){

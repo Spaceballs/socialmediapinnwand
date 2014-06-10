@@ -93,6 +93,7 @@ public class PinnwandPanel extends JPanel {
             }
             
             JScrollPane scrollPane = new JScrollPane();
+            scrollPane.getVerticalScrollBar().setUnitIncrement(20);
             scrollPane.setBorder(null);
             scrollPane.getInsets().set(0,0,0,0);
             scrollPane.setViewportBorder(null);
