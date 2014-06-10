@@ -9,6 +9,7 @@ package SocialMedia_Client;
 import SocialMedia_Gui.DialogServerData;
 import SocialMedia_Gui.HauptfensterReport;
 import SocialMedia_Logic.SocialMediaLogic;
+import SocialMedia_Logic.SocialMediaServer;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -77,15 +78,19 @@ public class SocialMediaReportClient {
         } catch (NotBoundException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
+            createAndShowDialogue();
         } catch (MalformedURLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
+            createAndShowDialogue();
         } catch (RemoteException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
+            createAndShowDialogue();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
+            createAndShowDialogue();
         }
         javax.swing.SwingUtilities.invokeLater(
                 new Runnable() { public void run() { createAndShowGUI();}});
@@ -105,5 +110,6 @@ public class SocialMediaReportClient {
     public static void main(String[] args) {
         SocialMediaReportClient c = new SocialMediaReportClient();
         System.out.println("Client gestartet...");
+        SocialMediaServer a = new SocialMediaServer();
     }
 }

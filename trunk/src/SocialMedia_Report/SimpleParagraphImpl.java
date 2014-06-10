@@ -55,10 +55,8 @@ public class SimpleParagraphImpl extends ParagraphImpl implements SimpleParagrap
      */
     public String toStrings () 
             throws RemoteException{
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(" %p ");
-        buffer.append(text);
-        buffer.append(" %/p ");   
+        StringBuilder buffer = new StringBuilder();
+        buffer.append(text);   
         return buffer.toString();
     }
 }

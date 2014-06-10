@@ -28,5 +28,10 @@ public interface SimpleParagraph extends Paragraph{
     // #[regen=yes,id=DCE.193B4D3C-F228-B112-FBD8-4CE55F239E30]
     // </editor-fold>
     
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
     String toStrings() throws RemoteException;
 }

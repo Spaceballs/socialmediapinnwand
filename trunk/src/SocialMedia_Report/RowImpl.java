@@ -79,7 +79,7 @@ public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{
      * @return
      * @throws java.rmi.RemoteException
      */
-        public Column getColumnAt (int val) 
+    public Column getColumnAt (int val) 
             throws RemoteException{
         return mColumn.get(val);
     }
