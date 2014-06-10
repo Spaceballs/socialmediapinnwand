@@ -122,6 +122,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // </editor-fold> 
     /**
      * Getting all Beiträge
+     * 
+     * 
      * @return vector with all Beiträge
      * @throws java.rmi.RemoteException 
      */
@@ -225,6 +227,8 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     // </editor-fold> 
     /**
      * Construktor for createNutzer.
+     * 
+     * 
      * @param username - Username of the new Nutzer object.
      * @param name - Name of the new Nutzer object.
      * @param surname - Surname of the new Nutzer object.
@@ -749,6 +753,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         p = pinnwandMapper.findByID(p.getID());
         return p.getOwner(this);
     }
+    
     /**
      * //TO DO
      * @param n

@@ -100,7 +100,6 @@ public class HauptfensterReport extends JFrame {
         nutzerliste.setCellRenderer(new NutzerListCellRenderer());
         nutzerliste.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
-                runBeitragReportButton.setEnabled(true);
                 runNutzerReportButton.setEnabled(true);
                 reportUser = nutzerliste.getSelectedValue();
             }
@@ -274,7 +273,6 @@ public class HauptfensterReport extends JFrame {
                 }
             }
         });
-        runBeitragReportButton.setEnabled(false);
         popularityOfBeitragReportPanel.add(runBeitragReportButton, BorderLayout.SOUTH);
     }
 }

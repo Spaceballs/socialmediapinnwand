@@ -19,6 +19,7 @@ import java.rmi.server.ExportException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Social Media Server creates the server logic and the mappers.
@@ -47,6 +48,7 @@ public class SocialMediaServer {
      * Constructor of the Server class
      */
     public SocialMediaServer () {
+        System.out.println("Server gestartet...");
         try {
             socialMediaLogic =
                     new SocialMediaLogicImpl(SocialMedia_DatabaseManager.LikeMapper.likeMapper(),
@@ -71,16 +73,24 @@ public class SocialMediaServer {
             Naming.lookup("rmi://" + rmiRegistryServer + ":" + serverPort + "/socialMediaLogic");
             System.out.println("RMI Verbindung hergestellt...");
 
-            //System.exit(0);
+            
 
         } catch (RemoteException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(0);
         } catch (MalformedURLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(0);
         } catch (IOException ex){
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(0);
         } catch (NotBoundException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(0);
         }
     }
 

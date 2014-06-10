@@ -21,7 +21,7 @@ public class CompositeParagraphImpl extends ParagraphImpl implements CompositePa
     /* Konstruktor of the CompositeParagraphImpl class
      * @throws java.rmi.RemoteException
      */
-    private Vector<SimpleParagraph> subParagraphs = new Vector<SimpleParagraph>();
+    Vector<SimpleParagraph> subParagraphs = new Vector<SimpleParagraph>();
     
     public CompositeParagraphImpl () throws RemoteException{
         
@@ -93,9 +93,8 @@ public class CompositeParagraphImpl extends ParagraphImpl implements CompositePa
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < subParagraphs.size(); i++) {
             SimpleParagraph simpleParagraph = subParagraphs.elementAt(i);
-            buffer.append(" %p ");
-            buffer.append(simpleParagraph.toString());
-            buffer.append(" %/p ");
+            buffer.append(simpleParagraph.toStrings());
+            buffer.append(" %br ");
         }
 	return buffer.toString();
     }
