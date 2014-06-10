@@ -1,11 +1,6 @@
 
 package SocialMedia_Gui;
 
-import SocialMedia_Data.Beitrag;
-import SocialMedia_Data.Kommentar;
-import SocialMedia_Data.Nutzer;
-import SocialMedia_Data.Pinnwand;
-import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.Font;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -20,9 +15,10 @@ import javax.swing.UIManager;
  * @author Max
  */
 public class DialogBeitrag extends JFrame {
+    // @todo - Max. 1000 Zeichen für Beitrag/Kommentar
     
     private String nutzerEingabe = null;
-    private JTextArea textFeld;
+    private final JTextArea textFeld;
  
     public DialogBeitrag() {
         textFeld = new JTextArea(5, 20);
@@ -57,7 +53,7 @@ public class DialogBeitrag extends JFrame {
         JDialog dialogErgebnis = ergebnisAuswahl.createDialog(null, "Neuer Text");
         dialogErgebnis.setVisible(true);
         
-        final int value = ((Integer)ergebnisAuswahl.getValue()).intValue();
+        final int value = (Integer)ergebnisAuswahl.getValue();
         
         if (JOptionPane.OK_OPTION == value){
             nutzerEingabe = textFeld.getText();

@@ -3,6 +3,7 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -36,6 +37,9 @@ public class DialogAnmelden extends JFrame{
      */
     public DialogAnmelden(SocialMediaLogic server) {
         this.server = server;
+        this.username.setPreferredSize(new Dimension(140, 20));
+        username.setDocument(new SetTextLength(25));
+        password.setDocument(new SetTextLength(25));
         username.setText("MaxK");
         password.setText("dooonuts");
         initialize();
@@ -50,6 +54,9 @@ public class DialogAnmelden extends JFrame{
     public DialogAnmelden(SocialMediaLogic server, String username, String password) {
         this.server = server; 
         initialize();
+        this.username.setPreferredSize(new Dimension(140, 20));
+        this.username.setDocument(new SetTextLength(25));
+        this.password.setDocument(new SetTextLength(25));
         this.username.setText(username);
         this.password.setText(password);
     }

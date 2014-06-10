@@ -19,8 +19,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -71,6 +73,7 @@ public class NewsfeedPanel extends JPanel {
         titlePanel.add(buttonNeuerBeitrag, BorderLayout.EAST);
         
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
         scrollPane.setBorder(null); 
         scrollPane.getInsets().set(0,0,0,0);
         scrollPane.setViewportBorder(null);
@@ -107,6 +110,7 @@ public class NewsfeedPanel extends JPanel {
         beitraege = new Vector<Beitrag>();
         
         try {
+            // @todo - Sortieren der Beiträge nach creationDate; neueste nach oben
             abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
 
             for (int i = 0; i < abonnements.size(); i++) {
@@ -130,10 +134,15 @@ public class NewsfeedPanel extends JPanel {
             buttonNeuerBeitrag.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     try {
+                        // @todo - Fehler bei leerer Eingabe / Verhalten bei "Abbrechen"
                         DialogBeitrag dialogBeitrag = new DialogBeitrag();
-                        if (!dialogBeitrag.getText().isEmpty() && dialogBeitrag.getText() != null)
+                        if (!dialogBeitrag.getText().isEmpty() && dialogBeitrag.getText() != null) {
                             server.createBeitrag(meinePinnwand, clientNutzer, dialogBeitrag.getText());
-                        SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+                            SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+//                        } else {
+//                            UIManager.put("OptionPane.okButtonText", "OK");
+//                            JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
+                        }
                     } catch (RemoteException ex) {
                         Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }

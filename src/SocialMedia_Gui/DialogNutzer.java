@@ -42,6 +42,7 @@ public class DialogNutzer extends JFrame {
     public DialogNutzer(SocialMediaLogic server, Nutzer clientNutzer){
         this.server = server;
         this.clientNutzer = clientNutzer;
+        
         try {
             this.username.setText(clientNutzer.getUsername());
             this.name.setText(clientNutzer.getName());
@@ -65,16 +66,16 @@ public class DialogNutzer extends JFrame {
         labels.add(new JLabel("Vorname", SwingConstants.RIGHT));
         labels.add(new JLabel("Passwort", SwingConstants.RIGHT));
         p.add(labels, BorderLayout.WEST);
-       
+        
         controls.add(username);
         controls.add(name);
-        controls.add(surname);
-        
+        controls.add(surname); 
         controls.add(password);
         p.add(controls, BorderLayout.CENTER);
 
         String[] buttons = {"Speichern", "Account löschen"};
 
+        // @todo - Änderung auch bei Klick auf "X"
         if (JOptionPane.showOptionDialog(
                 this, p, "Accountdaten ändern", JOptionPane.YES_NO_OPTION,
                 JOptionPane.PLAIN_MESSAGE, null, buttons, buttons[0])== 1) {
