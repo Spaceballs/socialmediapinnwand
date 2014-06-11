@@ -165,7 +165,6 @@ public class BeitragPanel extends JPanel {
                 this.add(buttonLike, gridBagLayout);
             }
             
-            // @todo - Sortieren der Kommentare nach creationDate; neueste nach unten
             kommentare = new Vector<Kommentar>();
             kommentare = server.getAllKommentarOfBeitrag(beitrag);
             for (int i = 0; i < kommentare.size(); i++) {

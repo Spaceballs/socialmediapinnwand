@@ -93,7 +93,10 @@ public class DialogSuchen extends JFrame {
         
         JDialog dialogErgebnis = ergebnisAuswahl.createDialog(null, "Suchergebnis");
         dialogErgebnis.setVisible(true);
+        
+        // @todo - Fehler beim abbrechen mit "X"
         final int value = ((Integer)ergebnisAuswahl.getValue()).intValue();
+        
         if (ergebnisListe.getSelectedIndex() != (-1) && JOptionPane.OK_OPTION == value){
             SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new PinnwandPanel(server, clientNutzer, ergebnisListe.getSelectedValue()));
         } else if (ergebnisListe.getSelectedIndex() == (-1) && JOptionPane.OK_OPTION == value) {
