@@ -16,6 +16,7 @@ import SocialMedia_Report.PopularityOfBeitragImpl;
 import SocialMedia_Report.Report;
 import SocialMedia_Report.Row;
 import SocialMedia_Report.RowImpl;
+import SocialMedia_Report.SimpleParagraph;
 import SocialMedia_Report.SimpleParagraphImpl;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
@@ -74,10 +75,11 @@ public class ReportGeneratorImpl
      * @throws java.rmi.RemoteException
      */
     public Report createContributionOfNutzerReport (Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
-        System.out.println(nutzerVal);
-        System.out.println(sortByVal);
-        System.out.println(startDateVal);
-        System.out.println(endDateVal);
+        
+        Logger.getLogger(this.getClass().getName()).info("nutzerVal " + nutzerVal);
+        Logger.getLogger(this.getClass().getName()).info("sortByVal " + sortByVal);
+        Logger.getLogger(this.getClass().getName()).info("startDateVal " + startDateVal);
+        Logger.getLogger(this.getClass().getName()).info("endDateVal " + endDateVal);
         ContributionOfNutzer report = new ContributionOfNutzerImpl();
         
         //@todo createContributionOfNutzerReport// Welcher nutzer hat die meisten beiträge gemacht? meiste likes erhalten? meisten abonnenten? in einem zeitraum?
@@ -86,7 +88,13 @@ public class ReportGeneratorImpl
         report.setStartDate(startDateVal);
         report.setEndDate(endDateVal);
         report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Nutzer Popularitäts-/Aktivitäts Report"));
-        report.setBodyParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
+        if (nutzerVal != null){
+            report.setBodyParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
+        } else {
+            report.setBodyParagraph(new SimpleParagraphImpl("Report zwischen dem " + startDateVal + " und dem " + endDateVal));
+        }
+        
+        
 
 //        Vector<Beitrag> reportBeitraege = socialMediaLogic.getAllBeitrag();
 //        for (int i = 0; i < reportBeitraege.size(); i++) {
@@ -160,16 +168,13 @@ public class ReportGeneratorImpl
      * @throws java.rmi.RemoteException
      */
     public Report createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
-        System.out.println(sortByVal);
-        System.out.println(startDateVal);
-        System.out.println(endDateVal);
         PopularityOfBeitrag report = new PopularityOfBeitragImpl();
         
         report.setCreationDate(new Date());
         report.setStartDate(startDateVal);
         report.setEndDate(endDateVal);
         report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Beitrag Popularitäts-Report"));
-        report.setBodyParagraph(new SimpleParagraphImpl("Report über die Popularität der Beiträge zwischen dem " + startDateVal + " und dem " + endDateVal));
+        report.setBodyParagraph(new SimpleParagraphImpl("Report über die Popularität der Beiträge zwischen dem " + df.format(startDateVal) + " und dem " + df.format(endDateVal)));
         
         Vector<Beitrag> beitraege = socialMediaLogic.getAllBeitrag();
         Vector<Beitrag> beitraege2 = new Vector<Beitrag>();
@@ -216,9 +221,9 @@ public class ReportGeneratorImpl
             Vector<Like> likes = socialMediaLogic.getAllLikeOfBeitrag(beitrag);
             Vector<Kommentar> kommentare = socialMediaLogic.getAllKommentarOfBeitrag(beitrag);
             int laufindex = (likes.size() > kommentare.size()) ?  likes.size() : kommentare.size();
-            System.out.println(" Laufindex: " + laufindex);
-            System.out.println(" Laufindex: " + likes.size());
-            System.out.println(" Laufindex: " + kommentare.size());
+            Logger.getLogger(this.getClass().getName()).info(" Laufindex: " + laufindex);
+            Logger.getLogger(this.getClass().getName()).info(" Laufindex: " + likes.size());
+            Logger.getLogger(this.getClass().getName()).info(" Laufindex: " + kommentare.size());
             
             if (sortByVal==1){
                 /**

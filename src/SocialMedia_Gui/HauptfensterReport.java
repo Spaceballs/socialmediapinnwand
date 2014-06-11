@@ -1,6 +1,8 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_IOandHelper.FormattedTextFieldVerifier;
+import SocialMedia_IOandHelper.NutzerListCellRenderer;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import SocialMedia_Report.HTMLWriter;
@@ -24,6 +26,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.InputVerifier;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -65,7 +68,7 @@ public class HauptfensterReport extends JFrame {
     private JButton runBeitragReportButton;
     private JFormattedTextField calendarStartDateField;
     private JFormattedTextField calendarEndDateField;
-    private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+    private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy | kk.mm", Locale.GERMANY);
 
     /**
      * Constructor of the HauptfensterReport class.
@@ -83,8 +86,8 @@ public class HauptfensterReport extends JFrame {
     private void initialize() {
         initListAndComboBox();
         initData();
-        initFrame();
         initPanel();
+        initFrame();
     }
 
     /**
@@ -100,10 +103,47 @@ public class HauptfensterReport extends JFrame {
         nutzerliste.setCellRenderer(new NutzerListCellRenderer());
         nutzerliste.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
-                runNutzerReportButton.setEnabled(true);
                 reportUser = nutzerliste.getSelectedValue();
             }
         });
+        nutzerliste.setSelectionModel(new DefaultListSelectionModel() {
+            private static final long serialVersionUID = 1L;
+
+            boolean gestureStarted = false;
+
+            @Override
+            public void setSelectionInterval(int index0, int index1) {
+                if(!gestureStarted){
+                if (index0==index1) {
+                    if (isSelectedIndex(index0)) {
+                        removeSelectionInterval(index0, index0);
+                        return;
+                    }
+                }
+                super.setSelectionInterval(index0, index1);
+                }
+                gestureStarted = true;
+            }
+
+            @Override
+            public void addSelectionInterval(int index0, int index1) {
+                if (index0==index1) {
+                    if (isSelectedIndex(index0)) {
+                        removeSelectionInterval(index0, index0);
+                        return;
+                    }
+                super.addSelectionInterval(index0, index1);
+                }
+            }
+
+            @Override
+            public void setValueIsAdjusting(boolean isAdjusting) {
+                if (isAdjusting == false) {
+                    gestureStarted = false;
+                }
+            }
+        });
+    
         nutzerliste.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
@@ -117,6 +157,8 @@ public class HauptfensterReport extends JFrame {
                                 contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
                                 dateStart, 
                                 dateEnd));
+                        nutzerliste.clearSelection();
+                        reportUser = null;
                     } catch (RemoteException ex) {
                         Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ParseException ex) {
@@ -125,6 +167,7 @@ public class HauptfensterReport extends JFrame {
                 }
             }
         });
+        nutzerliste.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
     /**
@@ -162,7 +205,7 @@ public class HauptfensterReport extends JFrame {
         initContributionOfNutzerReportPanel();
         initPopularityOfBeitragReportPanel();
         tabbedPane.addTab("Start", initPanel);
-        tabbedPane.addTab("Contribution of Users", contributionOfNutzerReportPanel);
+        tabbedPane.addTab("Popularity of Users", contributionOfNutzerReportPanel);
         tabbedPane.addTab("Popularity of Articles", popularityOfBeitragReportPanel);
         this.add(tabbedPane);
         this.setVisible(true);
@@ -189,14 +232,16 @@ public class HauptfensterReport extends JFrame {
         JPanel textFieldPanel = new JPanel();
         textFieldPanel.add(new JLabel("Start Date: "), BorderLayout.NORTH);
         calendarStartDateField = new JFormattedTextField(df);
-        calendarStartDateField.setText(df.format(new Date()));
+        calendarStartDateField.setText(df.format(new Date(new Date().getTime()-86400000)));
         calendarStartDateField.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarStartDateField.setPreferredSize(new Dimension(140, 20));
         textFieldPanel.add(calendarStartDateField, BorderLayout.NORTH);
         
         textFieldPanel.add(new JLabel("End Date: "), BorderLayout.NORTH);
         calendarEndDateField = new JFormattedTextField(df);
         calendarEndDateField.setText(df.format(new Date()));
         calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarEndDateField.setPreferredSize(new Dimension(140, 20));
         textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
         
         textFieldPanel.add(new JLabel("Sort by... "), BorderLayout.NORTH);
@@ -215,10 +260,14 @@ public class HauptfensterReport extends JFrame {
                 try {
                     Date dateStart = df.parse(calendarStartDateField.getText());
                     Date dateEnd = df.parse(calendarEndDateField.getText());
-                    HTMLWriter htmlWriter = new HTMLWriter(reportGenerator.createContributionOfNutzerReport(reportUser, 
-                            contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
-                            dateStart, 
-                            dateEnd));
+                    HTMLWriter htmlWriter = new HTMLWriter(
+                            reportGenerator.createContributionOfNutzerReport(
+                                    reportUser, 
+                                    contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
+                                    dateStart, 
+                                    dateEnd));
+                    nutzerliste.clearSelection();
+                    reportUser = null;
                 } catch (RemoteException ex) {
                     Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
@@ -226,7 +275,6 @@ public class HauptfensterReport extends JFrame {
                 }
             }
         });
-        runNutzerReportButton.setEnabled(false);
         contributionOfNutzerReportPanel.add(runNutzerReportButton, BorderLayout.SOUTH);
     }
 
@@ -240,22 +288,21 @@ public class HauptfensterReport extends JFrame {
         JPanel textFieldPanel = new JPanel();
         textFieldPanel.add(new JLabel("Start Date: "), BorderLayout.NORTH);
         calendarStartDateField = new JFormattedTextField(df);
-        calendarStartDateField.setText(df.format(new Date()));
+        calendarStartDateField.setText(df.format(new Date(new Date().getTime()-86400000)));
         calendarStartDateField.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarStartDateField.setPreferredSize(new Dimension(140, 20));
         textFieldPanel.add(calendarStartDateField, BorderLayout.NORTH);
         
         textFieldPanel.add(new JLabel("End Date: "), BorderLayout.NORTH);
         calendarEndDateField = new JFormattedTextField(df);
         calendarEndDateField.setText(df.format(new Date()));
         calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarEndDateField.setPreferredSize(new Dimension(140, 20));
         textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
         
         textFieldPanel.add(new JLabel("Sort by... "), BorderLayout.NORTH);
         textFieldPanel.add(popularityOfBeitragReportPanelSortByBox, BorderLayout.NORTH);
         popularityOfBeitragReportPanel.add(textFieldPanel, BorderLayout.NORTH);
-        
-        
-        
         
         runBeitragReportButton = new JButton("Go!");
         runBeitragReportButton.addActionListener(new ActionListener() {
@@ -263,9 +310,11 @@ public class HauptfensterReport extends JFrame {
                 try {
                     Date dateStart = df.parse(calendarStartDateField.getText());
                     Date dateEnd = df.parse(calendarEndDateField.getText());
-                    HTMLWriter htmlWriter = new HTMLWriter(reportGenerator.createPopularityOfBeitragReport(popularityOfBeitragReportPanelSortByBox.getSelectedIndex(), 
-                            dateStart, 
-                            dateEnd));
+                    HTMLWriter htmlWriter = new HTMLWriter(
+                            reportGenerator.createPopularityOfBeitragReport(
+                                    popularityOfBeitragReportPanelSortByBox.getSelectedIndex(), 
+                                    dateStart, 
+                                    dateEnd));
                 } catch (RemoteException ex) {
                     Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {

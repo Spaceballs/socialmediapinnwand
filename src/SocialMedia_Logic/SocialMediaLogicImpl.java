@@ -640,9 +640,12 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
      * @throws java.rmi.RemoteException 
      */
     public Nutzer editNutzer (String username, String name, String surname, String password, Nutzer val) throws RemoteException{
+        
         Boolean isEditable = true;
         Boolean isSame = false;
+        
         Vector<Nutzer> alleNutzer = this.getAllNutzer();
+        
         for (int i = 0; i < alleNutzer.size(); i++) {
             Nutzer nutzer = alleNutzer.elementAt(i);
             if(nutzer.getUsername().equals(username) ){
@@ -651,6 +654,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
                     isSame = true;
             }       
         }
+        
         if (isEditable) {
             val.setUsername(username);
             val.setName(name);
