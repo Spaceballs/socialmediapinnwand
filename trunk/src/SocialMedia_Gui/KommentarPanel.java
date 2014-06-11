@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * 
+ * Displays a Kommentar with buttons for editing/deleting
  * @author Max
  */
 public class KommentarPanel extends JPanel {
@@ -41,7 +41,7 @@ public class KommentarPanel extends JPanel {
     private final JButton buttonLoeschen = new JButton();
     
     /**
-     * Konstruktor of the KommentarPanel
+     * Constructor of the KommentarPanel
      * @param server - the server
      * @param clientNutzer - the logged-in Nutzer
      * @param kommentar - the kommentar
@@ -54,12 +54,19 @@ public class KommentarPanel extends JPanel {
         initialize();
     }
     
+    /**
+     * Initializes the needed operations
+     */
     private void initialize() {
         initializeData();
         initializeContent();
         initializeListeners();
     }
     
+    /**
+     * Gets the username and creationDate from the Kommentar and creates the buttons with Icons and tooltips
+     * Buttons for deleting/editing are only enabled if the logged-in user is the owner of the Kommentar
+     */
     private void initializeData() {
         try {
             String html1 = "<html><body style='width: ";
@@ -82,6 +89,9 @@ public class KommentarPanel extends JPanel {
         }
     }
     
+    /**
+     * Puts the labels and buttons in a GridBagLayout
+     */
     private void initializeContent() {
         this.setLayout(new GridBagLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
@@ -108,6 +118,9 @@ public class KommentarPanel extends JPanel {
         initializeTextfield();
     }
     
+    /**
+     * Initializes the needed ActionListeners for deleting and editing a Kommentar
+     */
     private void initializeListeners() {
         buttonLoeschen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -133,7 +146,7 @@ public class KommentarPanel extends JPanel {
     }
 
     /**
-     * 
+     * Sets the text of the Kommentar with automatical wordwrap
      */
     private void initializeTextfield() {
         String html1 = "<html><body style='width: ";
@@ -144,6 +157,9 @@ public class KommentarPanel extends JPanel {
         this.add(new JLabel(html1 + 200 + html2 + text, JLabel.LEFT), gridBagLayout);
     }
     
+    /**
+     * Gets the inserted text from Dialogbeitrag and edits the Kommentar
+     */
     private void editKommentar() {
         if (dialogBeitrag.getText() != null)
             try {

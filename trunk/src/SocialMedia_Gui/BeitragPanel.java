@@ -26,7 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * 
+ * Displays a Beitrag with its attributes
+ * Also shows buttons for editing/deleting/commenting/liking and the Kommentare
  * @author Max
  */
 public class BeitragPanel extends JPanel {
@@ -53,10 +54,10 @@ public class BeitragPanel extends JPanel {
     private final JButton buttonUnlike = new JButton();
     
     /**
-     * 
-     * @param server
-     * @param clientNutzer
-     * @param beitrag 
+     * Constructor
+     * @param server - the server
+     * @param clientNutzer - the logged-in user
+     * @param beitrag - the Beitrag shown in the BeitragPanel
      */
     BeitragPanel(SocialMediaLogic server, Nutzer clientNutzer, Beitrag beitrag) {
         super();
@@ -67,7 +68,7 @@ public class BeitragPanel extends JPanel {
     }
     
     /**
-     * 
+     * Initializes the needed operations
      */
     private void initialize() {
         initializeData();
@@ -76,7 +77,8 @@ public class BeitragPanel extends JPanel {
     }
     
     /**
-     * 
+     * Gets the username, creationDate and number of likes from the Beitrag and creates the buttons with Icons and tooltips
+     * Buttons for deleting/editing are only enabled if the logged-in user is the owner of the Beitrag
      */
     private void initializeData() {
         try {
@@ -117,7 +119,9 @@ public class BeitragPanel extends JPanel {
     }
     
     /**
-     * 
+     * Puts the labels and buttons in a GridBagLayout
+     * Button for unliking is only shown if Beitrag is already liked
+     * Adds a KommentarPanel for every Kommentar
      */
     private void initializeContent() {
         try {
@@ -179,7 +183,8 @@ public class BeitragPanel extends JPanel {
     }
     
     /**
-     * 
+     * Initializes the needed ActionListeners for deleting, editing a Beitrag
+     * and for creating a Kommentar and for creating and deleting a Like
      */
     private void initializeListeners() {        
         buttonLoeschen.addActionListener(new ActionListener() {
@@ -242,7 +247,7 @@ public class BeitragPanel extends JPanel {
     }   
 
     /**
-     * 
+     * Sets the text of the Beitrag with automatical wordwrap
      */
     private void initializeTextfield() {
         String html1 = "<html><body style='width: ";
@@ -254,6 +259,9 @@ public class BeitragPanel extends JPanel {
         textfieldOffset = gridBagLayout.gridy;
     }
     
+    /**
+     * Gets the inserted text from Dialogbeitrag and edits the Beitrag
+     */
     private void editBeitrag() {
         if (dialogBeitrag.getText() != null)
             try {

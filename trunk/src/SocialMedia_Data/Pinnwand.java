@@ -27,6 +27,9 @@ public interface Pinnwand extends DataReference{
 
     public Nutzer getOwner (SocialMediaLogicImpl verwaltung)
             throws RemoteException;
+    
+     public Vector<Abonnement> getAllAbonnementsOfPinnwand (SocialMediaLogicImpl verwaltung)
+            throws RemoteException;
 
 }
 

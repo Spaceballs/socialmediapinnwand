@@ -84,7 +84,7 @@ public interface SocialMediaLogic extends java.rmi.Remote{
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.E61ADFC0-D8EE-51E2-5CD4-E1BB37A9C6FC]
     // </editor-fold> 
-    public void deactivateNutzer (Nutzer val)throws java.rmi.RemoteException;
+    public Nutzer deactivateNutzer (Nutzer val)throws java.rmi.RemoteException;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.CB626DDB-C83E-1C13-AFFA-5BC2005C56AB]

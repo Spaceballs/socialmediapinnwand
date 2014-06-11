@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 /**
- * Creates the content of the panelRechtsOben
  * Shows the username, name and surname of the logged-in Nutzer
  * @author Max
  */
@@ -38,8 +37,7 @@ public class NutzerInfo extends JPanel {
 
     /**
      * Gets the username, name and surname of the logged-in Nutzer,
-     * puts in in a GridLayout and
-     * changes the font.
+     * puts in in a BorderLayout and changes the font.
      */
     private void initialize() {
         this.setLayout(new BorderLayout());

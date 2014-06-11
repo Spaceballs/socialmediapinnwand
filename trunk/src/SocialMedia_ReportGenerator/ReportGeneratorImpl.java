@@ -16,7 +16,6 @@ import SocialMedia_Report.PopularityOfBeitragImpl;
 import SocialMedia_Report.Report;
 import SocialMedia_Report.Row;
 import SocialMedia_Report.RowImpl;
-import SocialMedia_Report.SimpleParagraph;
 import SocialMedia_Report.SimpleParagraphImpl;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
@@ -44,7 +43,7 @@ public class ReportGeneratorImpl
     // #[regen=yes,id=DCE.5F731C06-B576-8C5F-7EB5-3ED06DFC5D1B]
     // </editor-fold> 
     private SocialMediaLogicImpl socialMediaLogic = null;
-    private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+    private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy | HH.mm", Locale.GERMANY);
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.657F1B43-DFBC-7C21-6CDC-195ADE1929AA]
@@ -327,7 +326,7 @@ public class ReportGeneratorImpl
             report.setRows(rows);
         }
         report.setImprintParagraph(addImprint());
-        // @todo createPopularityOfBeitragReport//Beiträge mit den meisten Likes, Kommentaren in einem Zeitraum
+        //createPopularityOfBeitragReport//Beiträge mit den meisten Likes, Kommentaren in einem Zeitraum
         return report;
     }
     

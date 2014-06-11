@@ -135,7 +135,7 @@ public class PinnwandMapper extends DBStatementFactory{
             con.createStatement().executeUpdate(
                     DELETE + " " +
                     FROM + " " +
-                            TABLE_NAME_ABONNEMENT + " " +
+                            TABLE_NAME_PINNWAND + " " +
                     WHERE + " " +
                             COLUMN_ID + " =\"" + val.getID() + "\"");
         } catch (SQLException ex) {

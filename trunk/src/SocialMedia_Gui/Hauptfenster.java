@@ -40,7 +40,6 @@ public class Hauptfenster extends JFrame {
     private NewsfeedPanel newsfeedPanel;
     private static Hauptfenster hauptfenster;
 
-
     /**
      * Constructor of the Hauptfenster class
      * @param server - the server
@@ -52,14 +51,12 @@ public class Hauptfenster extends JFrame {
         initialize();
     }
     
-
     /**
-     *
+     * Creates a singleton Hauptfenster-object since there is only one Hauptfenster per run
      * @param server - the server
      * @param clientNutzer - the logged-in Nutzer
      * @return - Returns the hauptfenster
      */
-    
     public static Hauptfenster hauptfenster(SocialMediaLogic server, Nutzer clientNutzer){
         if(server == null && clientNutzer == null){
             return hauptfenster;
@@ -72,7 +69,7 @@ public class Hauptfenster extends JFrame {
     }
 
     /**
-     * Initializes all components (menu, listeners and frame)
+     * Initializes all needed operations and instantiates a NewsfeedPanel
      */
     private void initialize() {
         NewsfeedPanel newsfeed = new NewsfeedPanel(server, clientNutzer);
@@ -99,8 +96,7 @@ public class Hauptfenster extends JFrame {
     }
 
     /**
-     * Creates the structure of the frame
-     * with SplitPanes
+     * Creates the structure of the frame with SplitPanes
      */
     private void initializePane() {
         NutzerInfo nutzerInfo = new NutzerInfo(server, clientNutzer);
@@ -153,6 +149,9 @@ public class Hauptfenster extends JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * Checks which sort of panel is set (NewsfeedPanel or PinnwandPanel) and refreshes the panel
+     */
     public void refreshPanelLinks() {
         if (panel instanceof NewsfeedPanel) {
             NewsfeedPanel newsfeedPanel = (NewsfeedPanel) panel;
@@ -164,7 +163,7 @@ public class Hauptfenster extends JFrame {
     }
     
     /**
-     * 
+     * Sets size and location of the Hauptfenster
      */
     private void initializeOptions() {
         this.pack();
@@ -179,7 +178,7 @@ public class Hauptfenster extends JFrame {
 
     
     /**
-     * All required listeners
+     * All required menu-listeners
      */    
     private void initializeListeners() {
         newsfeedMenu.addActionListener(new ActionListener() {

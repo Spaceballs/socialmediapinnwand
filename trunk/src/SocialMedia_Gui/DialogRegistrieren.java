@@ -53,7 +53,7 @@ public class DialogRegistrieren extends JFrame {
     /**
      * Constructor
      * @param server - the server
-     * @param username - the server
+     * @param username - username inserted
      * @param name - name inserted
      * @param surname - surname inserted
      * @param password - password inserted
@@ -73,7 +73,7 @@ public class DialogRegistrieren extends JFrame {
     }
 
     /**
-     * Initializes the Dialog and the ActionListeners of the Buttons
+     * Initializes the needed operations
      */
     private void initalize() {
         initializeDialog();
@@ -131,13 +131,14 @@ public class DialogRegistrieren extends JFrame {
               
         this.setTitle("Registrieren");
         this.pack();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
-     * All required Listeners
+     * Initializes the ActionListeners for cancelling and registering
      */
     public void initializeListeners() {
         buttonAbbrechen.addActionListener(new ActionListener() {

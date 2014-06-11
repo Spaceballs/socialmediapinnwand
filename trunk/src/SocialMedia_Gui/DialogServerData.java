@@ -29,11 +29,11 @@ public class DialogServerData extends JFrame{
     JButton buttonUebernehmen = new JButton("Übernehmen");
 
     /**
-     * Constructor
-     * @param client
-     * @param adresse
-     * @param serverPort
-     * @param clientPort
+     * Constructor for the SocialMediaClient
+     * @param client - the client
+     * @param adresse - adress of the server
+     * @param serverPort - port of the server
+     * @param clientPort - port of the client
      */
     public DialogServerData(SocialMediaClient client, String adresse, String serverPort, String clientPort) {
         this.client = client;
@@ -45,11 +45,11 @@ public class DialogServerData extends JFrame{
     }
     
     /**
-     * Constructor
-     * @param client
-     * @param adresse
-     * @param serverPort
-     * @param clientPort
+     * Constructor for the SocialMediaReportClient
+     * @param client - the client
+     * @param adresse - adress of the server
+     * @param serverPort - port of the server
+     * @param clientPort - port of the client
      */
     public DialogServerData(SocialMediaReportClient client, String adresse, String serverPort, String clientPort) {
         this.rClient = client;
@@ -61,7 +61,7 @@ public class DialogServerData extends JFrame{
     }
     
     /**
-     * Initializes the Dialog and the ActionListener of the Button
+     * Initializes the needed operations
      */
     private void initialize() {
         initializeDialog();
@@ -118,13 +118,14 @@ public class DialogServerData extends JFrame{
 
         this.setTitle("Server Data");
         this.pack();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
-     * All required Listeners
+     * Initializes the Actionlistener
      */
     private void initializeListeners() {
         buttonUebernehmen.addActionListener(new ActionListener() {

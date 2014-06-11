@@ -19,7 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
+ * Every booked Pinnwand/Nutzer is shown in a separate panel
+ * You can navigate to the Pinnwand of the booked Nutzer or delete the Abonnement
  * @author Max
  */
 class AbonnementPanel extends JPanel {
@@ -34,10 +35,10 @@ class AbonnementPanel extends JPanel {
     private Nutzer user;
 
     /**
-     * 
-     * @param server
-     * @param clientNutzer
-     * @param abonnement 
+     * Constructor for the AbonnementPanel
+     * @param server - the server
+     * @param clientNutzer - the logged-in user
+     * @param abonnement - the Abonnement shown in the panel
      */
     AbonnementPanel(SocialMediaLogic server, Nutzer clientNutzer, Abonnement abonnement) {
         super();
@@ -48,7 +49,7 @@ class AbonnementPanel extends JPanel {
     }
 
     /**
-     * 
+     * Initializes the needed operations
      */
     private void initialize() {
         initializeData();
@@ -57,7 +58,7 @@ class AbonnementPanel extends JPanel {
     }
 
     /**
-     * 
+     * Gets the username from the Abonnement and creates the buttons with Icons and tooltips
      */
     private void initializeData() {
         try {
@@ -81,7 +82,7 @@ class AbonnementPanel extends JPanel {
     }
     
     /**
-     * 
+     * Puts the username and buttons in a GridBagLayout
      */
     private void initializeContent() {
         this.setLayout(new GridBagLayout());
@@ -105,7 +106,8 @@ class AbonnementPanel extends JPanel {
     }
     
     /**
-     * 
+     * Initializes the needed ActionListeners to go to the Pinnwand
+     * and to delete a Abonnement
      */
     private void initializeListeners() {
         

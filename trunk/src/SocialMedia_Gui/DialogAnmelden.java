@@ -21,7 +21,7 @@ import javax.swing.JRootPane;
 import javax.swing.JTextField;
 
 /**
- * Dialog where user inserts username and password
+ * Log-in dialog where user inserts username and password
  * @author Max
  */
 public class DialogAnmelden extends JFrame{
@@ -41,8 +41,8 @@ public class DialogAnmelden extends JFrame{
         this.username.setPreferredSize(new Dimension(140, 20));
         username.setDocument(new SetTextLength(25));
         password.setDocument(new SetTextLength(25));
-        username.setText("MaxK");
-        password.setText("dooonuts");
+        username.setText("");
+        password.setText("");
         initialize();
     }
 
@@ -53,17 +53,17 @@ public class DialogAnmelden extends JFrame{
      * @param password - inserted password
      */
     public DialogAnmelden(SocialMediaLogic server, String username, String password) {
-        this.server = server; 
-        initialize();
+        this.server = server;
         this.username.setPreferredSize(new Dimension(140, 20));
         this.username.setDocument(new SetTextLength(25));
         this.password.setDocument(new SetTextLength(25));
         this.username.setText(username);
         this.password.setText(password);
+        initialize();
     }
 
     /**
-     * Initializes the Dialog and the ActionListeners of the Buttons
+     * Initializes the needed operations
      */
     private void initialize() {
         initializeDialog();
@@ -71,7 +71,7 @@ public class DialogAnmelden extends JFrame{
     }
 
     /**
-     * Creates the Dialog with Labels, TextFields and Buttons
+     * Creates the Dialog with Labels, TextFields and Buttons and puts it in a GridBagLayout
      */
     private void initializeDialog() {
         this.setLayout(new GridBagLayout());
@@ -107,13 +107,14 @@ public class DialogAnmelden extends JFrame{
 
         this.setTitle("Anmelden");
         this.pack();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
-     * All required Listeners
+     * All required Listeners for log-in button and registrate button
      */
     private void initializeListeners() {
         buttonAnmelden.addActionListener(new ActionListener() {
@@ -129,7 +130,7 @@ public class DialogAnmelden extends JFrame{
                    Hauptfenster hauptfenster = SocialMedia_Gui.Hauptfenster.hauptfenster(server, clientNutzer);
                } else {
                    dispose();
-                   DialogAnmelden  anmelden = new DialogAnmelden(server, username.getText(), new String(password.getPassword()));
+                   DialogAnmelden anmelden = new DialogAnmelden(server, username.getText(), new String(password.getPassword()));
                }
            }
         });
