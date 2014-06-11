@@ -19,8 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 /**
- * Creates the content of the panelRechtsUnten
  * Shows the Abonnements of the logged-in Nutzer
+ * Provides the data for the AbonnementPanel
  * @author Max
  */
 public class AbonnementInfo extends JPanel{
@@ -44,9 +44,8 @@ public class AbonnementInfo extends JPanel{
     }
 
     /**
-     * Gets the username, name and surname of the logged-in Nutzer,
-     * puts in a GridLayout and
-     * changes the font.
+     * Puts the title in a BorderLayout
+     * Creates a ScrollPane which contains the AbonnementPanels
      */
     private void initialize() {
         this.setLayout(new BorderLayout());
@@ -82,7 +81,7 @@ public class AbonnementInfo extends JPanel{
     }
 
     /**
-     * 
+     * Gets all Abonnements of the logged-in user
      */
     private void initializeData() {
         try {

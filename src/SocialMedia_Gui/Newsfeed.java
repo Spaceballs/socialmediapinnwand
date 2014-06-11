@@ -24,6 +24,10 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 /**
+ * Class is no longer used!!
+ */
+
+/**
  * Creates the content of the panelLinks and
  * shows the Newsfeed (all Beitraege, Kommentare and Likes)
  * of all Abonnements of the logged-in Nutzer

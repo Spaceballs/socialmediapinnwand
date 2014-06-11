@@ -1,6 +1,7 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_IOandHelper.SetTextLength;
 import java.awt.Font;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -11,34 +12,43 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 /**
- *
+ * Dialog for creating a new Beitrag or Kommentar or editing an existing Beitrag or Kommentar
  * @author Max
  */
 public class DialogBeitrag extends JFrame {
-    // @todo - Max. 1000 Zeichen für Beitrag/Kommentar
     
     private String nutzerEingabe = null;
     private final JTextArea textFeld;
  
+    /**
+     * Constructor for creating a Beitrag/Kommentar
+     */
     public DialogBeitrag() {
         textFeld = new JTextArea(5, 20);
+        textFeld.setDocument(new SetTextLength(1000));
         initialize();
     }
     
+    /**
+     * Constructor for editing a Beitrag/Kommentar
+     * @param text - the existing text
+     */
     public DialogBeitrag(String text) {
-        textFeld = new JTextArea(text, 5, 20);
+        textFeld = new JTextArea(5, 20);
+        textFeld.setDocument(new SetTextLength(1000));
+        textFeld.setText(text);
         initialize();
     }
 
     /**
-     * 
+     * Initializes the needed operations
      */
     private void initialize() {
         initializeDialog();
     }
 
     /**
-     * 
+     * Initializes the dialog and puts the textfield into a ScrollPane
      */
     private void initializeDialog() {
         textFeld.setLineWrap(true);
@@ -53,17 +63,24 @@ public class DialogBeitrag extends JFrame {
         JDialog dialogErgebnis = ergebnisAuswahl.createDialog(null, "Neuer Text");
         dialogErgebnis.setVisible(true);
         
-        final int value = (Integer)ergebnisAuswahl.getValue();
-        
-        if (JOptionPane.OK_OPTION == value){
-            nutzerEingabe = textFeld.getText();
-        } else if (textFeld.getText().isEmpty() && JOptionPane.OK_OPTION == value) {
-            UIManager.put("OptionPane.okButtonText", "OK");
-            JOptionPane.showMessageDialog(null, "Kein Text eingegeben", "Fehler", JOptionPane.ERROR_MESSAGE);
-            initializeDialog();
+        if ((Integer)ergebnisAuswahl.getValue() == null) {
+        } else {
+            final int value = (Integer)ergebnisAuswahl.getValue();
+
+            if (JOptionPane.OK_OPTION == value){
+                nutzerEingabe = textFeld.getText();
+            } else if (textFeld.getText().isEmpty() && JOptionPane.OK_OPTION == value) {
+                UIManager.put("OptionPane.okButtonText", "OK");
+                JOptionPane.showMessageDialog(null, "Kein Text eingegeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+                initializeDialog();
+            }
         }
     }
     
+    /**
+     * Gets the text from the textfield
+     * @return the inserted text
+     */
     public String getText() {
         return this.nutzerEingabe;
     }

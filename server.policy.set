@@ -18,6 +18,6 @@ grant codeBase "%path*"
    // Allow the client to connect and accept
    permission java.net.SocketPermission "%ip:1024-", "accept, connect, resolve";
 };
-grant codeBase "file:/C:/Users/Sebastian/Documents/NetBeansProjects1314/SocialMedia_Application/-" {
+grant codeBase "file:/C:/Users/Max/Documents/NetBeansProjects/Socialmediapinnwand/-" {
    permission java.net.SocketPermission "mars.iuk.hdm-stuttgart.de", "connect, resolve";
 };

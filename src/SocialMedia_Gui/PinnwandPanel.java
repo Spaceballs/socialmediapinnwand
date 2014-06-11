@@ -14,6 +14,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,9 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 /**
- * Creates the content of the panelLinks and
- * shows the Pinnwand (all Beitraege, Kommentare and Likes)
- * of the logged-in Nutzer
+ * Creates the Pinnwand (all Beitraege, Kommentare and Likes) of a Nutzer
  * @author Max
  */
 public class PinnwandPanel extends JPanel {
@@ -42,6 +42,7 @@ public class PinnwandPanel extends JPanel {
     private final JButton buttonAbonnementLoeschen = new JButton();
     private Abonnement pinnwandAbonnement;
     private Vector<Beitrag> beitraege;
+    private Vector<Beitrag> beitraegeSortiert;
     private Pinnwand pinnwand;
 
     /**
@@ -60,9 +61,8 @@ public class PinnwandPanel extends JPanel {
     }
 
     /**
-     * Gets the username, name and surname of the logged-in Nutzer,
-     * puts in in a GridLayout and
-     * changes the font.
+     * Sets a title and a button for creating a new Abonnement/deleting a Abonnement
+     * Creates a ScrollPane which contains a BeitragPanel for every Beitrag to be displayed
      */
     private void initialize() {
         try {
@@ -124,7 +124,9 @@ public class PinnwandPanel extends JPanel {
     }
     
     /**
-     * 
+     * Gets the data needed from the database via the server (all Beitraege of a Nutzer)
+     * and makes it useable for the BeitragPanel
+     * Sorts the Beitraege by creationDate, newest on top
      */
     private void initializeData() {
         beitraege = new Vector<Beitrag>();
@@ -134,13 +136,24 @@ public class PinnwandPanel extends JPanel {
             beitraege.addAll(server.getAllBeitragOfPinnwand(pinnwand));
             
             pinnwandAbonnement = server.getPinnwandAbonnement(clientNutzer, pinnwand);
+            
+            Collections.sort(beitraege, new Comparator<Beitrag>() {
+                public int compare(Beitrag o1, Beitrag o2){
+                    try {
+                        return o2.getCreationDate().compareTo(o1.getCreationDate());
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    return -1;
+                }
+            });
         } catch (RemoteException ex) {
             Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     /**
-     * 
+     * Initializes all needed ActionListeners
      */
     private void initializeListeners() {
         buttonNeuerBeitrag.addActionListener(new ActionListener() {
@@ -182,9 +195,12 @@ public class PinnwandPanel extends JPanel {
             }
         });
     }
-    
+   
+    /**
+     * Gets the user whose Pinnwand is displayed
+     * @return Nutzer-object
+     */
     public Nutzer getNutzer(){
         return this.nutzer;
     }
-
 }

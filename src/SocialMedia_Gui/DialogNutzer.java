@@ -1,13 +1,11 @@
 
 package SocialMedia_Gui;
 
-import SocialMedia_IOandHelper.SetTextLength;
 import SocialMedia_Data.Nutzer;
+import SocialMedia_IOandHelper.SetTextLength;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +38,7 @@ public class DialogNutzer extends JFrame {
     public JPanel labels;
     
     /**
-     * Constructor
+     * Constructor, sets the existing data
      * @param server - the server
      * @param clientNutzer - the logged-in Nutzer
      */
@@ -70,7 +68,7 @@ public class DialogNutzer extends JFrame {
     }
 
     /**
-     * Creates the Dialog with Labels, TextFields and Buttons
+     * Creates the Dialog with Labels and TextFields
      */
     private void initializeDialog() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -90,52 +88,55 @@ public class DialogNutzer extends JFrame {
         controls.add(password);
         p.add(controls, BorderLayout.CENTER);
 
-//        String[] buttons = {"Speichern", "Account löschen"};
-
-        // @todo - Änderung auch bei Klick auf "X"
+        UIManager.put("OptionPane.yesButtonText", "Speichern");
+        UIManager.put("OptionPane.noButtonText", "Account löschen");
         JOptionPane nutzerDaten = new JOptionPane(p, JOptionPane.PLAIN_MESSAGE, JOptionPane.YES_NO_OPTION);
         
         JDialog dialogErgebnis = nutzerDaten.createDialog(null, "Accountdaten ändern");
         dialogErgebnis.setVisible(true);
         
-        final int value = (Integer)nutzerDaten.getValue();
-        System.out.println(value);
-        
-        if (JOptionPane.YES_OPTION == value){
-            System.out.println("Gespeichert");
-        } else if (JOptionPane.NO_OPTION == value) {
-            System.out.println("Gelöscht");
-        } 
-        
-//        if (JOptionPane.showOptionDialog(
-//                this, p, "Accountdaten ändern", JOptionPane.YES_NO_OPTION,
-//                JOptionPane.PLAIN_MESSAGE, null, buttons, buttons[0])== 1) {
-//                if (JOptionPane.showConfirmDialog(this,
-//                        "Den Account wirklich löschen?", "Account löschen",
-//                        JOptionPane.YES_NO_OPTION) == 0) {
-//                    try {
-//                        server.deactivateNutzer(clientNutzer);
-//                        dispose();
-//                    } catch (RemoteException ex) {
-//                        Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                }
-//            } else {
-//                try {
-//                    Nutzer clientNutzerBarbeitet;
-//                    clientNutzerBarbeitet = server.editNutzer(username.getText(),
-//                            name.getText(),
-//                            surname.getText(),
-//                            new String(password.getPassword()),
-//                            clientNutzer);
-//                    if (clientNutzerBarbeitet == null){
-//                        // @todo Error Behaviour
-//                    } else {
-//                        dispose();
-//                    }   
-//                } catch (RemoteException ex) {
-//                    Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
+        if ((Integer)nutzerDaten.getValue() == null) {
+        } else {
+            final int value = (Integer)nutzerDaten.getValue();
+
+            // @todo - Fehler bei leerer Eingabe implementieren
+            if (JOptionPane.YES_OPTION == value){
+                try {
+                    Nutzer clientNutzerBearbeitet;
+                    clientNutzerBearbeitet = server.editNutzer(username.getText(),
+                            name.getText(),
+                            surname.getText(),
+                            new String(password.getPassword()),
+                            clientNutzer);
+                    
+                    if (clientNutzerBearbeitet == null){
+                        UIManager.put("OptionPane.okButtonText", "OK");
+                        JOptionPane.showMessageDialog(null, "Accountdaten konnten nicht geändert werden", "Fehler", JOptionPane.ERROR_MESSAGE);
+                        new DialogNutzer(server, clientNutzer);
+                    } else {
+                        dispose();
+                        UIManager.put("OptionPane.okButtonText", "OK");
+                        JOptionPane.showMessageDialog(null, "Accountdaten erfolgreich geändert", "Gespeichert", JOptionPane.PLAIN_MESSAGE);
+                    }
+                } catch (RemoteException ex) {
+                    Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            } else if (JOptionPane.NO_OPTION == value) {
+                UIManager.put("OptionPane.yesButtonText", "Ja");
+                UIManager.put("OptionPane.noButtonText", "Abbrechen");
+                
+                if (JOptionPane.showConfirmDialog(this,
+                        "Den Account wirklich löschen?", "Account löschen",
+                        JOptionPane.YES_NO_OPTION) == 0) {
+                    try {
+                        server.deactivateNutzer(clientNutzer);
+                        System.exit(0);
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
     }
 }

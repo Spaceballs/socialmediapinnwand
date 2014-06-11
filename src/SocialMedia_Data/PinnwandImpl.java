@@ -96,6 +96,26 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
         }
         return null;
     }
+    
+    /**
+     * Gets all <code>Abonnements</code> which reference this <code>Pinnwand</code>-instance
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @return - returns all referenced <code>Abonnements</code>
+     * @throws RemoteException
+     */
+    public Vector<Abonnement> getAllAbonnementsOfPinnwand (SocialMediaLogicImpl verwaltung)
+            throws RemoteException {
+        Vector<Abonnement> abonnements = verwaltung.getAllAbonnement();
+        Vector<Abonnement> abonnementsResult = new Vector<Abonnement>();
+                
+        for (int i = 0; i < abonnements.size(); i++) {
+            Abonnement abonnement = abonnements.elementAt(i);
+            
+            if(abonnement.getPinnwandID() == this.getID())
+                abonnementsResult.add(abonnement);
+        }
+        return abonnementsResult;
+    }
 
 }
 

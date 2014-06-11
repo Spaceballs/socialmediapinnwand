@@ -1,8 +1,8 @@
 
 package SocialMedia_Gui;
 
-import SocialMedia_IOandHelper.NutzerListCellRenderer;
 import SocialMedia_Data.Nutzer;
+import SocialMedia_IOandHelper.NutzerListCellRenderer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.rmi.RemoteException;
 import java.util.Vector;
@@ -31,6 +31,7 @@ public class DialogSuchen extends JFrame {
     /**
      * Constructor
      * @param server - the server
+     * @param clientNutzer - the logged-in user
      */
     DialogSuchen(SocialMediaLogic server, Nutzer clientNutzer) {
         this.clientNutzer = clientNutzer;
@@ -39,7 +40,7 @@ public class DialogSuchen extends JFrame {
     }
 
     /**
-     * Creates the Dialog with Label, TextField and Button
+     * Creates the Dialog where user inserts the username he wants to search for
      */
     private void initializeDialog() {
         UIManager.put("OptionPane.okButtonText", "Suchen");
@@ -47,8 +48,8 @@ public class DialogSuchen extends JFrame {
         
         if (nutzerEingabe != null) {
             try {
-                //@todo - Fehler bei Eingabe von 2 Leerzeichen oder mehr auswerfen
-                if (nutzerEingabe.contentEquals("") || nutzerEingabe.contentEquals(" ")) {
+                String s = nutzerEingabe;
+                if (s.replaceAll(" ", "").length() == 0) {
                     UIManager.put("OptionPane.okButtonText", "OK");
                     JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
                     new DialogSuchen(server, clientNutzer);
@@ -64,7 +65,7 @@ public class DialogSuchen extends JFrame {
     }
 
     /**
-     * 
+     * Puts the result of the search in a list
      */
     private void initializeList() {
         ergebnisListe.setCellRenderer(new NutzerListCellRenderer());
@@ -72,7 +73,7 @@ public class DialogSuchen extends JFrame {
     }
 
     /**
-     * 
+     * JOptionPane where a user can be selected to switch to his Pinnwand
      */
     private void selectionOptionPane() {
         UIManager.put("OptionPane.okButtonText", "Zur Pinnwand");
@@ -95,15 +96,17 @@ public class DialogSuchen extends JFrame {
         JDialog dialogErgebnis = ergebnisAuswahl.createDialog(null, "Suchergebnis");
         dialogErgebnis.setVisible(true);
         
-        // @todo - Fehler beim abbrechen mit "X"
-        final int value = ((Integer)ergebnisAuswahl.getValue()).intValue();
-        
-        if (ergebnisListe.getSelectedIndex() != (-1) && JOptionPane.OK_OPTION == value){
-            SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new PinnwandPanel(server, clientNutzer, ergebnisListe.getSelectedValue()));
-        } else if (ergebnisListe.getSelectedIndex() == (-1) && JOptionPane.OK_OPTION == value) {
-            UIManager.put("OptionPane.okButtonText", "OK");
-            JOptionPane.showMessageDialog(null, "Kein Nutzer ausgewählt", "Fehler", JOptionPane.ERROR_MESSAGE);
-            selectionOptionPane();
+        if ((Integer)ergebnisAuswahl.getValue() == null) {
+        } else {
+            final int value = (Integer)ergebnisAuswahl.getValue();
+
+            if (ergebnisListe.getSelectedIndex() != (-1) && JOptionPane.OK_OPTION == value){
+                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).setPanelLinks(new PinnwandPanel(server, clientNutzer, ergebnisListe.getSelectedValue()));
+            } else if (ergebnisListe.getSelectedIndex() == (-1) && JOptionPane.OK_OPTION == value) {
+                UIManager.put("OptionPane.okButtonText", "OK");
+                JOptionPane.showMessageDialog(null, "Kein Nutzer ausgewählt", "Fehler", JOptionPane.ERROR_MESSAGE);
+                selectionOptionPane();
+            }
         }
     }
 }

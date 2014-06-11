@@ -430,13 +430,26 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
     /**
      * // TO DO
      * @param val 
+     * @return  
      * @throws java.rmi.RemoteException 
      */
-    public void deactivateNutzer (Nutzer val) throws RemoteException{
+    public Nutzer deactivateNutzer (Nutzer val) throws RemoteException{
         val = nutzerMapper.findByID(val.getID());
         val.setUsername("Deaktivierter Nutzer");
         val.setPassword(new Date().toString());
+        
+        Vector<Abonnement> abonnements = getAllAbonnementOfNutzer(val);
+        for (int i = 0; i < abonnements.size(); i++) {
+            deleteAbonnement(abonnements.elementAt(i));
+        }
+        
+        abonnements = val.getNutzerPinnwand(this).getAllAbonnementsOfPinnwand(this);
+        for (int i = 0; i < abonnements.size(); i++) {
+            deleteAbonnement(abonnements.elementAt(i));
+        }
+        
         deletePinnwand(val.getNutzerPinnwand(this));
+        return saveNutzer(val);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -616,11 +629,7 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         Vector<Nutzer> filteredNutzers = new Vector<Nutzer>();
         for (int i = 0; i < nutzers.size(); i++) {
             Nutzer nutzer = nutzers.elementAt(i);
-//            if (nutzer.getSurname().toLowerCase().contains(val.toLowerCase())
-//                || nutzer.getName().toLowerCase().contains(val.toLowerCase())
-//                || nutzer.getUsername().toLowerCase().contains(val.toLowerCase()))
-//                filteredNutzers.addElement(nutzer);
-            if (nutzer.getUsername().toLowerCase().contains(val.toLowerCase()))
+            if (nutzer.getUsername().toLowerCase().contains(val.toLowerCase()) && !nutzer.getUsername().contentEquals("Deaktivierter Nutzer"))
                 filteredNutzers.addElement(nutzer);
         }
         return filteredNutzers;

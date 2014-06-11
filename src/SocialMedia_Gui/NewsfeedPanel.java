@@ -14,6 +14,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,8 +28,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 /**
- * Creates the content of the panelLinks and
- * shows the Newsfeed (all Beitraege, Kommentare and Likes)
+ * Creates the Newsfeed (all Beitraege, Kommentare and Likes)
  * of all Abonnements of the logged-in Nutzer
  * @author Max
  */
@@ -56,9 +57,8 @@ public class NewsfeedPanel extends JPanel {
     }
 
     /**
-     * Gets the username, name and surname of the logged-in Nutzer,
-     * puts in in a GridLayout and
-     * changes the font.
+     * Sets a title and a button for creating a new Beitrag
+     * Creates a ScrollPane which contains a BeitragPanel for every Beitrag to be displayed
      */
     private void initialize() {
         this.setLayout(new BorderLayout());
@@ -102,15 +102,15 @@ public class NewsfeedPanel extends JPanel {
     }
     
     /**
-     * Gets the data needed from the database via the server
+     * Gets the data needed from the database via the server (all Beitraege of Abonnements + own Beitraege)
      * and makes it useable for the BeitragPanel
+     * Sorts the Beitraege by creationDate, newest on top
      */
     private void initializeData() {
         abonnements = new Vector<Abonnement>();
         beitraege = new Vector<Beitrag>();
         
         try {
-            // @todo - Sortieren der Beiträge nach creationDate; neueste nach oben
             abonnements = server.getAllAbonnementOfNutzer(clientNutzer);
 
             for (int i = 0; i < abonnements.size(); i++) {
@@ -120,13 +120,24 @@ public class NewsfeedPanel extends JPanel {
             }
             myPinnwand = server.getPinnwandOfNutzer(clientNutzer);
             beitraege.addAll(server.getAllBeitragOfPinnwand(myPinnwand));
+            
+            Collections.sort(beitraege, new Comparator<Beitrag>() {
+                public int compare(Beitrag o1, Beitrag o2){
+                    try {
+                        return o2.getCreationDate().compareTo(o1.getCreationDate());
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    return -1;
+                }
+            });
         } catch (RemoteException ex) {
             Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
-     * 
+     * Initializes the ActionListener for creating a new Beitrag
      */
     private void initializeListeners() {
         try {
@@ -139,9 +150,9 @@ public class NewsfeedPanel extends JPanel {
                         if (!dialogBeitrag.getText().isEmpty() && dialogBeitrag.getText() != null) {
                             server.createBeitrag(meinePinnwand, clientNutzer, dialogBeitrag.getText());
                             SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
-//                        } else {
-//                            UIManager.put("OptionPane.okButtonText", "OK");
-//                            JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            UIManager.put("OptionPane.okButtonText", "OK");
+                            JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
                         }
                     } catch (RemoteException ex) {
                         Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
