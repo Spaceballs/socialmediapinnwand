@@ -1,0 +1,23 @@
+grant codeBase "%path*"
+{
+   permission java.lang.RuntimePermission "setSecurityManager";
+   permission java.lang.RuntimePermission "createSecurityManager";
+   permission java.lang.RuntimePermission "usePolicy";
+   permission java.io.FilePermission   "<<ALL FILES>>", "execute";
+   permission java.util.PropertyPermission "java.rmi.registry.hostname", "read";
+
+   // Allow the server to connect
+   permission java.net.SocketPermission "%ip:1024-", "connect, resolve";
+   permission java.net.SocketPermission "mars.iuk.hdm-stuttgart.de", "connect, resolve";
+
+   // Allow the server to connect
+   permission java.net.SocketPermission "%ip:1024-", "accept, connect, resolve";
+
+   // Allow the server to connect and accept
+   permission java.net.SocketPermission "%ip:1024-", "accept, connect, resolve";
+   // Allow the client to connect and accept
+   permission java.net.SocketPermission "%ip:1024-", "accept, connect, resolve";
+};
+grant codeBase "file:/C:/Users/Sebastian/Documents/NetBeansProjects1314/SocialMedia_Application/-" {
+   permission java.net.SocketPermission "mars.iuk.hdm-stuttgart.de", "connect, resolve";
+};

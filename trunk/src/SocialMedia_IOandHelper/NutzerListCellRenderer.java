@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package SocialMedia_Gui;
+package SocialMedia_IOandHelper;
 
 import SocialMedia_Data.Nutzer;
 import java.awt.Color;
@@ -20,7 +20,7 @@ import javax.swing.ListCellRenderer;
  * This class replaces the default ListCellRenderer and displays <code>val.getUsername()</code> instead of <code>val.toString()</code>.
  * @author Sebastian
  */
- class NutzerListCellRenderer extends JLabel implements ListCellRenderer<Object> {
+ public class NutzerListCellRenderer extends JLabel implements ListCellRenderer<Object> {
      
      /**
       * 

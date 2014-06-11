@@ -1,6 +1,7 @@
 
 package SocialMedia_Gui;
 
+import SocialMedia_IOandHelper.SetTextLength;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.BorderLayout;

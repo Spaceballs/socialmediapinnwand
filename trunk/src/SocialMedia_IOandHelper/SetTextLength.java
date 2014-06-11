@@ -1,5 +1,5 @@
 
-package SocialMedia_Gui;
+package SocialMedia_IOandHelper;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;

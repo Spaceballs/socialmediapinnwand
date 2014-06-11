@@ -1,5 +1,5 @@
 
-package SocialMedia_Gui;
+package SocialMedia_IOandHelper;
 
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -12,7 +12,7 @@ import javax.swing.JFormattedTextField;
  * Class for controlling the correct user input.
  * @author Sebastian
  */
-class FormattedTextFieldVerifier extends InputVerifier {
+public class FormattedTextFieldVerifier extends InputVerifier {
     
     /**
      * 

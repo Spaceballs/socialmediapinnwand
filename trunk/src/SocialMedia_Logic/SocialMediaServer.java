@@ -1,22 +1,19 @@
 package SocialMedia_Logic;
 
-import SocialMedia_Data.Abonnement;
-import SocialMedia_Data.Beitrag;
-import SocialMedia_Data.BeitragImpl;
-import SocialMedia_Data.Nutzer;
-import SocialMedia_Data.NutzerImpl;
-import SocialMedia_Data.Pinnwand;
-import SocialMedia_Data.PinnwandImpl;
+import SocialMedia_IOandHelper.ReadWriteTextFile;
+import java.util.List;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
+import java.rmi.RMISecurityManager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.ExportException;
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -40,6 +37,8 @@ public class SocialMediaServer {
 
     private final int serverPort = 1099;
     
+    
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.34EC638F-091D-E446-8B60-6A9101569827]
     // </editor-fold>
@@ -48,7 +47,37 @@ public class SocialMediaServer {
      * Constructor of the Server class
      */
     public SocialMediaServer () {
-        System.out.println("Server gestartet...");
+        ReadWriteTextFile text = new ReadWriteTextFile();
+        String ip = "localhost";
+        try {
+            Logger.getLogger(this.getClass().getName()).info("Loading Policy Data...");
+            ClassLoader loader = this.getClass().getClassLoader();
+            StringBuilder packageStringBuilder = new StringBuilder(this.getClass().getPackage().toString());
+            packageStringBuilder.delete(0, 8).append("/");
+            String path = loader.getResource(packageStringBuilder.toString()).toString();
+            path = path.replaceAll(packageStringBuilder.toString(), "");
+            ip = InetAddress.getLocalHost().getHostAddress();
+            System.out.println(ip);
+            
+            Logger.getLogger(this.getClass().getName()).info("Preparing File...");
+            List<String> lines = text.readSmallTextFile("server.policy.set");
+            List<String> lines0 = new ArrayList<String>();
+
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i).replaceAll("%path", path).replaceAll("%ip", ip);  
+                lines0.add(i, line);
+            }
+            Logger.getLogger(this.getClass().getName()).info("Writing Files...");
+            text.writeSmallTextFile(lines0, "server.policy");
+            
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        Logger.getLogger(this.getClass().getName()).info("Server gestartet...");
         try {
             socialMediaLogic =
                     new SocialMediaLogicImpl(SocialMedia_DatabaseManager.LikeMapper.likeMapper(),
@@ -57,21 +86,22 @@ public class SocialMediaServer {
                                             SocialMedia_DatabaseManager.AbonnementMapper.abonnementMapper(),
                                             SocialMedia_DatabaseManager.NutzerMapper.nutzerMapper(),
                                             SocialMedia_DatabaseManager.PinnwandMapper.pinnwandMapper());
-
-            sometests();
+            
+            System.setProperty("java.security.policy", "server.policy");
+            RMISecurityManager securityManager = new RMISecurityManager();
+            System.setSecurityManager(securityManager);
             
             Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);
-            System.out.println("RMI Gestartet...");
+            Logger.getLogger(this.getClass().getName()).info("RMI Gestartet...");
 
             Registry rmiRegistry = LocateRegistry.createRegistry(serverPort);
-            System.out.println("RMI Registry am Port " + serverPort + " erstellt...");
+            Logger.getLogger(this.getClass().getName()).info("RMI Registry am Port " + serverPort + " erstellt...");
+            
+            Logger.getLogger(this.getClass().getName()).info("Server: "+ ip);
 
-            String rmiRegistryServer = System.getProperty("java.rmi.registry.hostname","localhost");
-            System.out.println("Server: "+ rmiRegistryServer);
-
-            Naming.rebind("rmi://" + rmiRegistryServer + ":" + serverPort + "/socialMediaLogic",(Remote) socialMediaLogic);
-            Naming.lookup("rmi://" + rmiRegistryServer + ":" + serverPort + "/socialMediaLogic");
-            System.out.println("RMI Verbindung hergestellt...");
+            Naming.rebind("rmi://" + ip + ":" + serverPort + "/socialMediaLogic",(Remote) socialMediaLogic);
+            Naming.lookup("rmi://" + ip + ":" + serverPort + "/socialMediaLogic");
+            Logger.getLogger(this.getClass().getName()).info("RMI Verbindung hergestellt...");
 
             
 
@@ -103,14 +133,6 @@ public class SocialMediaServer {
      */
     public static void main (String args[]) {
         SocialMediaServer logic = new SocialMediaServer();
-        System.out.println("Server gestartet...");
-    }
-
-    /**
-     * Class for db and logic tests.
-     * Mostly uses the socialMediaLogic to manipulate db entries.
-     */
-    private void sometests() {
     }
 }
 
