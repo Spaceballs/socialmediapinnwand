@@ -2,7 +2,6 @@ package SocialMedia_DatabaseManager;
 
 import SocialMedia_Data.Beitrag; 
 import SocialMedia_Data.BeitragImpl;
-import java.awt.image.RescaleOp;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.ResultSet;

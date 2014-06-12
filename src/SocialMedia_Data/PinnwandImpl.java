@@ -111,7 +111,9 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
                 
         for (int i = 0; i < abonnements.size(); i++) {
             Abonnement abonnement = abonnements.elementAt(i);
-            
+            System.out.println(abonnement.getPinnwandID() == this.getID());
+            System.out.println("PinnwandID"+abonnement.getPinnwandID());
+            System.out.println("ID"+this.getID());
             if(abonnement.getPinnwandID() == this.getID())
                 abonnementsResult.add(abonnement);
         }

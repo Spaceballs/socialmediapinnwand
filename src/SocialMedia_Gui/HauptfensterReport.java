@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListSelectionModel;
@@ -60,7 +61,7 @@ public class HauptfensterReport extends JFrame {
     private JButton runBeitragReportButton;
     private JFormattedTextField calendarStartDateField;
     private JFormattedTextField calendarEndDateField;
-    private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy | kk.mm", Locale.GERMANY);
+    private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy | kk:mm", Locale.GERMANY);
 
     /**
      * Constructor of the HauptfensterReport class.
@@ -168,7 +169,13 @@ public class HauptfensterReport extends JFrame {
      */
     private void initData() {
         try {
-            nutzerliste.setListData(server.getAllNutzer());
+            Vector<Nutzer> n = server.getAllNutzer();
+            Vector<Nutzer> n0 = new Vector<Nutzer>();
+            for (int i = 0; i < n.size(); i++) {
+                if (!n.elementAt(i).getUsername().contentEquals("Deaktivierter Nutzer"))
+                    n0.add(n.elementAt(i));
+            }
+            nutzerliste.setListData(n0);
             reportGenerator = server.getReportGenerator();
         } catch (RemoteException ex) {
             Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
