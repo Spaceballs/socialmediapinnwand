@@ -16,9 +16,11 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 /**
  * Dialog where user can register himself
@@ -150,7 +152,11 @@ public class DialogRegistrieren extends JFrame {
         
         buttonRegistrieren.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(username.getText().length() >= 3 && name.getText().length() >= 3 && surname.getText().length() >= 3 && new String(password.getPassword()).length()  >= 4 ){
+                String s1 = username.getText();
+                String s2 = name.getText();
+                String s3 = surname.getText();
+                String s4 = String.valueOf(password.getPassword());
+                if(s1.replaceAll(" ", "").length() != 0 && s2.replaceAll(" ", "").length() != 0 && s3.replaceAll(" ", "").length() != 0 && s4.replaceAll(" ", "").length() != 0){
                     Nutzer clientNutzer = null;
                     try {
                         clientNutzer = server.registrateNutzer(username.getText(), name.getText(), surname.getText(), new String(password.getPassword()));
@@ -162,11 +168,15 @@ public class DialogRegistrieren extends JFrame {
                         DialogAnmelden dialogAnmelden = new DialogAnmelden(server, username.getText(), new String(password.getPassword()));
                     } else {
                         dispose();
-                        DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, "Username already in use!", name.getText(), surname.getText(), new String(password.getPassword()));
+//                        UIManager.put("OptionPane.okButtonText", "OK");
+                        JOptionPane.showMessageDialog(null, "Username bereits vergeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+                        DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, username.getText(), name.getText(), surname.getText(), new String(password.getPassword()));
                     }
                 } else {
                     dispose();
-                    DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, "Min. 3 chars per field!", name.getText(), surname.getText(), new String(password.getPassword()));
+//                    UIManager.put("OptionPane.okButtonText", "OK");
+                    JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    new DialogRegistrieren(server, username.getText(), name.getText(), surname.getText(), new String(password.getPassword()));
                 }
            }
         });

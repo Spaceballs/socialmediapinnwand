@@ -144,23 +144,15 @@ public class NewsfeedPanel extends JPanel {
             meinePinnwand = server.getPinnwandOfNutzer(clientNutzer);
             buttonNeuerBeitrag.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    try {
-                        // @todo - Fehler bei leerer Eingabe / Verhalten bei "Abbrechen"
-                        DialogBeitrag dialogBeitrag = new DialogBeitrag();
-                        if (dialogBeitrag.getText() != null) {
-                            if (!dialogBeitrag.getText().isEmpty()){
-                                server.createBeitrag(meinePinnwand, clientNutzer, dialogBeitrag.getText());
-                                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks(); 
-                            }else{
-                                UIManager.put("OptionPane.okButtonText", "OK");
-                                JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } else {
-                            UIManager.put("OptionPane.okButtonText", "OK");
-                            JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    DialogBeitrag dialogBeitrag = new DialogBeitrag();
+                    
+                    if (dialogBeitrag.getText() != null) {
+                        try {
+                            server.createBeitrag(meinePinnwand, clientNutzer, dialogBeitrag.getText());
+                            SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+                        } catch (RemoteException ex) {
+                            Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    } catch (RemoteException ex) {
-                        Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
