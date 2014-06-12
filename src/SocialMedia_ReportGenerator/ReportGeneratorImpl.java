@@ -2,11 +2,11 @@ package SocialMedia_ReportGenerator;
 
 import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Beitrag;
+import SocialMedia_Data.DataReference;
+import SocialMedia_Data.DataReferenceImpl;
 import SocialMedia_Data.Kommentar;
 import SocialMedia_Data.Like;
 import SocialMedia_Data.Nutzer;
-import SocialMedia_Data.Pinnwand;
-import SocialMedia_Data.PinnwandImpl;
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import SocialMedia_Report.Column;
 import SocialMedia_Report.ColumnImpl;
@@ -77,11 +77,6 @@ public class ReportGeneratorImpl
      * @throws java.rmi.RemoteException
      */
     public Report createContributionOfNutzerReport (Nutzer nutzerVal, final int sortByVal, final Date startDateVal, final Date endDateVal) throws RemoteException {
-        Logger.getLogger(this.getClass().getName()).info("nutzerVal " + nutzerVal);
-        Logger.getLogger(this.getClass().getName()).info("sortByVal " + sortByVal);
-        Logger.getLogger(this.getClass().getName()).info("startDateVal " + startDateVal);
-        Logger.getLogger(this.getClass().getName()).info("endDateVal " + endDateVal);
-        
         ContributionOfNutzer report = new ContributionOfNutzerImpl();
         Vector<Nutzer> nutzers = socialMediaLogic.getAllNutzer();
         Vector<Nutzer> n0 = new Vector<Nutzer>();
@@ -108,25 +103,25 @@ public class ReportGeneratorImpl
          * Wenn die Beiträge im Report nach menge der Kommentare sortiert werden soll dann den entsprechenden Sortieralgorythmus anwerfen.
          * Ansonsten soll der Report nach menge der Likes sortiert werden.
          */
-        if (sortByVal == 1 && nutzers.size() > 1){
+        if (sortByVal == 0 && nutzers.size() > 1){
             Collections.sort(nutzers, new Comparator<Nutzer>() {
                 public int compare(Nutzer o1, Nutzer o2){
                     try {
                         Vector<Beitrag> o1Beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(o1));
-                        Vector<Beitrag> beitraege2 = new Vector<Beitrag>();
-                        for (int i = 0; i < o1Beitraege.size(); i++) {
-                            if (!startDateVal.after(o1Beitraege.elementAt(i).getCreationDate()) && !endDateVal.before(o1Beitraege.elementAt(i).getCreationDate()))
-                                beitraege2.add(o1Beitraege.elementAt(i));
+                        Vector<Beitrag> beitraege = new Vector<Beitrag>();
+                        for (int h = 0; h < o1Beitraege.size(); h++) {
+                            if (!startDateVal.after(o1Beitraege.elementAt(h).getCreationDate()) && !endDateVal.before(o1Beitraege.elementAt(h).getCreationDate()))
+                                beitraege.add(o1Beitraege.elementAt(h));
                         }
-                        o1Beitraege = beitraege2;
+                        o1Beitraege = beitraege;
                         
+                        beitraege = new Vector<Beitrag>();
                         Vector<Beitrag> o2Beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(o2));
-                        beitraege2 = new Vector<Beitrag>();
-                        for (int i = 0; i < o2Beitraege.size(); i++) {
-                            if (!startDateVal.after(o2Beitraege.elementAt(i).getCreationDate()) && !endDateVal.before(o2Beitraege.elementAt(i).getCreationDate()))
-                                beitraege2.add(o2Beitraege.elementAt(i));
+                        for (int h = 0; h < beitraege.size(); h++) {
+                            if (!startDateVal.after(beitraege.elementAt(h).getCreationDate()) && !endDateVal.before(beitraege.elementAt(h).getCreationDate()))
+                                beitraege.add(beitraege.elementAt(h));
                         }
-                        o2Beitraege = beitraege2;
+                        beitraege = beitraege;
                         
                         return ((Integer)o2Beitraege.size()).compareTo((Integer)o1Beitraege.size());
                     } catch (RemoteException ex) {
@@ -135,7 +130,7 @@ public class ReportGeneratorImpl
                     return -1;
                 }
             });  
-        }else if (sortByVal == 0 && nutzers.size() > 1){
+        }else if (sortByVal == 1 && nutzers.size() > 1){
             Collections.sort(nutzers, new Comparator<Nutzer>() {
                 public int compare(Nutzer o1, Nutzer o2){
                     try {
@@ -145,22 +140,24 @@ public class ReportGeneratorImpl
                             o1Likes.addAll(o1Beitraege.get(i).getAllBeitragLikes(socialMediaLogic));
                         }
                         Vector<Like> likes2 = new Vector<Like>();
-                        for (int i = 0; i < o1Likes.size(); i++) {
-                            if (!startDateVal.after(o1Likes.elementAt(i).getCreationDate()) && !endDateVal.before(o1Likes.elementAt(i).getCreationDate()))
-                                likes2.add(o1Likes.elementAt(i));
+                        for (int h = 0; h < o1Likes.size(); h++) {
+                            if (!startDateVal.after(o1Likes.elementAt(h).getCreationDate()) && !endDateVal.before(o1Likes.elementAt(h).getCreationDate()))
+                                likes2.add(o1Likes.elementAt(h));
                         }
                         o1Likes = likes2;
+                        
                         Vector<Beitrag> o2Beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(o2));
                         Vector<Like> o2Likes = new  Vector<Like>();
                         for (int i = 0; i < o2Beitraege.size(); i++) {
                             o2Likes.addAll(o2Beitraege.get(i).getAllBeitragLikes(socialMediaLogic));
                         }
                         likes2 = new Vector<Like>();
-                        for (int i = 0; i < o2Likes.size(); i++) {
-                            if (!startDateVal.after(o2Likes.elementAt(i).getCreationDate()) && !endDateVal.before(o2Likes.elementAt(i).getCreationDate()))
-                                likes2.add(o2Likes.elementAt(i));
+                        for (int h = 0; h < o2Likes.size(); h++) {
+                            if (!startDateVal.after(o2Likes.elementAt(h).getCreationDate()) && !endDateVal.before(o2Likes.elementAt(h).getCreationDate()))
+                                likes2.add(o2Likes.elementAt(h));
                         }
                         o2Likes = likes2;
+                        
                         return ((Integer)o2Likes.size()).compareTo((Integer)o1Likes.size());
                     } catch (RemoteException ex) {
                         Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,19 +170,20 @@ public class ReportGeneratorImpl
                 public int compare(Nutzer o1, Nutzer o2){
                     try {
                         Vector<Abonnement> o1Abonnements = socialMediaLogic.getPinnwandOfNutzer(o1).getAllAbonnementsOfPinnwand(socialMediaLogic);
-                        Vector<Abonnement> abonnements2 = new Vector<Abonnement>();
-                        for (int i = 0; i < o1Abonnements.size(); i++) {
-                            if (!startDateVal.after(o1Abonnements.elementAt(i).getCreationDate()) && !endDateVal.before(o1Abonnements.elementAt(i).getCreationDate()))
-                                abonnements2.add(o1Abonnements.elementAt(i));
+                        Vector<Abonnement> abonnements = new Vector<Abonnement>();
+                        for (int k = 0; k < o1Abonnements.size(); k++) {
+                            if (!startDateVal.after(o1Abonnements.elementAt(k).getCreationDate()) && !endDateVal.before(o1Abonnements.elementAt(k).getCreationDate()))
+                                abonnements.add(o1Abonnements.elementAt(k));
                         }
-                        o1Abonnements = abonnements2;
+                        o1Abonnements = abonnements;
+                        
                         Vector<Abonnement> o2Abonnements = socialMediaLogic.getPinnwandOfNutzer(o2).getAllAbonnementsOfPinnwand(socialMediaLogic);
-                        abonnements2 = new Vector<Abonnement>();
-                        for (int i = 0; i < o2Abonnements.size(); i++) {
-                            if (!startDateVal.after(o2Abonnements.elementAt(i).getCreationDate()) && !endDateVal.before(o2Abonnements.elementAt(i).getCreationDate()))
-                                abonnements2.add(o2Abonnements.elementAt(i));
+                        abonnements = new Vector<Abonnement>();
+                        for (int k = 0; k < o2Abonnements.size(); k++) {
+                            if (!startDateVal.after(o2Abonnements.elementAt(k).getCreationDate()) && !endDateVal.before(o2Abonnements.elementAt(k).getCreationDate()))
+                                abonnements.add(o2Abonnements.elementAt(k));
                         }
-                        o2Abonnements = abonnements2;
+                        o2Abonnements = abonnements;
                         return ((Integer)o2Abonnements.size()).compareTo((Integer)o1Abonnements.size());
                     } catch (RemoteException ex) {
                         Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -194,24 +192,26 @@ public class ReportGeneratorImpl
                 }
             });
         }
-        System.out.println(nutzers);
-        
-        
-        
         /**
          * Schleife über alle Nutzer.
          */
         Vector<Row> rows = new Vector<Row>();
         for (int i = 0; i < nutzers.size(); i++) {
-            
             Vector<Beitrag> beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(nutzers.elementAt(i)));
+            Vector<Beitrag> beitraege2 = new Vector<Beitrag>();
+            for (int h = 0; h < beitraege.size(); h++) {
+                if (!startDateVal.after(beitraege.elementAt(h).getCreationDate()) && !endDateVal.before(beitraege.elementAt(h).getCreationDate()))
+                    beitraege2.add(beitraege.elementAt(h));
+            }
+            beitraege = beitraege2;
             Vector<Abonnement> abonnements = socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(nutzers.elementAt(i)));
-            System.out.println(abonnements);
+            Vector<Abonnement> abonnements2 = new Vector<Abonnement>();
+            for (int k = 0; k < abonnements.size(); k++) {
+                if (!startDateVal.after(abonnements.elementAt(k).getCreationDate()) && !endDateVal.before(abonnements.elementAt(k).getCreationDate()))
+                    abonnements2.add(abonnements.elementAt(k));
+            }
+            abonnements = abonnements2;
             int laufindex0 = (beitraege.size() > abonnements.size()) ?  beitraege.size() : abonnements.size();
-            Logger.getLogger(this.getClass().getName()).info(" Laufindex0: " + laufindex0);
-            Logger.getLogger(this.getClass().getName()).info(" Laufindex0: " + beitraege.size());
-            Logger.getLogger(this.getClass().getName()).info(" Laufindex0: " + abonnements.size());
-            
             if (sortByVal==0){
                 //sortByVal Beiträge
                 /**
@@ -242,7 +242,6 @@ public class ReportGeneratorImpl
                  * Schleife über alle Beiträge und Abonnements, wovon mehr da ist.
                  * Wenn nix da ist dann leere Zeile erzeugen
                  */
-                
                 for (int j = 0; j < laufindex0; j++) {
                     Vector<Like> likes;
                     Vector<Kommentar> kommentare;
@@ -253,11 +252,19 @@ public class ReportGeneratorImpl
                         likes=new Vector<Like>();
                         kommentare=new Vector<Kommentar>();
                     }
+                    Vector<Like> likes2 = new Vector<Like>();
+                    for (int h = 0; h < likes.size(); h++) {
+                        if (!startDateVal.after(likes.elementAt(h).getCreationDate()) && !endDateVal.before(likes.elementAt(h).getCreationDate()))
+                            likes2.add(likes.elementAt(h));
+                    }
+                    likes = likes2;
+                    Vector<Kommentar> kommentare2 = new Vector<Kommentar>();
+                    for (int h = 0; h < kommentare.size(); h++) {
+                        if (!startDateVal.after(kommentare.elementAt(h).getCreationDate()) && !endDateVal.before(kommentare.elementAt(h).getCreationDate()))
+                            kommentare2.add(kommentare.elementAt(h));
+                    }
+                    kommentare = kommentare2;
                     int laufindex = (likes.size() > kommentare.size()) ?  likes.size() : kommentare.size();
-                    Logger.getLogger(this.getClass().getName()).info(" Laufindex: " + laufindex);
-                    Logger.getLogger(this.getClass().getName()).info(" Laufindex: " + likes.size());
-                    Logger.getLogger(this.getClass().getName()).info(" Laufindex: " + kommentare.size());
-                    
                     /**
                      * Schleife über alle Likes und Kommentare, wovon mehr da ist.
                      * Wenn nix da ist dann leere Zeile erzeugen
@@ -289,6 +296,104 @@ public class ReportGeneratorImpl
                             r0.addColumn(writeKommentar(kommentare.elementAt(counter)));
                         } catch (IndexOutOfBoundsException ex){
                             r0.addColumn(c);
+                        }
+                        if (counter == 0){
+                            try{
+                                System.out.println("abos to print " + abonnements);
+                                r0.addColumn(writeAbonnement(abonnements.elementAt(j)));
+                            } catch (IndexOutOfBoundsException ex){
+                                r0.addColumn(c);
+                            } 
+                        } else {
+                            r0.addColumn(c);
+                        }
+                        rows.add(r0);
+                    }
+                }
+            }else if(sortByVal==1){
+                //sortByVal Likes
+                /**
+                 * Wenn erste Zeile dann TableHeader schreiben.
+                 */
+                if (i==0){
+                    Column c = new ColumnImpl();
+                    Row r = new RowImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Nutzer"));
+                    r.addColumn(c);
+                    c = new ColumnImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Likes"));
+                    c.addSubParagraph(new SimpleParagraphImpl(df.format(startDateVal) + " - " + df.format(endDateVal)));
+                    c.addSubParagraph(new SimpleParagraphImpl("sort By Value"));
+                    r.addColumn(c);
+                    c = new ColumnImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Beiträge"));
+                    r.addColumn(c);
+                    c = new ColumnImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Kommentare"));
+                    r.addColumn(c);
+                    c = new ColumnImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Abonnements"));
+                    r.addColumn(c);
+                    rows.add(r);
+                }
+                /**
+                 * Schleife über alle Beiträge und Abonnements, wovon mehr da ist.
+                 * Wenn nix da ist dann leere Zeile erzeugen
+                 */
+                for (int j = 0; j < laufindex0; j++) {
+                    Vector<Like> likes;
+                    Vector<Kommentar> kommentare;
+                    try{
+                        likes = socialMediaLogic.getAllLikeOfBeitrag(beitraege.get(j));
+                        kommentare = socialMediaLogic.getAllKommentarOfBeitrag(beitraege.get(j));
+                    } catch (IndexOutOfBoundsException ex){
+                        likes=new Vector<Like>();
+                        kommentare=new Vector<Kommentar>();
+                    }
+                    Vector<Like> likes2 = new Vector<Like>();
+                    for (int h = 0; h < likes.size(); h++) {
+                        if (!startDateVal.after(likes.elementAt(h).getCreationDate()) && !endDateVal.before(likes.elementAt(h).getCreationDate()))
+                            likes2.add(likes.elementAt(h));
+                    }
+                    likes = likes2;
+                    Vector<Kommentar> kommentare2 = new Vector<Kommentar>();
+                    for (int h = 0; h < kommentare.size(); h++) {
+                        if (!startDateVal.after(kommentare.elementAt(h).getCreationDate()) && !endDateVal.before(kommentare.elementAt(h).getCreationDate()))
+                            kommentare2.add(kommentare.elementAt(h));
+                    }
+                    kommentare = kommentare2;
+                    int laufindex = (likes.size() > kommentare.size()) ?  likes.size() : kommentare.size();
+                    /**
+                     * Schleife über alle Likes und Kommentare, wovon mehr da ist.
+                     * Wenn nix da ist dann leere Zeile erzeugen
+                     */
+                    for (int counter = 0; counter < laufindex; counter++){
+                        Row r0 = new RowImpl();
+                        Column c = new ColumnImpl();
+                        c.addSubParagraph(new SimpleParagraphImpl(""));
+                        if (counter == 0){
+                            r0.addColumn(writeNutzer(nutzers.elementAt(i)));
+                        } else {
+                            r0.addColumn(c);
+                        }
+                        try{
+                            r0.addColumn(writeLike(likes.elementAt(counter)));
+                        } catch (IndexOutOfBoundsException ex){
+                            r0.addColumn(c);
+                        }
+                        if (counter == 0){
+                            try{
+                                r0.addColumn(writeBeitrag(beitraege.elementAt(j)));
+                            } catch (IndexOutOfBoundsException ex){
+                                r0.addColumn(c);
+                            }
+                        } else {
+                            r0.addColumn(c);
+                        }
+                        try{
+                            r0.addColumn(writeKommentar(kommentare.elementAt(counter)));
+                        } catch (IndexOutOfBoundsException ex){
+                            r0.addColumn(c);
                         } 
                         if (counter == 0){
                             try{
@@ -303,143 +408,105 @@ public class ReportGeneratorImpl
                         rows.add(r0);
                     }
                 }
+            }else if(sortByVal==2){
+                //sortByVal Abonnement
+                /**
+                 * Wenn erste Zeile dann TableHeader schreiben.
+                 */
+                if (i==0){
+                    Column c = new ColumnImpl();
+                    Row r = new RowImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Nutzer"));
+                    r.addColumn(c);
+                    c = new ColumnImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Abonnements"));
+                    c.addSubParagraph(new SimpleParagraphImpl(df.format(startDateVal) + " - " + df.format(endDateVal)));
+                    c.addSubParagraph(new SimpleParagraphImpl("sort By Value"));
+                    r.addColumn(c);
+                    c = new ColumnImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Beiträge"));
+                    r.addColumn(c);
+                    c = new ColumnImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Likes"));
+                    r.addColumn(c);
+                    c = new ColumnImpl();
+                    c.addSubParagraph(new SimpleParagraphImpl("Kommentare"));
+                    r.addColumn(c);
+                    rows.add(r);
+                }
+                /**
+                 * Schleife über alle Beiträge und Abonnements, wovon mehr da ist.
+                 * Wenn nix da ist dann leere Zeile erzeugen
+                 */
+                for (int j = 0; j < laufindex0; j++) {
+                    Vector<Like> likes;
+                    Vector<Kommentar> kommentare;
+                    try{
+                        likes = socialMediaLogic.getAllLikeOfBeitrag(beitraege.get(j));
+                        kommentare = socialMediaLogic.getAllKommentarOfBeitrag(beitraege.get(j));
+                    } catch (IndexOutOfBoundsException ex){
+                        likes=new Vector<Like>();
+                        kommentare=new Vector<Kommentar>();
+                    }
+                    Vector<Like> likes2 = new Vector<Like>();
+                    for (int h = 0; h < likes.size(); h++) {
+                        if (!startDateVal.after(likes.elementAt(h).getCreationDate()) && !endDateVal.before(likes.elementAt(h).getCreationDate()))
+                            likes2.add(likes.elementAt(h));
+                    }
+                    likes = likes2;
+                    Vector<Kommentar> kommentare2 = new Vector<Kommentar>();
+                    for (int h = 0; h < kommentare.size(); h++) {
+                        if (!startDateVal.after(kommentare.elementAt(h).getCreationDate()) && !endDateVal.before(kommentare.elementAt(h).getCreationDate()))
+                            kommentare2.add(kommentare.elementAt(h));
+                    }
+                    kommentare = kommentare2;
+                    int laufindex = (likes.size() > kommentare.size()) ?  likes.size() : kommentare.size();
+                    /**
+                     * Schleife über alle Likes und Kommentare, wovon mehr da ist.
+                     * Wenn nix da ist dann leere Zeile erzeugen
+                     */
+                    for (int counter = 0; counter < laufindex; counter++){
+                        Row r0 = new RowImpl();
+                        Column c = new ColumnImpl();
+                        c.addSubParagraph(new SimpleParagraphImpl(""));
+                        if (counter == 0){
+                            r0.addColumn(writeNutzer(nutzers.elementAt(i)));
+                        } else {
+                            r0.addColumn(c);
+                        } 
+                        if (counter == 0){
+                            try{
+                                System.out.println(abonnements);
+                                r0.addColumn(writeAbonnement(abonnements.elementAt(j)));
+                            } catch (IndexOutOfBoundsException ex){
+                                r0.addColumn(c);
+                            } 
+                        } else {
+                            r0.addColumn(c);
+                        }
+                        if (counter == 0){
+                            try{
+                                r0.addColumn(writeBeitrag(beitraege.elementAt(j)));
+                            } catch (IndexOutOfBoundsException ex){
+                                r0.addColumn(c);
+                            }
+                        } else {
+                            r0.addColumn(c);
+                        }
+                        try{
+                            r0.addColumn(writeLike(likes.elementAt(counter)));
+                        } catch (IndexOutOfBoundsException ex){
+                            r0.addColumn(c);
+                        }
+                        try{
+                            r0.addColumn(writeKommentar(kommentare.elementAt(counter)));
+                        } catch (IndexOutOfBoundsException ex){
+                            r0.addColumn(c);
+                        }
+                        rows.add(r0);
+                    }
+                }
             }
-            
-            
-            
-            
-            
-            
-            
-//            else if(sortByVal==1){
-//                //sortByVal Likes
-//                /**
-//                 * Wenn erste Zeile dann TableHeader schreiben.
-//                 */
-//                if (i==0){
-//                    Column c = new ColumnImpl();
-//                    Row r = new RowImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Nutzer"));
-//                    r.addColumn(c);
-//                    c = new ColumnImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Likes"));
-//                    c.addSubParagraph(new SimpleParagraphImpl(df.format(startDateVal) + " - " + df.format(endDateVal)));
-//                    c.addSubParagraph(new SimpleParagraphImpl("sort By Value"));
-//                    r.addColumn(c);
-//                    c = new ColumnImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Beiträge"));
-//                    r.addColumn(c);
-//                    c = new ColumnImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Kommentare"));
-//                    r.addColumn(c);
-//                    c = new ColumnImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Abonnements"));
-//                    r.addColumn(c);
-//                    rows.add(r);
-//                }
-//                beitragColumn = writeBeitrag(beitrag);
-//                /**
-//                 * Laufindex über alle Likes
-//                 */
-//                
-//                /**
-//                 * Schleife über alle Beiträge oder Kommentare, wovon mehr da ist.
-//                 * Wenn nix da ist dann leere Zeile erzeugen
-//                 */
-//                for (int counter = 0; counter < laufindex; counter++){
-//                    Row r0 = new RowImpl();
-//                    Column c = new ColumnImpl();
-//                    if (counter == 0){
-//                        r0.addColumn(beitragColumn);
-//                    } else {
-//                        c.addSubParagraph(new SimpleParagraphImpl(""));
-//                        r0.addColumn(c);
-//                    }
-//                    try{
-//                        r0.addColumn(writeLike(likes.elementAt(counter)));
-//                    } catch (IndexOutOfBoundsException ex){
-//                        c = new ColumnImpl();
-//                        c.addSubParagraph(new SimpleParagraphImpl(""));
-//                        r0.addColumn(c);
-//                    }
-//                    try{
-//                        r0.addColumn(writeKommentar(kommentare.elementAt(counter)));
-//                    } catch (IndexOutOfBoundsException ex){
-//                        c = new ColumnImpl();
-//                        c.addSubParagraph(new SimpleParagraphImpl(""));
-//                        r0.addColumn(c);
-//                    }
-//                    rows.add(r0);
-//                }
-//                
-//            }
-//            
-//            
-//            
-//            
-//            
-//            
-//            else if(sortByVal==2){
-//                //sortByVal Abonnement
-//                /**
-//                 * Wenn erste Zeile dann TableHeader schreiben.
-//                 */
-//                if (i==0){
-//                    Column c = new ColumnImpl();
-//                    Row r = new RowImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Nutzer"));
-//                    r.addColumn(c);
-//                    c = new ColumnImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Abonnements"));
-//                    c.addSubParagraph(new SimpleParagraphImpl(df.format(startDateVal) + " - " + df.format(endDateVal)));
-//                    c.addSubParagraph(new SimpleParagraphImpl("sort By Value"));
-//                    r.addColumn(c);
-//                    c = new ColumnImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Beiträge"));
-//                    r.addColumn(c);
-//                    c = new ColumnImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Likes"));
-//                    r.addColumn(c);
-//                    c = new ColumnImpl();
-//                    c.addSubParagraph(new SimpleParagraphImpl("Kommentare"));
-//                    r.addColumn(c);
-//                    rows.add(r);
-//                }
-//                /**
-//                 * Schleife über alle Abonnements
-//                 */
-//                for (int k = 0; k < abonnements.size(); k++) {
-//                    row.add(writeAbonnement(abonnements.elementAt(k)));
-//                    /**
-//                     * Schleife über alle Beiträge Likes oder Kommentare, wovon mehr da ist.
-//                     * Wenn nix da ist dann leere Zeile erzeugen
-//                     */
-//                    for (int counter = 0; counter < laufindex; counter++){
-//                    Row r0 = new RowImpl();
-//                    Column c = new ColumnImpl();
-//                    if (counter == 0){
-//                        r0.addColumn(beitragColumn);
-//                    } else {
-//                        c.addSubParagraph(new SimpleParagraphImpl(""));
-//                        r0.addColumn(c);
-//                    }
-//                    try{
-//                        r0.addColumn(writeLike(likes.elementAt(counter)));
-//                    } catch (IndexOutOfBoundsException ex){
-//                        c = new ColumnImpl();
-//                        c.addSubParagraph(new SimpleParagraphImpl(""));
-//                        r0.addColumn(c);
-//                    }
-//                    try{
-//                        r0.addColumn(writeKommentar(kommentare.elementAt(counter)));
-//                    } catch (IndexOutOfBoundsException ex){
-//                        c = new ColumnImpl();
-//                        c.addSubParagraph(new SimpleParagraphImpl(""));
-//                        r0.addColumn(c);
-//                    }
-//                    rows.add(r0);
-//                }
-            
         }
         report.setRows(rows);
         report.setImprintParagraph(addImprint());
@@ -632,6 +699,25 @@ public class ReportGeneratorImpl
         column.addSubParagraph(new SimpleParagraphImpl("alias " + n.getUsername()));
         column.addSubParagraph(new SimpleParagraphImpl("Abonnements: " + socialMediaLogic.getAllAbonnementOfNutzer(n).size() + "\t wurde Abonniert: " + socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(n)).size()));
         return column;
+    }
+    
+    /**
+     * Helper method for the report generation. Edits a vector of <code>DataReference</code> so that only the objects between the two dates are present.
+     * 
+     * @param startDateVal - The <code>startDateVal</code> which should be sorted by.
+     * @param endDateVal - The <code>endDateVal</code> which should be sorted by.
+     * @param rfV - The vector <code>rfV</code> which should be sorted out.
+     * @return Returns Vector<DataReference> of sorted objects which can be down casted.
+     * @throws RemoteException 
+     */
+    private Vector<DataReference> sorterDf(final Date startDateVal, final Date endDateVal, Vector<DataReference> rfV) throws RemoteException{
+        Vector<DataReference> rfErgV = new Vector<DataReference>();
+        for (int h = 0; h < rfV.size(); h++) {
+            if (!startDateVal.after(rfV.elementAt(h).getCreationDate()) && !endDateVal.before(rfV.elementAt(h).getCreationDate()))
+                rfErgV.add(rfV.elementAt(h));
+        }
+        return rfErgV;
+        
     }
     
     /**

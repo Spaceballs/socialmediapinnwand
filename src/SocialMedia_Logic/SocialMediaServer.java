@@ -96,6 +96,13 @@ public class SocialMediaServer {
             Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(0);
         }
+        javax.swing.SwingUtilities.invokeLater(
+                new Runnable() { public void run() { createAndShowDialogue();}
+
+            private void createAndShowDialogue() {
+                JOptionPane.showMessageDialog(null, "Server Läuft...", "Server Läuft...", JOptionPane.ERROR_MESSAGE);
+            }
+        });
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

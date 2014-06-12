@@ -67,7 +67,6 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
             throws RemoteException{
         Vector<Beitrag> beitraege = verwaltung.getAllBeitrag();
         Vector<Beitrag> pinnwandBeitraege = new Vector<Beitrag>();
-
         for (int i = 0; i < beitraege.size(); i++) {
             Beitrag beitrag = beitraege.elementAt(i);
             if(beitrag.getPinnwandID() == this.getID())
@@ -88,10 +87,8 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
         Vector<Nutzer> nutzers = verwaltung.getAllNutzer();
-
         for (int i = 0; i < nutzers.size(); i++) {
             Nutzer nutzer = nutzers.elementAt(i);
-            
             if(nutzer.getID() == nutzerID)
                 return nutzer;
         }
@@ -108,17 +105,12 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
             throws RemoteException {
         Vector<Abonnement> abonnements = verwaltung.getAllAbonnement();
         Vector<Abonnement> abonnementsResult = new Vector<Abonnement>();
-                
         for (int i = 0; i < abonnements.size(); i++) {
             Abonnement abonnement = abonnements.elementAt(i);
-            System.out.println(abonnement.getPinnwandID() == this.getID());
-            System.out.println("PinnwandID"+abonnement.getPinnwandID());
-            System.out.println("ID"+this.getID());
             if(abonnement.getPinnwandID() == this.getID())
                 abonnementsResult.add(abonnement);
         }
         return abonnementsResult;
     }
-
 }
 

@@ -61,6 +61,8 @@ public class HauptfensterReport extends JFrame {
     private JButton runBeitragReportButton;
     private JFormattedTextField calendarStartDateField;
     private JFormattedTextField calendarEndDateField;
+    private JFormattedTextField calendarStartDateField0;
+    private JFormattedTextField calendarEndDateField0;
     private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy | kk:mm", Locale.GERMANY);
 
     /**
@@ -286,18 +288,18 @@ public class HauptfensterReport extends JFrame {
         
         JPanel textFieldPanel = new JPanel();
         textFieldPanel.add(new JLabel("Start Date: "), BorderLayout.NORTH);
-        calendarStartDateField = new JFormattedTextField(df);
-        calendarStartDateField.setText(df.format(new Date(new Date().getTime()-86400000)));
-        calendarStartDateField.setInputVerifier(new FormattedTextFieldVerifier());
-        calendarStartDateField.setPreferredSize(new Dimension(140, 20));
-        textFieldPanel.add(calendarStartDateField, BorderLayout.NORTH);
+        calendarStartDateField0 = new JFormattedTextField(df);
+        calendarStartDateField0.setText(df.format(new Date(new Date().getTime()-86400000)));
+        calendarStartDateField0.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarStartDateField0.setPreferredSize(new Dimension(140, 20));
+        textFieldPanel.add(calendarStartDateField0, BorderLayout.NORTH);
         
         textFieldPanel.add(new JLabel("End Date: "), BorderLayout.NORTH);
-        calendarEndDateField = new JFormattedTextField(df);
-        calendarEndDateField.setText(df.format(new Date()));
-        calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
-        calendarEndDateField.setPreferredSize(new Dimension(140, 20));
-        textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
+        calendarEndDateField0 = new JFormattedTextField(df);
+        calendarEndDateField0.setText(df.format(new Date()));
+        calendarEndDateField0.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarEndDateField0.setPreferredSize(new Dimension(140, 20));
+        textFieldPanel.add(calendarEndDateField0, BorderLayout.NORTH);
         
         textFieldPanel.add(new JLabel("Sort by... "), BorderLayout.NORTH);
         textFieldPanel.add(popularityOfBeitragReportPanelSortByBox, BorderLayout.NORTH);
@@ -307,8 +309,8 @@ public class HauptfensterReport extends JFrame {
         runBeitragReportButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Date dateStart = df.parse(calendarStartDateField.getText());
-                    Date dateEnd = df.parse(calendarEndDateField.getText());
+                    Date dateStart = df.parse(calendarStartDateField0.getText());
+                    Date dateEnd = df.parse(calendarEndDateField0.getText());
                     HTMLWriter htmlWriter = new HTMLWriter(
                             reportGenerator.createPopularityOfBeitragReport(
                                     popularityOfBeitragReportPanelSortByBox.getSelectedIndex(), 

@@ -83,8 +83,8 @@ public class HTMLWriter {
         Logger.getLogger(this.getClass().getName()).info("\t\t Writing HeaderAndTitleParagraph...");
         
         buffer.append("<html><head><title>");
-        buffer.append(this.report.getHeaderAndTitleParagraph());
-        buffer.append("</title></head><body>");
+        buffer.append(((SimpleParagraph)this.report.getHeaderAndTitleParagraph()).toStrings());
+        buffer.append("</title></head><body style=\"width:1024px\">");
     }
     
     /**
@@ -102,7 +102,7 @@ public class HTMLWriter {
     private void tableToHTML(Vector<Row> rows) throws RemoteException{
         Logger.getLogger(this.getClass().getName()).info("\t\t Writing Table...");
         if (rows != null){
-            buffer.append("<p></p>").append("<table border=\"3\" bordercolor=\"#c86260\" bgcolor=\"#ffffcc\" width=\"50%\" cellspacing=\"5\" cellpadding=\"3\">");
+            buffer.append("<p></p>").append("<table border=\"3\" bordercolor=\"#c86260\" bgcolor=\"#ffffcc\" width=\"99%\" cellspacing=\"5\" cellpadding=\"3\">");
             for (int i = 0; i < rows.size(); i++) {
                 if (i==0){
                     Logger.getLogger(this.getClass().getName()).info("\t\t\t Writing HeadRow...");
