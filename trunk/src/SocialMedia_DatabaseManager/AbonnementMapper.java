@@ -171,7 +171,6 @@ public class AbonnementMapper extends DBStatementFactory {
                 FROM + " " +
                         TABLE_NAME_ABONNEMENT + " " +
                 ORDER_BY_ID_STATEMENT_OPTION);
-            resultSet.next();
             while (resultSet.next()) {
                 try {
                     Abonnement abonnement = new AbonnementImpl();
