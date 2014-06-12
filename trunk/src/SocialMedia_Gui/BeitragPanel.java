@@ -105,12 +105,14 @@ public class BeitragPanel extends JPanel {
             
             buttonKommentieren.setIcon(new ImageIcon(this.getClass().getResource("Ressources/kommentar.jpg")));
             buttonKommentieren.setToolTipText("Beitrag kommentieren");
+            buttonKommentieren.setEnabled(server.isAlreadyBooked(clientNutzer, server.getPinnwandOfNutzer(user)) || user.getUsername().contentEquals(clientNutzer.getUsername()));
             
             buttonUnlike.setIcon(new ImageIcon(this.getClass().getResource("Ressources/unlike.jpg")));
             buttonUnlike.setToolTipText("Like zurücknehmen");
             
             buttonLike.setIcon(new ImageIcon(this.getClass().getResource("Ressources/like.jpg")));
             buttonLike.setToolTipText("Beitrag liken");
+            buttonLike.setEnabled(server.isAlreadyBooked(clientNutzer, server.getPinnwandOfNutzer(user)) || user.getUsername().contentEquals(clientNutzer.getUsername()));
             
             text = beitrag.getText();
         } catch (RemoteException ex) {
