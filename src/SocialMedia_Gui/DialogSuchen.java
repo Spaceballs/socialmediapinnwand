@@ -53,6 +53,10 @@ public class DialogSuchen extends JFrame {
                     UIManager.put("OptionPane.okButtonText", "OK");
                     JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
                     new DialogSuchen(server, clientNutzer);
+                } else if (nutzerEingabe.contentEquals("getall")) {
+                    nutzerSuche = server.searchNutzer("");
+                    initializeList();
+                    selectionOptionPane();
                 } else {
                     nutzerSuche = server.searchNutzer(nutzerEingabe);
                     initializeList();
