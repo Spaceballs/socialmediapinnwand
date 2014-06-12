@@ -99,29 +99,38 @@ public class DialogNutzer extends JFrame {
         } else {
             final int value = (Integer)nutzerDaten.getValue();
 
-            // @todo - Fehler bei leerer Eingabe implementieren
             if (JOptionPane.YES_OPTION == value){
-                try {
-                    Nutzer clientNutzerBearbeitet;
-                    clientNutzerBearbeitet = server.editNutzer(username.getText(),
-                            name.getText(),
-                            surname.getText(),
-                            new String(password.getPassword()),
-                            clientNutzer);
-                    
-                    if (clientNutzerBearbeitet == null){
-                        UIManager.put("OptionPane.okButtonText", "OK");
-                        JOptionPane.showMessageDialog(null, "Accountdaten konnten nicht geändert werden", "Fehler", JOptionPane.ERROR_MESSAGE);
-                        new DialogNutzer(server, clientNutzer);
-                    } else {
-                        dispose();
-                        UIManager.put("OptionPane.okButtonText", "OK");
-                        JOptionPane.showMessageDialog(null, "Accountdaten erfolgreich geändert", "Gespeichert", JOptionPane.PLAIN_MESSAGE);
+                String s1 = username.getText();
+                String s2 = name.getText();
+                String s3 = surname.getText();
+                String s4 = String.valueOf(password.getPassword());
+                if (s1.replaceAll(" ", "").length() != 0 && s2.replaceAll(" ", "").length() != 0 && s3.replaceAll(" ", "").length() != 0 && s4.replaceAll(" ", "").length() != 0) {
+                    try {
+                        Nutzer clientNutzerBearbeitet;
+                        clientNutzerBearbeitet = server.editNutzer(username.getText(),
+                                name.getText(),
+                                surname.getText(),
+                                new String(password.getPassword()),
+                                clientNutzer);
+
+                        if (clientNutzerBearbeitet == null){
+                            UIManager.put("OptionPane.okButtonText", "OK");
+                            JOptionPane.showMessageDialog(null, "Accountdaten konnten nicht geändert werden", "Fehler", JOptionPane.ERROR_MESSAGE);
+                            new DialogNutzer(server, clientNutzer);
+                        } else {
+                            dispose();
+                            UIManager.put("OptionPane.okButtonText", "OK");
+                            JOptionPane.showMessageDialog(null, "Accountdaten erfolgreich geändert", "Gespeichert", JOptionPane.PLAIN_MESSAGE);
+                            SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+                        }
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (RemoteException ex) {
-                    Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
+                } else {
+                    UIManager.put("OptionPane.okButtonText", "OK");
+                    JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    new DialogNutzer(server, clientNutzer);
                 }
-                
             } else if (JOptionPane.NO_OPTION == value) {
                 UIManager.put("OptionPane.yesButtonText", "Ja");
                 UIManager.put("OptionPane.noButtonText", "Abbrechen");

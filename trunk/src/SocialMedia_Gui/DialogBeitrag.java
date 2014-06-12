@@ -66,13 +66,15 @@ public class DialogBeitrag extends JFrame {
         if ((Integer)ergebnisAuswahl.getValue() == null) {
         } else {
             final int value = (Integer)ergebnisAuswahl.getValue();
-
-            if (JOptionPane.OK_OPTION == value){
-                nutzerEingabe = textFeld.getText();
-            } else if (textFeld.getText().isEmpty() && JOptionPane.OK_OPTION == value) {
-                UIManager.put("OptionPane.okButtonText", "OK");
-                JOptionPane.showMessageDialog(null, "Kein Text eingegeben", "Fehler", JOptionPane.ERROR_MESSAGE);
-                initializeDialog();
+            if (textFeld.getText() != null && JOptionPane.OK_OPTION == value) {
+                String s = textFeld.getText();
+                if (s.replaceAll(" ", "").length() == 0) {
+                    UIManager.put("OptionPane.okButtonText", "OK");
+                    JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    new DialogBeitrag();
+                } else {
+                    nutzerEingabe = textFeld.getText();
+                }
             }
         }
     }

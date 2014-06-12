@@ -41,8 +41,8 @@ public class DialogAnmelden extends JFrame{
         this.username.setPreferredSize(new Dimension(140, 20));
         username.setDocument(new SetTextLength(25));
         password.setDocument(new SetTextLength(25));
-        username.setText("");
-        password.setText("");
+        username.setText("MaxK");
+        password.setText("dooonuts");
         initialize();
     }
 

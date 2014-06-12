@@ -160,9 +160,10 @@ public class PinnwandPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     DialogBeitrag dialogBeitrag = new DialogBeitrag();
-                    if (!dialogBeitrag.getText().isEmpty() && dialogBeitrag.getText() != null)
-                        server.createBeitrag(pinnwand, clientNutzer, dialogBeitrag.getText());
-                    SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+                    if (dialogBeitrag.getText() != null) {
+                            server.createBeitrag(pinnwand, clientNutzer, dialogBeitrag.getText());
+                            SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+                    }
                 } catch (RemoteException ex) {
                     Logger.getLogger(PinnwandPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
