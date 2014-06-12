@@ -24,6 +24,7 @@ public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{
     
     public RowImpl() 
             throws RemoteException{
+        super();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

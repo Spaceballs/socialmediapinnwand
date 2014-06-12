@@ -30,6 +30,7 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
      */
     public BeitragImpl () 
             throws RemoteException{
+        super();
     }
 
 

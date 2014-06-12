@@ -147,9 +147,14 @@ public class NewsfeedPanel extends JPanel {
                     try {
                         // @todo - Fehler bei leerer Eingabe / Verhalten bei "Abbrechen"
                         DialogBeitrag dialogBeitrag = new DialogBeitrag();
-                        if (!dialogBeitrag.getText().isEmpty() && dialogBeitrag.getText() != null) {
-                            server.createBeitrag(meinePinnwand, clientNutzer, dialogBeitrag.getText());
-                            SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks();
+                        if (dialogBeitrag.getText() != null) {
+                            if (!dialogBeitrag.getText().isEmpty()){
+                                server.createBeitrag(meinePinnwand, clientNutzer, dialogBeitrag.getText());
+                                SocialMedia_Gui.Hauptfenster.hauptfenster(null, null).refreshPanelLinks(); 
+                            }else{
+                                UIManager.put("OptionPane.okButtonText", "OK");
+                                JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
+                            }
                         } else {
                             UIManager.put("OptionPane.okButtonText", "OK");
                             JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);

@@ -6,11 +6,10 @@
 
 package SocialMedia_Client;
 
-import SocialMedia_IOandHelper.ReadWriteTextFile;
 import SocialMedia_Gui.DialogAnmelden;
 import SocialMedia_Gui.DialogServerData;
+import SocialMedia_IOandHelper.ClientPolicy;
 import SocialMedia_Logic.SocialMediaLogic;
-import SocialMedia_Logic.SocialMediaServer;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -19,10 +18,9 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.security.Policy;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -42,35 +40,11 @@ public class SocialMediaClient {
      * Constructor of the client start class.
      */
     private SocialMediaClient (){
-        ReadWriteTextFile text = new ReadWriteTextFile();
-        
         try {
-            Logger.getLogger(this.getClass().getName()).info("Loading Policy Data...");
-            ClassLoader loader = this.getClass().getClassLoader();
-            StringBuilder packageStringBuilder = new StringBuilder(this.getClass().getPackage().toString());
-            packageStringBuilder.delete(0, 8).append("/");
-            String path = loader.getResource(packageStringBuilder.toString()).toString();
-            path = path.replaceAll(packageStringBuilder.toString(), "");
             serverAdress = InetAddress.getLocalHost().getHostAddress();
-            System.out.println(serverAdress);
-            
-            Logger.getLogger(this.getClass().getName()).info("Preparing File...");
-            List<String> lines = text.readSmallTextFile("client.policy.set");
-            List<String> lines0 = new ArrayList<String>();
-
-            for (int i = 0; i < lines.size(); i++) {
-                String line = lines.get(i).replaceAll("%path", path).replaceAll("%ip", serverAdress);  
-                lines0.add(i, line);
-            }
-            Logger.getLogger(this.getClass().getName()).info("Writing Files...");
-            text.writeSmallTextFile(lines0, "client.policy");
-            
         } catch (UnknownHostException ex) {
-            Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
             Logger.getLogger(SocialMediaClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         Logger.getLogger(this.getClass().getName()).info("Client gestartet...");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -106,7 +80,7 @@ public class SocialMediaClient {
      */
     public void executeClient(String adresse, String serverPort, String clientPort) {
          try {
-             System.setProperty("java.security.policy", "client.policy");
+             Policy.setPolicy(new ClientPolicy());
              RMISecurityManager securityManager = new RMISecurityManager();
              System.setSecurityManager(securityManager);
              

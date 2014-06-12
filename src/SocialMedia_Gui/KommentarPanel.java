@@ -75,11 +75,11 @@ public class KommentarPanel extends JPanel {
             user = server.getNutzerOf(kommentar);
             kommentarHeader = html1 + 200 + html2 + "Verfasst von " + user.getUsername() + " am " + dateFormat.format(kommentar.getCreationDate());
 
-            buttonBearbeiten.setIcon(new ImageIcon("edit.jpg"));
+            buttonBearbeiten.setIcon(new ImageIcon(this.getClass().getResource("Ressources/edit.jpg")));
             buttonBearbeiten.setToolTipText("Kommentar bearbeiten");
             buttonBearbeiten.setEnabled(server.ownerCheck(clientNutzer, kommentar));
 
-            buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));
+            buttonLoeschen.setIcon(new ImageIcon(this.getClass().getResource("Ressources/delete.jpg")));
             buttonLoeschen.setToolTipText("Kommentar löschen");
             buttonLoeschen.setEnabled(server.ownerCheck(clientNutzer, kommentar));
             

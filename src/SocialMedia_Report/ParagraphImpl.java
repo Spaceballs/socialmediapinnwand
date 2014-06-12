@@ -18,6 +18,6 @@ public abstract class ParagraphImpl extends java.rmi.server.UnicastRemoteObject 
      * @throws RemoteException
      */
     public ParagraphImpl () throws RemoteException{
-        
+        super();
     }
 }

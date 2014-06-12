@@ -24,6 +24,7 @@ public class CompositeParagraphImpl extends ParagraphImpl implements CompositePa
     Vector<SimpleParagraph> subParagraphs = new Vector<SimpleParagraph>();
     
     public CompositeParagraphImpl () throws RemoteException{
+        super();
         
     }
 

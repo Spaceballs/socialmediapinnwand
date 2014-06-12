@@ -20,6 +20,7 @@ public class SimpleParagraphImpl extends ParagraphImpl implements SimpleParagrap
      */
     public SimpleParagraphImpl (String val) 
             throws RemoteException{
+        super();
         this.text = val;
     }
 
