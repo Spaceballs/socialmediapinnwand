@@ -3,6 +3,7 @@ package SocialMedia_Gui;
 
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -118,8 +119,6 @@ public class Hauptfenster extends JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(Hauptfenster.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        this.setVisible(true);  
     }
 
     /**
@@ -168,12 +167,13 @@ public class Hauptfenster extends JFrame {
     private void initializeOptions() {
         this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH); // Frame is maximized on start
-//        this.setMinimumSize(new Dimension(400, 200));
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setMinimumSize(new Dimension(1024,600));
         
-        this.setSize(1024, 768);
-        this.setResizable(false);
-        this.setLocationRelativeTo(null); // frame is at the center of the screen
+//        this.setSize(1024, 768);
+//        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     
