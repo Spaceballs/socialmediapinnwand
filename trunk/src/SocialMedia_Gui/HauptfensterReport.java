@@ -51,9 +51,9 @@ public class HauptfensterReport extends JFrame {
     private JPanel popularityOfBeitragReportPanel;
     private JTabbedPane tabbedPane;
     private JList<Nutzer> nutzerliste;
-    private JComboBox contributionOfNutzerReportPanelSortByBox;
+    private JComboBox<String> contributionOfNutzerReportPanelSortByBox;
     private String[] data0 = {"Beiträge", "Likes", "Abonnenten"};
-    private JComboBox popularityOfBeitragReportPanelSortByBox;
+    private JComboBox<String> popularityOfBeitragReportPanelSortByBox;
     private String[] data1 = {"Likes", "Kommentare"};
     private ScrollPane nutzerlisteScrollPane;
     private JButton runNutzerReportButton;
@@ -87,11 +87,11 @@ public class HauptfensterReport extends JFrame {
      * This listener sets, if selection occurs, the selected user for the report and sets the buttons <code>setEnabled(true)</code>.
      */
     private void initListAndComboBox() {
-        contributionOfNutzerReportPanelSortByBox = new JComboBox(data0);
-        popularityOfBeitragReportPanelSortByBox = new JComboBox(data1);
+        contributionOfNutzerReportPanelSortByBox = new JComboBox<String>(data0);
+        popularityOfBeitragReportPanelSortByBox = new JComboBox<String>(data1);
         
         
-        nutzerliste = new JList();
+        nutzerliste = new JList<Nutzer>();
         nutzerliste.setCellRenderer(new NutzerListCellRenderer());
         nutzerliste.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
