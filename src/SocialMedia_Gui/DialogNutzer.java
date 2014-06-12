@@ -131,6 +131,8 @@ public class DialogNutzer extends JFrame {
                         JOptionPane.YES_NO_OPTION) == 0) {
                     try {
                         server.deactivateNutzer(clientNutzer);
+                        UIManager.put("OptionPane.okButtonText", "OK");
+                        JOptionPane.showMessageDialog(null, "Sie werden jetzt abgemeldet", "Account gelöscht", JOptionPane.PLAIN_MESSAGE);
                         System.exit(0);
                     } catch (RemoteException ex) {
                         Logger.getLogger(DialogNutzer.class.getName()).log(Level.SEVERE, null, ex);
