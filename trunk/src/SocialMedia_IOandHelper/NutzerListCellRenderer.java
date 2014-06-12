@@ -41,7 +41,7 @@ import javax.swing.ListCellRenderer;
      public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
          Nutzer val = (Nutzer)value;
          try {
-             setText(val.getUsername() + " (" + val.getName() + ", " + val.getSurname() + ")" + "(" + val.getCreationDate() + ")");
+             setText(val.getUsername());
          } catch (RemoteException ex) {
              Logger.getLogger(NutzerListCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
          }
