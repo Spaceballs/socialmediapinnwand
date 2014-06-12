@@ -19,7 +19,7 @@ public class ColumnImpl extends CompositeParagraphImpl implements Column {
      * @throws RemoteException
      */
     public ColumnImpl() throws RemoteException{
-        
+        super();
     }
 }
 

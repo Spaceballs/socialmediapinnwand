@@ -25,6 +25,7 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
      */
     public PinnwandImpl () 
             throws RemoteException{
+        super();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

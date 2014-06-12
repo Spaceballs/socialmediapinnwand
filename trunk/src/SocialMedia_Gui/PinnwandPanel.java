@@ -76,10 +76,10 @@ public class PinnwandPanel extends JPanel {
             titlePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
             titlePanel.add(titlePinnwand, BorderLayout.WEST);
             
-            buttonAbonnieren.setIcon(new ImageIcon("abonnieren.jpg"));
+            buttonAbonnieren.setIcon(new ImageIcon(this.getClass().getResource("Ressources/abonnieren.jpg")));
             buttonAbonnieren.setToolTipText("Nutzer " + nutzer.getUsername() + " abonnieren");
             
-            buttonAbonnementLoeschen.setIcon(new ImageIcon("delete.jpg"));
+            buttonAbonnementLoeschen.setIcon(new ImageIcon(this.getClass().getResource("Ressources/delete.jpg")));
             buttonAbonnementLoeschen.setToolTipText("Abonnement löschen");
             
             if(server.ownerCheck(clientNutzer, pinnwand)) {

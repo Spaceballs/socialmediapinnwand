@@ -94,22 +94,22 @@ public class BeitragPanel extends JPanel {
             likeString = html1 + 40 + html2 + Integer.toString(anzahlLikes) + " Like(s)";
             
             userLike = server.getUserLike(clientNutzer, beitrag);
-
-            buttonBearbeiten.setIcon(new ImageIcon("edit.jpg"));
+            
+            buttonBearbeiten.setIcon(new ImageIcon(this.getClass().getResource("Ressources/edit.jpg")));
             buttonBearbeiten.setToolTipText("Beitrag bearbeiten");
             buttonBearbeiten.setEnabled(server.ownerCheck(clientNutzer, beitrag));
 
-            buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));
+            buttonLoeschen.setIcon(new ImageIcon(this.getClass().getResource("Ressources/delete.jpg")));
             buttonLoeschen.setToolTipText("Beitrag löschen");
             buttonLoeschen.setEnabled(server.ownerCheck(clientNutzer, beitrag));
             
-            buttonKommentieren.setIcon(new ImageIcon("kommentar.jpg"));
+            buttonKommentieren.setIcon(new ImageIcon(this.getClass().getResource("Ressources/kommentar.jpg")));
             buttonKommentieren.setToolTipText("Beitrag kommentieren");
             
-            buttonUnlike.setIcon(new ImageIcon("unlike.jpg"));
+            buttonUnlike.setIcon(new ImageIcon(this.getClass().getResource("Ressources/unlike.jpg")));
             buttonUnlike.setToolTipText("Like zurücknehmen");
             
-            buttonLike.setIcon(new ImageIcon("like.jpg"));
+            buttonLike.setIcon(new ImageIcon(this.getClass().getResource("Ressources/like.jpg")));
             buttonLike.setToolTipText("Beitrag liken");
             
             text = beitrag.getText();

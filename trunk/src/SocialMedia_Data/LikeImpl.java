@@ -27,6 +27,7 @@ public class LikeImpl extends DataReferenceImpl implements Like {
      */
     public LikeImpl () 
             throws RemoteException{
+        super();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

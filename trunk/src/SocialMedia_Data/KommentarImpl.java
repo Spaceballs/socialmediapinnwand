@@ -24,6 +24,7 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
      */
     public KommentarImpl () 
             throws RemoteException{
+        super();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

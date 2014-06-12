@@ -44,6 +44,7 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
      */
     public NutzerImpl () 
             throws RemoteException{
+        super();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

@@ -1,7 +1,6 @@
 package SocialMedia_Logic;
 
-import SocialMedia_IOandHelper.ReadWriteTextFile;
-import java.util.List;
+import SocialMedia_IOandHelper.ServerPolicy;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -13,7 +12,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
+import java.security.Policy;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -47,36 +46,12 @@ public class SocialMediaServer {
      * Constructor of the Server class
      */
     public SocialMediaServer () {
-        ReadWriteTextFile text = new ReadWriteTextFile();
         String ip = "localhost";
         try {
-            Logger.getLogger(this.getClass().getName()).info("Loading Policy Data...");
-            ClassLoader loader = this.getClass().getClassLoader();
-            StringBuilder packageStringBuilder = new StringBuilder(this.getClass().getPackage().toString());
-            packageStringBuilder.delete(0, 8).append("/");
-            String path = loader.getResource(packageStringBuilder.toString()).toString();
-            path = path.replaceAll(packageStringBuilder.toString(), "");
             ip = InetAddress.getLocalHost().getHostAddress();
-            System.out.println(ip);
-            
-            Logger.getLogger(this.getClass().getName()).info("Preparing File...");
-            List<String> lines = text.readSmallTextFile("server.policy.set");
-            List<String> lines0 = new ArrayList<String>();
-
-            for (int i = 0; i < lines.size(); i++) {
-                String line = lines.get(i).replaceAll("%path", path).replaceAll("%ip", ip);  
-                lines0.add(i, line);
-            }
-            Logger.getLogger(this.getClass().getName()).info("Writing Files...");
-            text.writeSmallTextFile(lines0, "server.policy");
-            
         } catch (UnknownHostException ex) {
             Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
         Logger.getLogger(this.getClass().getName()).info("Server gestartet...");
         try {
             socialMediaLogic =
@@ -86,9 +61,8 @@ public class SocialMediaServer {
                                             SocialMedia_DatabaseManager.AbonnementMapper.abonnementMapper(),
                                             SocialMedia_DatabaseManager.NutzerMapper.nutzerMapper(),
                                             SocialMedia_DatabaseManager.PinnwandMapper.pinnwandMapper());
-            
-            System.setProperty("java.security.policy", "server.policy");
             RMISecurityManager securityManager = new RMISecurityManager();
+            Policy.setPolicy(new ServerPolicy());
             System.setSecurityManager(securityManager);
             
             Process exec = Runtime.getRuntime().exec("rmiregistry "+ serverPort);

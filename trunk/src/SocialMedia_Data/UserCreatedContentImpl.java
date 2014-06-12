@@ -33,6 +33,7 @@ public class UserCreatedContentImpl extends DataReferenceImpl implements UserCre
      */
     public UserCreatedContentImpl () 
             throws RemoteException{
+        super();
     }
 
     

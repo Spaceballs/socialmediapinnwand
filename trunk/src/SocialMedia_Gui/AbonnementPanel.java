@@ -69,11 +69,11 @@ class AbonnementPanel extends JPanel {
             username = html1 + 75 + html2 + user.getUsername();
             usernameToolTip = user.getUsername();
             
-            buttonPinnwand.setIcon(new ImageIcon("pinnwand.jpg"));
+            buttonPinnwand.setIcon(new ImageIcon(this.getClass().getResource("Ressources/pinnwand.jpg")));
             buttonPinnwand.setToolTipText("Gehe zur Pinnwand von " + usernameToolTip);
             
             buttonLoeschen.setSize(18, 18);
-            buttonLoeschen.setIcon(new ImageIcon("delete.jpg"));
+            buttonLoeschen.setIcon(new ImageIcon(this.getClass().getResource("Ressources/delete.jpg")));
             buttonLoeschen.setToolTipText("Abonnement löschen");
             
         } catch (RemoteException ex) {

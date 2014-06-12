@@ -33,6 +33,7 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
      */
     public AbonnementImpl () 
             throws RemoteException{
+        super();
     }
     
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

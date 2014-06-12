@@ -38,6 +38,7 @@ public class ReportImpl extends java.rmi.server.UnicastRemoteObject implements R
      */
     public ReportImpl () 
             throws RemoteException{
+        super();
     }
 
     @Override

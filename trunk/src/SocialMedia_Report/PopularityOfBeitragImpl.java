@@ -5,8 +5,6 @@ package SocialMedia_Report;
 import java.rmi.RemoteException;
 
 public class PopularityOfBeitragImpl extends ReportImpl implements PopularityOfBeitrag{
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.EDCE594B-47D4-552E-4534-E0E3A32843EF]
@@ -16,8 +14,7 @@ public class PopularityOfBeitragImpl extends ReportImpl implements PopularityOfB
      */
     public PopularityOfBeitragImpl () 
             throws RemoteException{
+        super();
     }
-    
-
 }
 

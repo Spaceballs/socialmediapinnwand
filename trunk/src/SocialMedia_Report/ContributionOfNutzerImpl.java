@@ -16,6 +16,7 @@ public class ContributionOfNutzerImpl extends ReportImpl implements Contribution
      */
     public ContributionOfNutzerImpl () 
             throws RemoteException{
+        super();
     }
 
 }
