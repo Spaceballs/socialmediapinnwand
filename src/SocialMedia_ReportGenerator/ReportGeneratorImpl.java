@@ -30,6 +30,15 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @todo - Beiträge von Prinz_Poldi und Superman werden nciht angezeigt
+ * report_von_11.01.2014_bis_12.06.2014
+ */
+
+/**
+ * @todo - Nur "Beiträge" kann ausgewählt werden, andere Möglichkeiten erst nach Hin- und Herschalten zu einem anderen Tab
+ */
+
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.E7C2C07C-F969-9A30-C188-C220A1AD2C41]
 // </editor-fold> 
