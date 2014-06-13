@@ -19,6 +19,10 @@ import java.util.Vector;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.E76387BD-2F3C-081D-1D36-29915AB9AE5C]
 // </editor-fold> 
+/**
+ * @todo Kommentierung
+ * @author Max
+ */
 public interface SocialMediaLogic extends java.rmi.Remote{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

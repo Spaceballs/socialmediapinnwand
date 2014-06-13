@@ -6,7 +6,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 /**
- *
+ * @todo Kommentierung
  * @author Max
  */
 public class SetTextLength extends PlainDocument {

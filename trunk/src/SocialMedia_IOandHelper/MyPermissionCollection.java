@@ -14,7 +14,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 class MyPermissionCollection extends PermissionCollection {

@@ -6,6 +6,10 @@ import java.rmi.RemoteException;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.0BCEFED5-709C-C881-F6DE-BEC6977B5E59]
 // </editor-fold> 
+/**
+ * @todo Kommentierung
+ * @author Max
+ */
 public class SimpleParagraphImpl extends ParagraphImpl implements SimpleParagraph {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.F53CDAB6-019F-C91C-45C5-EC1F1804E748]

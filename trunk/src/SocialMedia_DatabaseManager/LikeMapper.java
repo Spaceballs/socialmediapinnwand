@@ -196,7 +196,7 @@ public class LikeMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.2F208909-213E-7E00-A86E-FFABCE2016FE]
     // </editor-fold> 
     /**
-     * 
+     * @todo Kommentierung
      * @param val int value to be set
      * @return like - Returns the like with the chosen ID 
      */

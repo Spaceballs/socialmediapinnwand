@@ -9,7 +9,7 @@ package SocialMedia_Report;
 import java.rmi.RemoteException;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 public interface SimpleParagraph extends Paragraph{

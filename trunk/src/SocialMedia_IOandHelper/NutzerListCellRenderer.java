@@ -23,7 +23,7 @@ import javax.swing.ListCellRenderer;
  public class NutzerListCellRenderer extends JLabel implements ListCellRenderer<Object> {
      
      /**
-      * 
+      * @todo Kommentierung
       */
      public NutzerListCellRenderer() {
          setOpaque(true);

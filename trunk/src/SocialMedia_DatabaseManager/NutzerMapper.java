@@ -205,7 +205,7 @@ public class NutzerMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.D23558EA-2F26-4617-294C-70420DD1EA3B]
     // </editor-fold> 
     /**
-     * 
+     * @todo Kommentierung
      * @param val int value to be set
      * @return nutzer - Returns the nutzer with the chosen ID
      */

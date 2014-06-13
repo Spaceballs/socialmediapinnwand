@@ -201,7 +201,7 @@ public class KommentarMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.5A7836AD-406C-422D-ADA6-76B6D52AF31F]
     // </editor-fold> 
     /**
-     * 
+     * @todo Kommentierung
      * @param val int value to be set
      * @return kommentar - Returns the kommentar with the chosen ID
      */

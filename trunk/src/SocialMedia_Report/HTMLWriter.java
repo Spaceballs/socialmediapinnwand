@@ -19,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 public class HTMLWriter {

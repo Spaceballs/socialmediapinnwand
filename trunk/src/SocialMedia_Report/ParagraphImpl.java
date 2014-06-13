@@ -8,7 +8,7 @@ package SocialMedia_Report;
 import java.rmi.RemoteException;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian Fink
  */
 public abstract class ParagraphImpl extends java.rmi.server.UnicastRemoteObject implements Paragraph{

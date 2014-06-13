@@ -196,7 +196,7 @@ public class AbonnementMapper extends DBStatementFactory {
     // #[regen=yes,id=DCE.8FEA238D-153E-6EFA-188A-255C783AA53D]
     // </editor-fold> 
     /**
-     * 
+     * @todo Kommentierung
      * @param val int value to be set
      * @return abonnement - Returns the abonnement with the chosen ID
      */
