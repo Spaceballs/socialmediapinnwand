@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 // </editor-fold> 
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 public class ColumnImpl extends CompositeParagraphImpl implements Column {

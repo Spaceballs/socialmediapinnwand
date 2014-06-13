@@ -5,6 +5,7 @@ import java.util.Vector;
 
 
 /**
+ * @todo Kommentierung
  *  Diese Klasse stellt eine Menge einzelner Absätze 
  *   (<code>SimpleParagraphImplImpl</code>-Objekte) dar. Diese werden als Unterabschnitte
  *   in einem <code>Vector</code> abgelegt verwaltet.

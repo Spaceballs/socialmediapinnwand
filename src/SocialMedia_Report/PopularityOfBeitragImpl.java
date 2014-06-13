@@ -4,6 +4,10 @@ package SocialMedia_Report;
 
 import java.rmi.RemoteException;
 
+/**
+ * @todo Kommentierung
+ * @author Max
+ */
 public class PopularityOfBeitragImpl extends ReportImpl implements PopularityOfBeitrag{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

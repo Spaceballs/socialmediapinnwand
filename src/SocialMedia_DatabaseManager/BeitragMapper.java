@@ -202,7 +202,7 @@ public class BeitragMapper extends DBStatementFactory {
     // #[regen=yes,id=DCE.D12ED43A-5458-0A9B-A33B-4670D16CC3F1]
     // </editor-fold> 
     /**
-     * 
+     * @todo Kommentierung
      * @param val int value to be set
      * @return beitrag - Returns the beitrag with the chosen ID
      */

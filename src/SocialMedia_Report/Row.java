@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import java.util.Vector;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 public interface Row extends java.rmi.Remote{

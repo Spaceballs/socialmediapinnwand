@@ -28,7 +28,7 @@ import java.util.Vector;
 // #[regen=yes,id=DCE.FB484D00-E9A8-8868-8F1F-2944573C596E]
 // </editor-fold> 
 /**
- * 
+ * @todo Kommentierung
  * @author Sebastian
  */
 public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject implements SocialMediaLogic {

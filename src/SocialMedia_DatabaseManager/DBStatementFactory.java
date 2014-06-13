@@ -9,7 +9,7 @@ package SocialMedia_DatabaseManager;
 import java.sql.Statement;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  * 
  */

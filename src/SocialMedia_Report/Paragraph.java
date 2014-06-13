@@ -7,7 +7,7 @@
 package SocialMedia_Report;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 public abstract interface Paragraph extends java.rmi.Remote{

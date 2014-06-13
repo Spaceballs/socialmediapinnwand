@@ -15,7 +15,7 @@ import javax.swing.JFormattedTextField;
 public class FormattedTextFieldVerifier extends InputVerifier {
     
     /**
-     * 
+     * @todo Kommentierung
      * @param input
      * @return 
      */

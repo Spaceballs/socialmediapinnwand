@@ -14,7 +14,7 @@ import java.security.Policy;
 import java.util.PropertyPermission;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 public class ServerPolicy extends Policy {

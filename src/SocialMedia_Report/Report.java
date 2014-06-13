@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Vector;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 public interface Report extends java.rmi.Remote{

@@ -6,6 +6,10 @@ import java.rmi.RemoteException;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.9015A86E-4FA0-CF21-CDF2-EBF794A398CC]
 // </editor-fold> 
+/**
+ * @todo Kommentierung
+ * @author Max
+ */
 public class ContributionOfNutzerImpl extends ReportImpl implements ContributionOfNutzer{
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

@@ -7,7 +7,7 @@
 package SocialMedia_Report;
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 public interface PopularityOfBeitrag extends Report{

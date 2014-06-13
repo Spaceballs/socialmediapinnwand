@@ -10,7 +10,7 @@ import java.util.Vector;
 // #[regen=yes,id=DCE.327FB869-2B98-9C14-B7F3-E4CCB7B95F64]
 // </editor-fold> 
 /**
- * 
+ * @todo Kommentierung
  * @author Sebastian
  */
 public class ReportImpl extends java.rmi.server.UnicastRemoteObject implements Report{

@@ -9,7 +9,7 @@ import java.util.Vector;
 // </editor-fold> 
 
 /**
- *
+ * @todo Kommentierung
  * @author Sebastian
  */
 public class RowImpl extends java.rmi.server.UnicastRemoteObject implements Row{

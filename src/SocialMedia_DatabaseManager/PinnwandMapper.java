@@ -191,7 +191,7 @@ public class PinnwandMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.C0658A8A-FA2D-12E1-4BCA-21F0FDF7D437]
     // </editor-fold> 
     /**
-     * 
+     * @todo Kommentierung
      * @param val int value to be set
      * @return pinnwand - Returns the pinnwand with the chosen ID 
      */
