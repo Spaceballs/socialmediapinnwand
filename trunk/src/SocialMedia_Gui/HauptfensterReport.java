@@ -10,6 +10,9 @@ import SocialMedia_ReportGenerator.ReportGenerator;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,13 +52,15 @@ public class HauptfensterReport extends JFrame {
     private ReportGenerator reportGenerator = null;
     private JPanel initPanel;
     private JPanel contributionOfNutzerReportPanel;
+    private JPanel contributionOfNutzerTextFieldPanel;
     private JPanel popularityOfBeitragReportPanel;
+    private JPanel popularityOfBeitragTextFieldPanel;
     private JTabbedPane tabbedPane;
     private JList<Nutzer> nutzerliste;
     private JComboBox<String> contributionOfNutzerReportPanelSortByBox;
-    private String[] data0 = {"Beiträge", "Likes", "Abonnenten"};
+    private final String[] data0 = {"Beiträge", "Likes", "Abonnenten"};
     private JComboBox<String> popularityOfBeitragReportPanelSortByBox;
-    private String[] data1 = {"Likes", "Kommentare"};
+    private final String[] data1 = {"Likes", "Kommentare"};
     private ScrollPane nutzerlisteScrollPane;
     private JButton runNutzerReportButton;
     private JButton runBeitragReportButton;
@@ -90,79 +95,79 @@ public class HauptfensterReport extends JFrame {
      * This listener sets, if selection occurs, the selected user for the report and sets the buttons <code>setEnabled(true)</code>.
      */
     private void initListAndComboBox() {
+        //@todo - Alles mit nutzerliste kann glaube ich weg
         contributionOfNutzerReportPanelSortByBox = new JComboBox<String>(data0);
         popularityOfBeitragReportPanelSortByBox = new JComboBox<String>(data1);
-        
-        
-        nutzerliste = new JList<Nutzer>();
-        nutzerliste.setCellRenderer(new NutzerListCellRenderer());
-        nutzerliste.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                reportUser = nutzerliste.getSelectedValue();
-            }
-        });
-        nutzerliste.setSelectionModel(new DefaultListSelectionModel() {
-            private static final long serialVersionUID = 1L;
 
-            boolean gestureStarted = false;
-
-            @Override
-            public void setSelectionInterval(int index0, int index1) {
-                if(!gestureStarted){
-                if (index0==index1) {
-                    if (isSelectedIndex(index0)) {
-                        removeSelectionInterval(index0, index0);
-                        return;
-                    }
-                }
-                super.setSelectionInterval(index0, index1);
-                }
-                gestureStarted = true;
-            }
-
-            @Override
-            public void addSelectionInterval(int index0, int index1) {
-                if (index0==index1) {
-                    if (isSelectedIndex(index0)) {
-                        removeSelectionInterval(index0, index0);
-                        return;
-                    }
-                super.addSelectionInterval(index0, index1);
-                }
-            }
-
-            @Override
-            public void setValueIsAdjusting(boolean isAdjusting) {
-                if (isAdjusting == false) {
-                    gestureStarted = false;
-                }
-            }
-        });
-    
-        nutzerliste.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                JList list = (JList)evt.getSource();
-                if (evt.getClickCount() == 2) {
-                    int index = list.locationToIndex(evt.getPoint());
-                    try {
-                        Date dateStart = df.parse(calendarStartDateField.getText());
-                        Date dateEnd = df.parse(calendarEndDateField.getText());
-                        HTMLWriter htmlWriter = new HTMLWriter(reportGenerator.createContributionOfNutzerReport(reportUser, 
-                                contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
-                                dateStart, 
-                                dateEnd));
-                        nutzerliste.clearSelection();
-                        reportUser = null;
-                    } catch (RemoteException ex) {
-                        Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        });
-        nutzerliste.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//        nutzerliste = new JList<Nutzer>();
+//        nutzerliste.setCellRenderer(new NutzerListCellRenderer());
+//        nutzerliste.addListSelectionListener(new ListSelectionListener() {
+//            public void valueChanged(ListSelectionEvent e) {
+//                reportUser = nutzerliste.getSelectedValue();
+//            }
+//        });
+//        nutzerliste.setSelectionModel(new DefaultListSelectionModel() {
+//            private static final long serialVersionUID = 1L;
+//
+//            boolean gestureStarted = false;
+//
+//            @Override
+//            public void setSelectionInterval(int index0, int index1) {
+//                if(!gestureStarted){
+//                if (index0==index1) {
+//                    if (isSelectedIndex(index0)) {
+//                        removeSelectionInterval(index0, index0);
+//                        return;
+//                    }
+//                }
+//                super.setSelectionInterval(index0, index1);
+//                }
+//                gestureStarted = true;
+//            }
+//
+//            @Override
+//            public void addSelectionInterval(int index0, int index1) {
+//                if (index0==index1) {
+//                    if (isSelectedIndex(index0)) {
+//                        removeSelectionInterval(index0, index0);
+//                        return;
+//                    }
+//                super.addSelectionInterval(index0, index1);
+//                }
+//            }
+//
+//            @Override
+//            public void setValueIsAdjusting(boolean isAdjusting) {
+//                if (isAdjusting == false) {
+//                    gestureStarted = false;
+//                }
+//            }
+//        });
+//    
+//        nutzerliste.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent evt) {
+//                JList list = (JList)evt.getSource();
+//                if (evt.getClickCount() == 2) {
+//                    int index = list.locationToIndex(evt.getPoint());
+//                    try {
+//                        Date dateStart = df.parse(calendarStartDateField.getText());
+//                        Date dateEnd = df.parse(calendarEndDateField.getText());
+//                        HTMLWriter htmlWriter = new HTMLWriter(reportGenerator.createContributionOfNutzerReport(reportUser, 
+//                                contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
+//                                dateStart, 
+//                                dateEnd));
+//                        nutzerliste.clearSelection();
+//                        reportUser = null;
+//                    } catch (RemoteException ex) {
+//                        Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (ParseException ex) {
+//                        Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//            }
+//        });
+//        nutzerliste.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
     /**
@@ -170,6 +175,7 @@ public class HauptfensterReport extends JFrame {
      * This data is obtained from the server.
      */
     private void initData() {
+        // @todo - Hier kann glaub auch was raus
         try {
             Vector<Nutzer> n = server.getAllNutzer();
             Vector<Nutzer> n0 = new Vector<Nutzer>();
@@ -189,8 +195,9 @@ public class HauptfensterReport extends JFrame {
      */
     private void initFrame() {
         this.pack();
-        this.setExtendedState(this.getExtendedState()); // Frame is maximized on start
-        this.setMinimumSize(new Dimension(500, 300));
+        this.setTitle("Report Generator");
+        this.setResizable(false);
+        this.setSize(new Dimension(400, 250));
         this.setLocationRelativeTo(null); // frame is at the center of the screen
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -218,7 +225,7 @@ public class HauptfensterReport extends JFrame {
     private void initInitPanel() {
         initPanel = new JPanel();
         initPanel.setLayout(new BorderLayout());
-        JLabel startLabel = new JLabel("Social Media Report Generator",JLabel.LEFT);
+        JLabel startLabel = new JLabel("Report Generator",JLabel.CENTER);
         startLabel.setFont(new Font("Arial", Font.BOLD, 28));
         initPanel.add(startLabel, BorderLayout.CENTER);
     }
@@ -227,35 +234,53 @@ public class HauptfensterReport extends JFrame {
      * In this method the panel for the ContributionOfNutzerReport is created.
      */
     private void initContributionOfNutzerReportPanel() {
-        // @todo Labels etc. untereinander, ScrollPane rausnehmen
         contributionOfNutzerReportPanel = new JPanel();
         contributionOfNutzerReportPanel.setLayout(new BorderLayout());
         
-        JPanel textFieldPanel = new JPanel();
-        textFieldPanel.add(new JLabel("Start Date: "), BorderLayout.NORTH);
+        contributionOfNutzerTextFieldPanel = new JPanel();
+        contributionOfNutzerTextFieldPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 5, 5);
+        
+        c.gridx = 0;
+        c.gridy = 0;
+        contributionOfNutzerTextFieldPanel.add(new JLabel("Start Date: "), c);        
+        
         calendarStartDateField = new JFormattedTextField(df);
         calendarStartDateField.setText(df.format(new Date(new Date().getTime()-86400000)));
         calendarStartDateField.setInputVerifier(new FormattedTextFieldVerifier());
         calendarStartDateField.setPreferredSize(new Dimension(140, 20));
-        textFieldPanel.add(calendarStartDateField, BorderLayout.NORTH);
         
-        textFieldPanel.add(new JLabel("End Date: "), BorderLayout.NORTH);
+        c.gridx = 1;
+        c.gridy = 0;
+        contributionOfNutzerTextFieldPanel.add(calendarStartDateField, c);
+        
+        c.gridx = 0;
+        c.gridy = 1;
+        contributionOfNutzerTextFieldPanel.add(new JLabel("End Date: "), c);        
+        
         calendarEndDateField = new JFormattedTextField(df);
         calendarEndDateField.setText(df.format(new Date()));
         calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
         calendarEndDateField.setPreferredSize(new Dimension(140, 20));
-        textFieldPanel.add(calendarEndDateField, BorderLayout.NORTH);
         
-        textFieldPanel.add(new JLabel("Sort by... "), BorderLayout.NORTH);
-        textFieldPanel.add(contributionOfNutzerReportPanelSortByBox, BorderLayout.NORTH);
-        contributionOfNutzerReportPanel.add(textFieldPanel, BorderLayout.NORTH);
+        c.gridx = 1;
+        c.gridy = 1;
+        contributionOfNutzerTextFieldPanel.add(calendarEndDateField, c);
         
-        nutzerlisteScrollPane = new ScrollPane();
-        nutzerliste.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        nutzerliste.setLayoutOrientation(JList.VERTICAL);
-        nutzerlisteScrollPane.add(nutzerliste);
-        contributionOfNutzerReportPanel.add(nutzerlisteScrollPane, BorderLayout.CENTER);
+        c.gridx = 0;
+        c.gridy = 2;
+        contributionOfNutzerTextFieldPanel.add(new JLabel("Sort by... "), c);
         
+        c.gridx = 1;
+        c.gridy = 2;
+        contributionOfNutzerTextFieldPanel.add(contributionOfNutzerReportPanelSortByBox, c);
+        
+        contributionOfNutzerReportPanel.add(contributionOfNutzerTextFieldPanel, BorderLayout.CENTER);
+        
+        //@todo - ReportGeneratorImpl anpassen!!
         runNutzerReportButton = new JButton("Go!");
         runNutzerReportButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -264,12 +289,12 @@ public class HauptfensterReport extends JFrame {
                     Date dateEnd = df.parse(calendarEndDateField.getText());
                     HTMLWriter htmlWriter = new HTMLWriter(
                             reportGenerator.createContributionOfNutzerReport(
-                                    reportUser, 
+//                                    reportUser, 
                                     contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
                                     dateStart, 
                                     dateEnd));
-                    nutzerliste.clearSelection();
-                    reportUser = null;
+//                    nutzerliste.clearSelection();
+//                    reportUser = null;
                 } catch (RemoteException ex) {
                     Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
@@ -277,35 +302,58 @@ public class HauptfensterReport extends JFrame {
                 }
             }
         });
-        contributionOfNutzerReportPanel.add(runNutzerReportButton, BorderLayout.SOUTH);
+        contributionOfNutzerReportPanel.add(runNutzerReportButton, BorderLayout.SOUTH); 
     }
 
     /**
      * In this method the panel for the PopularityOfBeitragReport is created.
      */
     private void initPopularityOfBeitragReportPanel() {
-        // @todo Labels etc. untereinander
         popularityOfBeitragReportPanel = new JPanel();
         popularityOfBeitragReportPanel.setLayout(new BorderLayout());
         
-        JPanel textFieldPanel = new JPanel();
-        textFieldPanel.add(new JLabel("Start Date: "), BorderLayout.NORTH);
-        calendarStartDateField0 = new JFormattedTextField(df);
-        calendarStartDateField0.setText(df.format(new Date(new Date().getTime()-86400000)));
-        calendarStartDateField0.setInputVerifier(new FormattedTextFieldVerifier());
-        calendarStartDateField0.setPreferredSize(new Dimension(140, 20));
-        textFieldPanel.add(calendarStartDateField0, BorderLayout.NORTH);
+        popularityOfBeitragTextFieldPanel = new JPanel();
+        popularityOfBeitragTextFieldPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 5, 5);
         
-        textFieldPanel.add(new JLabel("End Date: "), BorderLayout.NORTH);
-        calendarEndDateField0 = new JFormattedTextField(df);
-        calendarEndDateField0.setText(df.format(new Date()));
-        calendarEndDateField0.setInputVerifier(new FormattedTextFieldVerifier());
-        calendarEndDateField0.setPreferredSize(new Dimension(140, 20));
-        textFieldPanel.add(calendarEndDateField0, BorderLayout.NORTH);
+        c.gridx = 0;
+        c.gridy = 0;
+        popularityOfBeitragTextFieldPanel.add(new JLabel("Start Date: "), c);        
         
-        textFieldPanel.add(new JLabel("Sort by... "), BorderLayout.NORTH);
-        textFieldPanel.add(popularityOfBeitragReportPanelSortByBox, BorderLayout.NORTH);
-        popularityOfBeitragReportPanel.add(textFieldPanel, BorderLayout.NORTH);
+        calendarStartDateField = new JFormattedTextField(df);
+        calendarStartDateField.setText(df.format(new Date(new Date().getTime()-86400000)));
+        calendarStartDateField.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarStartDateField.setPreferredSize(new Dimension(140, 20));
+        
+        c.gridx = 1;
+        c.gridy = 0;
+        popularityOfBeitragTextFieldPanel.add(calendarStartDateField, c);
+        
+        c.gridx = 0;
+        c.gridy = 1;
+        popularityOfBeitragTextFieldPanel.add(new JLabel("End Date: "), c);        
+        
+        calendarEndDateField = new JFormattedTextField(df);
+        calendarEndDateField.setText(df.format(new Date()));
+        calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarEndDateField.setPreferredSize(new Dimension(140, 20));
+        
+        c.gridx = 1;
+        c.gridy = 1;
+        popularityOfBeitragTextFieldPanel.add(calendarEndDateField, c);
+        
+        c.gridx = 0;
+        c.gridy = 2;
+        popularityOfBeitragTextFieldPanel.add(new JLabel("Sort by... "), c);
+        
+        c.gridx = 1;
+        c.gridy = 2;
+        popularityOfBeitragTextFieldPanel.add(popularityOfBeitragReportPanelSortByBox, c);
+        
+        popularityOfBeitragReportPanel.add(popularityOfBeitragTextFieldPanel, BorderLayout.CENTER);
         
         runBeitragReportButton = new JButton("Go!");
         runBeitragReportButton.addActionListener(new ActionListener() {
