@@ -14,8 +14,8 @@ public interface Kommentar extends UserCreatedContent {
     // #[regen=yes,id=DCE.39717E0E-C847-C40A-D332-2D62777C400B]
     // </editor-fold> 
     /**
-     * 
-     * @return
+     * Getter for the BeitragID attribute.
+     * @return Integer - Returns the int ID of the object.
      * @throws RemoteException 
      */
     public int getBeitragID ()
@@ -25,9 +25,9 @@ public interface Kommentar extends UserCreatedContent {
     // #[regen=yes,id=DCE.4B410CC2-7B33-490B-B7D3-AD8FFD533CC8]
     // </editor-fold> 
     /**
-     * 
-     * @param val
-     * @throws RemoteException 
+     * Setter for the BeitragID attribute.
+     * @param val - Needs an int ID to be set
+     * @throws java.rmi.RemoteException 
      */
     public void setBeitragID (int val)
             throws RemoteException;

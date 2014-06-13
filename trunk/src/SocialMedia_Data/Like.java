@@ -15,8 +15,8 @@ public interface Like extends DataReference {
     // #[regen=yes,id=DCE.A88DC027-D2F0-D6F5-ECB1-4A7220FAA7DC]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the BeitragID attribute.
+     * @return Integer - Returns the int ID of the object. 
      * @throws java.rmi.RemoteException 
      */
     public int getBeitragID ()
@@ -26,8 +26,8 @@ public interface Like extends DataReference {
     // #[regen=yes,id=DCE.D760514B-38E6-75B8-5C57-E4BA4FAC3470]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the BeitragID attribute.
+     * @param val - Needs an int ID to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setBeitragID (int val)
@@ -48,7 +48,7 @@ public interface Like extends DataReference {
     // #[regen=yes,id=DCE.D0B082B6-C9BE-1FCD-A313-D22D5D132062]
     // </editor-fold> 
     /**
-     * 
+     * Getter for the NutzerID attribute.
      * @param val 
      * @throws java.rmi.RemoteException 
      */

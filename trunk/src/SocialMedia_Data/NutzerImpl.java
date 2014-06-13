@@ -155,7 +155,7 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,id=DCE.EA9F8A85-2059-4E68-72FA-B23705639051]
     // </editor-fold> 
     /**
-     * 
+     * Getter for the Nutzer Pinnwand.
      * @param verwaltung - This object is needed for getting data from the DB.
      * @return - Returns the pinnwand object.
      * @throws java.rmi.RemoteException 
@@ -176,7 +176,7 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,id=DCE.E49402FD-5DC6-2D8C-7CB5-633CA9E8C37B]
     // </editor-fold> 
     /**
-     * 
+     * Getter for all Nutzer of the Abonement.
      * @param verwaltung - This object is needed for getting data from the DB.
      * @return - Returns all Abonnements of the Nutzer.
      * @throws java.rmi.RemoteException 
