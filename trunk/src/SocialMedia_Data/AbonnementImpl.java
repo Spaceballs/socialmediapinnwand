@@ -9,7 +9,7 @@ import java.util.Vector;
 // #[regen=yes,id=DCE.D34739A1-3E6D-6B19-CAA4-1E4A754FEA92]
 // </editor-fold> 
 /**
- * 
+ * @todo Kommentar
  * @author Sebastian
  */
 public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
@@ -28,7 +28,7 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,id=DCE.9A023376-AEF4-0492-69FC-D772039EAC98]
     // </editor-fold> 
     /**
-     * Konstruktor von Abonnement.
+     * Constructor
      * @throws java.rmi.RemoteException
      */
     public AbonnementImpl () 

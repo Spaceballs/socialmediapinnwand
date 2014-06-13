@@ -9,7 +9,7 @@ import java.util.Vector;
 // #[regen=yes,id=DCE.2A8A201C-25A8-2BD1-CC04-C6B0EFE3BF00]
 // </editor-fold> 
 /**
- * 
+ * @todo Kommentare
  * @author Sebastian
  */
 public interface Beitrag extends UserCreatedContent {
