@@ -19,8 +19,8 @@ public interface DataReference extends java.rmi.Remote{
     // #[regen=yes,regenBody=yes,id=DCE.4BCCE1AB-78B5-AA3C-932B-883E5D1775B5]
     // </editor-fold>
     /**
-     *
-     * @return
+     * Getter for the CreationDate attribute.
+     * @return Date
      * @throws java.rmi.RemoteException
      */
     Date getCreationDate()
@@ -30,8 +30,8 @@ public interface DataReference extends java.rmi.Remote{
     // #[regen=yes,regenBody=yes,id=DCE.FCABA384-0469-0962-060E-28BE0D0E7C82]
     // </editor-fold>
     /**
-     *
-     * @return
+     * Getter for the ID attribute.
+     * @return int
      * @throws java.rmi.RemoteException
      */
     int getID()
@@ -41,7 +41,7 @@ public interface DataReference extends java.rmi.Remote{
     // #[regen=yes,regenBody=yes,id=DCE.86FD70C6-270D-42C5-EFB5-AB6602CF95B1]
     // </editor-fold>
     /**
-     *
+     * Setter for the CreationDate attribute.
      * @param val
      * @throws java.rmi.RemoteException
      */
@@ -52,7 +52,7 @@ public interface DataReference extends java.rmi.Remote{
     // #[regen=yes,regenBody=yes,id=DCE.FDCE10AB-E236-B3C7-2407-6A09EA4717F4]
     // </editor-fold>
     /**
-     *
+     * Setter for the ID attribute.
      * @param val
      * @throws java.rmi.RemoteException
      */

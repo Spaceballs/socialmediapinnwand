@@ -117,6 +117,7 @@ public class DialogAnmelden extends JFrame{
      * All required Listeners for log-in button and registrate button
      */
     private void initializeListeners() {
+        //@todo Fehlermeldung bei falschem Username/Passwort
         buttonAnmelden.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                Nutzer clientNutzer = null;

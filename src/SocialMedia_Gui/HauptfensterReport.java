@@ -227,6 +227,7 @@ public class HauptfensterReport extends JFrame {
      * In this method the panel for the ContributionOfNutzerReport is created.
      */
     private void initContributionOfNutzerReportPanel() {
+        // @todo Labels etc. untereinander, ScrollPane rausnehmen
         contributionOfNutzerReportPanel = new JPanel();
         contributionOfNutzerReportPanel.setLayout(new BorderLayout());
         
@@ -283,6 +284,7 @@ public class HauptfensterReport extends JFrame {
      * In this method the panel for the PopularityOfBeitragReport is created.
      */
     private void initPopularityOfBeitragReportPanel() {
+        // @todo Labels etc. untereinander
         popularityOfBeitragReportPanel = new JPanel();
         popularityOfBeitragReportPanel.setLayout(new BorderLayout());
         

@@ -18,8 +18,8 @@ public interface Nutzer extends DataReference{
     // #[regen=yes,id=DCE.E43AA795-3C56-21D4-4433-70637434F45E]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the Username attribute.
+     * @return String
      * @throws java.rmi.RemoteException 
      */
     public String getUsername ()
@@ -29,8 +29,8 @@ public interface Nutzer extends DataReference{
     // #[regen=yes,id=DCE.3E73CF75-5E6B-810D-6C9C-5F5EB3FC885F]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the Username attribute.
+     * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setUsername (String val)
@@ -40,8 +40,8 @@ public interface Nutzer extends DataReference{
     // #[regen=yes,id=DCE.8458843F-1E37-B667-B32B-DBC7B069FDB8]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the Name attribute.
+     * @return String
      * @throws java.rmi.RemoteException 
      */
     public String getName ()
@@ -51,8 +51,8 @@ public interface Nutzer extends DataReference{
     // #[regen=yes,id=DCE.3D2FE16F-24D5-6839-AB3C-D9115E02A2E9]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the Name attribute.
+     * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setName (String val)
@@ -63,7 +63,7 @@ public interface Nutzer extends DataReference{
     // </editor-fold> 
     /**
      * 
-     * @return 
+     * @return String
      * @throws java.rmi.RemoteException 
      */
     public String getSurname ()
@@ -73,8 +73,8 @@ public interface Nutzer extends DataReference{
     // #[regen=yes,id=DCE.C745F1EF-B411-98F3-1AAE-A7B56AC34214]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Getter for the Surname attribute.
+     * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setSurname (String val)
@@ -84,8 +84,8 @@ public interface Nutzer extends DataReference{
     // #[regen=yes,id=DCE.2724338A-E37B-F36D-B4B8-465E8AF41A47]
     // </editor-fold> 
     /**
-     * 
-     * @return 
+     * Getter for the Password attribute.
+     * @return String
      * @throws java.rmi.RemoteException 
      */
     public String getPassword ()
@@ -95,26 +95,26 @@ public interface Nutzer extends DataReference{
     // #[regen=yes,id=DCE.8599D1DB-7C9D-E5AA-1335-1F77CA4ABE17]
     // </editor-fold> 
     /**
-     * 
-     * @param val 
+     * Setter for the Password attribute.
+     * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setPassword (String val)
             throws RemoteException;
 
     /**
-     * 
+     * Getter for the Nutzer Pinnwand.
      * @param verwaltung
-     * @return 
+     * @return Pinnwand
      * @throws java.rmi.RemoteException 
      */
     public Pinnwand getNutzerPinnwand (SocialMediaLogicImpl verwaltung)
             throws RemoteException;
 
     /**
-     * 
+     * Getter for all Nutzer of the Abonement.
      * @param verwaltung
-     * @return 
+     * @return Abonnement 
      * @throws java.rmi.RemoteException 
      */
     public Vector<Abonnement> getAllNutzerAbonnement (SocialMediaLogicImpl verwaltung)

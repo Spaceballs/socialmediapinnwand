@@ -19,7 +19,9 @@ public interface Beitrag extends UserCreatedContent {
     // </editor-fold> 
     /**
      * 
-     * @return 
+     * Getter for the pinnwandID attribute.
+     * @throws java.rmi.RemoteException
+     * @return int
      */
     public int getPinnwandID ()
             throws RemoteException;
@@ -29,23 +31,29 @@ public interface Beitrag extends UserCreatedContent {
     // </editor-fold> 
     /**
      * 
-     * @param val 
+     * Setter for the pinnwandID attribute.
+     * @throws java.rmi.RemoteException
+     * @param val - int value to be set
      */
     public void setPinnwandID (int val)
             throws RemoteException;
 
     /**
-     * 
-     * @param verwaltung
-     * @return 
+     * Note: only used by the Server. 
+     * Getter for all Kommentare of the Beitrag.
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @throws java.rmi.RemoteException
+     * @return Vector
      */
     public Vector<Kommentar> getAllBeitragKommentar (SocialMediaLogicImpl verwaltung)
             throws RemoteException;
 
     /**
-     * 
-     * @param verwaltung
-     * @return 
+     * Note: only used by the Server. 
+     * Getter for all likes of the Beitrag.
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @throws java.rmi.RemoteException
+     * @return Vector
      */
     public Vector<Like> getAllBeitragLikes (SocialMediaLogicImpl verwaltung)
             throws RemoteException;
