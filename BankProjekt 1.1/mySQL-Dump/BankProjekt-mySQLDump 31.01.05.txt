@@ -1,0 +1,74 @@
+# phpMyAdmin SQL Dump
+# version 2.5.3
+# http://www.phpmyadmin.net
+#
+# Host: localhost
+# Erstellungszeit: 31. Januar 2005 um 21:16
+# Server Version: 4.0.15
+# PHP-Version: 4.3.3
+# 
+# Datenbank: `bankproject`
+# 
+CREATE DATABASE `bankproject`;
+USE bankproject;
+
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `accounts`
+#
+
+CREATE TABLE `accounts` (
+  `id` int(11) NOT NULL default '0',
+  `owner` int(11) NOT NULL default '0',
+  `balance` float NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) TYPE=MyISAM;
+
+#
+# Daten für Tabelle `accounts`
+#
+
+INSERT INTO `accounts` VALUES (1, 1, '300.23');
+INSERT INTO `accounts` VALUES (2, 7, '1000.94');
+INSERT INTO `accounts` VALUES (3, 5, '978278');
+INSERT INTO `accounts` VALUES (4, 6, '215652');
+INSERT INTO `accounts` VALUES (5, 6, '121232');
+INSERT INTO `accounts` VALUES (6, 3, '32');
+INSERT INTO `accounts` VALUES (7, 10, '10105.8');
+INSERT INTO `accounts` VALUES (8, 6, '160');
+INSERT INTO `accounts` VALUES (10, 1, '100001');
+INSERT INTO `accounts` VALUES (9, 6, '100');
+INSERT INTO `accounts` VALUES (11, 1, '100001');
+INSERT INTO `accounts` VALUES (12, 1, '100001');
+INSERT INTO `accounts` VALUES (13, 1, '100001');
+INSERT INTO `accounts` VALUES (14, 1, '100001');
+
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `customers`
+#
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL default '0',
+  `firstName` varchar(100) NOT NULL default '',
+  `lastName` varchar(100) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) TYPE=MyISAM;
+
+#
+# Daten für Tabelle `customers`
+#
+
+INSERT INTO `customers` VALUES (1, 'Herbert', 'Müller');
+INSERT INTO `customers` VALUES (2, 'Erna', 'Sparbier');
+INSERT INTO `customers` VALUES (3, 'Sandra', 'Schweigemeier');
+INSERT INTO `customers` VALUES (4, 'Helmut', 'Schmidt');
+INSERT INTO `customers` VALUES (5, 'Helmut', 'Kohl');
+INSERT INTO `customers` VALUES (6, 'Gerhard', 'Schröder');
+INSERT INTO `customers` VALUES (7, 'Willy', 'Brand');
+INSERT INTO `customers` VALUES (8, 'Kurt Georg', 'Kiesinger');
+INSERT INTO `customers` VALUES (9, 'Ludwig', 'Erhard');
+INSERT INTO `customers` VALUES (10, 'Konrad', 'Adenauer');
+INSERT INTO `customers` VALUES (11, 'Günther', 'Maier');

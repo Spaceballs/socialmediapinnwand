@@ -1,0 +1,79 @@
+# phpMyAdmin SQL Dump
+# version 2.5.3
+# http://www.phpmyadmin.net
+#
+# Host: localhost
+# Erstellungszeit: 22. Oktober 2004 um 14:49
+# Server Version: 4.0.15
+# PHP-Version: 4.3.3
+# 
+# Datenbank: `test`
+# 
+CREATE DATABASE `test`;
+USE test;
+
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `people`
+#
+
+CREATE TABLE `people` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(100) NOT NULL default '',
+  `vorname` varchar(100) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) TYPE=MyISAM AUTO_INCREMENT=5 ;
+
+#
+# Daten für Tabelle `people`
+#
+
+INSERT INTO `people` (`id`, `name`, `vorname`) VALUES (1, 'Thies', 'Peter');
+INSERT INTO `people` (`id`, `name`, `vorname`) VALUES (2, 'Rathke', 'Christian');
+INSERT INTO `people` (`id`, `name`, `vorname`) VALUES (3, 'Riekert', 'Wolf-Fritz');
+INSERT INTO `people` (`id`, `name`, `vorname`) VALUES (4, 'Müller', 'Berta');
+
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `rooms`
+#
+
+CREATE TABLE `rooms` (
+  `no` int(11) NOT NULL default '0',
+  `building` varchar(100) NOT NULL default '',
+  `type` varchar(100) NOT NULL default '',
+  `capacity` varchar(100) NOT NULL default '',
+  PRIMARY KEY  (`no`,`building`)
+) TYPE=MyISAM;
+
+#
+# Daten für Tabelle `rooms`
+#
+
+INSERT INTO `rooms` (`no`, `building`, `type`, `capacity`) VALUES (426, 'W', 'Office', '1');
+INSERT INTO `rooms` (`no`, `building`, `type`, `capacity`) VALUES (408, 'N', 'Office', '2');
+INSERT INTO `rooms` (`no`, `building`, `type`, `capacity`) VALUES (418, 'N', 'Office', '4');
+
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `works_at`
+#
+
+CREATE TABLE `works_at` (
+  `person` int(11) NOT NULL default '0',
+  `office_no` int(11) NOT NULL default '0',
+  `building` varchar(100) NOT NULL default '',
+  PRIMARY KEY  (`building`,`office_no`,`person`)
+) TYPE=MyISAM;
+
+#
+# Daten für Tabelle `works_at`
+#
+
+INSERT INTO `works_at` (`person`, `office_no`, `building`) VALUES (3, 408, 'N');
+INSERT INTO `works_at` (`person`, `office_no`, `building`) VALUES (1, 418, 'N');
+INSERT INTO `works_at` (`person`, `office_no`, `building`) VALUES (2, 426, 'W');
+    
