@@ -168,13 +168,11 @@ public class DialogRegistrieren extends JFrame {
                         DialogAnmelden dialogAnmelden = new DialogAnmelden(server, username.getText(), new String(password.getPassword()));
                     } else {
                         dispose();
-//                        UIManager.put("OptionPane.okButtonText", "OK");
                         JOptionPane.showMessageDialog(null, "Username bereits vergeben", "Fehler", JOptionPane.ERROR_MESSAGE);
                         DialogRegistrieren dialogRegistrieren = new DialogRegistrieren(server, username.getText(), name.getText(), surname.getText(), new String(password.getPassword()));
                     }
                 } else {
                     dispose();
-//                    UIManager.put("OptionPane.okButtonText", "OK");
                     JOptionPane.showMessageDialog(null, "Leere Eingabe nicht möglich", "Fehler", JOptionPane.ERROR_MESSAGE);
                     new DialogRegistrieren(server, username.getText(), name.getText(), surname.getText(), new String(password.getPassword()));
                 }

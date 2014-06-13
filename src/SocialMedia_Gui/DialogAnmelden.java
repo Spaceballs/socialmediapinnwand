@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
@@ -117,7 +118,6 @@ public class DialogAnmelden extends JFrame{
      * All required Listeners for log-in button and registrate button
      */
     private void initializeListeners() {
-        //@todo Fehlermeldung bei falschem Username/Passwort
         buttonAnmelden.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                Nutzer clientNutzer = null;
@@ -131,6 +131,7 @@ public class DialogAnmelden extends JFrame{
                    Hauptfenster hauptfenster = SocialMedia_Gui.Hauptfenster.hauptfenster(server, clientNutzer);
                } else {
                    dispose();
+                   JOptionPane.showMessageDialog(null, "Username oder Passwort nicht korrekt", "Fehler", JOptionPane.ERROR_MESSAGE);
                    DialogAnmelden anmelden = new DialogAnmelden(server, username.getText(), new String(password.getPassword()));
                }
            }
