@@ -86,22 +86,14 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     // #[regen=yes,id=DCE.A095AC40-10D1-77A9-0A67-2D41CC05B201]
     // </editor-fold> 
     /**
-     * 
+     * Gets the Nutzer by the nutzerID
      * @param verwaltung - This object is needed for getting data from the DB.
      * @return - Returns the nutzer object. 
      * @throws RemoteException 
      */
     public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
-        Vector<Nutzer> nutzers = verwaltung.getAllNutzer();
-
-        for (int i = 0; i < nutzers.size(); i++) {
-            Nutzer nutzer = nutzers.elementAt(i);
-            
-            if(nutzer.getID() == nutzerID)
-                return nutzer;
-        }
-        return null;
+        return verwaltung.getNutzerByID(nutzerID);
     }
 }
 

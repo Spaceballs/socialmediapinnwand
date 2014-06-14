@@ -35,10 +35,6 @@ import java.util.logging.Logger;
  * report_von_11.01.2014_bis_12.06.2014
  */
 
-/**
- * @todo - Nur "Beiträge" kann ausgewählt werden, andere Möglichkeiten erst nach Hin- und Herschalten zu einem anderen Tab
- */
-
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.E7C2C07C-F969-9A30-C188-C220A1AD2C41]
 // </editor-fold> 
@@ -85,135 +81,190 @@ public class ReportGeneratorImpl
      * @return ContributionOfNutzerImpl - Returns created the Report object.
      * @throws java.rmi.RemoteException
      */
-    public Report createContributionOfNutzerReport (Nutzer nutzerVal, final int sortByVal, final Date startDateVal, final Date endDateVal) throws RemoteException {
+    public Report createContributionOfNutzerReport ( 
+            final int sortByVal, 
+            final Date startDateVal, 
+            final Date endDateVal) 
+            throws RemoteException {
+        //@todo createContributionOfNutzerReport - Welcher nutzer hat die meisten beiträge gemacht? meiste likes erhalten? meisten abonnenten? in einem zeitraum?
+        /**
+         * Neuer Report wird erzeugt
+         */
         ContributionOfNutzer report = new ContributionOfNutzerImpl();
+        /**
+         * Nutzer für den Report werden angelegt
+         */
         Vector<Nutzer> nutzers = socialMediaLogic.getAllNutzer();
+        /**
+         * Deaktivierte Nutzer werden aus dem Report aussortiert
+         */
         Vector<Nutzer> n0 = new Vector<Nutzer>();
         for (int i = 0; i < nutzers.size(); i++) {
             if (!nutzers.elementAt(i).getUsername().contentEquals("Deaktivierter Nutzer"))
                 n0.add(nutzers.elementAt(i));
         }
         nutzers = n0;
+        /**
+         * Dem Report werden Datum, Datumsvariablen und Titel hinzugefügt
+         */
         report.setCreationDate(new Date());
         report.setStartDate(startDateVal);
         report.setEndDate(endDateVal);
         report.setHeaderAndTitleParagraph(new SimpleParagraphImpl("Nutzer Popularitäts-/Aktivitäts Report"));
-        if (nutzerVal != null){
-            report.setBodyParagraph(new SimpleParagraphImpl("Report über die Aktivität des Nutzers: " + nutzerVal.getUsername() + " zwischen dem " + startDateVal + " und dem " + endDateVal));
-            nutzers = new Vector<Nutzer>();
-            nutzers.add(nutzerVal);
-        } else {
-            report.setBodyParagraph(new SimpleParagraphImpl("Report zwischen dem " + startDateVal + " und dem " + endDateVal));
-        }
-        
-        //@todo createContributionOfNutzerReport// Welcher nutzer hat die meisten beiträge gemacht? meiste likes erhalten? meisten abonnenten? in einem zeitraum?
-        
         /**
-         * Wenn die Beiträge im Report nach menge der Kommentare sortiert werden soll dann den entsprechenden Sortieralgorythmus anwerfen.
-         * Ansonsten soll der Report nach menge der Likes sortiert werden.
+         * 0 = nach beiträgen sortieren
+         * 1 = nach likes sortieren
+         * 2 = nach Abonnements sortieren
          */
         if (sortByVal == 0 && nutzers.size() > 1){
             Collections.sort(nutzers, new Comparator<Nutzer>() {
                 public int compare(Nutzer o1, Nutzer o2){
                     try {
+                        /**
+                         * Hole alle Beiträge der Pinnwand des nutzers
+                         */
                         Vector<Beitrag> o1Beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(o1));
+                        /**
+                         * Sortiere alle Beiträge ausserhalb des zeitraums raus
+                         */
                         Vector<Beitrag> beitraege = new Vector<Beitrag>();
                         for (int h = 0; h < o1Beitraege.size(); h++) {
                             if (!startDateVal.after(o1Beitraege.elementAt(h).getCreationDate()) && !endDateVal.before(o1Beitraege.elementAt(h).getCreationDate()))
                                 beitraege.add(o1Beitraege.elementAt(h));
                         }
                         o1Beitraege = beitraege;
-                        
-                        beitraege = new Vector<Beitrag>();
+                        /**
+                         * Hole alle Beiträge der Pinnwand des nutzers
+                         */
                         Vector<Beitrag> o2Beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(o2));
-                        for (int h = 0; h < beitraege.size(); h++) {
-                            if (!startDateVal.after(beitraege.elementAt(h).getCreationDate()) && !endDateVal.before(beitraege.elementAt(h).getCreationDate()))
-                                beitraege.add(beitraege.elementAt(h));
+                        /**
+                         * Sortiere alle Beiträge ausserhalb des zeitraums raus
+                         */
+                        beitraege = new Vector<Beitrag>();
+                        for (int h = 0; h < o2Beitraege.size(); h++) {
+                            if (!startDateVal.after(o2Beitraege.elementAt(h).getCreationDate()) && !endDateVal.before(o2Beitraege.elementAt(h).getCreationDate()))
+                                beitraege.add(o2Beitraege.elementAt(h));
                         }
-                        beitraege = beitraege;
-                        
+                        o2Beitraege = beitraege;
+                        /**
+                         * Vergleiche alle beiträge und sortiere nutzer danach
+                         */
                         return ((Integer)o2Beitraege.size()).compareTo((Integer)o1Beitraege.size());
                     } catch (RemoteException ex) {
                         Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    return -1;
+                    return 0;
                 }
             });  
         }else if (sortByVal == 1 && nutzers.size() > 1){
             Collections.sort(nutzers, new Comparator<Nutzer>() {
                 public int compare(Nutzer o1, Nutzer o2){
                     try {
+                        /**
+                         * Hole alle Beiträge der Pinnwand des nutzers
+                         */
                         Vector<Beitrag> o1Beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(o1));
+                        /**
+                         * Hole alle Likes der Beiträge
+                         */
                         Vector<Like> o1Likes = new  Vector<Like>();
                         for (int i = 0; i < o1Beitraege.size(); i++) {
-                            o1Likes.addAll(o1Beitraege.get(i).getAllBeitragLikes(socialMediaLogic));
+                            o1Likes.addAll(socialMediaLogic.getAllLikeOfBeitrag(o1Beitraege.get(i)));
                         }
+                        /**
+                         * Sortier alle Likes ausserhalb des zeitraums aus
+                         */
                         Vector<Like> likes2 = new Vector<Like>();
                         for (int h = 0; h < o1Likes.size(); h++) {
                             if (!startDateVal.after(o1Likes.elementAt(h).getCreationDate()) && !endDateVal.before(o1Likes.elementAt(h).getCreationDate()))
                                 likes2.add(o1Likes.elementAt(h));
                         }
                         o1Likes = likes2;
-                        
+                        /**
+                         * Hole alle Beiträge der Pinnwand des nutzers
+                         */
                         Vector<Beitrag> o2Beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(o2));
+                        /**
+                         * Hole alle Likes der Beiträge
+                         */
                         Vector<Like> o2Likes = new  Vector<Like>();
                         for (int i = 0; i < o2Beitraege.size(); i++) {
-                            o2Likes.addAll(o2Beitraege.get(i).getAllBeitragLikes(socialMediaLogic));
+                            o2Likes.addAll(socialMediaLogic.getAllLikeOfBeitrag(o2Beitraege.get(i)));
                         }
+                        /**
+                         * Sortier alle Likes ausserhalb des zeitraums aus
+                         */
                         likes2 = new Vector<Like>();
                         for (int h = 0; h < o2Likes.size(); h++) {
                             if (!startDateVal.after(o2Likes.elementAt(h).getCreationDate()) && !endDateVal.before(o2Likes.elementAt(h).getCreationDate()))
                                 likes2.add(o2Likes.elementAt(h));
                         }
                         o2Likes = likes2;
-                        
+                        /**
+                         * Vergleiche die menge der likes und sortier die nutzer
+                         */
                         return ((Integer)o2Likes.size()).compareTo((Integer)o1Likes.size());
                     } catch (RemoteException ex) {
                         Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    return -1;
+                    return 0;
                 }
             });
         } else if (sortByVal == 2 && nutzers.size() > 1){
             Collections.sort(nutzers, new Comparator<Nutzer>() {
                 public int compare(Nutzer o1, Nutzer o2){
                     try {
-                        Vector<Abonnement> o1Abonnements = socialMediaLogic.getPinnwandOfNutzer(o1).getAllAbonnementsOfPinnwand(socialMediaLogic);
+                        /**
+                         * Hole alle Abonnements des Nutzers Pinnwand des nutzers
+                         */
+                        Vector<Abonnement> o1Abonnements = socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(o1));
+                        /**
+                         * Sortier die ausserhalb des zeitraums aus
+                         */
                         Vector<Abonnement> abonnements = new Vector<Abonnement>();
                         for (int k = 0; k < o1Abonnements.size(); k++) {
                             if (!startDateVal.after(o1Abonnements.elementAt(k).getCreationDate()) && !endDateVal.before(o1Abonnements.elementAt(k).getCreationDate()))
                                 abonnements.add(o1Abonnements.elementAt(k));
                         }
                         o1Abonnements = abonnements;
-                        
-                        Vector<Abonnement> o2Abonnements = socialMediaLogic.getPinnwandOfNutzer(o2).getAllAbonnementsOfPinnwand(socialMediaLogic);
+                        /**
+                         * Hole alle Abonnements des Nutzers Pinnwand des nutzers
+                         */
+                        Vector<Abonnement> o2Abonnements = socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(o2));
+                        /**
+                         * Sortier die ausserhalb des zeitraums aus
+                         */
                         abonnements = new Vector<Abonnement>();
                         for (int k = 0; k < o2Abonnements.size(); k++) {
                             if (!startDateVal.after(o2Abonnements.elementAt(k).getCreationDate()) && !endDateVal.before(o2Abonnements.elementAt(k).getCreationDate()))
                                 abonnements.add(o2Abonnements.elementAt(k));
                         }
                         o2Abonnements = abonnements;
+                        /**
+                         * Vergleiche und sortier nutzer nach der menge der abonnements ihrer pinnwand
+                         */
                         return ((Integer)o2Abonnements.size()).compareTo((Integer)o1Abonnements.size());
                     } catch (RemoteException ex) {
                         Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    return -1;
+                    return 0;
                 }
             });
         }
+        
         /**
          * Schleife über alle Nutzer.
          */
         Vector<Row> rows = new Vector<Row>();
-        for (int i = 0; i < nutzers.size(); i++) {
-            Vector<Beitrag> beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(nutzers.elementAt(i)));
+        for (int nutzerschleife = 0; nutzerschleife < nutzers.size(); nutzerschleife++) {
+            Vector<Beitrag> beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(nutzers.elementAt(nutzerschleife)));
             Vector<Beitrag> beitraege2 = new Vector<Beitrag>();
             for (int h = 0; h < beitraege.size(); h++) {
                 if (!startDateVal.after(beitraege.elementAt(h).getCreationDate()) && !endDateVal.before(beitraege.elementAt(h).getCreationDate()))
                     beitraege2.add(beitraege.elementAt(h));
             }
             beitraege = beitraege2;
-            Vector<Abonnement> abonnements = socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(nutzers.elementAt(i)));
+            Vector<Abonnement> abonnements = socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(nutzers.elementAt(nutzerschleife)));
             Vector<Abonnement> abonnements2 = new Vector<Abonnement>();
             for (int k = 0; k < abonnements.size(); k++) {
                 if (!startDateVal.after(abonnements.elementAt(k).getCreationDate()) && !endDateVal.before(abonnements.elementAt(k).getCreationDate()))
@@ -221,12 +272,13 @@ public class ReportGeneratorImpl
             }
             abonnements = abonnements2;
             int laufindex0 = (beitraege.size() > abonnements.size()) ?  beitraege.size() : abonnements.size();
+            System.out.println(laufindex0);
             if (sortByVal==0){
                 //sortByVal Beiträge
                 /**
                  * Wenn erste Zeile dann TableHeader schreiben.
                  */
-                if (i==0){
+                if (nutzerschleife==0){
                     Column c = new ColumnImpl();
                     Row r = new RowImpl();
                     c.addSubParagraph(new SimpleParagraphImpl("Nutzer"));
@@ -256,9 +308,12 @@ public class ReportGeneratorImpl
                     Vector<Kommentar> kommentare;
                     try{
                         likes = socialMediaLogic.getAllLikeOfBeitrag(beitraege.get(j));
-                        kommentare = socialMediaLogic.getAllKommentarOfBeitrag(beitraege.get(j));
                     } catch (IndexOutOfBoundsException ex){
                         likes=new Vector<Like>();
+                    }
+                    try{
+                        kommentare = socialMediaLogic.getAllKommentarOfBeitrag(beitraege.get(j));
+                    } catch (IndexOutOfBoundsException ex){
                         kommentare=new Vector<Kommentar>();
                     }
                     Vector<Like> likes2 = new Vector<Like>();
@@ -274,16 +329,19 @@ public class ReportGeneratorImpl
                     }
                     kommentare = kommentare2;
                     int laufindex = (likes.size() > kommentare.size()) ?  likes.size() : kommentare.size();
+                    if (laufindex==0)
+                        laufindex=1;
                     /**
                      * Schleife über alle Likes und Kommentare, wovon mehr da ist.
                      * Wenn nix da ist dann leere Zeile erzeugen
                      */
-                    for (int counter = 0; counter < laufindex; counter++){
+                    for (int counter = 0; counter <  laufindex; counter++){
+                        System.out.println(nutzerschleife + " " + j + " " + counter);
                         Row r0 = new RowImpl();
                         Column c = new ColumnImpl();
                         c.addSubParagraph(new SimpleParagraphImpl(""));
-                        if (counter == 0){
-                            r0.addColumn(writeNutzer(nutzers.elementAt(i)));
+                        if (j == 0){
+                            r0.addColumn(writeNutzer(nutzers.elementAt(nutzerschleife)));
                         } else {
                             r0.addColumn(c);
                         }
@@ -324,7 +382,7 @@ public class ReportGeneratorImpl
                 /**
                  * Wenn erste Zeile dann TableHeader schreiben.
                  */
-                if (i==0){
+                if (nutzerschleife==0){
                     Column c = new ColumnImpl();
                     Row r = new RowImpl();
                     c.addSubParagraph(new SimpleParagraphImpl("Nutzer"));
@@ -349,7 +407,7 @@ public class ReportGeneratorImpl
                  * Schleife über alle Beiträge und Abonnements, wovon mehr da ist.
                  * Wenn nix da ist dann leere Zeile erzeugen
                  */
-                for (int j = 0; j < laufindex0; j++) {
+                for (int j = 0; j < laufindex0;) {
                     Vector<Like> likes;
                     Vector<Kommentar> kommentare;
                     try{
@@ -381,12 +439,14 @@ public class ReportGeneratorImpl
                         Column c = new ColumnImpl();
                         c.addSubParagraph(new SimpleParagraphImpl(""));
                         if (counter == 0){
-                            r0.addColumn(writeNutzer(nutzers.elementAt(i)));
+                            r0.addColumn(writeNutzer(nutzers.elementAt(nutzerschleife)));
+                            nutzerschleife++;
                         } else {
                             r0.addColumn(c);
                         }
                         try{
                             r0.addColumn(writeLike(likes.elementAt(counter)));
+                            
                         } catch (IndexOutOfBoundsException ex){
                             r0.addColumn(c);
                         }
@@ -422,7 +482,7 @@ public class ReportGeneratorImpl
                 /**
                  * Wenn erste Zeile dann TableHeader schreiben.
                  */
-                if (i==0){
+                if (nutzerschleife==0){
                     Column c = new ColumnImpl();
                     Row r = new RowImpl();
                     c.addSubParagraph(new SimpleParagraphImpl("Nutzer"));
@@ -479,7 +539,7 @@ public class ReportGeneratorImpl
                         Column c = new ColumnImpl();
                         c.addSubParagraph(new SimpleParagraphImpl(""));
                         if (counter == 0){
-                            r0.addColumn(writeNutzer(nutzers.elementAt(i)));
+                            r0.addColumn(writeNutzer(nutzers.elementAt(nutzerschleife)));
                         } else {
                             r0.addColumn(c);
                         } 
@@ -521,7 +581,7 @@ public class ReportGeneratorImpl
         report.setImprintParagraph(addImprint());
         return report;
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A085AD62-913F-0C59-690A-A589531FAEA9]
     // </editor-fold> 
@@ -535,7 +595,7 @@ public class ReportGeneratorImpl
      * @return PopularityOfBeitragImpl - Returns created the Report object.
      * @throws java.rmi.RemoteException
      */
-    public Report createPopularityOfBeitragReport (int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
+    public Report createPopularityOfBeitragReport (int sortByVal, final Date startDateVal, final Date endDateVal) throws RemoteException {
         PopularityOfBeitrag report = new PopularityOfBeitragImpl();
         
         report.setCreationDate(new Date());
@@ -559,7 +619,38 @@ public class ReportGeneratorImpl
             Collections.sort(beitraege, new Comparator<Beitrag>() {
                 public int compare(Beitrag o1, Beitrag o2){
                     try {
-                        return ((Integer)socialMediaLogic.getAllKommentarOfBeitrag(o2).size()).compareTo((Integer)socialMediaLogic.getAllKommentarOfBeitrag(o1).size());
+                        
+                        /**
+                         * Hole alle Kommentare der Beiträge
+                         */
+                        Vector<Kommentar> o1Kommentare = socialMediaLogic.getAllKommentarOfBeitrag(o1);
+                        /**
+                         * Sortier alle Kommentare ausserhalb des zeitraums aus
+                         */
+                        Vector<Kommentar> kommentare = new Vector<Kommentar>();
+                        for (int h = 0; h < o1Kommentare.size(); h++) {
+                            if (!startDateVal.after(o1Kommentare.elementAt(h).getCreationDate()) && !endDateVal.before(o1Kommentare.elementAt(h).getCreationDate()))
+                                kommentare.add(o1Kommentare.elementAt(h));
+                        }
+                        o1Kommentare = kommentare;
+                        /**
+                         * Hole alle Kommentare der Beiträge
+                         */
+                        Vector<Kommentar> o2Kommentare  = socialMediaLogic.getAllKommentarOfBeitrag(o2);
+                        /**
+                         * Sortier alle Kommentare ausserhalb des zeitraums aus
+                         */
+                        kommentare = new Vector<Kommentar>();
+                        for (int h = 0; h < o2Kommentare.size(); h++) {
+                            if (!startDateVal.after(o2Kommentare.elementAt(h).getCreationDate()) && !endDateVal.before(o2Kommentare.elementAt(h).getCreationDate()))
+                                kommentare.add(o2Kommentare.elementAt(h));
+                        }
+                        o2Kommentare = kommentare;
+                        /**
+                         * Vergleiche die menge der Kommentare und sortier die nutzer
+                         */
+                        
+                        return ((Integer)o2Kommentare.size()).compareTo((Integer)o1Kommentare.size());
                     } catch (RemoteException ex) {
                         Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -570,7 +661,36 @@ public class ReportGeneratorImpl
             Collections.sort(beitraege, new Comparator<Beitrag>() {
                 public int compare(Beitrag o1, Beitrag o2){
                     try {
-                        return ((Integer)socialMediaLogic.getAllLikeOfBeitrag(o2).size()).compareTo((Integer)socialMediaLogic.getAllLikeOfBeitrag(o1).size());
+                        /**
+                         * Hole alle Likes der Beiträge
+                         */
+                        Vector<Like> o1Likes = socialMediaLogic.getAllLikeOfBeitrag(o1);
+                        /**
+                         * Sortier alle Likes ausserhalb des zeitraums aus
+                         */
+                        Vector<Like> likes = new Vector<Like>();
+                        for (int h = 0; h < o1Likes.size(); h++) {
+                            if (!startDateVal.after(o1Likes.elementAt(h).getCreationDate()) && !endDateVal.before(o1Likes.elementAt(h).getCreationDate()))
+                                likes.add(o1Likes.elementAt(h));
+                        }
+                        o1Likes = likes;
+                        /**
+                         * Hole alle Likes der Beiträge
+                         */
+                        Vector<Like> o2Likes  = socialMediaLogic.getAllLikeOfBeitrag(o2);
+                        /**
+                         * Sortier alle Likes ausserhalb des zeitraums aus
+                         */
+                        likes = new Vector<Like>();
+                        for (int h = 0; h < o2Likes.size(); h++) {
+                            if (!startDateVal.after(o2Likes.elementAt(h).getCreationDate()) && !endDateVal.before(o2Likes.elementAt(h).getCreationDate()))
+                                likes.add(o2Likes.elementAt(h));
+                        }
+                        o2Likes = likes;
+                        /**
+                         * Vergleiche die menge der likes und sortier die nutzer
+                         */
+                        return ((Integer)o2Likes.size()).compareTo((Integer)o1Likes.size());
                     } catch (RemoteException ex) {
                         Logger.getLogger(ReportGeneratorImpl.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -587,7 +707,19 @@ public class ReportGeneratorImpl
             Column beitragColumn;
             Beitrag beitrag = beitraege.get(i);
             Vector<Like> likes = socialMediaLogic.getAllLikeOfBeitrag(beitrag);
+            Vector<Like> likes0 = new Vector<Like>();
+            for (int k = 0; k < likes.size(); k++) {
+                if (!startDateVal.after(likes.elementAt(k).getCreationDate()) && !endDateVal.before(likes.elementAt(k).getCreationDate()))
+                    likes0.add(likes.elementAt(k));
+            }
+            likes = likes0;
             Vector<Kommentar> kommentare = socialMediaLogic.getAllKommentarOfBeitrag(beitrag);
+            Vector<Kommentar> kommentare0 = new Vector<Kommentar>();
+            for (int k = 0; k < kommentare.size(); k++) {
+                if (!startDateVal.after(kommentare.elementAt(k).getCreationDate()) && !endDateVal.before(kommentare.elementAt(k).getCreationDate()))
+                    kommentare0.add(kommentare.elementAt(k));
+            }
+            kommentare = kommentare0;
             int laufindex = (likes.size() > kommentare.size()) ?  likes.size() : kommentare.size();
             if (sortByVal==1){
                 /**
@@ -706,7 +838,8 @@ public class ReportGeneratorImpl
         Column column = new ColumnImpl();
         column.addSubParagraph(new SimpleParagraphImpl("User: " + n.getName() + ", " + n.getSurname()));
         column.addSubParagraph(new SimpleParagraphImpl("alias " + n.getUsername()));
-        column.addSubParagraph(new SimpleParagraphImpl("Abonnements: " + socialMediaLogic.getAllAbonnementOfNutzer(n).size() + "\t wurde Abonniert: " + socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(n)).size()));
+        column.addSubParagraph(new SimpleParagraphImpl("Abonnements: " + socialMediaLogic.getAllAbonnementOfNutzer(n).size()));
+        column.addSubParagraph(new SimpleParagraphImpl("wurde Abonniert: " + socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(n)).size()));
         return column;
     }
     

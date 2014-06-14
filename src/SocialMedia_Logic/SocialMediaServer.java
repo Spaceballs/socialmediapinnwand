@@ -52,6 +52,7 @@ public class SocialMediaServer {
         } catch (UnknownHostException ex) {
             Logger.getLogger(SocialMediaServer.class.getName()).log(Level.SEVERE, null, ex);
         }
+        final String iptext = ip;
         Logger.getLogger(this.getClass().getName()).info("Server gestartet...");
         try {
             socialMediaLogic =
@@ -100,7 +101,7 @@ public class SocialMediaServer {
                 new Runnable() { public void run() { createAndShowDialogue();}
 
             private void createAndShowDialogue() {
-                JOptionPane.showMessageDialog(null, "Server Läuft...", "Server Läuft...", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, ("Server Läuft auf: " + iptext + ":" + serverPort),"Server Läuft..." , JOptionPane.ERROR_MESSAGE);
             }
         });
     }
