@@ -8,6 +8,7 @@ package SocialMedia_Data;
 
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.Vector;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -113,6 +114,42 @@ public class BeitragTest {
 
         public Vector<Like> getAllBeitragLikes(SocialMediaLogicImpl verwaltung) throws RemoteException {
             return null;
+        }
+
+        public int getNutzerID() throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public String getText() throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public void setNutzerID(int val) throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public void setText(String val) throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public Nutzer getOwner(SocialMediaLogicImpl verwaltung) throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public Date getCreationDate() throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public int getID() throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public void setCreationDate(Date val) throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public void setID(int val) throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
     
