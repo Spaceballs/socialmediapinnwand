@@ -54,7 +54,7 @@ public class ReportGeneratorTest {
         Date endDateVal = null;
         ReportGenerator instance = new ReportGeneratorImpl();
         Report expResult = null;
-        Report result = instance.createContributionOfNutzerReport(nutzerVal, sortByVal, startDateVal, endDateVal);
+        Report result = instance.createContributionOfNutzerReport(sortByVal, startDateVal, endDateVal);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -79,11 +79,11 @@ public class ReportGeneratorTest {
 
     public class ReportGeneratorImpl implements ReportGenerator {
 
-        public Report createContributionOfNutzerReport(Nutzer nutzerVal, int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
+        public Report createPopularityOfBeitragReport(int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
             return null;
         }
 
-        public Report createPopularityOfBeitragReport(int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
+        public Report createContributionOfNutzerReport(int sortByVal, Date startDateVal, Date endDateVal) throws RemoteException {
             return null;
         }
     }

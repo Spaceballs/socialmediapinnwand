@@ -8,6 +8,7 @@ package SocialMedia_Data;
 
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -127,6 +128,22 @@ public class LikeTest {
 
         public Nutzer getOwner(SocialMediaLogicImpl verwaltung) throws RemoteException {
             return null;
+        }
+
+        public Date getCreationDate() throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public int getID() throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public void setCreationDate(Date val) throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public void setID(int val) throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
     

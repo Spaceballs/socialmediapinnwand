@@ -53,7 +53,7 @@ public class ReportGeneratorImplTest {
         Date endDateVal = null;
         ReportGeneratorImpl instance = null;
         Report expResult = null;
-        Report result = instance.createContributionOfNutzerReport(nutzerVal, sortByVal, startDateVal, endDateVal);
+        Report result = instance.createContributionOfNutzerReport(sortByVal, startDateVal, endDateVal);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
