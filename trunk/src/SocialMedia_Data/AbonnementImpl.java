@@ -92,21 +92,14 @@ public class AbonnementImpl extends DataReferenceImpl implements Abonnement {
     // #[regen=yes,id=DCE.3F4ABB83-B7D5-73F1-C799-438A3E6484D4]
     // </editor-fold> 
     /**
-     * Collects all Pinnwand Abonnements and compares them with the current PinnwandID
+     * Gets Pinnwand by the pinnwandID
      * @param verwaltung - This object is needed for getting data from the DB.
      * @throws java.rmi.RemoteException
      * @return - Returns the Pinnwand object.
      */
     public Pinnwand getAbonnementPinnwand (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
-        Vector<Pinnwand> pinnwaende = verwaltung.getAllPinnwand();
-        
-        for (int i = 0; i < pinnwaende.size(); i++) {
-            Pinnwand pinnwand = pinnwaende.elementAt(i);
-            if(pinnwand.getID() == pinnwandID)
-                return pinnwand;
-        }
-        return null;
+        return verwaltung.getPinnwandByID(pinnwandID);
     }
 
 }

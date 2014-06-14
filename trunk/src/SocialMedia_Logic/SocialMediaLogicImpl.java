@@ -850,5 +850,65 @@ public class SocialMediaLogicImpl extends java.rmi.server.UnicastRemoteObject im
         }
         return null;
     }
+    
+    /**
+     * Gets the requested object from the database by id.
+     * 
+     * @param val - int id, primary key of the database
+     * @return The entry in the database as an Object
+     */
+    public Abonnement getAbonnementByID(int val){
+        return abonnementMapper.findByID(val);
+    }
+    
+    /**
+     * Gets the requested object from the database by id.
+     * 
+     * @param val - int id, primary key of the database
+     * @return The entry in the database as an Object
+     */
+    public Beitrag getBeitragByID(int val){
+        return beitragMapper.findByID(val);
+    }
+    
+    /**
+     * Gets the requested object from the database by id.
+     * 
+     * @param val - int id, primary key of the database
+     * @return The entry in the database as an Object
+     */
+    public Kommentar getKommentarByID(int val){
+        return kommentarMapper.findByID(val);
+    }
+    
+    /**
+     * Gets the requested object from the database by id.
+     * 
+     * @param val - int id, primary key of the database
+     * @return The entry in the database as an Object
+     */
+    public Like getLikeByID(int val){
+        return likeMapper.findByID(val);
+    }
+    
+    /**
+     * Gets the requested object from the database by id.
+     * 
+     * @param val - int id, primary key of the database
+     * @return The entry in the database as an Object
+     */
+    public Nutzer getNutzerByID(int val){
+        return nutzerMapper.findByID(val);
+    }
+    
+    /**
+     * Gets the requested object from the database by id.
+     * 
+     * @param val - int id, primary key of the database
+     * @return The entry in the database as an Object
+     */
+    public Pinnwand getPinnwandByID(int val){
+        return pinnwandMapper.findByID(val);
+    }
 }
 

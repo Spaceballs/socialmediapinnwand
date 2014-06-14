@@ -79,20 +79,14 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     // #[regen=yes,id=DCE.A095AC40-10D1-77A9-0A67-2D41CC05B201]
     // </editor-fold> 
     /**
-     * Gets all Nutzer and compares with the chosen ID.
+     * Gets Nutzer by nutzerID.
      * @param verwaltung - This object is needed for getting data from the DB.
      * @return - Returns the nutzer object.
      * @throws RemoteException 
      */
     public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
             throws RemoteException{
-        Vector<Nutzer> nutzers = verwaltung.getAllNutzer();
-        for (int i = 0; i < nutzers.size(); i++) {
-            Nutzer nutzer = nutzers.elementAt(i);
-            if(nutzer.getID() == nutzerID)
-                return nutzer;
-        }
-        return null;
+        return verwaltung.getNutzerByID(nutzerID);
     }
     
     /**

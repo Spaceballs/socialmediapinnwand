@@ -2,7 +2,6 @@
 package SocialMedia_Gui;
 
 import SocialMedia_IOandHelper.FormattedTextFieldVerifier;
-import SocialMedia_IOandHelper.NutzerListCellRenderer;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import SocialMedia_Report.HTMLWriter;
@@ -13,31 +12,22 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  * Report Generator class for the graphical user interface.
@@ -46,8 +36,6 @@ import javax.swing.event.ListSelectionListener;
  * @author Sebastian
  */
 public class HauptfensterReport extends JFrame {
-    
-    private Nutzer reportUser = null;
     private SocialMediaLogic server = null;
     private ReportGenerator reportGenerator = null;
     private JPanel initPanel;
@@ -56,12 +44,12 @@ public class HauptfensterReport extends JFrame {
     private JPanel popularityOfBeitragReportPanel;
     private JPanel popularityOfBeitragTextFieldPanel;
     private JTabbedPane tabbedPane;
-    private JList<Nutzer> nutzerliste;
     private JComboBox<String> contributionOfNutzerReportPanelSortByBox;
+    private int nutzerReportPanelSortByBox = 0;
     private final String[] data0 = {"Beiträge", "Likes", "Abonnenten"};
     private JComboBox<String> popularityOfBeitragReportPanelSortByBox;
+    private int beitragReportPanelSortByBox = 0;
     private final String[] data1 = {"Likes", "Kommentare"};
-    private ScrollPane nutzerlisteScrollPane;
     private JButton runNutzerReportButton;
     private JButton runBeitragReportButton;
     private JFormattedTextField calendarStartDateField;
@@ -97,77 +85,19 @@ public class HauptfensterReport extends JFrame {
     private void initListAndComboBox() {
         //@todo - Alles mit nutzerliste kann glaube ich weg
         contributionOfNutzerReportPanelSortByBox = new JComboBox<String>(data0);
+        contributionOfNutzerReportPanelSortByBox.setSelectedIndex(0);
+        contributionOfNutzerReportPanelSortByBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                nutzerReportPanelSortByBox = contributionOfNutzerReportPanelSortByBox.getSelectedIndex();
+            }
+        });
         popularityOfBeitragReportPanelSortByBox = new JComboBox<String>(data1);
-
-//        nutzerliste = new JList<Nutzer>();
-//        nutzerliste.setCellRenderer(new NutzerListCellRenderer());
-//        nutzerliste.addListSelectionListener(new ListSelectionListener() {
-//            public void valueChanged(ListSelectionEvent e) {
-//                reportUser = nutzerliste.getSelectedValue();
-//            }
-//        });
-//        nutzerliste.setSelectionModel(new DefaultListSelectionModel() {
-//            private static final long serialVersionUID = 1L;
-//
-//            boolean gestureStarted = false;
-//
-//            @Override
-//            public void setSelectionInterval(int index0, int index1) {
-//                if(!gestureStarted){
-//                if (index0==index1) {
-//                    if (isSelectedIndex(index0)) {
-//                        removeSelectionInterval(index0, index0);
-//                        return;
-//                    }
-//                }
-//                super.setSelectionInterval(index0, index1);
-//                }
-//                gestureStarted = true;
-//            }
-//
-//            @Override
-//            public void addSelectionInterval(int index0, int index1) {
-//                if (index0==index1) {
-//                    if (isSelectedIndex(index0)) {
-//                        removeSelectionInterval(index0, index0);
-//                        return;
-//                    }
-//                super.addSelectionInterval(index0, index1);
-//                }
-//            }
-//
-//            @Override
-//            public void setValueIsAdjusting(boolean isAdjusting) {
-//                if (isAdjusting == false) {
-//                    gestureStarted = false;
-//                }
-//            }
-//        });
-//    
-//        nutzerliste.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent evt) {
-//                JList list = (JList)evt.getSource();
-//                if (evt.getClickCount() == 2) {
-//                    int index = list.locationToIndex(evt.getPoint());
-//                    try {
-//                        Date dateStart = df.parse(calendarStartDateField.getText());
-//                        Date dateEnd = df.parse(calendarEndDateField.getText());
-//                        HTMLWriter htmlWriter = new HTMLWriter(reportGenerator.createContributionOfNutzerReport(reportUser, 
-//                                contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
-//                                dateStart, 
-//                                dateEnd));
-//                        nutzerliste.clearSelection();
-//                        reportUser = null;
-//                    } catch (RemoteException ex) {
-//                        Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (ParseException ex) {
-//                        Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                }
-//            }
-//        });
-//        nutzerliste.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        popularityOfBeitragReportPanelSortByBox.setSelectedIndex(0);
+        popularityOfBeitragReportPanelSortByBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                beitragReportPanelSortByBox = popularityOfBeitragReportPanelSortByBox.getSelectedIndex();
+            }
+        });
     }
     
     /**
@@ -177,13 +107,6 @@ public class HauptfensterReport extends JFrame {
     private void initData() {
         // @todo - Hier kann glaub auch was raus
         try {
-            Vector<Nutzer> n = server.getAllNutzer();
-            Vector<Nutzer> n0 = new Vector<Nutzer>();
-            for (int i = 0; i < n.size(); i++) {
-                if (!n.elementAt(i).getUsername().contentEquals("Deaktivierter Nutzer"))
-                    n0.add(n.elementAt(i));
-            }
-            nutzerliste.setListData(n0);
             reportGenerator = server.getReportGenerator();
         } catch (RemoteException ex) {
             Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
@@ -194,6 +117,7 @@ public class HauptfensterReport extends JFrame {
      * This method sets up the frame of the window and its form, size and default behaviour.
      */
     private void initFrame() {
+        this.setTitle("Report Generator");
         this.pack();
         this.setTitle("Report Generator");
         this.setResizable(false);
@@ -288,13 +212,10 @@ public class HauptfensterReport extends JFrame {
                     Date dateStart = df.parse(calendarStartDateField.getText());
                     Date dateEnd = df.parse(calendarEndDateField.getText());
                     HTMLWriter htmlWriter = new HTMLWriter(
-                            reportGenerator.createContributionOfNutzerReport(
-//                                    reportUser, 
-                                    contributionOfNutzerReportPanelSortByBox.getSelectedIndex(),
+                            reportGenerator.createContributionOfNutzerReport( 
+                                    nutzerReportPanelSortByBox,
                                     dateStart, 
                                     dateEnd));
-//                    nutzerliste.clearSelection();
-//                    reportUser = null;
                 } catch (RemoteException ex) {
                     Logger.getLogger(HauptfensterReport.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
@@ -363,7 +284,7 @@ public class HauptfensterReport extends JFrame {
                     Date dateEnd = df.parse(calendarEndDateField0.getText());
                     HTMLWriter htmlWriter = new HTMLWriter(
                             reportGenerator.createPopularityOfBeitragReport(
-                                    popularityOfBeitragReportPanelSortByBox.getSelectedIndex(), 
+                                    beitragReportPanelSortByBox, 
                                     dateStart, 
                                     dateEnd));
                 } catch (RemoteException ex) {
