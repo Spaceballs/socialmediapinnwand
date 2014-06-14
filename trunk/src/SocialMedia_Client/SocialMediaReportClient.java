@@ -91,29 +91,25 @@ public class SocialMediaReportClient {
              Logger.getLogger(this.getClass().getName()).info("RMI Gestartet...");
              socialMediaLogic = (SocialMediaLogic) Naming.lookup("rmi://" + adresse + ":" + serverPort + "/socialMediaLogic");
              Logger.getLogger(this.getClass().getName()).info("Verbindung hergestellt...");
+             javax.swing.SwingUtilities.invokeLater(
+                new Runnable() { public void run() { createAndShowGUI();}});
         } catch (NotBoundException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
-            javax.swing.SwingUtilities.invokeLater(
-                new Runnable() { public void run() { createAndShowDialogue();}});
+            createAndShowDialogue();
         } catch (MalformedURLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
-            javax.swing.SwingUtilities.invokeLater(
-                new Runnable() { public void run() { createAndShowDialogue();}});
+            createAndShowDialogue();
         } catch (RemoteException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
-            javax.swing.SwingUtilities.invokeLater(
-                new Runnable() { public void run() { createAndShowDialogue();}});
+            createAndShowDialogue();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SocialMediaReportClient.class.getName()).log(Level.SEVERE, null, ex);
-            javax.swing.SwingUtilities.invokeLater(
-                new Runnable() { public void run() { createAndShowDialogue();}});
+            createAndShowDialogue();
         }
-        javax.swing.SwingUtilities.invokeLater(
-                new Runnable() { public void run() { createAndShowGUI();}});
     }
     
     /**
