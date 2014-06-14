@@ -44,6 +44,7 @@ public class PinnwandPanel extends JPanel {
     private Vector<Beitrag> beitraege;
     private Vector<Beitrag> beitraegeSortiert;
     private Pinnwand pinnwand;
+    JScrollPane scrollPane;
 
     /**
      * Constructor
@@ -92,7 +93,7 @@ public class PinnwandPanel extends JPanel {
                 }
             }
             
-            JScrollPane scrollPane = new JScrollPane();
+            scrollPane = new JScrollPane();
             scrollPane.getVerticalScrollBar().setUnitIncrement(20);
             scrollPane.setBorder(null);
             scrollPane.getInsets().set(0,0,0,0);
@@ -203,5 +204,8 @@ public class PinnwandPanel extends JPanel {
      */
     public Nutzer getNutzer(){
         return this.nutzer;
+    }
+    public JScrollPane getScrollPane(){
+        return scrollPane;
     }
 }
