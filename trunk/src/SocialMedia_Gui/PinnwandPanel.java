@@ -205,6 +205,11 @@ public class PinnwandPanel extends JPanel {
     public Nutzer getNutzer(){
         return this.nutzer;
     }
+    
+    /**
+     * Getter for the ScrollPane
+     * @return scrollPane of the Panel
+     */
     public JScrollPane getScrollPane(){
         return scrollPane;
     }

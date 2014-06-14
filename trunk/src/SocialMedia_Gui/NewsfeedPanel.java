@@ -159,6 +159,11 @@ public class NewsfeedPanel extends JPanel {
             Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /**
+     * Getter for the ScrollPane
+     * @return scrollPane of the Panel
+     */
     public JScrollPane getScrollPane(){
         return scrollPane;
     }
