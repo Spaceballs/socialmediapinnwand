@@ -7,6 +7,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -80,6 +85,7 @@ public class Hauptfenster extends JFrame {
         initializeListeners();
         initializePane();
         initializeOptions();
+        intializeRefreshTimer();
     }
 
     /**
@@ -154,7 +160,12 @@ public class Hauptfenster extends JFrame {
     public void refreshPanelLinks() {
         if (panel instanceof NewsfeedPanel) {
             NewsfeedPanel newsfeedPanel = (NewsfeedPanel) panel;
+            int scrollValue = newsfeedPanel.getScrollPane().getVerticalScrollBar().getValue();
+            
+            System.out.println(scrollValue);
+            
             setPanelLinks(new NewsfeedPanel(server, clientNutzer));
+            newsfeedPanel.getScrollPane().getVerticalScrollBar().setValue(scrollValue);
         } else if (panel instanceof PinnwandPanel) {
             PinnwandPanel pinnwandPanel = (PinnwandPanel) panel;
             setPanelLinks(new PinnwandPanel(server, clientNutzer, pinnwandPanel.getNutzer()));
@@ -216,5 +227,16 @@ public class Hauptfenster extends JFrame {
                 }
             }
         });
+    }
+
+    private void intializeRefreshTimer() {
+        ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+        exec.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                
+                refreshPanelLinks();
+            }
+        }, 0, 15, TimeUnit.SECONDS);
     }
 }
