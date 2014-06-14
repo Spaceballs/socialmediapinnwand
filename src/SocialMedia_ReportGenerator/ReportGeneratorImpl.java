@@ -271,7 +271,6 @@ public class ReportGeneratorImpl
             }
             abonnements = abonnements2;
             int laufindex0 = (beitraege.size() > abonnements.size()) ?  beitraege.size() : abonnements.size();
-            System.out.println(laufindex0);
             if (sortByVal==0){
                 //sortByVal Beiträge
                 /**
@@ -335,7 +334,6 @@ public class ReportGeneratorImpl
                      * Wenn nix da ist dann leere Zeile erzeugen
                      */
                     for (int counter = 0; counter <  laufindex; counter++){
-                        System.out.println(nutzerschleife + " " + j + " " + counter);
                         Row r0 = new RowImpl();
                         Column c = new ColumnImpl();
                         c.addSubParagraph(new SimpleParagraphImpl(""));
@@ -365,7 +363,6 @@ public class ReportGeneratorImpl
                         }
                         if (counter == 0){
                             try{
-                                System.out.println("abos to print " + abonnements);
                                 r0.addColumn(writeAbonnement(abonnements.elementAt(j)));
                             } catch (IndexOutOfBoundsException ex){
                                 r0.addColumn(c);
@@ -406,7 +403,7 @@ public class ReportGeneratorImpl
                  * Schleife über alle Beiträge und Abonnements, wovon mehr da ist.
                  * Wenn nix da ist dann leere Zeile erzeugen
                  */
-                for (int j = 0; j < laufindex0;) {
+                for (int j = 0; j < laufindex0; j++) {
                     Vector<Like> likes;
                     Vector<Kommentar> kommentare;
                     try{
@@ -439,7 +436,6 @@ public class ReportGeneratorImpl
                         c.addSubParagraph(new SimpleParagraphImpl(""));
                         if (counter == 0){
                             r0.addColumn(writeNutzer(nutzers.elementAt(nutzerschleife)));
-                            nutzerschleife++;
                         } else {
                             r0.addColumn(c);
                         }
@@ -465,7 +461,6 @@ public class ReportGeneratorImpl
                         } 
                         if (counter == 0){
                             try{
-                                System.out.println(abonnements);
                                 r0.addColumn(writeAbonnement(abonnements.elementAt(j)));
                             } catch (IndexOutOfBoundsException ex){
                                 r0.addColumn(c);
@@ -544,7 +539,6 @@ public class ReportGeneratorImpl
                         } 
                         if (counter == 0){
                             try{
-                                System.out.println(abonnements);
                                 r0.addColumn(writeAbonnement(abonnements.elementAt(j)));
                             } catch (IndexOutOfBoundsException ex){
                                 r0.addColumn(c);
