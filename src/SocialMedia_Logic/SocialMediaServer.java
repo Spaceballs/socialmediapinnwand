@@ -44,6 +44,7 @@ public class SocialMediaServer {
 
     /**
      * Constructor of the Server class
+     * Starts the rmi and the server object
      */
     public SocialMediaServer () {
         String ip = "localhost";
