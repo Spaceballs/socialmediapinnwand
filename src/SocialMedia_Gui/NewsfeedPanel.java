@@ -40,6 +40,7 @@ public class NewsfeedPanel extends JPanel {
     private Pinnwand pinnwand;
     private Vector<Beitrag> beitraege;
     private Pinnwand meinePinnwand;
+    JScrollPane scrollPane;
 
     /**
      * Constructor
@@ -70,7 +71,7 @@ public class NewsfeedPanel extends JPanel {
         titlePanel.add(titleNewsfeed, BorderLayout.WEST);
         titlePanel.add(buttonNeuerBeitrag, BorderLayout.EAST);
         
-        JScrollPane scrollPane = new JScrollPane();
+        scrollPane = new JScrollPane();
         scrollPane.getVerticalScrollBar().setUnitIncrement(20);
         scrollPane.setBorder(null); 
         scrollPane.getInsets().set(0,0,0,0);
@@ -157,5 +158,8 @@ public class NewsfeedPanel extends JPanel {
         } catch (RemoteException ex) {
             Logger.getLogger(NewsfeedPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public JScrollPane getScrollPane(){
+        return scrollPane;
     }
 }
