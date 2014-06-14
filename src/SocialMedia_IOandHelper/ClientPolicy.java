@@ -15,13 +15,18 @@ import java.security.Policy;
 import java.util.PropertyPermission;
 
 /**
- * @todo Kommentierung
+ * Class to set the security policy rules for the client.
  * @author Sebastian
  */
 public class ClientPolicy extends Policy {
-
+    /**
+     * PermissionsCollection for the client
+     */
     private static PermissionCollection perms;
-
+    
+    /**
+     * Constructror of the client policy class calls for the super class and creates a new permissionCollection.
+     */
     public ClientPolicy() {
         super();
         if (perms == null) {
@@ -29,12 +34,20 @@ public class ClientPolicy extends Policy {
             addPermissions();
         }
     }
-
+    
+    /**
+     * Permission getter for the security manager
+     * @param codesource - The source of the permission invocation.
+     * @return 
+     */
     @Override
     public PermissionCollection getPermissions(CodeSource codesource) {
         return perms;
     }
-
+    
+    /**
+     * Method for adding permission grants to the collection
+     */
     private void addPermissions() {
         SocketPermission socketPermission = new SocketPermission("*:1024-", "connect, resolve");
         PropertyPermission propertyPermission = new PropertyPermission("<<ALL FILES>>", "read, write");

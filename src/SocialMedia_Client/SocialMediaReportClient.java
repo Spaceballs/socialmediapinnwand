@@ -38,6 +38,7 @@ public class SocialMediaReportClient {
     
     /**
      * Constructor of the client start class.
+     * Prepares the Data for the rmi connection.
      */
     private SocialMediaReportClient (){
         try {
@@ -74,6 +75,7 @@ public class SocialMediaReportClient {
     
     /**
      * This Method starts the real client graphical user interface and the rmi connection.
+     * With the data given by the Dialog Server Data.
      * 
      * @param adresse - String for the url.
      * @param serverPort - String for the server rmi port.

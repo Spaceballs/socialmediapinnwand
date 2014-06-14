@@ -196,9 +196,9 @@ public class AbonnementMapper extends DBStatementFactory {
     // #[regen=yes,id=DCE.8FEA238D-153E-6EFA-188A-255C783AA53D]
     // </editor-fold> 
     /**
-     * @todo Kommentierung
-     * @param val int value to be set
-     * @return abonnement - Returns the abonnement with the chosen ID
+     * Method to get a single entry form the database.
+     * @param val primary key of the database entry.
+     * @return abonnement - Returns the oject with the given ID
      */
     public Abonnement findByID (int val) {
         Connection con = DBConnection.connection();

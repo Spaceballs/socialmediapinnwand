@@ -38,6 +38,7 @@ public class SocialMediaClient {
     
     /**
      * Constructor of the client start class.
+     * Prepares the Data for the rmi connection.
      */
     private SocialMediaClient (){
         try {
@@ -67,6 +68,7 @@ public class SocialMediaClient {
     
     /**
      * Creates an window to ask for the server data.
+     * 
      */
     public void createAndShowDialogue(){
         DialogServerData serverData = new DialogServerData(this, serverAdress, serverPort, clientPort);
@@ -74,6 +76,8 @@ public class SocialMediaClient {
 
     /**
      * This Method starts the real client grafical user interface and the rmi connection.
+     * With the data given by the Dialog Server Data.
+     * 
      * @param adresse - String for the url.
      * @param serverPort - String for the server rmi port.
      * @param clientPort - String for the client rmi port.

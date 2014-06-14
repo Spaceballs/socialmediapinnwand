@@ -23,20 +23,22 @@ import javax.swing.ListCellRenderer;
  public class NutzerListCellRenderer extends JLabel implements ListCellRenderer<Object> {
      
      /**
-      * @todo Kommentierung
+      * Constructor of the nutzer list cell renderer.
       */
      public NutzerListCellRenderer() {
+         super();
          setOpaque(true);
      }
      
      /**
+      * Method for viewing the right content of the nutzer object.
       * 
-      * @param list
-      * @param value
-      * @param index
-      * @param isSelected
-      * @param cellHasFocus
-      * @return 
+      * @param list - JList of the renderer.
+      * @param value - Object of the jlist.
+      * @param index - Index of the object in the jlist.
+      * @param isSelected - Boolean value if or not the object is selected.
+      * @param cellHasFocus - Boolean value if or not the object cell has focus.
+      * @return Returns the renderer object.
       */
      public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
          Nutzer val = (Nutzer)value;

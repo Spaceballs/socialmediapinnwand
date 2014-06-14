@@ -9,15 +9,16 @@ import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 
 /**
- * Class for controlling the correct user input.
+ * Class for controlling the correct user input for the date format.
  * @author Sebastian
  */
 public class FormattedTextFieldVerifier extends InputVerifier {
     
     /**
-     * @todo Kommentierung
-     * @param input
-     * @return 
+     * Verifyer method for the formatted text field.
+     * 
+     * @param input - JComponent where the user input occurs.
+     * @return true - When string is a date/ false - When it is not.
      */
      public boolean verify(JComponent input) {
          if (input instanceof JFormattedTextField) {
@@ -38,9 +39,9 @@ public class FormattedTextFieldVerifier extends InputVerifier {
       }
      
      /**
-      * 
-      * @param input
-      * @return 
+      * Method to check the user input when the JComponent loses focus
+      * @param input - JComponent with the verifier.
+      * @return true - When string is a date/ false - When it is not.
       */
      @Override
       public boolean shouldYieldFocus(JComponent input) {
