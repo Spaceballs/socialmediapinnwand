@@ -244,14 +244,14 @@ public class HauptfensterReport extends JFrame {
         c.gridy = 0;
         popularityOfBeitragTextFieldPanel.add(new JLabel("Start Date: "), c);        
         
-        calendarStartDateField = new JFormattedTextField(df);
-        calendarStartDateField.setText(df.format(new Date(new Date().getTime()-86400000)));
-        calendarStartDateField.setInputVerifier(new FormattedTextFieldVerifier());
-        calendarStartDateField.setPreferredSize(new Dimension(140, 20));
+        calendarStartDateField0 = new JFormattedTextField(df);
+        calendarStartDateField0.setText(df.format(new Date(new Date().getTime()-86400000)));
+        calendarStartDateField0.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarStartDateField0.setPreferredSize(new Dimension(140, 20));
         
         c.gridx = 1;
         c.gridy = 0;
-        popularityOfBeitragTextFieldPanel.add(calendarStartDateField, c);
+        popularityOfBeitragTextFieldPanel.add(calendarStartDateField0, c);
         
         c.gridx = 0;
         c.gridy = 1;
