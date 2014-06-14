@@ -202,9 +202,9 @@ public class BeitragMapper extends DBStatementFactory {
     // #[regen=yes,id=DCE.D12ED43A-5458-0A9B-A33B-4670D16CC3F1]
     // </editor-fold> 
     /**
-     * @todo Kommentierung
-     * @param val int value to be set
-     * @return beitrag - Returns the beitrag with the chosen ID
+     * Method to get a single entry form the database.
+     * @param val primary key of the database entry.
+     * @return abonnement - Returns the oject with the given ID
      */
     public Beitrag findByID (int val) {
         Connection con = DBConnection.connection();

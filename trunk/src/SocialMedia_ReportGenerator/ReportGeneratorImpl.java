@@ -3,7 +3,6 @@ package SocialMedia_ReportGenerator;
 import SocialMedia_Data.Abonnement;
 import SocialMedia_Data.Beitrag;
 import SocialMedia_Data.DataReference;
-import SocialMedia_Data.DataReferenceImpl;
 import SocialMedia_Data.Kommentar;
 import SocialMedia_Data.Like;
 import SocialMedia_Data.Nutzer;

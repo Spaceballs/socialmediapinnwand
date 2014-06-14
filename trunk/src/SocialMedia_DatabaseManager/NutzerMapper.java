@@ -205,9 +205,9 @@ public class NutzerMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.D23558EA-2F26-4617-294C-70420DD1EA3B]
     // </editor-fold> 
     /**
-     * @todo Kommentierung
-     * @param val int value to be set
-     * @return nutzer - Returns the nutzer with the chosen ID
+     * Method to get a single entry form the database.
+     * @param val primary key of the database entry.
+     * @return abonnement - Returns the oject with the given ID
      */
     public Nutzer findByID(int val) {
         Connection con = DBConnection.connection();

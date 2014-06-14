@@ -196,9 +196,9 @@ public class LikeMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.2F208909-213E-7E00-A86E-FFABCE2016FE]
     // </editor-fold> 
     /**
-     * @todo Kommentierung
-     * @param val int value to be set
-     * @return like - Returns the like with the chosen ID 
+     * Method to get a single entry form the database.
+     * @param val primary key of the database entry.
+     * @return abonnement - Returns the oject with the given ID
      */
     public Like findByID (int val) {
         Connection con = DBConnection.connection();

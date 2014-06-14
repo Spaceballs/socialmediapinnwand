@@ -191,9 +191,9 @@ public class PinnwandMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.C0658A8A-FA2D-12E1-4BCA-21F0FDF7D437]
     // </editor-fold> 
     /**
-     * @todo Kommentierung
-     * @param val int value to be set
-     * @return pinnwand - Returns the pinnwand with the chosen ID 
+     * Method to get a single entry form the database.
+     * @param val primary key of the database entry.
+     * @return abonnement - Returns the oject with the given ID
      */
     public Pinnwand findByID (int val) {
         Connection con = DBConnection.connection();
