@@ -83,7 +83,6 @@ public class Hauptfenster extends JFrame {
         initializeListeners();
         initializePane();
         initializeOptions();
-        intializeRefreshTimer();
     }
 
     /**
@@ -158,16 +157,12 @@ public class Hauptfenster extends JFrame {
     public void refreshPanelLinks() {
         if (panel instanceof NewsfeedPanel) {
             newsfeedPanel = (NewsfeedPanel) panel;
-            Point p = newsfeedPanel.getScrollPane().getViewport().getViewPosition();
             newsfeedPanel = new NewsfeedPanel(server, clientNutzer);
             setPanelLinks(newsfeedPanel);
-            newsfeedPanel.getScrollPane().getViewport().setViewPosition(p);
         } else if (panel instanceof PinnwandPanel) {
             pinnwandPanel = (PinnwandPanel) panel;
-            Point p = pinnwandPanel.getScrollPane().getViewport().getViewPosition();
             pinnwandPanel = new PinnwandPanel(server, clientNutzer, pinnwandPanel.getNutzer());
             setPanelLinks(pinnwandPanel);
-            pinnwandPanel.getScrollPane().getViewport().setViewPosition(p);
         }
     }
     
@@ -226,25 +221,5 @@ public class Hauptfenster extends JFrame {
                 }
             }
         });
-    }
-
-    private void intializeRefreshTimer() {
-        ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
-        exec.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                if (panel instanceof NewsfeedPanel) {
-                    NewsfeedPanel newsfeedPanel = (NewsfeedPanel) panel;
-                    Point p = newsfeedPanel.getScrollPane().getViewport().getViewPosition();
-                    refreshPanelLinks();
-                    newsfeedPanel.getScrollPane().getViewport().setViewPosition(p);
-                } else if (panel instanceof PinnwandPanel) {
-                    PinnwandPanel pinnwandPanel = (PinnwandPanel) panel;
-                    Point p = pinnwandPanel.getScrollPane().getViewport().getViewPosition();
-                    refreshPanelLinks();
-                    pinnwandPanel.getScrollPane().getViewport().setViewPosition(p);
-                }
-            }
-        }, 0, 15, TimeUnit.SECONDS);
     }
 }
