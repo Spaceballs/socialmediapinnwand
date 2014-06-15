@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 /**
  * Class for mapping PinnwandImpl objects onto a sql database.
  * 
- * 
  * @author Sebastian
  */
 public class PinnwandMapper extends DBStatementFactory{
@@ -55,8 +54,6 @@ public class PinnwandMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Insert method of the Pinnwand mapper for the PinnwandImpl objects.
-     * 
-     * 
      * @param val - Needs a Pinnwand object without an id.
      * @return Pinnwand - Returns the inserted object with the generated id.
      */
@@ -95,8 +92,6 @@ public class PinnwandMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Update method of the Pinnwand mapper updates object by id.
-     * 
-     * 
      * @param val - Needs an Pinnwand object with a id.
      * @return Pinnwand - Returns the updated objects.
      */
@@ -125,8 +120,6 @@ public class PinnwandMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Deletes the given Pinnwand from the sql table by id.
-     * 
-     * 
      * @param val Pinnwand to be deleted.
      */
     public void delete (Pinnwand val) {
@@ -149,9 +142,7 @@ public class PinnwandMapper extends DBStatementFactory{
     // #[regen=yes,id=DCE.FB59E1FB-D7D9-B9DA-BC04-2EFEC34E9A73]
     // </editor-fold> 
     /**
-     * Method to read every entry in the Pinnwand table.
-     * 
-     * 
+     * Method to read every entry in the Pinnwand table. 
      * @return Vector<Pinnwand> - Returns all the entrys in the sql table
      */
     public Vector<Pinnwand> getAll () {

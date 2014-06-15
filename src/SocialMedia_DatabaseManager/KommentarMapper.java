@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 /**
  * Class for mapping KommentarImpl objects onto a sql database.
  * 
- * 
  * @author Sebastian
  */
 public class KommentarMapper extends DBStatementFactory{
@@ -55,8 +54,6 @@ public class KommentarMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Update method of the Kommentar mapper updates object by id.
-     * 
-     * 
      * @param val - Needs a Kommentar object without an id.
      * @return Kommentar - Returns the inserted object with the generated id.
      */    
@@ -99,8 +96,6 @@ public class KommentarMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Updates the Kommentar object by the objects id.
-     * 
-     * 
      * @param val - Needs an Kommentar object with a id.
      * @return Kommentar - Returns the updated objects.
      */
@@ -131,8 +126,6 @@ public class KommentarMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Deletes the given Kommentar from the sql table by id.
-     * 
-     * 
      * @param val - Kommentar to be deleted.
      */
     public void delete (Kommentar val) {
@@ -156,8 +149,6 @@ public class KommentarMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Method to read every entry in the Kommentar table.
-     * 
-     * 
      * @return Vector<Kommentar> - Returns all the entrys in the sql table
      */
     public Vector<Kommentar> getAll () {

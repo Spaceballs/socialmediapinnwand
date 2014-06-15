@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +17,6 @@ import java.util.logging.Logger;
 // </editor-fold> 
 /**
  * Class for mapping AbonnementImpl objects onto a sql database.
- * 
  * 
  * @author Sebastian
  */
@@ -56,8 +54,6 @@ public class AbonnementMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * Insert method of the Abonnement mapper for the AbonnementImpl objects.
-     * 
-     * 
      * @param val - Needs a Abonnement object without an id.
      * @return Abonnement - Returns the inserted object with the generated id.
      */
@@ -98,8 +94,6 @@ public class AbonnementMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * Update method of the Abonnement mapper updates object by id.
-     * 
-     * 
      * @param val - Needs an Abonnement object with a id.
      * @return Abonnement - Returns the updated objects.
      */
@@ -129,8 +123,6 @@ public class AbonnementMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * Deletes the given Abonnement from the sql table by id.
-     * 
-     * 
      * @param val Abonnement to be deleted.
      */
     public void delete (Abonnement val) {
@@ -154,8 +146,6 @@ public class AbonnementMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * Method to read every entry in the Abonnement table.
-     * 
-     * 
      * @return Vector<Abonnement> - Returns all the entrys in the sql table
      */
     public Vector<Abonnement> getAll () {
