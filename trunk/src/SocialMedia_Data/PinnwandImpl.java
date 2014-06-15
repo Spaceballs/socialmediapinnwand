@@ -1,14 +1,18 @@
+
 package SocialMedia_Data;
 
-//import SocialMedia_DatabaseManager.Vector<Beitrag>;
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
-    import java.util.Vector;
+import java.util.Vector;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.47B4081F-641D-CF5F-7507-4246F9B5F87B]
 // </editor-fold> 
+/**
+ * Implementation class of Pinnwand
+ * @author Sebastian
+ */
 public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -20,7 +24,7 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     // #[regen=yes,id=DCE.72DCC317-149D-B9E4-6A3B-717A3374A9CA]
     // </editor-fold> 
     /**
-     * Konstruktor von Pinnwand
+     * Constructor of the class
      * @throws RemoteException 
      */
     public PinnwandImpl () 
@@ -58,7 +62,7 @@ public class PinnwandImpl extends DataReferenceImpl implements Pinnwand {
     // #[regen=yes,id=DCE.1C5670FC-1942-4082-13A2-408A385BBDAB]
     // </editor-fold> 
     /**
-     * Gets all PinnwandBeitraege of the PinnwandID.
+     * Gets all Beitraege of a Pinnwand
      * @param verwaltung - This object is needed for getting data from the DB.
      * @return - Returns all Beiträge of the Pinnwand.
      * @throws RemoteException 

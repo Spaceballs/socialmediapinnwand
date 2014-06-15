@@ -2,14 +2,12 @@ package SocialMedia_Data;
 
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
-import java.util.Vector;
-
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.D34739A1-3E6D-6B19-CAA4-1E4A754FEA92]
 // </editor-fold> 
 /**
- * @todo Kommentar
+ * Implementation class for Abonnement
  * @author Sebastian
  */
 public class AbonnementImpl extends DataReferenceImpl implements Abonnement {

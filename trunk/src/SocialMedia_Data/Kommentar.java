@@ -5,7 +5,7 @@ package SocialMedia_Data;
 import java.rmi.RemoteException;
 
 /**
- * 
+ * Interface class for Kommentar
  * @author Sebastian
  */
 public interface Kommentar extends UserCreatedContent {

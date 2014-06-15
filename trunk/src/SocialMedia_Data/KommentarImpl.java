@@ -5,7 +5,7 @@ package SocialMedia_Data;
 import java.rmi.RemoteException;
 
 /**
- * 
+ * Implementation class for Kommentar
  * @author Sebastian
  */
 public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
@@ -19,7 +19,7 @@ public class KommentarImpl extends UserCreatedContentImpl implements Kommentar {
     // #[regen=yes,id=DCE.F298D0BE-9649-8BB0-3B54-FBD7D203EFBB]
     // </editor-fold> 
     /**
-     * Konstruktor von Kommentar
+     * Constructor of the class
      * @throws java.rmi.RemoteException
      */
     public KommentarImpl () 

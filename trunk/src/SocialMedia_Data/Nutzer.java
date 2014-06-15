@@ -9,7 +9,7 @@ import java.util.Vector;
 // #[regen=yes,id=DCE.917FBD41-4ADB-8612-BEDC-6048D96A8ED8]
 // </editor-fold> 
 /**
- * 
+ * Interface class for Nutzer
  * @author Sebastian
  */
 public interface Nutzer extends DataReference{
@@ -62,7 +62,7 @@ public interface Nutzer extends DataReference{
     // #[regen=yes,id=DCE.90EE25F5-9838-FA49-1619-7496F8C9D4CE]
     // </editor-fold> 
     /**
-     * 
+     * Getter for the Surname attribute.
      * @return String
      * @throws java.rmi.RemoteException 
      */
@@ -73,7 +73,7 @@ public interface Nutzer extends DataReference{
     // #[regen=yes,id=DCE.C745F1EF-B411-98F3-1AAE-A7B56AC34214]
     // </editor-fold> 
     /**
-     * Getter for the Surname attribute.
+     * Setter for the Surname attribute.
      * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
@@ -103,7 +103,7 @@ public interface Nutzer extends DataReference{
             throws RemoteException;
 
     /**
-     * Getter for the Nutzer Pinnwand.
+     * Gets the Pinnwand of a Nutzer
      * @param verwaltung
      * @return Pinnwand
      * @throws java.rmi.RemoteException 
@@ -112,7 +112,7 @@ public interface Nutzer extends DataReference{
             throws RemoteException;
 
     /**
-     * Getter for all Nutzer of the Abonement.
+     * Gets all Abonnements of a Nutzer
      * @param verwaltung
      * @return Abonnement 
      * @throws java.rmi.RemoteException 

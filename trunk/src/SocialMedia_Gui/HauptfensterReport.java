@@ -2,7 +2,6 @@
 package SocialMedia_Gui;
 
 import SocialMedia_IOandHelper.FormattedTextFieldVerifier;
-import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import SocialMedia_Report.HTMLWriter;
 import SocialMedia_ReportGenerator.ReportGenerator;
@@ -83,7 +82,6 @@ public class HauptfensterReport extends JFrame {
      * This listener sets, if selection occurs, the selected user for the report and sets the buttons <code>setEnabled(true)</code>.
      */
     private void initListAndComboBox() {
-        //@todo - Alles mit nutzerliste kann glaube ich weg
         contributionOfNutzerReportPanelSortByBox = new JComboBox<String>(data0);
         contributionOfNutzerReportPanelSortByBox.setSelectedIndex(0);
         contributionOfNutzerReportPanelSortByBox.addActionListener(new ActionListener() {
@@ -105,7 +103,6 @@ public class HauptfensterReport extends JFrame {
      * This data is obtained from the server.
      */
     private void initData() {
-        // @todo - Hier kann glaub auch was raus
         try {
             reportGenerator = server.getReportGenerator();
         } catch (RemoteException ex) {
@@ -204,7 +201,6 @@ public class HauptfensterReport extends JFrame {
         
         contributionOfNutzerReportPanel.add(contributionOfNutzerTextFieldPanel, BorderLayout.CENTER);
         
-        //@todo - ReportGeneratorImpl anpassen!!
         runNutzerReportButton = new JButton("Go!");
         runNutzerReportButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

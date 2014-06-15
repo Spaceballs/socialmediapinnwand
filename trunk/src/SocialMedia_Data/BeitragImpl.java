@@ -11,7 +11,7 @@ import java.util.Vector;
 // #[regen=yes,id=DCE.B78E78F9-7381-6316-44FC-40BD9E5B2A96]
 // </editor-fold> 
 /**
- * 
+ * Implementation class for Beitrag
  * @author Sebastian
  */
 public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
@@ -25,7 +25,7 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // #[regen=yes,id=DCE.64B1D205-0A3A-C365-8CF0-423F6D3F24FA]
     // </editor-fold> 
     /**
-     * Konstruktor von Beitrag.
+     * Constructor of Beitrag
      * @throws java.rmi.RemoteException
      */
     public BeitragImpl () 
@@ -64,7 +64,7 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // #[regen=yes,id=DCE.07143528-A037-8DD6-009D-144D8FDEA987]
     // </editor-fold> 
     /**
-     * 
+     * Gets a Vector of all Kommentare of a Beitrag
      * @param verwaltung - This object is needed for getting data from the DB.
      * @throws java.rmi.RemoteException
      * @return - Returns the Kommentare of the Beitrag
@@ -86,7 +86,7 @@ public class BeitragImpl extends UserCreatedContentImpl implements Beitrag {
     // #[regen=yes,id=DCE.9AF3AE41-59F5-5C5E-7339-D644ABD49DD7]
     // </editor-fold> 
     /**
-     * 
+     * Gets a Vector of all Likes of a Beitrag
      * @param verwaltung - This object is needed for getting data from the DB.
      * @throws java.rmi.RemoteException
      * @return - Returns the number of Likes of a Beitrag.

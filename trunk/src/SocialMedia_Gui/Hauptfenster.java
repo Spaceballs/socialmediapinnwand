@@ -160,12 +160,7 @@ public class Hauptfenster extends JFrame {
     public void refreshPanelLinks() {
         if (panel instanceof NewsfeedPanel) {
             NewsfeedPanel newsfeedPanel = (NewsfeedPanel) panel;
-            int scrollValue = newsfeedPanel.getScrollPane().getVerticalScrollBar().getValue();
-            
-            System.out.println(scrollValue);
-            
             setPanelLinks(new NewsfeedPanel(server, clientNutzer));
-            newsfeedPanel.getScrollPane().getVerticalScrollBar().setValue(scrollValue);
         } else if (panel instanceof PinnwandPanel) {
             PinnwandPanel pinnwandPanel = (PinnwandPanel) panel;
             setPanelLinks(new PinnwandPanel(server, clientNutzer, pinnwandPanel.getNutzer()));
@@ -237,11 +232,13 @@ public class Hauptfenster extends JFrame {
                 if (panel instanceof NewsfeedPanel) {
                     NewsfeedPanel newsfeedPanel = (NewsfeedPanel) panel;
                     Point p = newsfeedPanel.getScrollPane().getViewport().getViewPosition();
+                    refreshPanelLinks();
+                    newsfeedPanel.getScrollPane().getViewport().setViewPosition(p);
                 } else if (panel instanceof PinnwandPanel) {
                     PinnwandPanel pinnwandPanel = (PinnwandPanel) panel;
                     Point p = pinnwandPanel.getScrollPane().getViewport().getViewPosition();
                     refreshPanelLinks();
-                    newsfeedPanel.getScrollPane().getViewport().setViewPosition(p);
+                    pinnwandPanel.getScrollPane().getViewport().setViewPosition(p);
                 }
             }
         }, 0, 15, TimeUnit.SECONDS);

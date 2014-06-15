@@ -6,7 +6,7 @@ import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
 
 /**
- * 
+ * Interface class for Like
  * @author Sebastian
  */
 public interface Like extends DataReference {
@@ -37,7 +37,7 @@ public interface Like extends DataReference {
     // #[regen=yes,id=DCE.66E08099-C5B7-4506-F5DA-E8F82BABB84C]
     // </editor-fold> 
     /**
-     * 
+     * Getter for the NutzerID attribute.
      * @return 
      * @throws java.rmi.RemoteException 
      */
@@ -48,13 +48,19 @@ public interface Like extends DataReference {
     // #[regen=yes,id=DCE.D0B082B6-C9BE-1FCD-A313-D22D5D132062]
     // </editor-fold> 
     /**
-     * Getter for the NutzerID attribute.
+     * Setter for the NutzerID attribute.
      * @param val 
      * @throws java.rmi.RemoteException 
      */
     public void setNutzerID (int val)
             throws RemoteException;
     
+    /**
+     * Gets the Nutzer by the nutzerID
+     * @param verwaltung - This object is needed for getting data from the DB.
+     * @return - Returns the nutzer object. 
+     * @throws RemoteException 
+     */
     public Nutzer getOwner (SocialMediaLogicImpl verwaltung) 
             throws RemoteException;
 
