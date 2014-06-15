@@ -4,6 +4,7 @@ package SocialMedia_Gui;
 import SocialMedia_Data.Nutzer;
 import SocialMedia_Logic.SocialMediaLogic;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -27,7 +28,6 @@ import javax.swing.JSplitPane;
  * @author Max
  */
 public class Hauptfenster extends JFrame {
-    
     private final SocialMediaLogic server;
     private final Nutzer clientNutzer;
     private final JMenuBar menueLeiste = new JMenuBar();
@@ -234,8 +234,15 @@ public class Hauptfenster extends JFrame {
         exec.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                
-                refreshPanelLinks();
+                if (panel instanceof NewsfeedPanel) {
+                    NewsfeedPanel newsfeedPanel = (NewsfeedPanel) panel;
+                    Point p = newsfeedPanel.getScrollPane().getViewport().getViewPosition();
+                } else if (panel instanceof PinnwandPanel) {
+                    PinnwandPanel pinnwandPanel = (PinnwandPanel) panel;
+                    Point p = pinnwandPanel.getScrollPane().getViewport().getViewPosition();
+                    refreshPanelLinks();
+                    newsfeedPanel.getScrollPane().getViewport().setViewPosition(p);
+                }
             }
         }, 0, 15, TimeUnit.SECONDS);
     }
