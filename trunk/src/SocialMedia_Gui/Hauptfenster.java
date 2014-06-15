@@ -8,8 +8,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -159,11 +157,17 @@ public class Hauptfenster extends JFrame {
      */
     public void refreshPanelLinks() {
         if (panel instanceof NewsfeedPanel) {
-            NewsfeedPanel newsfeedPanel = (NewsfeedPanel) panel;
-            setPanelLinks(new NewsfeedPanel(server, clientNutzer));
+            newsfeedPanel = (NewsfeedPanel) panel;
+            Point p = newsfeedPanel.getScrollPane().getViewport().getViewPosition();
+            newsfeedPanel = new NewsfeedPanel(server, clientNutzer);
+            setPanelLinks(newsfeedPanel);
+            newsfeedPanel.getScrollPane().getViewport().setViewPosition(p);
         } else if (panel instanceof PinnwandPanel) {
-            PinnwandPanel pinnwandPanel = (PinnwandPanel) panel;
-            setPanelLinks(new PinnwandPanel(server, clientNutzer, pinnwandPanel.getNutzer()));
+            pinnwandPanel = (PinnwandPanel) panel;
+            Point p = pinnwandPanel.getScrollPane().getViewport().getViewPosition();
+            pinnwandPanel = new PinnwandPanel(server, clientNutzer, pinnwandPanel.getNutzer());
+            setPanelLinks(pinnwandPanel);
+            pinnwandPanel.getScrollPane().getViewport().setViewPosition(p);
         }
     }
     
