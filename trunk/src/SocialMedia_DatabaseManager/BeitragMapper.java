@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 /**
  * Class for mapping BeitragImpl objects into a sql database.
  * 
- * 
  * @author Sebastian
  */
 public class BeitragMapper extends DBStatementFactory {
@@ -55,8 +54,6 @@ public class BeitragMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * Update method of the Beitrag mapper updates object by id.
-     * 
-     * 
      * @param val - Needs a Beitrag object without an id.
      * @return Beitrag - Returns the inserted object with the generated id.
      */
@@ -99,8 +96,6 @@ public class BeitragMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * Updates the Beitrag object by the objects id.
-     * 
-     * 
      * @param val - Needs an Beitrag object with a id.
      * @return Beitrag - Returns the updated objects.
      */
@@ -131,8 +126,6 @@ public class BeitragMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * Deletes the given Beitrag from the sql table by id.
-     * 
-     * 
      * @param val - Beitrag to be deleted.
      */
     public void delete (Beitrag val) {
@@ -157,8 +150,6 @@ public class BeitragMapper extends DBStatementFactory {
     // </editor-fold> 
     /**
      * Method to read every entry in the Beitrag table.
-     * 
-     * 
      * @return Vector<Beitrag> - Returns all the entrys in the sql table
      */
     public Vector<Beitrag> getAll () {

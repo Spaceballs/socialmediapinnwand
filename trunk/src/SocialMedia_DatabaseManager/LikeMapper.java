@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.sql.Types;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,8 +16,7 @@ import java.util.logging.Logger;
 // #[regen=yes,id=DCE.11E2FD15-AC88-BA60-9549-E52BE333AD91]
 // </editor-fold> 
 /**
- * Class for mapping AbonnementImpl objects onto a sql database.
- * 
+ * Class for mapping AbonnementImpl objects onto a sql database. 
  * 
  * @author Sebastian
  */
@@ -55,8 +53,6 @@ public class LikeMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Insert method of the Like mapper for the AbonnementImpl objects.
-     * 
-     * 
      * @param val - Needs a Like object without an id.
      * @return Like - Returns the inserted object with the generated id.
      */
@@ -97,8 +93,6 @@ public class LikeMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Update method of the Like mapper updates object by id.
-     * 
-     * 
      * @param val - Needs an Like object with a id.
      * @return Like - Returns the updated objects.
      */
@@ -128,8 +122,6 @@ public class LikeMapper extends DBStatementFactory{
     // </editor-fold>
     /**
      * Deletes the given Like from the sql table by id.
-     * 
-     * 
      * @param val Like to be deleted.
      */
     public void delete (Like val) {
@@ -153,8 +145,6 @@ public class LikeMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Method to read every entry in the Like table.
-     * 
-     * 
      * @return Vector<Like> - Returns all the entrys in the sql table
      */
     public Vector<Like> getAll () {

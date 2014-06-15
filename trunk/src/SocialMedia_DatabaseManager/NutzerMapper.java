@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 /**
  * Class for mapping NutzerImpl objects onto a sql database.
  * 
- * 
  * @author Sebastian
  */
 public class NutzerMapper extends DBStatementFactory{
@@ -54,8 +53,6 @@ public class NutzerMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Insert method of the Nutzer mapper for the NutzerImpl objects.
-     * 
-     * 
      * @param val - Needs a Nutzer object without an id.
      * @return Nutzer - Returns the inserted object with the generated id.
      */
@@ -100,8 +97,6 @@ public class NutzerMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Update method of the Nutzer mapper updates object by id.
-     * 
-     * 
      * @param val - Needs an Nutzer object with a id.
      * @return Nutzer - Returns the updated objects.
      */
@@ -133,8 +128,6 @@ public class NutzerMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Deletes the given Nutzer from the sql table by id.
-     * 
-     * 
      * @param val Nutzer to be deleted.
      */
     public void delete(Nutzer val) {
@@ -158,8 +151,6 @@ public class NutzerMapper extends DBStatementFactory{
     // </editor-fold> 
     /**
      * Method to read every entry in the Nutzer table.
-     * 
-     * 
      * @return Vector<Nutzer> - Returns all the entrys in the sql table
      */
     public Vector<Nutzer> getAll() {
