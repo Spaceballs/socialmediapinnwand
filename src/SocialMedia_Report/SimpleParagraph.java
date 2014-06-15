@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package SocialMedia_Report;
 
 import java.rmi.RemoteException;
 
 /**
- * @todo Kommentierung
+ * Interface of a SimpleParagraph
  * @author Sebastian
  */
 public interface SimpleParagraph extends Paragraph{
@@ -29,9 +24,9 @@ public interface SimpleParagraph extends Paragraph{
     // </editor-fold>
     
     /**
-     *
-     * @return
-     * @throws RemoteException
+     * Adds the String to a buffer
+     * @return the String-buffer
+     * @throws RemoteException 
      */
     String toStrings() throws RemoteException;
 }

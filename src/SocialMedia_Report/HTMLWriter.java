@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package SocialMedia_Report;
 
@@ -19,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @todo Kommentierung
+ * Creates the format of the Reports in HTML
  * @author Sebastian
  */
 public class HTMLWriter {
@@ -29,9 +24,8 @@ public class HTMLWriter {
     private final SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
     
     /**
-     * Constructor of the class. Checks for the type of the report and calls the method for the transformation.
-     * 
-     * @param contributionOfNutzerReport
+     * Constructor for the class
+     * @param report - a Report
      */
     public HTMLWriter (Report report){
         buffer = new StringBuilder();
@@ -44,8 +38,9 @@ public class HTMLWriter {
     }
     
     /**
-     * 
-     * @param r 
+     * @todo was macht des? :D
+     * @param r
+     * @throws IOException 
      */
     private void writeHTML (Report r) throws IOException{
             Logger.getLogger(this.getClass().getName()).info("Writing Report...");
@@ -77,7 +72,8 @@ public class HTMLWriter {
     }
     
     /**
-     * 
+     * Writes the Header and Title
+     * @throws RemoteException 
      */
     private void writeHeader() throws RemoteException{
         Logger.getLogger(this.getClass().getName()).info("\t\t Writing HeaderAndTitleParagraph...");
@@ -88,7 +84,7 @@ public class HTMLWriter {
     }
     
     /**
-     * 
+     * Writes the closure
      */
     private  void writeClosure(){
         Logger.getLogger(this.getClass().getName()).info("\t\t Writing Closures...");
@@ -96,8 +92,9 @@ public class HTMLWriter {
     }
     
     /**
-     * 
-     * @param rows 
+     * Converts the Vector of Rows into HTML
+     * @param rows - a Vector of Rows
+     * @throws RemoteException 
      */
     private void tableToHTML(Vector<Row> rows) throws RemoteException{
         Logger.getLogger(this.getClass().getName()).info("\t\t Writing Table...");
@@ -116,10 +113,10 @@ public class HTMLWriter {
         }
     }
     
-    
     /**
-     * 
-     * @param r 
+     * Writes a Row
+     * @param r - a Row
+     * @throws RemoteException 
      */
     private void writeRow(Row r) throws RemoteException{
         Logger.getLogger(this.getClass().getName()).info("\t\t\t\t Writing Row...");
@@ -135,8 +132,9 @@ public class HTMLWriter {
     }
     
     /**
-     * 
-     * @param c 
+     * Writes a Column
+     * @param c - a Column
+     * @throws RemoteException 
      */
     private void writeColumn(Column c) throws RemoteException{
         Logger.getLogger(this.getClass().getName()).info("\t\t\t\t\t Writing Column...");
@@ -146,8 +144,9 @@ public class HTMLWriter {
     }
     
     /**
-     * 
-     * @param p 
+     * Writes a Paragraph
+     * @param p - a Paragraph
+     * @throws RemoteException 
      */
     private void writeParagraph(Paragraph p) throws RemoteException{
         if (p != null)
@@ -161,8 +160,9 @@ public class HTMLWriter {
     }
 
     /**
-     * 
-     * @param headRow 
+     * Writes the HeadRow
+     * @param headRow - a Row
+     * @throws RemoteException 
      */
     private void writeHeadRow(Row headRow) throws RemoteException {
         Logger.getLogger(this.getClass().getName()).info("\t\t\t\t Writing HeadRow...");
@@ -175,8 +175,9 @@ public class HTMLWriter {
     }
 
     /**
-     * 
-     * @param elementAt 
+     * Writes the HeadColumn
+     * @param c - a Column
+     * @throws RemoteException 
      */
     private void writeHeadColumn(Column c) throws RemoteException {
         Logger.getLogger(this.getClass().getName()).info("\t\t\t\t\t Writing HeadColumn...");
@@ -185,15 +186,20 @@ public class HTMLWriter {
         buffer.append("</b>");
     }
 
+    /**
+     * Writes the imprint
+     * @param p - a Paragraph
+     * @throws RemoteException 
+     */
     private void writeImprint(Paragraph p) throws RemoteException {
         Logger.getLogger(this.getClass().getName()).info("\t\t Writing Imprint...");
         writeParagraph(p);
     }
     
-    
-        
     /**
-     * 
+     * Finalizes the HTML report
+     * @throws FileNotFoundException
+     * @throws IOException 
      */
     private void finalizeDocument() throws FileNotFoundException, IOException {
         String result = buffer.toString();

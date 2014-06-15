@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 // #[regen=yes,id=DCE.9015A86E-4FA0-CF21-CDF2-EBF794A398CC]
 // </editor-fold> 
 /**
- * @todo Kommentierung
+ * Implementation class for the ContributionOfNutzer report
  * @author Max
  */
 public class ContributionOfNutzerImpl extends ReportImpl implements ContributionOfNutzer{
@@ -15,7 +15,7 @@ public class ContributionOfNutzerImpl extends ReportImpl implements Contribution
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.E349587E-675F-E79D-0277-31072E9BDDD6]
     // </editor-fold>
-    /* Konstruktor of the ContributionOfNutzerImpl class
+    /* Constructor of the ContributionOfNutzerImpl class
      * @throws java.rmi.RemoteException
      */
     public ContributionOfNutzerImpl () 
