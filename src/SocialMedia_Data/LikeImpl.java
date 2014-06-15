@@ -4,8 +4,11 @@ package SocialMedia_Data;
 
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
-import java.util.Vector;
 
+/**
+ * Implementation class for Like
+ * @author Sebastian
+ */
 public class LikeImpl extends DataReferenceImpl implements Like {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -22,7 +25,7 @@ public class LikeImpl extends DataReferenceImpl implements Like {
     // #[regen=yes,id=DCE.7CFB53F5-D920-C232-8F9A-29A12BD1521C]
     // </editor-fold> 
     /**
-     * Konstruktor von LikeImpl
+     * Constructor of the class
      * @throws java.rmi.RemoteException
      */
     public LikeImpl () 

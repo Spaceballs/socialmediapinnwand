@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package SocialMedia_DatabaseManager;
 
-import java.sql.Statement;
-
 /**
- * @todo Kommentierung
+ * Creates statements for an easier use in the mapper classes
  * @author Sebastian
- * 
  */
 public abstract class DBStatementFactory {
     

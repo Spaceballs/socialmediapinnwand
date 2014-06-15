@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 // #[regen=yes,id=DCE.C6C8C8C1-C1A1-6C43-5A79-24AB722E73B1]
 // </editor-fold> 
 /**
- * @todo Kommentare
+ * Interface class for Abonnement
  * @author Sebastian
  */
 public interface Abonnement extends DataReference {

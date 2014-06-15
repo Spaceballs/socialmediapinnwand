@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package SocialMedia_Data;
 
@@ -10,7 +5,7 @@ import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interface class of UserGeneratedContent
  * @author Sebastian
  */
 public interface UserCreatedContent extends DataReference{
@@ -30,9 +25,9 @@ public interface UserCreatedContent extends DataReference{
     // #[regen=yes,regenBody=yes,id=DCE.0A75001D-1A8F-9B66-7C7A-A84D8D309A09]
     // </editor-fold>
     /**
-     * 
-     * @return String
-     * @throws java.rmi.RemoteException 
+     * Getter for the Text attribute.
+     * @throws java.rmi.RemoteException
+     * @return String - Returns a string of the object.
      */
     String getText()
             throws RemoteException;
@@ -53,14 +48,14 @@ public interface UserCreatedContent extends DataReference{
     // </editor-fold>
     /**
      * Setter for the Text attribute.
-     * @param val 
+     * @param val - Needs a string to be set.
      * @throws java.rmi.RemoteException 
      */
     void setText(String val)
             throws RemoteException;
     
     /**
-     * Gets all Nutzer and compares them with the current NutzerID
+     * Gets Nutzer by NutzerID
      * @param verwaltung - This object is needed for getting data from the DB.
      * @throws java.rmi.RemoteException
      * @return - Returns the Nutzer object.

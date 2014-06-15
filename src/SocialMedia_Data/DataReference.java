@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 
 /**
- *
+ * Class for handling all IDs and creationDates
  * @author Sebastian
  */
 public interface DataReference extends java.rmi.Remote{

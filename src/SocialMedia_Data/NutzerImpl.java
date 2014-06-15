@@ -10,7 +10,7 @@ import java.util.Vector;
 // #[regen=yes,id=DCE.3553D03C-6305-B201-4A1B-DB2554E72E8D]
 // </editor-fold> 
 /**
- * 
+ * Implementation class for Nutzer
  * @author Sebastian
  */
 public class NutzerImpl extends DataReferenceImpl implements Nutzer {
@@ -39,7 +39,7 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,id=DCE.98F2AE72-D7D0-D7AC-4E04-53CF14F84A72]
     // </editor-fold> 
     /**
-     * Konstruktor von Nutzer
+     * Constructor of the class
      * @throws java.rmi.RemoteException
      */
     public NutzerImpl () 
@@ -155,7 +155,7 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,id=DCE.EA9F8A85-2059-4E68-72FA-B23705639051]
     // </editor-fold> 
     /**
-     * Getter for the Nutzer Pinnwand.
+     * Gets the Pinnwand of a Nutzer
      * @param verwaltung - This object is needed for getting data from the DB.
      * @return - Returns the pinnwand object.
      * @throws java.rmi.RemoteException 
@@ -176,7 +176,7 @@ public class NutzerImpl extends DataReferenceImpl implements Nutzer {
     // #[regen=yes,id=DCE.E49402FD-5DC6-2D8C-7CB5-633CA9E8C37B]
     // </editor-fold> 
     /**
-     * Getter for all Nutzer of the Abonement.
+     * Gets all Abonnements of a Nutzer
      * @param verwaltung - This object is needed for getting data from the DB.
      * @return - Returns all Abonnements of the Nutzer.
      * @throws java.rmi.RemoteException 

@@ -9,7 +9,7 @@ import java.util.Vector;
 // #[regen=yes,id=DCE.2A8A201C-25A8-2BD1-CC04-C6B0EFE3BF00]
 // </editor-fold> 
 /**
- * @todo Kommentare
+ * Interface class for Beitrag
  * @author Sebastian
  */
 public interface Beitrag extends UserCreatedContent {
@@ -30,7 +30,6 @@ public interface Beitrag extends UserCreatedContent {
     // #[regen=yes,id=DCE.651C2F55-16EC-4891-EB48-470BBCF219A5]
     // </editor-fold> 
     /**
-     * 
      * Setter for the pinnwandID attribute.
      * @throws java.rmi.RemoteException
      * @param val - int value to be set
@@ -40,7 +39,7 @@ public interface Beitrag extends UserCreatedContent {
 
     /**
      * Note: only used by the Server. 
-     * Getter for all Kommentare of the Beitrag.
+     * Getter for all Kommentare of a Beitrag.
      * @param verwaltung - This object is needed for getting data from the DB.
      * @throws java.rmi.RemoteException
      * @return Vector
@@ -50,7 +49,7 @@ public interface Beitrag extends UserCreatedContent {
 
     /**
      * Note: only used by the Server. 
-     * Getter for all likes of the Beitrag.
+     * Getter for all likes of a Beitrag.
      * @param verwaltung - This object is needed for getting data from the DB.
      * @throws java.rmi.RemoteException
      * @return Vector

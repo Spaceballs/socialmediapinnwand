@@ -1,15 +1,11 @@
-package SocialMedia_Data;
 
-// #[regen=yes,id=DCE.8AE5A633-3062-4D82-1BEC-55C100571D26]
+package SocialMedia_Data;
 
 import SocialMedia_Logic.SocialMediaLogicImpl;
 import java.rmi.RemoteException;
-import java.util.Vector;
-
-// </editor-fold> 
 
 /**
- * 
+ * Implementation class for UserGeneratedContent
  * @author Sebastian
  */
 public class UserCreatedContentImpl extends DataReferenceImpl implements UserCreatedContent {
@@ -28,14 +24,13 @@ public class UserCreatedContentImpl extends DataReferenceImpl implements UserCre
     // #[regen=yes,id=DCE.FC2B9EA8-431E-EEC0-1E02-8DD9F2C5450A]
     // </editor-fold> 
     /**
-     * Konstruktor von UserCreatedContent
+     * Constructor of the class
      * @throws java.rmi.RemoteException
      */
     public UserCreatedContentImpl () 
             throws RemoteException{
         super();
     }
-
     
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.09AA971C-CC81-7A33-68D2-9D93A9D48B66]

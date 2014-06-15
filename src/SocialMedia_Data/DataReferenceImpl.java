@@ -8,7 +8,7 @@ import java.util.Date;
 // #[regen=yes,id=DCE.6B973D64-CA18-01E4-0E33-4AD5ADD71973]
 // </editor-fold> 
 /**
- * 
+ * Class for handling all IDs and creationDates
  * @author Sebastian
  */
 public class DataReferenceImpl extends java.rmi.server.UnicastRemoteObject implements DataReference {
@@ -27,7 +27,7 @@ public class DataReferenceImpl extends java.rmi.server.UnicastRemoteObject imple
     // #[regen=yes,id=DCE.E53B2245-E1F6-6A0E-54A8-36E265C8BD5F]
     // </editor-fold> 
     /**
-     * Konstruktor von DataReference
+     * Constructor of class
      * @throws java.rmi.RemoteException
      */
     public DataReferenceImpl () 
