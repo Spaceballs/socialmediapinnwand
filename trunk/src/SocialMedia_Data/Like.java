@@ -38,7 +38,7 @@ public interface Like extends DataReference {
     // </editor-fold> 
     /**
      * Getter for the NutzerID attribute.
-     * @return 
+     * @return Integer - Returns the int ID of the object. 
      * @throws java.rmi.RemoteException 
      */
     public int getNutzerID ()
@@ -49,7 +49,7 @@ public interface Like extends DataReference {
     // </editor-fold> 
     /**
      * Setter for the NutzerID attribute.
-     * @param val 
+     * @param val - Needs an int ID to be set.
      * @throws java.rmi.RemoteException 
      */
     public void setNutzerID (int val)
