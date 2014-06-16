@@ -38,8 +38,8 @@ public class HTMLWriter {
     }
     
     /**
-     * @todo was macht des? :D
-     * @param r
+     * HTML writer method, chain-starts all the helper methods to transform a report into the format.
+     * @param r - report, either the ContributionOfUserReport or the PopularityOfBeitratReport.
      * @throws IOException 
      */
     private void writeHTML (Report r) throws IOException{
@@ -77,7 +77,6 @@ public class HTMLWriter {
      */
     private void writeHeader() throws RemoteException{
         Logger.getLogger(this.getClass().getName()).info("\t\t Writing HeaderAndTitleParagraph...");
-        
         buffer.append("<html><head><title>");
         buffer.append(((SimpleParagraph)this.report.getHeaderAndTitleParagraph()).toStrings());
         buffer.append("</title></head><body style=\"width:1024px\">");
