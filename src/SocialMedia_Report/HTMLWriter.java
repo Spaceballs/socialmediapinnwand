@@ -204,7 +204,12 @@ public class HTMLWriter {
     private void finalizeDocument() throws FileNotFoundException, IOException {
         String result = buffer.toString();
         result = result.replaceAll("&", "&amp;").replaceAll("%p", "<p>").replaceAll("%/p", "</p>").replaceAll("%tr", "</tr>").replaceAll("%/tr", "</tr>").replaceAll("%br", "<br>")
-                .replaceAll("ä", "&auml;").replaceAll("ü", "&uuml;").replaceAll("ö", "&ouml;").replaceAll("ß", "&szlig;").replaceAll("Ä", "&Auml;").replaceAll("Ü", "&Uuml;").replaceAll("Ö", "&Ouml;");
+                .replaceAll("ä", "&auml;").replaceAll("ü", "&uuml;").replaceAll("ö", "&ouml;").replaceAll("ß", "&szlig;")
+                .replaceAll("Ä", "&Auml;").replaceAll("Ü", "&Uuml;").replaceAll("Ö", "&Ouml;")
+                .replaceAll("é", "&eacute;").replaceAll("è", "&egrave;").replaceAll("ê", "&ecirc;")
+                .replaceAll("ì", "&igrave;").replaceAll("í", "&iacute;").replaceAll("î", "&icirc;")
+                .replaceAll("ò", "&oacute;").replaceAll("ó", "&ograve;").replaceAll("ô", "&ocirc;")
+                .replaceAll("ù", "&uacute;").replaceAll("ú", "&ugrave;").replaceAll("û", "&ucirc;");
         File htmlFile = new File("report_von_" + df.format(report.getStartDate()) + "_bis_" + df.format(report.getEndDate()) + ".html");
         htmlFile.createNewFile();
         PrintWriter writer = new PrintWriter(htmlFile);
