@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
 /**
  * Dialog where user can register himself
