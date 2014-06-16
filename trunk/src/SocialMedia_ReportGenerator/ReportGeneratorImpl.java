@@ -18,6 +18,7 @@ import SocialMedia_Report.PopularityOfBeitragImpl;
 import SocialMedia_Report.Report;
 import SocialMedia_Report.Row;
 import SocialMedia_Report.RowImpl;
+import SocialMedia_Report.SimpleParagraph;
 import SocialMedia_Report.SimpleParagraphImpl;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
@@ -256,7 +257,74 @@ public class ReportGeneratorImpl
          */
         Vector<Row> rows = new Vector<Row>();
         for (int nutzerschleife = 0; nutzerschleife < nutzers.size(); nutzerschleife++) {
+            /**
+             * Alle Beiträge des nutzers size
+             * alle kommentare aller beiträge size
+             * alle likes aller beiträge size
+             * alle abonnements size
+             */
+            /**
+             * Hole Alle beiträge des Nutzers
+             */
             Vector<Beitrag> beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(nutzers.elementAt(nutzerschleife)));
+            /**
+             * Sortiere alle Beiträge ausserhalb des zeitraums raus
+             */
+            Vector<Beitrag> beitraege0 = new Vector<Beitrag>();
+            for (int h = 0; h < beitraege.size(); h++) {
+                if (!startDateVal.after(beitraege.elementAt(h).getCreationDate()) && !endDateVal.before(beitraege.elementAt(h).getCreationDate()))
+                    beitraege0.add(beitraege.elementAt(h));
+            }
+            beitraege = beitraege0;
+            /**
+             * Hole alle Likes der Beiträge
+             */
+            Vector<Like> likes = new  Vector<Like>();
+            for (int i = 0; i < beitraege.size(); i++) {
+                likes.addAll(socialMediaLogic.getAllLikeOfBeitrag(beitraege.elementAt(i)));
+            }
+            /**
+             * Sortier alle Likes ausserhalb des zeitraums aus
+             */
+            Vector<Like> likes2 = new Vector<Like>();
+            for (int h = 0; h < likes.size(); h++) {
+                if (!startDateVal.after(likes.elementAt(h).getCreationDate()) && !endDateVal.before(likes.elementAt(h).getCreationDate()))
+                    likes2.add(likes.elementAt(h));
+            }
+            likes = likes2;
+            
+            /**
+             * Hole alle Likes der Beiträge
+             */
+            Vector<Kommentar> kommentare = new  Vector<Kommentar>();
+            for (int i = 0; i < beitraege.size(); i++) {
+                kommentare.addAll(socialMediaLogic.getAllKommentarOfBeitrag(beitraege.elementAt(i)));
+            }
+            /**
+             * Sortier alle Likes ausserhalb des zeitraums aus
+             */
+            Vector<Kommentar> kommentare0 = new Vector<Kommentar>();
+            for (int h = 0; h < kommentare.size(); h++) {
+                if (!startDateVal.after(kommentare.elementAt(h).getCreationDate()) && !endDateVal.before(kommentare.elementAt(h).getCreationDate()))
+                    kommentare0.add(kommentare.elementAt(h));
+            }
+            kommentare = kommentare0;
+            /**
+             * Hole alle Abonnements des Nutzers Pinnwand des nutzers
+             */
+            Vector<Abonnement> abonnements = socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(nutzers.elementAt(nutzerschleife)));
+            /**
+             * Sortier die ausserhalb des zeitraums aus
+             */
+            Vector<Abonnement> abonnements0 = new Vector<Abonnement>();
+            for (int k = 0; k < abonnements.size(); k++) {
+                if (!startDateVal.after(abonnements.elementAt(k).getCreationDate()) && !endDateVal.before(abonnements.elementAt(k).getCreationDate()))
+                    abonnements0.add(abonnements.elementAt(k));
+            }
+            abonnements = abonnements0;
+            /**
+            Vector<Beitrag> beitraege = socialMediaLogic.getAllBeitragOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(nutzers.elementAt(nutzerschleife)));
+            
             Vector<Beitrag> beitraege2 = new Vector<Beitrag>();
             for (int h = 0; h < beitraege.size(); h++) {
                 if (!startDateVal.after(beitraege.elementAt(h).getCreationDate()) && !endDateVal.before(beitraege.elementAt(h).getCreationDate()))
@@ -271,6 +339,8 @@ public class ReportGeneratorImpl
             }
             abonnements = abonnements2;
             int laufindex0 = (beitraege.size() > abonnements.size()) ?  beitraege.size() : abonnements.size();
+            **/
+            
             if (sortByVal==0){
                 //sortByVal Beiträge
                 /**
@@ -297,10 +367,33 @@ public class ReportGeneratorImpl
                     r.addColumn(c);
                     rows.add(r);
                 }
+                Row r = new RowImpl();
+                r.addColumn(writeNutzer(nutzers.elementAt(nutzerschleife)));
+                Column column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Beiträge:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)beitraege.size()).toString()));
+                r.addColumn(column);
+                column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Likes:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)likes.size()).toString()));
+                r.addColumn(column);
+                column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Kommentare:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)kommentare.size()).toString()));
+                r.addColumn(column);
+                column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Abonnements:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)abonnements.size()).toString()));
+                r.addColumn(column);
+                rows.add(r);
+                
+                
+                
                 /**
                  * Schleife über alle Beiträge und Abonnements, wovon mehr da ist.
                  * Wenn nix da ist dann leere Zeile erzeugen
                  */
+                /**
                 for (int j = 0; j < laufindex0; j++) {
                     Vector<Like> likes;
                     Vector<Kommentar> kommentare;
@@ -329,10 +422,12 @@ public class ReportGeneratorImpl
                     int laufindex = (likes.size() > kommentare.size()) ?  likes.size() : kommentare.size();
                     if (laufindex==0)
                         laufindex=1;
+                    **/
                     /**
                      * Schleife über alle Likes und Kommentare, wovon mehr da ist.
                      * Wenn nix da ist dann leere Zeile erzeugen
                      */
+                    /**
                     for (int counter = 0; counter <  laufindex; counter++){
                         Row r0 = new RowImpl();
                         Column c = new ColumnImpl();
@@ -373,6 +468,7 @@ public class ReportGeneratorImpl
                         rows.add(r0);
                     }
                 }
+            **/
             }else if(sortByVal==1){
                 //sortByVal Likes
                 /**
@@ -399,10 +495,30 @@ public class ReportGeneratorImpl
                     r.addColumn(c);
                     rows.add(r);
                 }
+                Row r = new RowImpl();
+                r.addColumn(writeNutzer(nutzers.elementAt(nutzerschleife)));
+                Column column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Likes:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)likes.size()).toString()));
+                r.addColumn(column);
+                column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Beiträge:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)beitraege.size()).toString()));
+                r.addColumn(column);
+                column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Kommentare:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)kommentare.size()).toString()));
+                r.addColumn(column);
+                column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Abonnements:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)abonnements.size()).toString()));
+                r.addColumn(column);
+                rows.add(r);
                 /**
                  * Schleife über alle Beiträge und Abonnements, wovon mehr da ist.
                  * Wenn nix da ist dann leere Zeile erzeugen
                  */
+                /**
                 for (int j = 0; j < laufindex0; j++) {
                     Vector<Like> likes;
                     Vector<Kommentar> kommentare;
@@ -426,10 +542,12 @@ public class ReportGeneratorImpl
                     }
                     kommentare = kommentare2;
                     int laufindex = (likes.size() > kommentare.size()) ?  likes.size() : kommentare.size();
+                    **/
                     /**
                      * Schleife über alle Likes und Kommentare, wovon mehr da ist.
                      * Wenn nix da ist dann leere Zeile erzeugen
                      */
+                    /**
                     for (int counter = 0; counter < laufindex; counter++){
                         Row r0 = new RowImpl();
                         Column c = new ColumnImpl();
@@ -471,6 +589,7 @@ public class ReportGeneratorImpl
                         rows.add(r0);
                     }
                 }
+            **/
             }else if(sortByVal==2){
                 //sortByVal Abonnement
                 /**
@@ -497,10 +616,30 @@ public class ReportGeneratorImpl
                     r.addColumn(c);
                     rows.add(r);
                 }
+                Row r = new RowImpl();
+                r.addColumn(writeNutzer(nutzers.elementAt(nutzerschleife)));
+                Column column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Abonnements:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)abonnements.size()).toString()));
+                r.addColumn(column);
+                column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Beiträge:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)beitraege.size()).toString()));
+                r.addColumn(column);
+                column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Likes:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)likes.size()).toString()));
+                r.addColumn(column);
+                column = new ColumnImpl();
+                column.addSubParagraph(new SimpleParagraphImpl("Kommentare:"));
+                column.addSubParagraph(new SimpleParagraphImpl(((Integer)kommentare.size()).toString()));
+                r.addColumn(column);
+                rows.add(r);
                 /**
                  * Schleife über alle Beiträge und Abonnements, wovon mehr da ist.
                  * Wenn nix da ist dann leere Zeile erzeugen
                  */
+                /**
                 for (int j = 0; j < laufindex0; j++) {
                     Vector<Like> likes;
                     Vector<Kommentar> kommentare;
@@ -524,10 +663,12 @@ public class ReportGeneratorImpl
                     }
                     kommentare = kommentare2;
                     int laufindex = (likes.size() > kommentare.size()) ?  likes.size() : kommentare.size();
+                    **/
                     /**
                      * Schleife über alle Likes und Kommentare, wovon mehr da ist.
                      * Wenn nix da ist dann leere Zeile erzeugen
                      */
+                    /**
                     for (int counter = 0; counter < laufindex; counter++){
                         Row r0 = new RowImpl();
                         Column c = new ColumnImpl();
@@ -568,6 +709,7 @@ public class ReportGeneratorImpl
                         rows.add(r0);
                     }
                 }
+            **/
             }
         }
         report.setRows(rows);
