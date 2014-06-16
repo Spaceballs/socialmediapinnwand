@@ -253,14 +253,14 @@ public class HauptfensterReport extends JFrame {
         c.gridy = 1;
         popularityOfBeitragTextFieldPanel.add(new JLabel("End Date: "), c);        
         
-        calendarEndDateField = new JFormattedTextField(df);
-        calendarEndDateField.setText(df.format(new Date()));
-        calendarEndDateField.setInputVerifier(new FormattedTextFieldVerifier());
-        calendarEndDateField.setPreferredSize(new Dimension(140, 20));
+        calendarEndDateField0 = new JFormattedTextField(df);
+        calendarEndDateField0.setText(df.format(new Date()));
+        calendarEndDateField0.setInputVerifier(new FormattedTextFieldVerifier());
+        calendarEndDateField0.setPreferredSize(new Dimension(140, 20));
         
         c.gridx = 1;
         c.gridy = 1;
-        popularityOfBeitragTextFieldPanel.add(calendarEndDateField, c);
+        popularityOfBeitragTextFieldPanel.add(calendarEndDateField0, c);
         
         c.gridx = 0;
         c.gridy = 2;
