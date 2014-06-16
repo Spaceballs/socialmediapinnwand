@@ -363,7 +363,7 @@ public class ReportGeneratorImpl
                     c.addSubParagraph(new SimpleParagraphImpl("Kommentare"));
                     r.addColumn(c);
                     c = new ColumnImpl();
-                    c.addSubParagraph(new SimpleParagraphImpl("Abonnements"));
+                    c.addSubParagraph(new SimpleParagraphImpl("Abonnenten"));
                     r.addColumn(c);
                     rows.add(r);
                 }
@@ -382,7 +382,7 @@ public class ReportGeneratorImpl
                 column.addSubParagraph(new SimpleParagraphImpl(((Integer)kommentare.size()).toString()));
                 r.addColumn(column);
                 column = new ColumnImpl();
-                column.addSubParagraph(new SimpleParagraphImpl("Abonnements:"));
+                column.addSubParagraph(new SimpleParagraphImpl("Abonnenten:"));
                 column.addSubParagraph(new SimpleParagraphImpl(((Integer)abonnements.size()).toString()));
                 r.addColumn(column);
                 rows.add(r);
@@ -491,7 +491,7 @@ public class ReportGeneratorImpl
                     c.addSubParagraph(new SimpleParagraphImpl("Kommentare"));
                     r.addColumn(c);
                     c = new ColumnImpl();
-                    c.addSubParagraph(new SimpleParagraphImpl("Abonnements"));
+                    c.addSubParagraph(new SimpleParagraphImpl("Abonnenten"));
                     r.addColumn(c);
                     rows.add(r);
                 }
@@ -510,7 +510,7 @@ public class ReportGeneratorImpl
                 column.addSubParagraph(new SimpleParagraphImpl(((Integer)kommentare.size()).toString()));
                 r.addColumn(column);
                 column = new ColumnImpl();
-                column.addSubParagraph(new SimpleParagraphImpl("Abonnements:"));
+                column.addSubParagraph(new SimpleParagraphImpl("Abonnenten:"));
                 column.addSubParagraph(new SimpleParagraphImpl(((Integer)abonnements.size()).toString()));
                 r.addColumn(column);
                 rows.add(r);
@@ -601,7 +601,7 @@ public class ReportGeneratorImpl
                     c.addSubParagraph(new SimpleParagraphImpl("Nutzer"));
                     r.addColumn(c);
                     c = new ColumnImpl();
-                    c.addSubParagraph(new SimpleParagraphImpl("Abonnements"));
+                    c.addSubParagraph(new SimpleParagraphImpl("Abonnenten"));
                     c.addSubParagraph(new SimpleParagraphImpl(df.format(startDateVal) + " - " + df.format(endDateVal)));
                     c.addSubParagraph(new SimpleParagraphImpl("sort By Value"));
                     r.addColumn(c);
@@ -619,7 +619,7 @@ public class ReportGeneratorImpl
                 Row r = new RowImpl();
                 r.addColumn(writeNutzer(nutzers.elementAt(nutzerschleife)));
                 Column column = new ColumnImpl();
-                column.addSubParagraph(new SimpleParagraphImpl("Abonnements:"));
+                column.addSubParagraph(new SimpleParagraphImpl("Abonnenten:"));
                 column.addSubParagraph(new SimpleParagraphImpl(((Integer)abonnements.size()).toString()));
                 r.addColumn(column);
                 column = new ColumnImpl();
@@ -974,7 +974,6 @@ public class ReportGeneratorImpl
         column.addSubParagraph(new SimpleParagraphImpl("User: " + n.getName() + ", " + n.getSurname()));
         column.addSubParagraph(new SimpleParagraphImpl("alias " + n.getUsername()));
         column.addSubParagraph(new SimpleParagraphImpl("Abonnements: " + socialMediaLogic.getAllAbonnementOfNutzer(n).size()));
-        column.addSubParagraph(new SimpleParagraphImpl("wurde Abonniert: " + socialMediaLogic.getAllAbonnementsOfPinnwand(socialMediaLogic.getPinnwandOfNutzer(n)).size()));
         return column;
     }
     
