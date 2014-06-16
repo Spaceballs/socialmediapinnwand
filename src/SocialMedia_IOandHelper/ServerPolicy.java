@@ -34,7 +34,7 @@ public class ServerPolicy extends Policy {
     /**
      * Permission getter for the security manager
      * @param codesource - The source of the permission invocation.
-     * @return 
+     * @return the PermissionColletion of the client
      */
     @Override
     public PermissionCollection getPermissions(CodeSource codesource) {

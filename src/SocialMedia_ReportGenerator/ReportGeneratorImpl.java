@@ -74,7 +74,6 @@ public class ReportGeneratorImpl
     /**
      * Method to create the <code>ContributionOfNutzerImpl</code>-Report by the given criteria.
      * 
-     * @param nutzerVal - Defines the user over which should be reported.
      * @param sortByVal - sorts the <code>Nutzer</code> by most <code>Beitrag</code>, most Like get or most <code>Abonnement</code> in a specific timespan.
      * @param startDateVal - Start Date of the timespan.
      * @param endDateVal - End Date of the timespan.
